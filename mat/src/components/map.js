@@ -57,7 +57,7 @@ const Map = () => {
     });
   }, []);
 
-  return <div ref={mapElement} style={{ width: '80%', height: '400px' }} />;
+  return <div ref={mapElement} style={{ width: '95%', height: '700px' }} />;
 };
 
 export default Map;

@@ -33,7 +33,7 @@ const Location = ({ lat, lng, title, content }) => {
     });
   }, [lat, lng, title, content]);
 
-  return <div ref={mapElement} style={{ width: '400px', height: '400px' }} />;
+  return <div ref={mapElement} style={{ width: '800px', height: '600px' }} />;
 };
 
 export default Location;
