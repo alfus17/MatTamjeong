@@ -1,0 +1,25 @@
+img {
+    width: 200px;
+    height: 200px;
+}
+.container {
+    display: flex;
+  }
+  
+  .images {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  .images img {
+    width: 200px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .map-container {
+    width: 400px;
+    height: 400px;
+  }
+  
