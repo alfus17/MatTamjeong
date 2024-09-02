@@ -1,24 +1,30 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import '../css/mypageMain.css';
 
 const MypageMain = () => {
   return (
-    <div className='ProfileRectangleee'>
-      <div className='ProfileCircleee'>
-        <img src={''} alt="Profile" className='ProfilePictureee' />
-      </div>
+    <div className="mypage-container">
+      <div className='ProfileRectangleee'>
+        <div className='ProfileCircleee'>
+          <img src={''} alt="Profile" className='ProfilePictureee' />
+        </div>
 
-      <div className='ProfileInfooo'>
-        <div className='ProfileNameee'>이름</div>
-        <div className='ProfileEmailll'>이메일</div>
-        
-          <button className='ProfileEditButtonnn'>내프로필</button>
+        <div className='ProfileInfooo'>
+          <div className='ProfileNameee'>이름</div>
+          <div className='ProfileEmailll'>이메일</div>
+          
+          <button className='ProfileEditButtonnn'>
+            <a href='/mypageMain/writedText'>내프로필</a>
+          </button>
           <button className='ProfileEditButtonnn'>정보수정</button>
           <button className='ProfileEditButtonnn'>이력관리</button>
+        </div>
       </div>
 
-      {/* 여기까지가 왼쪽에 뜨는 기본 프로필 */}
-
+      <div className="mypage-content">
+        <Outlet />
+      </div>
     </div>
   );
 };

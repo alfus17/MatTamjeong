@@ -1,10 +1,16 @@
-.ProfileRectangleee {
+.mypage-container {
+    display: flex;
+    flex-direction: row;
     margin-left: 4%;
+  }
+  
+  .ProfileRectangleee {
     width: 250px;
     height: 430px;
     background-color: rgb(252, 239, 202);
     padding: 20px;
     border-radius: 30px;
+    margin-right: 20px; /* Adds space between profile and content */
   }
   
   .ProfileCircleee {
@@ -17,39 +23,66 @@
     overflow: hidden;
   }
   
-.ProfilePictureee {
+  .ProfilePictureee {
     width: 100%;
     height: 100%;
     object-fit: cover;
-} 
-
-.ProfileInfooo {
+  } 
+  
+  .ProfileInfooo {
     text-align: center;
     margin-top: 20px;
-}
-
-.ProfileNameee {
+  }
+  
+  .ProfileNameee {
     margin-top: 30px;
-}
-
-.ProfileEmailll {
+  }
+  
+  .ProfileEmailll {
     margin-top: 30px;
-}
-
-.ProfileEditButtonnn {
+  }
+  
+  .ProfileEditButtonnn {
     margin-top: 40px;
     width: 69px;
     font-size: 11px;
     padding: 5px 10px;
-    border: 1px solid #eaeaea; /* 버튼 테두리 */
+    border: 1px solid #eaeaea;
     border-radius: 5px;
-    background-color: rgb(252, 239, 202);  /* 버튼 배경색 */
+    background-color: rgb(252, 239, 202);
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;  /* 부드러운 색변경 */
-}
-
-.ProfileEditButtonnn:hover {
-    background-color: #ffe2cf; /* 버튼 색상 변경 */
-    color: #333; /* 글자 색상 변경 */
-    border-color: #ffd2b4; /* 테두리 색상 변경 */
-}
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .ProfileEditButtonnn:hover {
+    background-color: #ffe2cf;
+    color: #333;
+    border-color: #ffd2b4;
+  }
+  
+  .mypage-content {
+    flex: 1; /* Allows content to take up remaining space */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 30px;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .mypage-container {
+      flex-direction: column;
+    }
+  
+    .ProfileRectangleee {
+      margin-right: 0;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+  
+    .mypage-content {
+      width: 100%;
+    }
+  }
+  .ProfileEditButtonnn a {
+    color: rgb(0, 0, 0);
+  }
