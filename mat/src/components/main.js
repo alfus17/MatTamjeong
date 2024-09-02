@@ -22,6 +22,8 @@ function Main() {
       title: '한솥 도시락', 
       content: '<div>한솥 도시락</div>',
       img: '/img/food2.jpg'
+
+      
     },
     { 
       lat: 37.4908, 
