@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBar from './Searchbar';
 import '../css/header.css';
