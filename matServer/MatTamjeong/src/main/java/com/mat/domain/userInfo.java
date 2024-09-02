@@ -3,6 +3,7 @@ package com.mat.domain;
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class userInfo {
 	@Id
 	@Column(name="user_id")
 	@NonNull
+	@GeneratedValue
 	private String userId;
 	
 	//  주소

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class user {
 	@Id
 	@Column(name="user_id")
 	@NonNull
+	@GeneratedValue
 	private String userId;
 	
 	// 비밀번호 	

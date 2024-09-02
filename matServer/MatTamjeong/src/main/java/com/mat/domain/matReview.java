@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class matReview {
 	@Id
 	@Column(name="mat_review_id")
 	@NonNull
+	@GeneratedValue
 	private String matReviewId;
 	
 	// 맛탐정 별점

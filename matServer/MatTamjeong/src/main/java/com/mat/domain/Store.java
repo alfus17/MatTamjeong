@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -38,6 +39,7 @@ public class Store {
 	@Id
 	@Column(name="store_id")
 	@NonNull
+	@GeneratedValue
 	private String sotreId;
 	
 	// 가게 이름

@@ -3,6 +3,7 @@ package com.mat.domain;
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class menu {
 	@Id
 	@Column(name="menu_id")
 	@NonNull
+	@GeneratedValue
 	private int menuId;
 	
 	// 가게ID
