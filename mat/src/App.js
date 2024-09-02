@@ -3,7 +3,7 @@ import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Main from './components/mainpage/main';
 import Map from './components/map/map';
-import MypageMain from './components/Mypage/mypagemain';
+import MypageMain from './components/mypage/mypageMain';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={ <Main/>} />
             <Route path="/Map" element={ <Map/>} />
-            <Route path="/MypageMain" element={ <MypageMain/>} />
+            <Route path="/mypageMain" element={ <MypageMain/>} />
           </Routes>
         </div>
       </>    

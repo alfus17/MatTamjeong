@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/MypageMain.css';
+import '../css/mypageMain.css';
 
 const MypageMain = () => {
   return (
@@ -11,12 +11,14 @@ const MypageMain = () => {
       <div className='ProfileInfooo'>
         <div className='ProfileNameee'>이름</div>
         <div className='ProfileEmailll'>이메일</div>
-        <div className='ProfileButtonnn'>
-          <button>내프로필</button>
-          <button>정보수정</button>
-          <button>이력관리</button>
-        </div>
+        
+          <button className='ProfileEditButtonnn'>내프로필</button>
+          <button className='ProfileEditButtonnn'>정보수정</button>
+          <button className='ProfileEditButtonnn'>이력관리</button>
       </div>
+
+      {/* 여기까지가 왼쪽에 뜨는 기본 프로필 */}
+
     </div>
   );
 };
