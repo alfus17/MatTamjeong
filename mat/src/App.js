@@ -3,8 +3,7 @@ import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Main from './components/mainpage/main';
 import Map from './components/map/map';
-import { Navbar } from 'react-bootstrap';
-import BagicProfile from './components/Mypage/MypageMain';
+import MypageMain from './components/Mypage/mypagemain';
 
 function App() {
   return (
@@ -14,7 +13,7 @@ function App() {
           <Header />
           </div>
 
-          <button><a href='/Mypage/MypageMain'>임시</a></button>
+          <button><a href='/MypageMain'>임시</a></button>
           
 
       
@@ -27,7 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={ <Main/>} />
             <Route path="/Map" element={ <Map/>} />
-            <Route path="/Mypage/MypageMain" element={ <BagicProfile/>} />
+            <Route path="/MypageMain" element={ <MypageMain/>} />
           </Routes>
         </div>
       </>    
