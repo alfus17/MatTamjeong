@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/searchbox.css';
+import '../css/searchbar.css';
 
 
 function SearchBar({search,onChange}) {
