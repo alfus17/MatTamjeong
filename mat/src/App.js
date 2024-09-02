@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={ <Main/>} />
             <Route path="/Map" element={ <Map/>} />
             <Route path="/mypageMain" element={ <MypageMain/>} >
-              <Route path='/mypageMain/writedText' element={<WritedText />} />
+            <Route path='/mypageMain/writedText' element={<WritedText />} />
             </Route>
           </Routes>
         </div>
