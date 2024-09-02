@@ -1,0 +1,28 @@
+.navbar{
+    background-color: rgb(253, 192, 59);
+    height: 60px; 
+    width: 96%;
+    border-radius: 30px;
+    line-height: 30px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    float: left;
+    padding-left: 100px;
+    padding-top: 5px;
+    font-size: 20px;
+}
+
+li h4 {
+    margin: 0;
+    text-decoration: none;
+}
+a {
+    color: white;
+    list-style: none;
+    text-decoration: none;
+}

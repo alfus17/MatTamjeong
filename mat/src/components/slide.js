@@ -1,5 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
-import './slide.css';
+import './css/slide.css';
 
 function Slide() {
     return (
