@@ -7,6 +7,11 @@ import '../css/header.css';
 
 
 function Header() { 
+    // 버튼 클릭 시 /Mypage로 이동하는 함수
+  const handleButtonClick = () => {
+    window.location.href = "./mypageMain";
+  };
+
     // 검색어 상태 관리
     const [search, setSearch] = useState("");
 
@@ -24,6 +29,7 @@ function Header() {
             <li><a href="#Dessert">Dessert</a></li>
             <li><a href="#Cart">Cart</a></li>
         </ul>
+        <button onClick={handleButtonClick}>임시마페</button>
     </nav>
     </>
 );

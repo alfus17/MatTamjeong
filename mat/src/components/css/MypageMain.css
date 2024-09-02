@@ -1,0 +1,88 @@
+.mypage-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: 4%;
+  }
+  
+  .ProfileRectangleee {
+    width: 250px;
+    height: 430px;
+    background-color: rgb(252, 239, 202);
+    padding: 20px;
+    border-radius: 30px;
+    margin-right: 20px; /* Adds space between profile and content */
+  }
+  
+  .ProfileCircleee {
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-top: 30px;
+    overflow: hidden;
+  }
+  
+  .ProfilePictureee {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } 
+  
+  .ProfileInfooo {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .ProfileNameee {
+    margin-top: 30px;
+  }
+  
+  .ProfileEmailll {
+    margin-top: 30px;
+  }
+  
+  .ProfileEditButtonnn {
+    margin-top: 40px;
+    width: 69px;
+    font-size: 11px;
+    padding: 5px 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    background-color: rgb(252, 239, 202);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .ProfileEditButtonnn:hover {
+    background-color: #ffe2cf;
+    color: #333;
+    border-color: #ffd2b4;
+  }
+  
+  .mypage-content {
+    flex: 1; /* Allows content to take up remaining space */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 30px;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .mypage-container {
+      flex-direction: column;
+    }
+  
+    .ProfileRectangleee {
+      margin-right: 0;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+  
+    .mypage-content {
+      width: 100%;
+    }
+  }
+  .ProfileEditButtonnn a {
+    color: rgb(0, 0, 0);
+  }
