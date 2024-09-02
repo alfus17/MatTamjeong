@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './css/main.css';
+import '../css/main.css';
 import Location from './location';
 
 function Main() {

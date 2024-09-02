@@ -1,15 +1,13 @@
 import './components/css/App.css';
-import SearchBar from './components/Searchbar';
-import Header from './components/header';
+import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Main from './components/main';
-import Map from './components/map';
+import Main from './components/mainpage/main';
+import Map from './components/map/map';
 
 function App() {
   return (
     <Router>
       <> 
-        <SearchBar/>
           <div className='nav'>
           <Header />
           </div>
