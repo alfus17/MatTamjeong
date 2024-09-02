@@ -1,0 +1,12 @@
+.view {
+    display: flex;
+}
+.map {
+    padding-top: 40px;
+    padding-left: 80px;
+    margin: 0;
+}
+.nav {
+    margin-left: 4%;
+   
+}
