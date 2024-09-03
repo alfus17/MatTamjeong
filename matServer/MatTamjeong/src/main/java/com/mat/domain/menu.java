@@ -30,25 +30,21 @@ public class menu {
 	private int menuId;
 	
 	// 가게ID
-	@Id
 	@Column(name="store_id")
 	@NonNull
 	private String storeId;
 
 	// 카테고리	
-	@Id
 	@Column(name="food_category")
 	@NonNull
 	private String foodCategory;
 	
 	// 가격
-	@Id
 	@Column(name="price")
 	@NonNull
 	private int price;
 	
 	// 메뉴사진URL
-	@Id
 	@Column(name="image_url")
 	@NonNull
 	private String imageUrl;

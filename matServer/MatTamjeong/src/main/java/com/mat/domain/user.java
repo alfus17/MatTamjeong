@@ -37,20 +37,17 @@ public class user {
 	private String userAddress;
 
 	// 생년월일
-	@Id
 	@Column(name="user_status")
 	@NonNull
 	private String userStatus;
 	
 	// 가입일자
-	@Id
 	@Column(name="signup_date")
 	@NonNull
 	private LocalDateTime signupDate;
 	
 	
 	// 유저토큰
-	@Id
 	@Column(name="user_token")
 	private String reviewId;
 	

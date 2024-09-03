@@ -29,25 +29,21 @@ public class userInfo {
 	private String userId;
 	
 	//  주소
-	@Id
 	@Column(name="user_address")
 	@NonNull
 	private String userAddress;
 
 	// 상태	
-	@Id
 	@Column(name="user_status")
 	@NonNull
 	private String userStatus;
 	
 	// 리뷰ID (FK)
-	@Id
 	@Column(name="review_id")
 	@NonNull
 	private String reviewId;
 	
 	// 즐겨찾기(FK)
-	@Id
 	@Column(name="bookmark_id")
 	@NonNull
 	private String bookmarId;
