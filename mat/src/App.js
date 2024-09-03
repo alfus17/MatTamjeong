@@ -3,8 +3,10 @@ import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Main from './components/mainpage/main';
 import Map from './components/map/map';
-// import MypageMain from './components/mypage/mypageMain';
-// import WritedText from './components/mypage/writedText';
+import MypageMain from './components/mypage/mypageMain';
+import WritedText from './components/mypage/writedText';
+import EditMe from './components/mypage/editMe';
+import ManagementHistory from './components/mypage/managementHistory';
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -36,9 +38,11 @@ function App() {
           <Routes>
             <Route path="/" element={ <Main/>} />
             <Route path="/Map" element={ <Map/>} />
-            {/* <Route path="/mypageMain" element={ <MypageMain/>} > */}
-            {/* <Route path='/mypageMain/writedText' element={<WritedText />} /> */}
-            {/* </Route> */}
+            <Route path="/mypageMain" element={ <MypageMain/>} >
+            <Route path='/mypageMain/writedText' element={<WritedText />} />
+            <Route path='/mypageMain/editMe' element={<EditMe />} />
+            <Route path='/mypageMain/managementHistory' element={<ManagementHistory />} />
+            </Route>
           </Routes>
         </div>
       </>    

@@ -14,11 +14,9 @@ const MypageMain = () => {
           <div className='ProfileNameee'>이름</div>
           <div className='ProfileEmailll'>이메일</div>
           
-          <button className='ProfileEditButtonnn'>
-            <a href='/mypageMain/writedText'>내프로필</a>
-          </button>
-          <button className='ProfileEditButtonnn'>정보수정</button>
-          <button className='ProfileEditButtonnn'>이력관리</button>
+          <button className='ProfileEditButtonnn'><a href='/mypageMain/writedText'>내프로필</a></button>
+          <button className='ProfileEditButtonnn'><a href='/mypageMain/editMe'>정보수정</a></button>
+          <button className='ProfileEditButtonnn'><a href='/mypageMain/ManagementHistory'>이력관리</a></button>
         </div>
       </div>
 

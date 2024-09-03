@@ -1,3 +1,5 @@
+// 작성글, 작성댓글,  댓글단글을 보여주는 페이지
+
 import Nav from 'react-bootstrap/Nav';
 import '../css/writedText.css';
 

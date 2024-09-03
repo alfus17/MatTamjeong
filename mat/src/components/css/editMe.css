@@ -1,0 +1,13 @@
+.EditMeee {
+    width: 400px;
+    margin-left: 260px;
+}
+
+.EditMeeeA {
+    border: 2px solid #ffc444; /* 항목의 테두리 */
+    border-radius: 10px;
+}
+
+#button-addon2 {
+    background-color: #ffc444;
+}
