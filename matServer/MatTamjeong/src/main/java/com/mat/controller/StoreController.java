@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/store")
 public class StoreController {
 
     @Autowired
     private StoreService storeService;
 
     // 모든 Store 데이터를 반환하는 API
-    @GetMapping
+    @GetMapping("/getStore")
     public List<Store> getAllStores() {
         return storeService.getAllStores();  // 전체 데이터를 반환
     }
