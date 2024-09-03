@@ -18,7 +18,8 @@ import lombok.NoArgsConstructor;
  * 	가게 ID (PK) : store_id
  *  가게 이름 		: store_name
  * 	가게 주소		: store_address
- * 	지도위치(위성) 	: store_location
+ * 	지도위치(lat) 	: store_location_lat
+ *	지도위치(lat)	: store_location_lng
  * 	영업시간		: business_hours
  * 	상세정보		: details
  * 	음식카테고리 	: food_category
@@ -52,10 +53,16 @@ public class Store {
 	@NonNull
 	private String storeAddress;
 	
-	// 가게 위성 주소
-	@Column(name="store_location")
+	// 가게 위성 주소(lat)
+	@Column(name="store_location_lat")
 	@NonNull
-	private String storeLocation;
+	private String storeLocationLat;
+	
+	// 가게 위성 주소(lng)
+	@Column(name="store_location_lng")
+	@NonNull
+	private String storeLocationLng;
+
 	
 	// 가게 영업시간
 	@Column(name="business_hours")
