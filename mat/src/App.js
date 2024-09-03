@@ -5,9 +5,9 @@ import Main from './components/mainpage/main';
 import Map from './components/map/map';
 // import MypageMain from './components/mypage/mypageMain';
 // import WritedText from './components/mypage/writedText';
+import Title from './components/title/title';
+import Foot from './components/common/footer';
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 function App() {
 
@@ -27,20 +27,24 @@ function App() {
   return (
     <Router>
       <> 
-          <div className='nav'>
-          <Header />
-          </div>
-
+     
+<div className='All'>  {/* 전체 영역 설정  건들지 마셈*/}
+        <Header />
+  
         {/* 라우팅 설정 */}
         <div className='map'>
           <Routes>
             <Route path="/" element={ <Main/>} />
             <Route path="/Map" element={ <Map/>} />
+            <Route path="/Title" element={ <Title/>} />
+         
             {/* <Route path="/mypageMain" element={ <MypageMain/>} > */}
             {/* <Route path='/mypageMain/writedText' element={<WritedText />} /> */}
             {/* </Route> */}
           </Routes>
+          <Foot />
         </div>
+</div>
       </>    
     </Router>
   );

@@ -1,37 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchBar from './Searchbar';
 import '../css/header.css';
-
-
+import Navba from './nav';
+import { useNavigate } from 'react-router-dom';
 
 function Header() { 
-    // 버튼 클릭 시 /Mypage로 이동하는 함수
-  const handleButtonClick = () => {
-    window.location.href = "./mypageMain";
-  };
+    const navigate = useNavigate(); // useNavigate 훅 사용
 
-    // 검색어 상태 관리
-    const [search, setSearch] = useState("");
+    // 클릭 핸들러 함수
+    const handleLogoClick = () => {
+      navigate('/'); // 메인 페이지로 이동
+    };
 
-     // 검색어 변경 핸들러
-    const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-  };
-  return (
-    <>
-    <SearchBar search={search} onChange={handleSearchChange} />
-    <nav className="navbar">
-        <ul>
-            <li><a href="/"><h4>메인 홈페이지</h4></a></li>
-            <li><a href="/Map">지도</a></li>
-            <li><a href="#Dessert">Dessert</a></li>
-            <li><a href="#Cart">Cart</a></li>
-        </ul>
-        <button onClick={handleButtonClick}>임시마페</button>
-    </nav>
-    </>
-);
+    return (
+      <>
+        <div className='top'>
+          <div className='head'>
+            {/* 로고 이미지를 추가하고 클릭 이벤트를 연결 */}
+            <img 
+              src='/img/mat.png' 
+              className='logo'
+              onClick={handleLogoClick} // 클릭 이벤트 추가
+            />
+          </div>
+        </div>
+        <Navba />
+      </>
+    );
 }
 
 export default Header;

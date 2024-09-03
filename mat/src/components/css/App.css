@@ -1,12 +1,7 @@
-.view {
-    display: flex;
+.All{
+    width: 90%;
+    height: 100%;
+    margin-left: 5%;
+    border: 1px solid;
 }
-.map {
-    padding-top: 40px;
-    padding-left: 80px;
-    margin: 0;
-}
-.nav {
-    margin-left: 4%;
-   
-}
+

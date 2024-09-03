@@ -10,7 +10,7 @@ const Map = () => {
     // 백엔드에서 Store 데이터를 가져오는 함수
     const fetchStoreData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/store/getStore'); // Spring Boot API 경로
+        const response = await axios.get('/store/getStore'); // Spring Boot API 경로
         setStore(response.data); // 가져온 데이터를 state에 저장
       } catch (error) {
         console.error('Error fetching store data:', error);
@@ -59,7 +59,7 @@ const Map = () => {
     });
   }, [store]); // store가 변경될 때마다 실행
 
-  return <div ref={mapElement} style={{ width: '95%', height: '700px' }} />;
+  return <div ref={mapElement} style={{ width: '30%', height: '700px' }} />;
 };
 
 export default Map;
