@@ -48,6 +48,7 @@ function Main() {
   };
 
   return (
+<div className='mainout'>
     <div className="container">
       <div className="images">
         {locations.map((location, index) => (
@@ -73,6 +74,7 @@ function Main() {
         </div>
       )}
     </div>
+</div>
   );
 }
 
