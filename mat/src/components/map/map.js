@@ -3,22 +3,31 @@ import axios from 'axios';
 
 const Map = () => {
   const mapElement = useRef(null);
-  const [storeData, setStoreData] = useState([]);
+  const [store, setStore] = useState([]);
 
   useEffect(() => {
     // 백엔드에서 Store 데이터를 가져오는 함수
     const fetchStoreData = async () => {
       try {
-        const response = await axios.get('/api/stores'); // Spring Boot API 경로
-        setStoreData(response.data); // 가져온 데이터를 state에 저장
+        const response = await axios.get('http://localhost:8080/api/test'); // Spring Boot API 경로
+        setStore(response.data); // 가져온 데이터를 state에 저장
       } catch (error) {
         console.error('Error fetching store data:', error);
       }
     };
-
     fetchStoreData();
   }, []);
-
+  <div>
+      <h1>Item List</h1>
+      <ul>
+        {store.map(store => (
+          <li key={store.id}>
+            {store.id}
+          </li>
+        ))}
+      </ul>
+    </div>
+/*
   useEffect(() => {
     const { naver } = window;
     if (!naver) return;
@@ -62,7 +71,7 @@ const Map = () => {
     // storeData 배열을 순회하면서 마커와 클릭 이벤트를 생성합니다.
     storeData.forEach((store) => {
       const marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(store.storeLocation.lat, store.storeLocation.lng),
+        position: new naver.maps.LatLng(store.storeLocationLat.lat, store.storeLocationLng.lng),
         map: map,
         title: store.storeName, // title을 storeName으로 설정
       });
@@ -83,6 +92,7 @@ const Map = () => {
   }, [storeData]); // storeData가 변경될 때마다 실행
 
   return <div ref={mapElement} style={{ width: '95%', height: '700px' }} />;
+  */
 };
 
 export default Map;

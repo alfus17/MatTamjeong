@@ -56,12 +56,12 @@ public class Store {
 	// 가게 위성 주소(lat)
 	@Column(name="store_location_lat")
 	@NonNull
-	private String storeLocationLat;
+	private double storeLocationLat;
 	
 	// 가게 위성 주소(lng)
 	@Column(name="store_location_lng")
 	@NonNull
-	private String storeLocationLng;
+	private double storeLocationLng;
 
 	
 	// 가게 영업시간
