@@ -31,7 +31,6 @@ public class user {
 	private String userId;
 	
 	// 비밀번호 	
-	@Id
 	@Column(name="user_pwd")
 	@NonNull
 	private String userAddress;

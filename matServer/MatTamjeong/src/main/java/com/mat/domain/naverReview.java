@@ -23,6 +23,7 @@ public class naverReview {
 	 * 	리뷰내용 		: review_content
 	 * 	작성일자		: created_at
 	 * 	사진URL		: photo_url
+	 * 	가게 ID (FK)	: store_id
 	 */
 	
 	// 네이버 리뷰 ID
@@ -55,6 +56,11 @@ public class naverReview {
 	// 이 리뷰의 사진 url 주소
 	@Column(name="photo_url")
 	private String nvPhotoUrl;
+	
+	// 가게 ID
+	@Column(name="store_id")
+	@NonNull
+	private String storeId;
 
 	
 

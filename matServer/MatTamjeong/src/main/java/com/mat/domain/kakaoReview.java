@@ -23,6 +23,7 @@ public class kakaoReview {
 	 * 	리뷰내용 		: review_content
 	 * 	작성일자		: created_at
 	 * 	사진URL		: photo_url
+ 	 * 	가게 ID (FK)	: store_id
 	 */
 	 
 	// 카카오 리뷰 ID
@@ -54,6 +55,11 @@ public class kakaoReview {
 	// 이 리뷰의 사진 url 주소
 	@Column(name="photo_url")
 	private String kgPhotoUrl;
+	
+	// 가게 ID
+	@Column(name="store_id")
+	@GeneratedValue
+	private String storeId;
 
 	
 

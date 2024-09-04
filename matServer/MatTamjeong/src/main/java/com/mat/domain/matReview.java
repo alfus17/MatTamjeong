@@ -24,6 +24,7 @@ public class matReview {
 	 * 	리뷰내용 			: review_content
 	 * 	작성일자			: created_at
 	 * 	사진ID			: photo_id(FK)
+	 * 	가게 ID (FK)	: store_id
 	 */
 	
 	// 맛탐정 리뷰 ID
@@ -56,6 +57,12 @@ public class matReview {
 	// 이 리뷰의 사진 url 주소
 	@Column(name="photo_url")
 	private String matPhotoUrl;
+	
+	// 가게 ID
+	@Column(name="store_id")
+	@NonNull
+	private String storeId;
+	
 
 	
 
