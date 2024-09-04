@@ -34,25 +34,20 @@ public class bookmark {
 	private String bookmarkId;
 	
 	// 가게ID (PK)(FK)
-	@Id
 	@Column(name="store_id")
 	@NonNull
 	private String storeId;
 
 	// 생성일	
-	@Id
 	@Column(name="created_at")
 	@NonNull
 	private LocalDateTime createdTime;
 	
 	// 수정일 
-	@Id
 	@Column(name="update_at")
-	
 	private LocalDateTime updateTime;
 	
 	// 메뉴ID(FK)
-	@Id
 	@Column(name="menu_id")
 	@NonNull
 	private int menuId;

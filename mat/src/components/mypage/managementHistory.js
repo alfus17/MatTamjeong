@@ -1,3 +1,5 @@
+// 즐겨찾기, 좋아요, 방문했던 음식점들을 보여주는 페이지
+
 import Accordion from 'react-bootstrap/Accordion';
 import '../css/manageHistory.css';
 

@@ -12,8 +12,8 @@
   }
   
   .WritedTexttt .nav-link.active {
-    color: #ffc444; /* 활성화된 링크 색상 (파란색) */
-    border-color: #ffc444; /* 활성화된 링크 테두리 색상 (파란색) */
+    color: rgb(88, 88, 87); /* 활성화된 링크 색상 (파란색) */
+    border-color: rgb(88, 88, 87); /* 활성화된 링크 테두리 색상 (파란색) */
     border-width: 2px; /* 테두리 두께 */
     /*text-decoration: underline;  활성화된 링크 밑줄 */
   }

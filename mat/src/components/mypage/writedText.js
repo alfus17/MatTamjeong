@@ -16,6 +16,7 @@ function WritedText() {
         <Nav.Link eventKey="link-3">댓글단글</Nav.Link>
       </Nav.Item>
     </Nav>
+    
   );
 }
 
