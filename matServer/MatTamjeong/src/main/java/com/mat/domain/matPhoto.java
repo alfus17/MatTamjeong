@@ -32,23 +32,19 @@ public class matPhoto {
 	private String photoId;
 	
 	// 사진 경로
-	@Id
 	@Column(name="image_path")
 	private String imagePath;
 
 	// 사진 올린 최초 시간
-	@Id
 	@Column(name="created_at")
 	@NonNull
 	private LocalDateTime createTime;
 	
 	// 사진 수정시간
-	@Id
 	@Column(name="update_at")
 	private LocalDateTime updateTime;
 	
 	// 사진 상태
-	@Id
 	@Column(name="photo_status")
 	private String photoStatus;
 	

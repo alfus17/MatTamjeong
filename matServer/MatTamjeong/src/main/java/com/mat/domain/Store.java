@@ -39,7 +39,6 @@ public class Store {
 	//가게 고유 ID
 	@Id
 	@Column(name="store_id")
-	
 	@GeneratedValue
 	private String storeId;
 	
@@ -89,21 +88,8 @@ public class Store {
 	private LocalDateTime updateAt;
 	
 	// 가게 상태
-
 	@Column(name="store_status")
 	private char storeStatus;
 	
-	// 아래는 전부 FK
-	// 네이버리뷰 아이디
-	@Column(name="nv_review_id")
-	private String naverReviewId;
-
-	// 카카오리뷰 아이디
-	@Column(name="kg_review_id")
-	private String kgReviewId;
-	
-	// 맛탐정리뷰 아이디
-	@Column(name="mat_review_id")
-	private String matReviewId;
 	
 }
