@@ -20,7 +20,7 @@ public class StoreService {
     }
 
     // 특정 ID의 Store 데이터를 가져오는 메서드
-    public Optional<Store> getStoreById(String storeId) {
+    public Optional<Store> getStoreById(Long storeId) {
         return storeRepository.findById(storeId);
     }
 
@@ -30,7 +30,12 @@ public class StoreService {
     }
 
     // Store 데이터를 삭제하는 메서드
-    public void deleteStoreById(String storeId) {
+    public void deleteStoreById(Long storeId) {
         storeRepository.deleteById(storeId);
     }
+
+	public void saveStoreALL(List<Store> storeList) {
+		 storeRepository.saveAll(storeList);		
+	}
+
 }

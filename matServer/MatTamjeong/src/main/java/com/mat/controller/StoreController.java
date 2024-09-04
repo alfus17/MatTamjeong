@@ -21,6 +21,8 @@ public class StoreController {
     public List<Store> getAllStores() {
         return storeService.getAllStores();  // 전체 데이터를 반환
     }
-
+    
+    
+    
     // 필요한 경우 특정 필드만 반환하는 DTO를 사용할 수 있습니다.
 }
