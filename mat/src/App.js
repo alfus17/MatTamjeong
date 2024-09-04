@@ -3,7 +3,7 @@ import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Main from './components/mainpage/main';
 import Map from './components/map/map';
-import MypageMain from './components/mypage/mypageMain';
+import MypageMain from './components/mypage/MypageMain';
 import WritedText from './components/mypage/writedText';
 import EditMe from './components/mypage/editMe';
 import ManagementHistory from './components/mypage/managementHistory';

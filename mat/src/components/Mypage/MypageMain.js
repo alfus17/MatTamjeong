@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import '../css/mypageMain.css';
+import '../css/MypageMain.css';
 
 const MypageMain = () => {
   return (
