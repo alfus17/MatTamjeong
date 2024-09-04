@@ -39,34 +39,34 @@ public class Store {
 	//가게 고유 ID
 	@Id
 	@Column(name="store_id")
-	@NonNull
+	
 	@GeneratedValue
-	private String sotreId;
+	private String storeId;
 	
 	// 가게 이름
 	@Column(name="store_name")
-	@NonNull
+	
 	private String storeName;
 	
 	// 가게 주소
 	@Column(name="store_address")
-	@NonNull
+	
 	private String storeAddress;
 	
 	// 가게 위성 주소(lat)
 	@Column(name="store_location_lat")
-	@NonNull
-	private String storeLocationLat;
+	
+	private double storeLocationLat;
 	
 	// 가게 위성 주소(lng)
 	@Column(name="store_location_lng")
-	@NonNull
-	private String storeLocationLng;
+	
+	private double storeLocationLng;
 
 	
 	// 가게 영업시간
 	@Column(name="business_hours")
-	@NonNull
+	
 	private String businessHours;
 	
 	// 가게 상세정보
@@ -80,7 +80,7 @@ public class Store {
 	// 생성날짜
 	@CreatedDate
 	@Column(name="created_at")
-	@NonNull
+	
 	private LocalDateTime createdAt;
 	
 	// 수정날짜
@@ -89,7 +89,7 @@ public class Store {
 	private LocalDateTime updateAt;
 	
 	// 가게 상태
-	@NonNull
+
 	@Column(name="store_status")
 	private char storeStatus;
 	
