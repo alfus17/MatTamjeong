@@ -9,7 +9,7 @@ const Location = ({ lat, lng, title, content }) => {
 
     const mapOptions = {
       center: new naver.maps.LatLng(lat, lng),
-      zoom: 16,
+      zoom: 18,
     };
 
     const map = new naver.maps.Map(mapElement.current, mapOptions);
@@ -33,7 +33,7 @@ const Location = ({ lat, lng, title, content }) => {
     });
   }, [lat, lng, title, content]);
 
-  return <div ref={mapElement} style={{ width: '800px', height: '600px' }} />;
+  return <div ref={mapElement} style={{ width: '450px', height: '600px' }} />;
 };
 
 export default Location;

@@ -1,0 +1,32 @@
+.gangline {
+    border: 1px solid;
+    background-color: aqua;
+    height: 1000px;
+    width: 100%;
+}
+.store-item {
+    margin-top: 150px;
+    margin-left: 120px;
+}
+
+.slidebox{
+    width: 350px;
+    float: left;
+    margin-left: 100px;
+    background-color: rgb(180, 100, 100);
+}   
+
+.store-image {
+    margin-left: 0px;
+    width: 200px;
+    height: 200px;
+}
+
+.slidebox li {
+    list-style: none;
+    float: left;
+    margin-left: 20px   ;
+}
+.slidebox p {
+    font-size: 10px;
+}

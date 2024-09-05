@@ -91,5 +91,7 @@ public class Store {
 	@Column(name="store_status")
 	private char storeStatus;
 	
-	
+	// 가게 이미지
+	@Column(name="store_imgurl")
+	private String storeimg;
 }

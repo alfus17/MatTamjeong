@@ -1,13 +1,8 @@
-import '../css/title.css';
 
-function Title() {
+function Title () {
+
     return (
-        <div className="out-line">
-            <div className='Top'>
-            <h3>카카오 리뷰 게시판</h3>
-            </div>
-        </div>
-     
+            <h1>hi</h1>
     )
 }
 export default Title;

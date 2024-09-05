@@ -1,11 +1,115 @@
-.out-line {
+.titleoutline{
     width: 100%;
-    height: 700px;
-    border: 1px solid;
-    margin-top: 30px;
+}
 
-}
-.Top {
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 960px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    background: #ffffff;
+    border: 1px solid #aacdff;
+    box-shadow: 7px 7px 39px rgba(80, 78, 78, 0.753);
+    border-radius: 20px;
+  }
+  
+  .member-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 818px;
+    margin-top: 72px;
+    margin-bottom: 70px;
+  }
+  
+  .header {
+    width: 466px;
+    height: 94px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 47px;
+    color: #000000;
+  }
+  
+  .user-info {
+    margin-top: 39px;
+  }
+  
+  .user-info div {
+    margin-top: 21px;
+  }
+  
+  .user-info input {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #797979;
+    border: none;
+    border-bottom: 1px solid #cfcfcf;
+    width: 466px;
+    margin-top: 21px;
+  }
+  
+  .user-info-email input {
+    border-bottom: 1px solid #303030;
+  }
+  
+  .gender {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 140px;
+    height: 23.94px;
+    margin-top: 50px;
+  }
+  
+  .gender input {
+    width: 20px;
+    height: 19.95px;
+    background: #ebebeb;
+    border: 1px solid #d2d2d2;
+  }
+  
+  .gender label {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .agree-check {
+    width: 454px;
+    height: 21.06px;
+    margin-top: 52.05px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+  }
+  
+  .btn {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    width: 470px;
+    height: 106px;
+    border-top: 1px solid #e6e6e6;
+  }
+  
+  button {
+    margin-top: 30px;
+    width: 470px;
+    height: 75px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
     text-align: center;
-    margin-top: 20px;
-}
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 10px;
+  }

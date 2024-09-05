@@ -6,22 +6,22 @@
     line-height: 30px;
 }
 
-ul {
+.navbar ul {
     list-style: none;
 }
 
-li {
+.navbar li {
     float: left;
     padding-left: 100px;
     padding-top: 5px;
     font-size: 20px;
 }
 
-li h4 {
+.navbar li h4 {
     margin: 0;
     text-decoration: none;
 }
-a {
+.navbar a {
     color: white;
     list-style: none;
     text-decoration: none;
