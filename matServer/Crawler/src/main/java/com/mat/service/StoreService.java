@@ -33,15 +33,9 @@ public class StoreService {
     public void deleteStoreById(Long storeId) {
         storeRepository.deleteById(storeId);
     }
-    
-    // 모든 Store정보 세이브 하기 
+
 	public void saveStoreALL(List<Store> storeList) {
 		 storeRepository.saveAll(storeList);		
-	}
-	
-	// 지역태그명으로 쿼리하기 
-	public List<Store> getAllStoreByLc(String locationCategory) {
-		return storeRepository.findByLocationCategory(locationCategory);		
 	}
 
 }
