@@ -10,4 +10,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 
 	List<Store> findByLocationCategory(String location);
 
+	List<Store> findByFoodCategory(String foodCategory);
+
 }

@@ -23,12 +23,27 @@ public class StoreController {
     }
     
     // 지역카테고리로 쿼리하기
+	/*
+	 *  들어오는값 : { locationCategory : "지역카테고리" }
+	 * 
+	 * 	응답값 :	List<Store>
+	 */
     @PostMapping("/getLCStore")
     public List<Store> getAllStoreByLc(@RequestBody String locationCategory) {
         return storeService.getAllStoreByLc(locationCategory);  // 전체 데이터를 반환
     }
     
+    // 음식 카테고리로 쿼리하기
+	/*
+	 *  들어오는값 :  { foodCategory : "음식카테고리" }
+	 * 
+	 * 	응답값 :	List<Store>
+	 */
+    @PostMapping("/getFCStore")
+    public List<Store> getAllStoreByFc(@RequestBody String foodCategory) {
+        return storeService.getAllStoreByFc(foodCategory);  // 전체 데이터를 반환
+    }
     
-    
+
     // 필요한 경우 특정 필드만 반환하는 DTO를 사용할 수 있습니다.
 }

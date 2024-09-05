@@ -37,7 +37,7 @@ public class matReview {
 			allocationSize = 1
 			)
 	@GeneratedValue(generator="matseq")
-	private String matReviewId;
+	private long matReviewId;
 	
 	// 맛탐정 별점
 	@Column(name="rating")

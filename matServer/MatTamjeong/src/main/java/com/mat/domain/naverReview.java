@@ -36,7 +36,7 @@ public class naverReview {
 			allocationSize = 1
 			)
 	@GeneratedValue(generator="naverseq")
-	private String nvReviewId;
+	private long nvReviewId;
 	
 	// 네이버 별점
 	@Column(name="rating")

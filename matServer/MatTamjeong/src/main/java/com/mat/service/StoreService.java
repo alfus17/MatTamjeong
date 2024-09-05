@@ -39,9 +39,15 @@ public class StoreService {
 		 storeRepository.saveAll(storeList);		
 	}
 	
-	// 지역태그명으로 쿼리하기 
+	
+	// 지역태그명으로 쿼리하기
 	public List<Store> getAllStoreByLc(String locationCategory) {
 		return storeRepository.findByLocationCategory(locationCategory);		
+	}
+	
+	// 음식 태그명으로 쿼리하기
+	public List<Store> getAllStoreByFc(String foodCategory) {
+		return storeRepository.findByFoodCategory(foodCategory);		
 	}
 
 }

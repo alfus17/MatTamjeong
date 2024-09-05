@@ -36,7 +36,7 @@ public class kakaoReview {
 			allocationSize = 1
 			)
 	@GeneratedValue(generator="kgseq")
-	private String kgReviewId;
+	private long kgReviewId;
 	
 	// 카카오 별점(
 	@Column(name="rating")
