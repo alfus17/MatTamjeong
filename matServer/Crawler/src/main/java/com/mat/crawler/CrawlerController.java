@@ -38,39 +38,40 @@ public class CrawlerController {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         
-        JSONObject jsonObject = new JSONObject();
+//        JSONObject jsonObject = new JSONObject();
         List<Store> StoreList = new ArrayList<>();
 
         // TODO 키워드 배열 for문 으로 구성
         String keyword = "성복역 맛집";
-
-        // 다이닝코드에 맛집 키워드 검색
-        driver.get("https://www.diningcode.com/list.dc?query="+keyword); // 크롤링할 URL 입력
-        
-        // class이름이 Info라는 데이터 가져오기
-        List<WebElement> elements = driver.findElements(By.className("Info"));
-        for (WebElement element : elements) {
-        	System.out.println(element.getText());
-
-        }
-        
-        // 타이틀 가져오기
-        List<WebElement> h2_elements = driver.findElements(By.tagName("h2"));
+        String [] keywords = {"홍대 맛집","강남 맛집"};
         // 타이틀 아이디 담을 배열
-        String []titleIds =new String[h2_elements.size()];
+        ArrayList<String> store_title_id = new ArrayList<>();
+
+    
         
-        // 상세페이지 타이틀 아이디 가져오기
-        for (int i=0; i<h2_elements.size(); i++) {
-        	// title id 값 -> 해당 매장의 상세페이지 및 리뷰 조회시 필요
-        	titleIds[i] = h2_elements.get(i).getAttribute("id").substring(5);
-            System.out.println(titleIds[i]);
-            System.out.println("-------------");
+        for(String key : keywords) {
+            // 크롤링할 URL 입력
+        	// 다이닝코드에 맛집 키워드 검색
+            driver.get("https://www.diningcode.com/list.dc?query="+key); 
+	        // class이름이 Info라는 데이터 가져오기
+	        List<WebElement> elements = driver.findElements(By.className("Info"));
+	        // 타이틀 가져오기
+	        List<WebElement> h2_elements = driver.findElements(By.tagName("h2"));
+	        
+	        // 상세페이지 타이틀 아이디 가져오기
+	        for (int i=0; i<h2_elements.size(); i++) {
+	        	// title id 값 -> 해당 매장의 상세페이지 및 리뷰 조회시 필요
+	        	store_title_id.add( h2_elements.get(i).getAttribute("id").substring(5));
+	//            System.out.println(titleIds[i]);
+	            System.out.println("-------------");
+	        }
         }
         
         
         // 다이닝코드 상세정보 페이지
         String url ="https://www.diningcode.com/profile.php?rid=";
-        for(String title : titleIds ) {
+        for(String title : store_title_id ) {
+        	
             /* 	Store Table
              * 	가게 ID (PK) : store_id
              *  가게 이름 		: store_name
@@ -113,25 +114,26 @@ public class CrawlerController {
             List<WebElement> details = driver.findElements(By.className("basic-info"));
 //            jsonObject.put("details", details.get(0).getText());
             
-            Store store = new Store();
-            store.setStoreName(store_name.get(0).getText());
-            store.setStoreAddress(adress.get(0).getText().split("\n")[0].replace("지번", ""));
-            store.setStoreLocationLat(Double.parseDouble(location_lat.get(0).getAttribute("value")));
-            store.setStoreLocationLng(Double.parseDouble(location_lng.get(0).getAttribute("value")));
-            store.setBusinessHours(business_hours.get(0).getText().split("더보기")[0]);
-            store.setDetails( details.get(0).getText());
+//            Store store = new Store();
+//            store.setStoreName(store_name.get(0).getText());
+//            store.setStoreAddress(adress.get(0).getText().split("\n")[0].replace("지번", ""));
+//            store.setStoreLocationLat(Double.parseDouble(location_lat.get(0).getAttribute("value")));
+//            store.setStoreLocationLng(Double.parseDouble(location_lng.get(0).getAttribute("value")));
+//            store.setBusinessHours(business_hours.get(0).getText().split("더보기")[0]);
+//            store.setDetails( details.get(0).getText());
             
             
-            StoreList.add(store); 
+//            StoreList.add(store); 
         }
+        // store DB에 넣는 코드
         String returnStr = "";
-        try {
-        	storeService.saveStoreALL(StoreList);
-        	returnStr = "ok";
-		} catch (Exception e) {
-			returnStr = e.toString();
-		}
-        
+//        try {
+//        	storeService.saveStoreALL(StoreList);
+//        	returnStr = "ok";
+//		} catch (Exception e) {
+//			returnStr = e.toString();
+//		}
+//        
         // 드라이버 종료
         driver.quit();
         return returnStr;

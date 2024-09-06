@@ -42,12 +42,12 @@ public class StoreService {
 	
 	// 지역태그명으로 쿼리하기
 	public List<Store> getAllStoreByLc(String locationCategory) {
-		return storeRepository.findByLocationCategory(locationCategory);		
+		return storeRepository.findByLocationCategoryContaining(locationCategory);		
 	}
 	
 	// 음식 태그명으로 쿼리하기
 	public List<Store> getAllStoreByFc(String foodCategory) {
-		return storeRepository.findByFoodCategory(foodCategory);		
+		return storeRepository.findByFoodCategoryContaining(foodCategory);		
 	}
 
 }

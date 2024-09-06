@@ -3,10 +3,10 @@ import axios from 'axios';
 
 const Map = (props) => {
   const mapElement = useRef(null);
-  
+
   // store에 관한 DATA 저장
   const [store, setStore] = useState([]);
-  console.log(props.location);
+  console.log(props.locationCategory);
 
   console.log();
   useEffect(() => {
@@ -15,9 +15,10 @@ const Map = (props) => {
       try {
 
         // 기본 파라미터가 없을 경우
-        const location = props.location == undefined ? "강남": props.location;
-
-        const response = await axios.post('/store/getStore',{location : location}); // Spring Boot API 경로
+        const location = props.locationCategory == undefined ? "강남": props.locationCategory;
+        console.log("map 기본 지역 설정")
+        const response = await axios.post('/store/getLCStore',{locationCategory : location}); // Spring Boot API 경로
+        
         setStore(response.data); // 가져온 데이터를 state에 저장
       } catch (error) {
         console.error('Error fetching store data:', error);

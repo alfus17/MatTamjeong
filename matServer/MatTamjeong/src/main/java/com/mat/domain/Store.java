@@ -88,10 +88,7 @@ public class Store {
 	@LastModifiedDate
 	@Column(name="update_at")
 	private LocalDateTime updateAt;
-	
-	// 가게 상태
-	@Column(name="store_status")
-	private char storeStatus;
+
 	
 	
 }
