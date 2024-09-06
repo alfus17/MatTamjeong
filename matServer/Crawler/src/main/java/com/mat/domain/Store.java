@@ -75,10 +75,6 @@ public class Store {
 	@Column(name="food_category")
 	private String foodCategory;
 	
-	// 지역 카테고리
-	@Column(name="location_category")
-	private String locationCategory;
-	
 	// 생성날짜
 	@CreatedDate
 	@Column(name="created_at")
@@ -88,7 +84,10 @@ public class Store {
 	@LastModifiedDate
 	@Column(name="update_at")
 	private LocalDateTime updateAt;
-
+	
+	// 가게 상태
+	@Column(name="store_status")
+	private char storeStatus;
 	
 	
 }
