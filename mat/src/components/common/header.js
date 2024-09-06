@@ -3,11 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/header.css';
 import Navba from './nav';
 import { useNavigate } from 'react-router-dom';
-import Topsearch from './topsearch';
-import Sidebar from './sidebar';
-
-
-
 
 function Header() { 
     const navigate = useNavigate(); // useNavigate 훅 사용
@@ -19,20 +14,16 @@ function Header() {
 
     return (
       <>
-<div className='top'>
-        <div className='head'>
+        <div className='top'>
+          <div className='head'>
             {/* 로고 이미지를 추가하고 클릭 이벤트를 연결 */}
             <img 
               src='/img/mat.png' 
               className='logo'
               onClick={handleLogoClick} // 클릭 이벤트 추가
             />
-        </div>  
-        <div className='searchbox'>
-        <Topsearch />
-        <Sidebar/>
+          </div>
         </div>
-</div>
         <Navba />
       </>
     );
