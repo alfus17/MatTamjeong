@@ -8,6 +8,7 @@ import '../css/editMe.css';
 function EditMe() {
   return (
     <div className='EditMeee'>
+        
         <h3>내 정보 수정하기</h3>
 
         <br></br>
