@@ -5,26 +5,30 @@ import Map from './components/map/map';
 import Title from './components/title/title';
 import Foot from './components/common/footer';
 import Main from './components/main/main';
-import Gang from './components/main/gang';
-import MapImg from './components/map_img/img_map';
+
 
 function App() {
 
   return (
+    <>
     <Router>
+    <div className='backbg'>
       <div className='All'>  {/* 전체 영역 설정 */}
         <Header />
         <Main />
-        <div className='map'>
+      <div className='content'>
+        <div className='slideshow'>
           <Routes>             
-            <Route path='/gang' element={<Gang />} />
             <Route path="/Map" element={<Map />} />
             <Route path="/Title" element={<Title />} />
           </Routes>
+        </div>
           <Foot />
         </div>
       </div>
+    </div>
     </Router>
+  </>
   );
 }
 

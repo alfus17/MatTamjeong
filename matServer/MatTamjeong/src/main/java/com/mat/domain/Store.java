@@ -94,4 +94,8 @@ public class Store {
 	// 가게 이미지
 	@Column(name="store_imgurl")
 	private String storeimg;
+	
+	// 가게 지역 카테고리 (헤시테그용)
+	@Column(name="storecategory")
+	private String storecate;
 }
