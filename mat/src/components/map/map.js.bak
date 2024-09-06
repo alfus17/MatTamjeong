@@ -1,16 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const Map = () => {
+const Map = (props) => {
   const mapElement = useRef(null);
+
   // store에 관한 DATA 저장
   const [store, setStore] = useState([]);
+  console.log(props.locationCategory);
 
+  console.log();
   useEffect(() => {
     // 백엔드에서 Store 데이터를 가져오는 함수
     const fetchStoreData = async () => {
       try {
-        const response = await axios.get('/store/getStore'); // Spring Boot API 경로
+
+        // 기본 파라미터가 없을 경우
+        const location = props.locationCategory == undefined ? "강남": props.locationCategory;
+        console.log("map 기본 지역 설정")
+        const response = await axios.post('/store/getLCStore',{locationCategory : location}); // Spring Boot API 경로
+        
         setStore(response.data); // 가져온 데이터를 state에 저장
       } catch (error) {
         console.error('Error fetching store data:', error);
@@ -58,8 +66,8 @@ const Map = () => {
       });
     });
   }, [store]); // store가 변경될 때마다 실행
-
-  return <div ref={mapElement} style={{ width: '30%', height: '700px' }} />;
+//                                        가로 세로크기는 파라미터로 넘겨받아서 보여줌
+  return <div ref={mapElement} style={{ width: props.width, height: props.height }} />;
 };
 
 export default Map;
