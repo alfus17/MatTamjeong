@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../css/main.css';
+import '../css/img_map.css';
 import Location from './location';
 
-function Main() {
+function MapImg() {
   // 지도에 표시할 위치 정보를 저장하는 state
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -78,4 +78,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MapImg;

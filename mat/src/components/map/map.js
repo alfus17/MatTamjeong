@@ -34,7 +34,7 @@ const Map = (props) => {
     // 처음 위치 설정
     const mapOptions = {
       center: new naver.maps.LatLng(37.49440, 127.0298),
-      zoom: 14,
+      zoom: 17,
     };
 
     // 맵 생성
