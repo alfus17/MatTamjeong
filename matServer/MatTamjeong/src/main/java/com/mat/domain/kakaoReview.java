@@ -7,7 +7,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,13 +29,9 @@ public class kakaoReview {
 	// 카카오 리뷰 ID
 	@Id
 	@Column(name="kg_review_id")
-	@SequenceGenerator (
-			name = "kgseq",
-			sequenceName = "kgseq",
-			allocationSize = 1
-			)
-	@GeneratedValue(generator="kgseq")
-	private long kgReviewId;
+	@NonNull
+	@GeneratedValue
+	private String kgReviewId;
 	
 	// 카카오 별점(
 	@Column(name="rating")
@@ -63,7 +58,7 @@ public class kakaoReview {
 	
 	// 가게 ID
 	@Column(name="store_id")
-	@NonNull
+	@GeneratedValue
 	private String storeId;
 
 	
