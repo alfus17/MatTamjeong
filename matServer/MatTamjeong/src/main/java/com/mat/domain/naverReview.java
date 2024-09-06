@@ -7,7 +7,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,13 +29,9 @@ public class naverReview {
 	// 네이버 리뷰 ID
 	@Id
 	@Column(name="nv_review_id")
-	@SequenceGenerator (
-			name = "naverseq",
-			sequenceName = "naverseq",
-			allocationSize = 1
-			)
-	@GeneratedValue(generator="naverseq")
-	private long nvReviewId;
+	@NonNull
+	@GeneratedValue
+	private String nvReviewId;
 	
 	// 네이버 별점
 	@Column(name="rating")
