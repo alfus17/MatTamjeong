@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,13 @@ public class matReview {
 	// 맛탐정 리뷰 ID
 	@Id
 	@Column(name="mat_review_id")
-	@NonNull
-	@GeneratedValue
-	private String matReviewId;
+	@SequenceGenerator (
+			name = "matseq",
+			sequenceName = "matseq",
+			allocationSize = 1
+			)
+	@GeneratedValue(generator="matseq")
+	private long matReviewId;
 	
 	// 맛탐정 별점
 	@Column(name="rating")
