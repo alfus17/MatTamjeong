@@ -3,6 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/header.css';
 import Navba from './nav';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import Topsearch from './topsearch';
+
+
+>>>>>>> parent of 768dd76 (2024-09-06)
 
 function Header() { 
     const navigate = useNavigate(); // useNavigate 훅 사용
@@ -22,7 +28,13 @@ function Header() {
               className='logo'
               onClick={handleLogoClick} // 클릭 이벤트 추가
             />
+<<<<<<< HEAD
           </div>
+=======
+        </div>  
+        <div className='searchbox'>
+        <Topsearch />
+>>>>>>> parent of 768dd76 (2024-09-06)
         </div>
         <Navba />
       </>

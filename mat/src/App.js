@@ -7,6 +7,10 @@ import Map from './components/map/map';
 // import WritedText from './components/mypage/writedText';
 import Title from './components/title/title';
 import Foot from './components/common/footer';
+<<<<<<< HEAD
+=======
+import Main from './components/main/main';
+>>>>>>> parent of 768dd76 (2024-09-06)
 
 
 function App() {
@@ -30,6 +34,7 @@ function App() {
      
 <div className='All'>  {/* 전체 영역 설정  건들지 마셈*/}
         <Header />
+<<<<<<< HEAD
   
         {/* 라우팅 설정 */}
         <div className='map'>
@@ -41,6 +46,14 @@ function App() {
             {/* <Route path="/mypageMain" element={ <MypageMain/>} > */}
             {/* <Route path='/mypageMain/writedText' element={<WritedText />} /> */}
             {/* </Route> */}
+=======
+        <Main />
+      <div className='content'>
+        <div className='slideshow'>
+          <Routes>             
+            <Route path="/Map" element={<Map />} />
+            <Route path="/Title" element={<Title />} />
+>>>>>>> parent of 768dd76 (2024-09-06)
           </Routes>
           <Foot />
         </div>
