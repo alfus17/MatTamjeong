@@ -9,7 +9,9 @@
 
 .navbar ul {
     list-style: none;
-    margin-left: 800px;
+    width: 600;
+    height: 100%;
+    margin: 0 auto;
 }
 
 .navbar li {

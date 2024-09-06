@@ -4,6 +4,8 @@ import '../css/header.css';
 import Navba from './nav';
 import { useNavigate } from 'react-router-dom';
 import Topsearch from './topsearch';
+import Sidebar from './sidebar';
+
 
 
 
@@ -28,6 +30,7 @@ function Header() {
         </div>  
         <div className='searchbox'>
         <Topsearch />
+        <Sidebar/>
         </div>
 </div>
         <Navba />

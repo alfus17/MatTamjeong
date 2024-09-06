@@ -5,6 +5,7 @@ import Map from './components/map/map';
 import Title from './components/title/title';
 import Foot from './components/common/footer';
 import Main from './components/main/main';
+import Main2 from './components/main/main2';
 
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
     <div className='backbg'>
       <div className='All'>  {/* 전체 영역 설정 */}
         <Header />
-        <Main />
       <div className='content'>
+        <Main2 />
+        <Main />
         <div className='slideshow'>
           <Routes>             
             <Route path="/Map" element={<Map />} />

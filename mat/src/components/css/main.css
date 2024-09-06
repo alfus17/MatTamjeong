@@ -1,7 +1,7 @@
 
 .gangline {
-    border: 1px solid;
-    height: 400px;
+    height: 500px;
+    background-color: rgba(241, 241, 241, 0.973);
     width: 100%;
     overflow: hidden; /* 슬라이더 바깥으로 튀어나오는 것을 숨김 */
     margin: 0 auto;
@@ -9,7 +9,7 @@
 .store-item {
     width: 100%;
     box-sizing: border-box; /* 패딩이 너비에 영향을 주지 않도록 설정 */
-    margin-top: 40px;
+    margin-top: 70px;
     padding: 0; /* 각 슬라이드 아이템 사이에 불필요한 패딩 제거 */
 }
 
@@ -39,7 +39,6 @@
 .gangline button {
     border: none;
     font-size: 20px;
-    border: 2px solid;
     font-weight: bold   ;
     cursor: pointer;
     width: 100px;

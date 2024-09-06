@@ -70,12 +70,12 @@ function Main() {
     <div className="gangline">
       {/* 지역 선택 버튼들 */}
       <div className='buttons'>
-      <button onClick={() => filterStoreByLocation('강남')}># 강남</button>
-      <button onClick={() => filterStoreByLocation('홍대')}># 홍대</button>
-      <button onClick={() => filterStoreByLocation('명동')}># 명동</button>
-      <button onClick={() => filterStoreByLocation('신촌')}># 신촌</button>
+      <button onClick={() => filterStoreByLocation('강남')}># 강남 ,</button>
+      <button onClick={() => filterStoreByLocation('홍대')}># 홍대 ,</button>
+      <button onClick={() => filterStoreByLocation('명동')}># 명동 ,</button>
+      <button onClick={() => filterStoreByLocation('신촌')}># 신촌 ,</button>
+      <button onClick={() => filterStoreByLocation('종로')}># 종로 ,</button>
       <button onClick={() => filterStoreByLocation('동대문')}># 동대문</button>
-      <button onClick={() => filterStoreByLocation('종로')}># 종로</button>
       </div>
 
       {/* 필터링된 데이터가 있을 때만 슬라이더를 보여줍니다 */}
