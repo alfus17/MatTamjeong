@@ -34,6 +34,9 @@ function Header() {
         </div>  
         <div className='searchbox'>
         <Topsearch />
+<<<<<<< HEAD
+>>>>>>> parent of 768dd76 (2024-09-06)
+=======
 >>>>>>> parent of 768dd76 (2024-09-06)
         </div>
         <Navba />
