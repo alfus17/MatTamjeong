@@ -8,5 +8,4 @@ function Main2 () {
     )
 }
 
-
 export default Main2;
