@@ -3,8 +3,8 @@ package com.mat.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mat.domain.Store;
-import com.mat.domain.diningReview;
+import com.mat.domain.kakaoReview;
 
-public interface naverReviewRepository extends JpaRepository<diningReview, Long>{
+public interface kakaoReviewRepository extends JpaRepository<kakaoReview, Long> {
 
 }

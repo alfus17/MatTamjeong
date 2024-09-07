@@ -20,8 +20,7 @@ import com.mat.service.matReviewService;
 @RequestMapping("/review")
 public class ReviewController {
 
-    @Autowired
-    private dcReviewService dcReviewService;
+    private final dcReviewService dcReviewService;
 
     @Autowired
     private kgReviewService kgReviewService;

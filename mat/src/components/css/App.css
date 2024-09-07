@@ -1,7 +1,11 @@
 .All{
-    width: 90%;
+    width: 100%;
     height: 100%;
-    margin-left: 5%;
-    border: 1px solid;
 }
 
+.content {
+    background-color: rgba(241, 241, 241, 0.973);}
+
+.slideshow {
+    background-color: bisque;   
+}

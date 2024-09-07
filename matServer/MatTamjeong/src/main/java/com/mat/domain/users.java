@@ -7,15 +7,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity(name="user")
-@Table(name="user")
-public class user {
+@Entity(name="users")
+@Table(name="users")
+public class users {
 	   /* 	user Table
 	 * 	회원 ID (PK)	 	: user_id
 	 *  비밀번호 			: user_pwd
@@ -25,9 +26,12 @@ public class user {
 	 */
 	// 회원 ID (PK)	
 	@Id
-	@Column(name="user_id")
-	@NonNull
-	@GeneratedValue
+	@SequenceGenerator (
+			name = "userseq",
+			sequenceName = "userseq",
+			allocationSize = 1
+			)
+	@GeneratedValue(generator="userseq")
 	private String userId;
 	
 	// 비밀번호 	
