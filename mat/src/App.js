@@ -5,7 +5,8 @@ import Map from './components/map/map';
 import Title from './components/title/title';
 import Foot from './components/common/footer';
 import Main from './components/main/main';
-import Main2 from './components/main/main2';
+import Detail from './detail/foodDetail';
+
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path='/' element={<Main />} />
             <Route path="/Map" element={<Map />} />
             <Route path="/Title" element={<Title />} />
+            <Route path='/Detail' element={<Detail />} />
           </Routes>
         </div>
           <Foot />

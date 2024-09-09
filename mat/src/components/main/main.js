@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import '../css/main.css';
 import Main2 from './main2';
+import Slider from 'react-slick';
 
 function Main() {
   const [store, setStore] = useState([]);
@@ -19,6 +19,7 @@ function Main() {
         setStore(response.data); // 가져온 데이터를 state에 저장
         // 처음에 강남 지역 데이터를 필터링
         filterStoreByLocation('강남')
+        console(response);
       } catch (error) {
         console.error('Error fetching store data:', error);
       }
@@ -87,11 +88,10 @@ function Main() {
           {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
             <div key={index} className="store-item">
               <ul className='slidebox'>
-                <li><img src={item.storeimg} className="store-image" alt={item.storeName} /></li>
+                <li><img src={item.storeimg} className="store-image" alt={item.storeName}/></li>
                 <li>
                   <h4>{item.storeName}</h4>
                   <p>{item.storeAddress}</p>
-                  <p>{item.storeName}</p>
                 </li>
               </ul>
             </div>
