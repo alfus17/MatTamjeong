@@ -34,7 +34,7 @@ public class diningReview {
 			allocationSize = 1
 			)
 	@GeneratedValue(generator="dcRvseq")
-	private String nvReviewId;
+	private int nvReviewId;
 	
 	// 네이버 별점
 	@Column(name="rating")
@@ -54,7 +54,7 @@ public class diningReview {
 	// 가게 ID
 	@Column(name="store_id")
 	@NonNull
-	private String storeId;
+	private int storeId;
 
 	
 

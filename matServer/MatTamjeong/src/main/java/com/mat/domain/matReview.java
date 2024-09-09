@@ -23,7 +23,7 @@ public class matReview {
 	  /* 	mat Review Table
 	 * 	맛탐정리뷰ID (PK) 	: mat_review_id		varchar2(10)
 	 *  별점 				: rating			double
-	 * 	좋아요				: likes_count		number	
+	 * 	좋아요			: likes_count		number	
 	 * 	리뷰내용 			: review_content	varchar2(1000)
 	 * 	작성일자			: created_at		date
 	 * 	사진ID			: photo_id(FK)		varchar2(10)
@@ -39,7 +39,7 @@ public class matReview {
 			allocationSize = 1
 			)
 	@GeneratedValue(generator="matRvseq")
-	private String matReviewId;
+	private int matReviewId;
 	
 	// 맛탐정 별점
 	@Column(name="rating")
@@ -68,7 +68,7 @@ public class matReview {
 	// 가게 ID
 	@Column(name="store_id" ,length=10)
 	@NonNull
-	private String storeId;
+	private int storeId;
 	
 
 	

@@ -15,8 +15,8 @@ public class kgReviewService {
 	private kakaoReviewRepository kakaoReviewRepository;
 
 	// 카카오 리뷰 가져오기
-	public Optional<kakaoReview> getKgReview(Long kgReviewId ) {
-		return kakaoReviewRepository.findById(kgReviewId);
+	public Optional<kakaoReview> getKgReview(Integer kgReviewId ) {
+		return kakaoReviewRepository.findByStoreId(kgReviewId);
 	}
 
 }

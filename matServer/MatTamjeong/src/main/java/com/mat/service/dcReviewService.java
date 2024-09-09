@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.mat.domain.kakaoReview;
 import com.mat.domain.diningReview;
-import com.mat.repository.naverReviewRepository;
+import com.mat.repository.diningReviewRepository;
 
 @Service
 public class dcReviewService {
 	
 	@Autowired
-	private naverReviewRepository naverReviewRepository;
+	private diningReviewRepository diningReviewRepository;
 
 	// 카카오 리뷰 가져오기
-	public Optional<diningReview> getKgReview(Long nvReviewId ) {
-		return naverReviewRepository.findById(nvReviewId);
+	public Optional<diningReview> getDCReview(Integer StoreId ) {
+		return diningReviewRepository.findByStoreId(StoreId);
 	}
 	
 	

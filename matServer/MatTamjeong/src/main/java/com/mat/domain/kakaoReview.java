@@ -20,7 +20,7 @@ public class kakaoReview {
 	  /* 	kakao Review Table
 	 * 	카카오ID (PK) : kg_review_id		varchar2(10)
 	 *  별점 			: rating			float
-	 * 	좋아요			: likes_count		number
+	 * 	좋아요		: likes_count		number
 	 * 	리뷰내용 		: review_content	varchar2(1000)
  	 * 	가게 ID (FK)	: store_id			varchar2(10)
 	 */
@@ -34,7 +34,7 @@ public class kakaoReview {
 			allocationSize = 1
 			)
 	@GeneratedValue(generator="kgRvseq")
-	private String kgReviewId;
+	private int kgReviewId;
 	
 	// 카카오 별점(
 	@Column(name="rating")
@@ -52,8 +52,7 @@ public class kakaoReview {
 	
 	// 가게 ID
 	@Column(name="store_id" ,length=10)
-	@GeneratedValue
-	private String storeId;
+	private int storeId;
 
 	
 

@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,8 +46,13 @@ public class Store {
 	// 추후에 시퀀스 추가 예정
 	@Id
 	@Column(name="store_id")
-	@GeneratedValue
-	private String storeId;
+	@SequenceGenerator (
+			name = "storeseq",
+			sequenceName = "storeseq",
+			allocationSize = 1
+			)
+	@GeneratedValue(generator="storeseq")
+	private int storeId;
 	
 	// 가게 이름
 	@Column(name="store_name" ,length=20)

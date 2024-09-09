@@ -1,7 +1,0 @@
-.All{
-    width: 90%;
-    height: 100%;
-    margin-left: 5%;
-    border: 1px solid;
-}
-
