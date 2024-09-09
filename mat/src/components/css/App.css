@@ -1,21 +1,11 @@
 .All{
-    width: 90%;
+    width: 100%;
     height: 100%;
-    margin-left: 5%;
-    border: 1px solid;
 }
 
-<<<<<<< HEAD
-=======
 .content {
-    background-color: bisque;
-}
+    background-color: rgba(241, 241, 241, 0.973);}
 
 .slideshow {
-    background-color: bisque;
-<<<<<<< HEAD
+    background-color: bisque;   
 }
->>>>>>> parent of 768dd76 (2024-09-06)
-=======
-}
->>>>>>> parent of 768dd76 (2024-09-06)
