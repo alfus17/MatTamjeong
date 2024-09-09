@@ -5,16 +5,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../css/main.css';
 
-
-
-
-
-
-
-
-
-
-
 function Main() {
   const [store, setStore] = useState([]);
   const [filterStore, setFilterStore] = useState([]);
@@ -75,7 +65,6 @@ function Main() {
       }
     ]
   };
-
 
   return (
     <div className="gangline">

@@ -21,7 +21,7 @@ function App() {
         <Main />
         <div className='slideshow'>
           <Routes>             
-            <Route path="/Map" element={<Map />} />
+            <Route path="/Map" element={<Map width="100%" heigth="700px" />} />
             <Route path="/Title" element={<Title />} />
           </Routes>
         </div>
