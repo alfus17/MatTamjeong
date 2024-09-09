@@ -5,7 +5,8 @@ import Map from './components/map/map';
 import Title from './components/title/title';
 import Foot from './components/common/footer';
 import Main from './components/main/main';
-import Detail from './detail/foodDetail';
+import StoreDetails from './detail/storeDetail';
+
 
 
 
@@ -23,7 +24,7 @@ function App() {
             <Route path='/' element={<Main />} />
             <Route path="/Map" element={<Map />} />
             <Route path="/Title" element={<Title />} />
-            <Route path='/Detail' element={<Detail />} />
+            <Route path='/store/:storeId' element={<StoreDetails />} />
           </Routes>
         </div>
           <Foot />
