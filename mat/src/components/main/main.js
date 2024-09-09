@@ -12,26 +12,22 @@ function Main() {
   const [selectedLocation, setSelectedLocation] = useState('');
 
   useEffect(() => {
-    // 백엔드에서 Store 데이터를 가져오는 함수
-    const fetchStoreData = async () => {
-      try {
-        const response = await axios.get('/store/getStore'); // Spring Boot API 경로
-        setStore(response.data); // 가져온 데이터를 state에 저장
-        // 처음에 강남 지역 데이터를 필터링
-        filterStoreByLocation('강남')
-        console(response);
-      } catch (error) {
-        console.error('Error fetching store data:', error);
-      }
-    };
-    fetchStoreData();
+    // 초기화 시 기본 '강남' 데이터를 불러오는 함수
+    fetchStoreByLocation('강남');
   }, []);
 
-  const filterStoreByLocation = (location) => {
-    setSelectedLocation(location);
-    const filteredStores = store.filter(item => item.storecate === location);
-    setFilterStore(filteredStores);
-  }
+  // 특정 위치로 가게 데이터를 가져오는 함수
+  const fetchStoreByLocation = async (location) => {
+    try {
+      const response = await axios.post('/store/getLCStore', { categoryName: location });
+      console.log(response.data);
+      setStore(response.data);
+      setFilterStore(response.data);
+      setSelectedLocation(location);
+    } catch (error) {
+      console.error('Error fetching store data:', error);
+    }
+  };
 
   const settings = {
     dots: true,
@@ -74,12 +70,12 @@ function Main() {
     <div className="gangline">
       {/* 지역 선택 버튼들 */}
       <div className='buttons'>
-      <button onClick={() => filterStoreByLocation('강남')}># 강남 ,</button>
-      <button onClick={() => filterStoreByLocation('홍대')}># 홍대 ,</button>
-      <button onClick={() => filterStoreByLocation('명동')}># 명동 ,</button>
-      <button onClick={() => filterStoreByLocation('신촌')}># 신촌 ,</button>
-      <button onClick={() => filterStoreByLocation('종로')}># 종로 ,</button>
-      <button onClick={() => filterStoreByLocation('동대문')}># 동대문</button>
+      <button onClick={() => fetchStoreByLocation('강남')}># 강남 ,</button>
+      <button onClick={() => fetchStoreByLocation('홍대')}># 홍대 ,</button>
+      <button onClick={() => fetchStoreByLocation('명동')}># 명동 ,</button>
+      <button onClick={() => fetchStoreByLocation('신촌')}># 신촌 ,</button>
+      <button onClick={() => fetchStoreByLocation('종로')}># 종로 ,</button>
+      <button onClick={() => fetchStoreByLocation('동대문')}># 동대문</button>
       </div>
 
       {/* 필터링된 데이터가 있을 때만 슬라이더를 보여줍니다 */}
