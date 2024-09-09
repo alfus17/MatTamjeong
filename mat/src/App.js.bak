@@ -5,8 +5,7 @@ import Map from './components/map/map';
 import Title from './components/title/title';
 import Foot from './components/common/footer';
 import Main from './components/main/main';
-import Detail from './detail/foodDetail';
-
+import Main2 from './components/main/main2';
 
 
 function App() {
@@ -18,12 +17,12 @@ function App() {
       <div className='All'>  {/* 전체 영역 설정 */}
         <Header />
       <div className='content'>
+        <Main2 />
+        <Main />
         <div className='slideshow'>
           <Routes>             
-            <Route path='/' element={<Main />} />
-            <Route path="/Map" element={<Map />} />
+            <Route path="/Map" element={<Map width="100%" heigth="700px" />} />
             <Route path="/Title" element={<Title />} />
-            <Route path='/Detail' element={<Detail />} />
           </Routes>
         </div>
           <Foot />

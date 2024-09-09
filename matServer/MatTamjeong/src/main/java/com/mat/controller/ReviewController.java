@@ -1,6 +1,7 @@
 package com.mat.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,7 @@ public class ReviewController {
     
     
     // 카카오 리뷰 가져오기
+	// 음식 카테고리로 쿼리하기
     @GetMapping("/getKgReview")
     public Optional<kakaoReview> getKgReview(Integer StoreId) {
     	return kgReviewService.getKgReview(StoreId);
@@ -53,14 +55,27 @@ public class ReviewController {
     
     // 모든 리뷰들 가져오기
     @GetMapping("/getAllReview")
-    public ArrayList<Object> getAllReviews(Integer StoreId) {
-    	ArrayList<Object> reviewsList = new ArrayList<>();
+    public HashMap<String,Object> getAllReviews(Integer StoreId) {
+    	// hashMap으로 반환
+    	HashMap<String,Object> reviewsMap = new HashMap<>();
     	
-    	reviewsList.add( matReviewService.getMatReview(StoreId).get());
-    	reviewsList.add( dcReviewService.getDCReview(StoreId).get());
-    	reviewsList.add( kgReviewService.getKgReview(StoreId).get());
+    	// db에서 리뷰들 각자 쿼리
+    	Optional <matReview> matReview = matReviewService.getMatReview(StoreId);
+    	Optional <diningReview> dcReview =  dcReviewService.getDCReview(StoreId);
+    	Optional <kakaoReview> kgReview = kgReviewService.getKgReview(StoreId);
     	
-    	return reviewsList;
+    	// 리뷰 목록이 있을경우 hashMap에 추가 
+    	if (matReview.isPresent()) {
+    		reviewsMap.put("matReview", matReview.get());
+    	}
+    	if (dcReview.isPresent()) {
+    		reviewsMap.put("dcReview", dcReview.get());
+    	}
+    	if (kgReview.isPresent()) {
+    		reviewsMap.put("kgReview", kgReview.get());
+    	}
+
+    	return reviewsMap;
     }
     
 

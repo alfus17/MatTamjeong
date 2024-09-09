@@ -42,6 +42,7 @@ public class StoreController {
 		// 카테고리 비교에서 아이디 가져오기
 		// 만약 입력한 카테고리의 값으로 db의 카테고리 id 체크 이후 없을경우 -1 리턴
 		int categoryID = locationCategoryService.getCategoryId(categoryName.getCategoryName());
+		
 		if (categoryID != -1) {
 			return storeService.getAllStoreByLc(categoryID); // 전체 데이터 반환
 		} else {
