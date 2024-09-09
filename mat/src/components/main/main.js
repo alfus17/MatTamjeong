@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import '../css/main.css';
+import Main2 from './main2';
 
 function Main() {
   const [store, setStore] = useState([]);
@@ -67,6 +68,8 @@ function Main() {
   };
 
   return (
+    <>
+    <Main2/>
     <div className="gangline">
       {/* 지역 선택 버튼들 */}
       <div className='buttons'>
@@ -96,6 +99,7 @@ function Main() {
         </Slider>
       )}
     </div>
+    </>
   );
 }
 

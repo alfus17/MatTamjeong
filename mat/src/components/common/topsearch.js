@@ -1,7 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import '../css/topsearch.css';
-import React from 'react';
+import React, { useState } from 'react';
 
 function Topsearch () {
+  const [searchFood, setSearchFood] = useState('');
+  const [results, setResults] = useState([]);
+  const navigate = useNavigate;
+
      return (
 
       <div className='search'>

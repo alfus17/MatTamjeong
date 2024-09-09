@@ -17,10 +17,9 @@ function App() {
       <div className='All'>  {/* 전체 영역 설정 */}
         <Header />
       <div className='content'>
-        <Main2 />
-        <Main />
         <div className='slideshow'>
           <Routes>             
+            <Route path='/' element={<Main />} />
             <Route path="/Map" element={<Map />} />
             <Route path="/Title" element={<Title />} />
           </Routes>

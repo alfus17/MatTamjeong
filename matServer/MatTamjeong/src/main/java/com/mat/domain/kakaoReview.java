@@ -58,7 +58,6 @@ public class kakaoReview {
 	
 	// 가게 ID
 	@Column(name="store_id")
-	@GeneratedValue
 	private String storeId;
 
 	
