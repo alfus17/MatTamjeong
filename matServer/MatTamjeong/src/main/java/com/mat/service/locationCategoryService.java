@@ -20,11 +20,13 @@ public class locationCategoryService {
 	 * 	만약 카테고리가 없을 경우 -1을 반환
 	 */
 	public int getCategoryId(String categoryName) {
+		System.out.println("categoryName : "+categoryName); 
 		// 객체에서  카테고리 이름만 가져오기
 		Optional<locationCategory> lcObject=locationCategoryRepository.findByCategoryNameContaining(categoryName);
 		// 지역카테고리 id
 		if (lcObject.isPresent()) {
 		    // 값이 존재할 때 처리
+			System.out.println("카테고리 값이 존재함 ");
 		    System.out.println(lcObject.get());
 		    return lcObject.get().getLCCategory();
 		} else {
