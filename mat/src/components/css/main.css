@@ -2,9 +2,9 @@
     height: 500px;
     background-color: rgba(241, 241, 241, 0.973);
     width: 100%;
-    overflow: hidden; /* ½½¶óÀÌ´õ ¹Ù±ùÀ¸·Î Æ¢¾î³ª¿À´Â °ÍÀ» ¼û±è */
+    overflow: hidden; /* ìŠ¬ë¼ì´ë” ë°”ê¹¥ìœ¼ë¡œ íŠ€ì–´ë‚˜ì˜¤ëŠ” ê²ƒì„ ìˆ¨ê¹€ */
     margin: 0 auto;
-    padding: 20px 0; /* »óÇÏ ÆĞµùÀ» Ãß°¡ÇÏ¿© ¿ä¼ÒµéÀÌ ´õ ³ªÀº ¿©¹éÀ» °¡Áü */
+    padding: 20px 0; /* ìƒí•˜ íŒ¨ë”©ì„ ì¶”ê°€í•˜ì—¬ ìš”ì†Œë“¤ì´ ë” ë‚˜ì€ ì—¬ë°±ì„ ê°€ì§ */
 }
 
 .store-item {
@@ -13,13 +13,13 @@
     margin-top: 70px;
     padding: 0;
     display: flex;
-    justify-content: center; /* Áß¾Ó Á¤·Ä */
+    justify-content: center; /* ì¤‘ì•™ ì •ë ¬ */
 }
 
 .slidebox {
-    width: auto; /* auto·Î ¼³Á¤ÇÏ¿© ½½¶óÀÌµå Å©±â¿¡ ¸ÂÃã */
+    width: auto; /* autoë¡œ ì„¤ì •í•˜ì—¬ ìŠ¬ë¼ì´ë“œ í¬ê¸°ì— ë§ì¶¤ */
     display: flex;
-    align-items: center; /* ¼öÁ÷ Áß¾Ó Á¤·Ä */
+    align-items: center; /* ìˆ˜ì§ ì¤‘ì•™ ì •ë ¬ */
     justify-content: center;
 
 }
@@ -57,5 +57,5 @@
     width: 100%;
     gap: 60px;
     margin-top: 20px;
-    justify-content: center; /* ¹öÆ°À» °¡¿îµ¥·Î Á¤·Ä */
+    justify-content: center; /* ë²„íŠ¼ì„ ê°€ìš´ë°ë¡œ ì •ë ¬ */
 }
