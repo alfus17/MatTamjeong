@@ -69,34 +69,7 @@ public class DetailPageController {
             "matCreatedTime": null,
             "matPhotoUrl": null,
             "storeId": 1
-        },
-        {
-            "matReviewId": 9,
-            "rating": 4.7,
-            "matLikeCount": 37,
-            "matReviewContent": "스시 하우스에서 먹은 초밥이 정말 신선하고 맛있었어요.",
-            "matCreatedTime": null,
-            "matPhotoUrl": null,
-            "storeId": 1
-        },
-        {
-            "matReviewId": 11,
-            "rating": 4.9,
-            "matLikeCount": 48,
-            "matReviewContent": "새롭게 오픈한 스시집인데, 맛과 서비스 모두 기대 이상이었어요.",
-            "matCreatedTime": null,
-            "matPhotoUrl": null,
-            "storeId": 1
-        },
-        {
-            "matReviewId": 16,
-            "rating": 4.8,
-            "matLikeCount": 40,
-            "matReviewContent": "이 집은 파스타가 정말 맛있어요. 특히 해산물 파스타가 최고였어요.",
-            "matCreatedTime": null,
-            "matPhotoUrl": null,
-            "storeId": 1
-        }
+        }...
     ],
     "StoreMenu": [
         {
@@ -106,31 +79,7 @@ public class DetailPageController {
             "foodCategory": "중식",
             "price": 30000,
             "imageUrl": null
-        },
-        {
-            "menuId": 2,
-            "menuName": "짬뽕",
-            "storeId": 1,
-            "foodCategory": "중식",
-            "price": 40000,
-            "imageUrl": null
-        },
-        {
-            "menuId": 3,
-            "menuName": "탕수육",
-            "storeId": 1,
-            "foodCategory": "중식",
-            "price": 13000,
-            "imageUrl": null
-        },
-        {
-            "menuId": 4,
-            "menuName": "양장피",
-            "storeId": 1,
-            "foodCategory": "중식",
-            "price": 20000,
-            "imageUrl": null
-        }
+        }...
     ],
     "StoreInfo": {
         "storeId": 1,
@@ -143,19 +92,19 @@ public class DetailPageController {
         "foodCategoryId": 1,
         "locationCategoryId": 1,
         "createdAt": null,
-        "updateAt": null
+        "updateAt": null								
     },
     "Ratings": {
-        "kgRating": 4.5,
-        "dcRating": 0.0,
-        "avgRating": 3.1,
-        "matRating": 4.8
+        "kgRating": 4.5,								// 카카오 평점 평균
+        "dcRating": 0.0,								// 다이닝코드 평점 평균
+        "avgRating": 3.1,								// 모든 평점 평균
+        "matRating": 4.8								// 맛탐정 평점 평균
     }
 }
 	 */
 	
 	//TODO url 설정
-	@PostMapping("/test")
+	@PostMapping("/getDetailStore")
 	public  HashMap<String,Object> getStoreAllInformation(@RequestBody Store store){
 		
 		// 해쉬맵 
