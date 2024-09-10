@@ -30,7 +30,7 @@ function Header() {
         </div>  
         <div className='searchbox'>
         <Topsearch />
-        <Sidebar/>
+        
         </div>
 </div>
         <Navba />
