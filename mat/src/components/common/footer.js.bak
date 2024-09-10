@@ -2,7 +2,7 @@ import '../css/footer.css';
 
 function Foot() {
     return(
-        <div className='body'>
+        <body>
          <div id='wrap'>
     	<section>
         </section>
@@ -20,7 +20,7 @@ function Foot() {
           </p>
       </footer>
     </div>
-</div>
+</body>
     )
 }
 export default Foot;
