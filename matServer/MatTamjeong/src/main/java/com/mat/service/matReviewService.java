@@ -16,8 +16,8 @@ public class matReviewService {
 	private matReviewRepository matReviewRepository;
 	
 	// 
-	public Optional<matReview> getMatReview(Long matReviewId ) {
-		return matReviewRepository.findById(matReviewId);
+	public Optional<matReview> getMatReview(Integer StoreId ) {
+		return matReviewRepository.findByStoreId(StoreId);
 	
 	}
 }

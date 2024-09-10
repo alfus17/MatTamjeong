@@ -1,0 +1,45 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.3.3'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.crawler'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	// 크롤링 관련 그래들
+	//implementation 'org.jsoup:jsoup:1.18.1'
+	// 웹드라이버 매니저
+	implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
+  	implementation 'org.seleniumhq.selenium:selenium-java:4.24.0'
+    //implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.1.4'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

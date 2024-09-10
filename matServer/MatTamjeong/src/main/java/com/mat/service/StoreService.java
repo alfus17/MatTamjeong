@@ -20,7 +20,7 @@ public class StoreService {
     }
 
     // 특정 ID의 Store 데이터를 가져오는 메서드
-    public Optional<Store> getStoreById(Long storeId) {
+    public Optional<Store> getStoreById(int storeId) {
         return storeRepository.findById(storeId);
     }
 
@@ -30,24 +30,20 @@ public class StoreService {
     }
 
     // Store 데이터를 삭제하는 메서드
-    public void deleteStoreById(Long storeId) {
+    public void deleteStoreById(int storeId) {
         storeRepository.deleteById(storeId);
     }
     
-    // 모든 Store정보 세이브 하기 
-	public void saveStoreALL(List<Store> storeList) {
-		 storeRepository.saveAll(storeList);		
-	}
-	
-	
 	// 지역태그명으로 쿼리하기
-	public List<Store> getAllStoreByLc(String locationCategory) {
-		return storeRepository.findByLocationCategoryContaining(locationCategory);		
+	public List<Store> getAllStoreByLc(int locationCategoryId) {
+		return storeRepository.findByLocationCategoryId(locationCategoryId);		
 	}
 	
 	// 음식 태그명으로 쿼리하기
-	public List<Store> getAllStoreByFc(String foodCategory) {
-		return storeRepository.findByFoodCategoryContaining(foodCategory);		
+	public List<Store> getAllStoreByFc(int foodCategoryId) {
+		return storeRepository.findByFoodCategoryId(foodCategoryId);		
 	}
 
+    
+    
 }

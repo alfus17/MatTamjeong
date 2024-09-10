@@ -6,14 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mat.domain.Store;
 
-public interface StoreRepository extends JpaRepository<Store, Long> {
+public interface StoreRepository extends JpaRepository<Store, Integer> {
 
-	List<Store> findByLocationCategory(String location);
+	List<Store> findByLocationCategoryId(int locationCategoryId);
 
-	List<Store> findByFoodCategory(String foodCategory);
-
-	List<Store> findByLocationCategoryContaining(String locationCategory);
-
-	List<Store> findByFoodCategoryContaining(String foodCategory);
+	List<Store> findByFoodCategoryId(int foodCategoryId);
 
 }

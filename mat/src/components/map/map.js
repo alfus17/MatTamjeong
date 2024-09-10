@@ -1,25 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
+/*  
+    맵 컴포넌트 사용시 파라미터 종류
+    width             : 지도 가로
+    height            : 지도 세로
+    locationCategory  : 지도에 나오게할 음식점 카테고리 
+
+    예시 ) 
+    <Map  width="100%" height="700px  locationCategory="강남"  />
+
+*/
 const Map = (props) => {
   const mapElement = useRef(null);
-
   // store에 관한 DATA 저장
   const [store, setStore] = useState([]);
-  console.log(props.locationCategory);
 
-  console.log();
+  // 파라미터로 넓이 높이 안줄경우 기본값 세팅 
+  let width  =  props.width == undefined ?'100%' : props.width ;
+  let height  =  props.height == undefined ?'700px'  : props.height ;
+
   useEffect(() => {
     // 백엔드에서 Store 데이터를 가져오는 함수
     const fetchStoreData = async () => {
       try {
 
-        // 기본 파라미터가 없을 경우
-        const location = props.locationCategory == undefined ? "강남": props.locationCategory;
-        console.log("map 기본 지역 설정")
-        const response = await axios.post('/store/getLCStore',{locationCategory : location}); // Spring Boot API 경로
+        // 파라미터에 지역 태그 없을 경우 기본으로 강남으로 설정
+        const location = props.locationCategory == undefined ? "강남" : props.locationCategory;
         
+        // 서버에 태그를 기준으로 데이터 쿼리 
+        const response = await axios.get('/store/getLCStore '); // Spring Boot API 경로
         setStore(response.data); // 가져온 데이터를 state에 저장
+      
       } catch (error) {
         console.error('Error fetching store data:', error);
       }
@@ -32,6 +44,7 @@ const Map = (props) => {
     if (!naver) return;
 
     // 처음 위치 설정
+    // TODO 추후에 기본 위치들 배열로 다시 세팅
     const mapOptions = {
       center: new naver.maps.LatLng(37.49440, 127.0298),
       zoom: 14,
@@ -66,8 +79,8 @@ const Map = (props) => {
       });
     });
   }, [store]); // store가 변경될 때마다 실행
-//                                        가로 세로크기는 파라미터로 넘겨받아서 보여줌
-  return <div ref={mapElement} style={{ width: props.width, height: props.height }} />;
+
+  return <div ref={mapElement} style={{ width: {width }, height: {height} }} />;
 };
 
 export default Map;
