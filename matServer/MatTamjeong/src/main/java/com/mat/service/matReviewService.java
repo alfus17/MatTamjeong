@@ -1,5 +1,6 @@
 package com.mat.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,13 @@ public class matReviewService {
 	@Autowired
 	private matReviewRepository matReviewRepository;
 	
-	// 
-	public Optional<matReview> getMatReview(Integer StoreId ) {
+	// 해당가게아이디의 맛탐정 리뷰들 리턴
+	public List<matReview> getMatReviewsByStoreId(Integer StoreId ) {
 		return matReviewRepository.findByStoreId(StoreId);
-	
+	}
+
+	// 평균 별점
+	public double getStoreRating(int storeId) {
+		return matReviewRepository.getStoreRating(storeId);
 	}
 }
