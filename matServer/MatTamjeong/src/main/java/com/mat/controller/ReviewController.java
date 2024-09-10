@@ -37,20 +37,20 @@ public class ReviewController {
     // 카카오 리뷰 가져오기
 	// 음식 카테고리로 쿼리하기
     @GetMapping("/getKgReview")
-    public Optional<kakaoReview> getKgReview(Integer StoreId) {
-    	return kgReviewService.getKgReview(StoreId);
+    public List<kakaoReview> getKgReview(Integer StoreId) {
+    	return kgReviewService.getKgReviewsByStoreId(StoreId);
     }
     
     // 다이닝코드 리뷰 가져오기
     @GetMapping("/getDCReview")
-    public Optional<diningReview> getMatReview(Integer StoreId) {
-    	return dcReviewService.getDCReview(StoreId);
+    public List<diningReview> getMatReview(Integer StoreId) {
+    	return dcReviewService.getDCReviewsByStoreId(StoreId);
     }
     
     // 맛탐정 리뷰 가져오기
     @GetMapping("/getMatReview")
-    public Optional<matReview> getNaverReview(Integer StoreId) {
-    	return matReviewService.getMatReview(StoreId);
+    public List<matReview> getNaverReview(Integer StoreId) {
+    	return matReviewService.getMatReviewsByStoreId(StoreId);
     }
     
     // 모든 리뷰들 가져오기
@@ -60,20 +60,15 @@ public class ReviewController {
     	HashMap<String,Object> reviewsMap = new HashMap<>();
     	
     	// db에서 리뷰들 각자 쿼리
-    	Optional <matReview> matReview = matReviewService.getMatReview(StoreId);
-    	Optional <diningReview> dcReview =  dcReviewService.getDCReview(StoreId);
-    	Optional <kakaoReview> kgReview = kgReviewService.getKgReview(StoreId);
+    	List <matReview> matReviews = matReviewService.getMatReviewsByStoreId(StoreId);
+    	List <diningReview> dcReview =  dcReviewService.getDCReviewsByStoreId(StoreId);
+    	List <kakaoReview> kgReview = kgReviewService.getKgReviewsByStoreId(StoreId);
     	
-    	// 리뷰 목록이 있을경우 hashMap에 추가 
-    	if (matReview.isPresent()) {
-    		reviewsMap.put("matReview", matReview.get());
-    	}
-    	if (dcReview.isPresent()) {
-    		reviewsMap.put("dcReview", dcReview.get());
-    	}
-    	if (kgReview.isPresent()) {
-    		reviewsMap.put("kgReview", kgReview.get());
-    	}
+    	// 리뷰 목록 hashMap에 추가 
+		reviewsMap.put("matReview", matReviews);
+		reviewsMap.put("dcReview", dcReview);
+		reviewsMap.put("kgReview", kgReview);
+
 
     	return reviewsMap;
     }
