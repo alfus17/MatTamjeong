@@ -10,7 +10,7 @@ function ManagementHistory() {
         <Accordion.Item eventKey="0">
             <Accordion.Header>즐겨찾기</Accordion.Header>
             <Accordion.Body>
-                AAA
+                코치클
             </Accordion.Body>
         </Accordion.Item>
 
@@ -19,7 +19,7 @@ function ManagementHistory() {
         <Accordion.Item eventKey="1">
             <Accordion.Header>좋아요</Accordion.Header>
             <Accordion.Body>
-                BBB
+                코치클
             </Accordion.Body>
         </Accordion.Item>
 
@@ -28,7 +28,16 @@ function ManagementHistory() {
         <Accordion.Item eventKey="2">
             <Accordion.Header>최근 방문한 음식점</Accordion.Header>
             <Accordion.Body>
-                CCC
+                코치클
+            </Accordion.Body>
+        </Accordion.Item>
+
+        <br></br>
+
+        <Accordion.Item eventKey="3">
+            <Accordion.Header>내가 작성한 리뷰</Accordion.Header>
+            <Accordion.Body>
+                코치클 너무 마시쪙
             </Accordion.Body>
         </Accordion.Item>
 

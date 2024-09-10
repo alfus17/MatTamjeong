@@ -23,31 +23,31 @@ const Sidebar = () => {
         <hr id='sidebarfirstbtn'/>
         
         <button className="sidebarbtn">
-          <a href='/MypageMain/writedText'>누가바</a>
+          <a href='/MypageMain/aboutMe'>누가바</a>
         </button>
         
         <hr />
         
         <button className="sidebarbtn">
-          <a href='/MypageMain/writedText'>바밤바</a>
+          <a href='/MypageMain/aboutMe'>바밤바</a>
         </button>
         
         <hr />
         
         <button className="sidebarbtn">
-          <a href='/MypageMain/writedText'>사이드바</a>
+          <a href='/MypageMain/aboutMe'>사이드바</a>
         </button>
         
         <hr />
         
         <button className="sidebarbtn">
-          <a href='/MypageMain/writedText'>레쓰고우~</a>
+          <a href='/MypageMain/aboutMe'>레쓰고우~</a>
         </button>
         
         <hr />
 
         <button className="sidebarbtn">
-          <a href='/MypageMain/writedText'>마이 페이지</a>
+          <a href='/MypageMain/aboutMe'>마이 페이지</a>
         </button>
 
         <hr />
