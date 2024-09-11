@@ -24,16 +24,12 @@ public class SearchPageController {
 	private StoreService StoreService;
 	
 	
-	// 가게이름 , 메뉴 , 지역태그, 음식태그 검색 이후 set 에 모두 모아서 리턴 
-	@PostMapping("/")
-	public List<Object> findStoresWithKeywords (@RequestBody String keyword){
+	// 가게이름 , 주소, 메뉴이름 검색 이후 set 에 모두 모아서 리턴 최대 10개
+	@GetMapping("/query={keword},{page}")
+	public List<Store> findStoresWithKeywords (String name, int page, String keyword){
+
 		
 		
-		// TODO
-//		Set<Store> stores = new HashSet<>();
-//		
-//		stores.add();
-//		
 			
 		return null;
 	}

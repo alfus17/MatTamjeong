@@ -145,7 +145,7 @@ public class DetailPageController {
 		List<matReview> matReviews = matReviewService.getMatReviewsByStoreId(store.getStoreId());
 		response.put("MatReivews", matReviews);
 		
-		// 메뉴테이블 데이터 TODO
+		// 메뉴테이블 데이터 
 		List<menu> menuResult = menuService.getMenu(store.getStoreId());
 		response.put("StoreMenu", menuResult);
 		
