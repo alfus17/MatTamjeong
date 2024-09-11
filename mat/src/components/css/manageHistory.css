@@ -1,6 +1,8 @@
 .ManagementHistoryyy {
     width: 400px;
-    margin-left: 260px;
+    margin-left: 80px;
+    display: flex;
+    gap: 20px; /* Adjust the gap between the items as needed */
 }
 
 .ManagementHistoryyy .accordion-item {
@@ -8,6 +10,8 @@
     border-radius: 10px; /* 전체 항목의 모서리 둥글게 설정 */
     margin-bottom: 10px; /* 항목 간격 조절 */
     overflow: hidden; /* 모서리가 둥글게 잘리도록 설정 */
+    flex: 1; /* Allows the accordion items to take equal space */
+    width: 400px;
   }
   
   .ManagementHistoryyy .accordion-header {

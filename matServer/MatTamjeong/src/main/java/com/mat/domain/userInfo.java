@@ -48,7 +48,7 @@ public class userInfo {
 	// 즐겨찾기(FK)
 	@Column(name="bookmark_id" ,length=10)
 	@NonNull
-	private String bookmarId;
+	private String bookmarkId;
 	
 	// auth( 사용여부 미정
 	@Column(name="auth" ,length=1000)
