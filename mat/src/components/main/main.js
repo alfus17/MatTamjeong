@@ -3,9 +3,10 @@ import axios from 'axios';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import '../css/main.css';
-import Main2 from './main2';
 import Slider from 'react-slick';
 import { useNavigate } from 'react-router-dom';
+import {  Box, Button, Container, Grid, Paper } from '@mui/material';
+import Map from '../map/map';
 
 function Main() {
   const [store, setStore] = useState([]);
@@ -17,6 +18,7 @@ function Main() {
     // 초기화 시 기본 '강남' 데이터를 불러오는 함수
     fetchStoreByLocation('강남');
   }, []);
+  
 
   // 특정 위치로 가게 데이터를 가져오는 함수
   const fetchStoreByLocation = async (location) => {
@@ -70,22 +72,36 @@ function Main() {
       }
     ]
   };
-
   return (
     <>
-    <Main2/>
+     <Container disableGutters maxWidth={false}> {/* Container 여백 제거 및 최대 넓이로 */}
+      <Grid item xs={12} md={6}>
+        <Paper  elevation={3} sx={{ 
+          p: 2, 
+          maxWidth:"70%",
+          margin:"0 auto"
+        }}>
+          <Box>
+     <Map  storeData={store} height="600px" />
+     </Box>
+     </Paper>
+     </Grid>
+      <Grid>
+        <Paper sx={{
+          marginTop:"50px"
+        }}>
+          
     <div className="gangline">
       {/* 지역 선택 버튼들 */}
       <div className='buttons'>
-      <button onClick={() => fetchStoreByLocation('강남')}># 강남 ,</button>
-      <button onClick={() => fetchStoreByLocation('홍대')}># 홍대 ,</button>
-      <button onClick={() => fetchStoreByLocation('명동')}># 명동 ,</button>
-      <button onClick={() => fetchStoreByLocation('신촌')}># 신촌 ,</button>
-      <button onClick={() => fetchStoreByLocation('종로')}># 종로 ,</button>
-      <button onClick={() => fetchStoreByLocation('동대문')}># 동대문</button>
+      <Button onClick={() => fetchStoreByLocation('강남') }># 강남 </Button>
+      <Button onClick={() => fetchStoreByLocation('홍대')}># 홍대 ,</Button>
+      <Button onClick={() => fetchStoreByLocation('명동')}># 명동 ,</Button>
+      <Button onClick={() => fetchStoreByLocation('신촌')}># 신촌 ,</Button>
+      <Button onClick={() => fetchStoreByLocation('종로')}># 종로 ,</Button>
+      <Button onClick={() => fetchStoreByLocation('동대문')}># 동대문</Button>
       </div>
-
-      {/* 필터링된 데이터가 있을 때만 슬라이더를 보여줍니다 */}
+      
       {selectedLocation && (
         <Slider {...settings}>
           {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
@@ -109,6 +125,9 @@ function Main() {
         </Slider>
       )}
     </div>
+    </Paper>
+    </Grid>
+    </Container>
     </>
   );
 }

@@ -22,7 +22,7 @@ function ExDetail() {
     }, [storeId]);
 
     const averageRating = detail.Ratings ? detail.Ratings.avgRating.toFixed(1) : '0';
-
+    console.log(detail.data);
     return (
         <Container maxWidth="md" sx={{ mt: 6 }}>
             <Grid container spacing={4}>
