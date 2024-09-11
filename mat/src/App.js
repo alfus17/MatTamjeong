@@ -6,30 +6,21 @@ import Title from './components/title/title';
 import Foot from './components/common/footer';
 import Main from './components/main/main';
 import StoreDetails from './components/detail/storeDetail';
-import Sidebar from './components/common/sidebar';
-import MypageMain from './components/Mypage/MypageMain';
-import EditMe from './components/Mypage/editMe';
-import ManagementHistory from './components/Mypage/managementHistory';
-import AboutMe from './components/Mypage/aboutMe';
-import {useEffect, useState} from "react";
-import React from "react";
+import Ex from './components/detail/searchFoodEx';
+import ExDetail from './components/detail/storeDetailEx';
 
 
 
+
+// npm install @mui/material @emotion/react @emotion/styled
+// npm i axios
+// npm i react-router-dom
+// npm install @mui/material @mui/styled-engine-sc styled-components
+// npm install @mui/icons-material
+
+// npm cache clean --force
 
 function App() {
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("/MyPage")
-        .then((res) => {
-          return res.json();
-        })
-        .then(function (result) {
-            setData(result);
-      })
-  },[]);
 
   return (
     <>
@@ -39,22 +30,13 @@ function App() {
         <Header />
       <div className='content'>
         <div className='slideshow'>
- 
-
           <Routes>             
             <Route path='/' element={<Main />} />
-            <Route path="/Map" element={<Map />} />
+            <Route path="/Map" element={<Ex />} />
+            <Route path="/Detail" element={<ExDetail />} />
             <Route path="/Title" element={<Title />} />
             <Route path='/store/:storeId' element={<StoreDetails />} />
-
-          {/* 사이드바 부분 */}
-            <Route path="/mypageMain" element={ <MypageMain/>} >
-              <Route path='/mypageMain/aboutMe' element={<AboutMe />} />
-              <Route path='/mypageMain/editMe' element={<EditMe />} />
-              <Route path='/mypageMain/managementHistory' element={<ManagementHistory />} />
-            </Route>
           </Routes>
-
         </div>
           <Foot />
         </div>

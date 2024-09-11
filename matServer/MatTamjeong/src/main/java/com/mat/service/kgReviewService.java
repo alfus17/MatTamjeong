@@ -1,5 +1,6 @@
 package com.mat.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,14 @@ public class kgReviewService {
 	private kakaoReviewRepository kakaoReviewRepository;
 
 	// 카카오 리뷰 가져오기
-	public Optional<kakaoReview> getKgReview(Integer kgReviewId ) {
+	public List<kakaoReview> getKgReviewsByStoreId(Integer kgReviewId ) {
 		return kakaoReviewRepository.findByStoreId(kgReviewId);
+	}
+
+	public double getStoreRating(int storeId) {
+	
+		return kakaoReviewRepository.getStoreRating(storeId);
+		
 	}
 
 }
