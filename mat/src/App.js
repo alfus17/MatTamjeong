@@ -8,6 +8,8 @@ import Main from './components/main/main';
 import StoreDetails from './components/detail/storeDetail';
 import Ex from './components/detail/searchFoodEx';
 import ExDetail from './components/detail/storeDetailEx';
+import Login from './components/login/login';
+
 
 
 
@@ -35,6 +37,7 @@ function App() {
             <Route path="/Map" element={<Ex />} />
             <Route path="/Detail" element={<ExDetail/>} />
             <Route path="/Title" element={<Title />} />
+            <Route path="/Login" element={<Login />} />
             <Route path='/store/:storeId' element={<ExDetail />} />
           </Routes>
         </div>

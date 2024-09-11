@@ -1,6 +1,5 @@
 package com.mat.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +15,7 @@ import com.mat.domain.matReview;
 import com.mat.domain.menu;
 import com.mat.service.StoreService;
 import com.mat.service.dcReviewService;
-import com.mat.service.foodCategoryService;
 import com.mat.service.kgReviewService;
-import com.mat.service.locationCategoryService;
 import com.mat.service.matReviewService;
 import com.mat.service.menuService;
 
@@ -26,35 +23,21 @@ import com.mat.service.menuService;
 @RequestMapping("/DetailPage")
 public class DetailPageController {
 
-	//다이닝 코드
-	@Autowired
-	private dcReviewService dcReviewService;
-	
-	// 카카오
-	@Autowired
+    @Autowired
+    private dcReviewService dcReviewService;
+    
+    @Autowired
     private kgReviewService kgReviewService;
 
-	// 맛탐정
     @Autowired
     private matReviewService matReviewService;
     
-    // 게게 정보
     @Autowired
-	private StoreService storeService;
+    private StoreService storeService;
     
-    // 지역 카테고리
-	@Autowired
-	private locationCategoryService locationCategoryService;
-	
-	// 음식 카테고리
-	@Autowired
-	private foodCategoryService foodCategoryService;
-	
-	
-	// 메뉴
-	@Autowired
-	private menuService menuService;
-
+    @Autowired
+    private menuService menuService;
+    
 	/*
 	 * 필요값 : {"storeId": 스토어아이디값(int)}
 	 *  
@@ -102,61 +85,43 @@ public class DetailPageController {
     }
 }
 	 */
-	
-	//TODO url 설정
-	@PostMapping("/getDetailStore")
-	public  HashMap<String,Object> getStoreAllInformation(@RequestBody Store store){
-		
-		System.out.println("store:"+store);
-		
-		// 해쉬맵 
-		HashMap<String,Object> response =  new HashMap<>();
-		
-		
-		// 가게 데이터 ( StoreInfo ) 
-		Optional<Store> idQueryResult =  storeService.getStoreById(store.getStoreId());
-		if(idQueryResult.isPresent()) {
-			System.out.println("------------------------------------------------------------------------------------------------");
-			System.out.println(idQueryResult.get());
-			response.put("StoreInfo",idQueryResult.get());
-		}
-		
-		//	별점 데이터 (storeRating)
-		Optional<Store> StoreRating   =  storeService.getStoreById(store.getStoreId());
-		
-		// 다이닝코드 평균 별점담아주는 hash맵
-		HashMap<String, Double> StoreRatings = new HashMap<>();
-		
-		// 다이닝 코드 별점
-		double dcStoreRating = dcReviewService.getStoreRating(store.getStoreId());
-		// 카카오 별점
-		double kgStoreRating = kgReviewService.getStoreRating(store.getStoreId());
-		// 맛탐정 별점
-		double matStoreRating = matReviewService.getStoreRating(store.getStoreId());
-		// 평균 별점
-		double avgAllRating = (dcStoreRating+kgStoreRating+matStoreRating)/3.0;
-		
-		// 데이터 해쉬맵에 넣어줌
-		StoreRatings.put("dcRating", dcStoreRating);
-		StoreRatings.put("kgRating", kgStoreRating);
-		StoreRatings.put("matRating", matStoreRating);
-		StoreRatings.put("avgRating", avgAllRating);
-		
-		// 되돌려줄 값에다가 넣어줌
-		response.put("Ratings", StoreRatings);
-		
-		// 맛탐정 리뷰 데이터 
-		List<matReview> matReviews = matReviewService.getMatReviewsByStoreId(store.getStoreId());
-		response.put("MatReivews", matReviews);
-		
-		// 메뉴테이블 데이터 TODO
-		List<menu> menuResult = menuService.getMenu(store.getStoreId());
-		response.put("StoreMenu", menuResult);
-		
-		return response;
-		
-		
-	}
-	
-	
+
+    @PostMapping("/getDetailStore")
+    public HashMap<String, Object> getStoreAllInformation(@RequestBody Store store) {
+        HashMap<String, Object> response = new HashMap<>();
+
+        // 가게 데이터 ( StoreInfo )
+        Optional<Store> storeOptional = storeService.getStoreById(store.getStoreId());
+        if (storeOptional.isPresent()) {
+            response.put("StoreInfo", storeOptional.get());
+        } else {
+            response.put("error", "Store not found");
+            return response;
+        }
+
+        // 별점 데이터 (storeRating)
+        HashMap<String, Double> storeRatings = new HashMap<>();
+        
+        double dcStoreRating = dcReviewService.getStoreRating(store.getStoreId());
+        double kgStoreRating = kgReviewService.getStoreRating(store.getStoreId());
+        double matStoreRating = matReviewService.getStoreRating(store.getStoreId());
+        double avgAllRating = (dcStoreRating + kgStoreRating + matStoreRating) / 3.0;
+
+        storeRatings.put("dcRating", dcStoreRating);
+        storeRatings.put("kgRating", kgStoreRating);
+        storeRatings.put("matRating", matStoreRating);
+        storeRatings.put("avgRating", avgAllRating);
+
+        response.put("Ratings", storeRatings);
+
+        // 맛탐정 리뷰 데이터
+        List<matReview> matReviews = matReviewService.getMatReviewsByStoreId(store.getStoreId());
+        response.put("MatReviews", matReviews);
+
+        // 메뉴 데이터
+        List<menu> menuResult = menuService.getMenu(store.getStoreId());
+        response.put("StoreMenu", menuResult);
+
+        return response;
+    }
 }
