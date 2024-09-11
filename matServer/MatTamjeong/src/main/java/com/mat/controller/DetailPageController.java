@@ -107,6 +107,8 @@ public class DetailPageController {
 	@PostMapping("/getDetailStore")
 	public  HashMap<String,Object> getStoreAllInformation(@RequestBody Store store){
 		
+		System.out.println("store:"+store);
+		
 		// 해쉬맵 
 		HashMap<String,Object> response =  new HashMap<>();
 		
@@ -114,6 +116,8 @@ public class DetailPageController {
 		// 가게 데이터 ( StoreInfo ) 
 		Optional<Store> idQueryResult =  storeService.getStoreById(store.getStoreId());
 		if(idQueryResult.isPresent()) {
+			System.out.println("------------------------------------------------------------------------------------------------");
+			System.out.println(idQueryResult.get());
 			response.put("StoreInfo",idQueryResult.get());
 		}
 		
