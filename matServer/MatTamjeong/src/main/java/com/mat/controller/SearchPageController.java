@@ -28,9 +28,7 @@ public class SearchPageController {
 	@GetMapping("/query={keword},{page}")
 	public List<Store> findStoresWithKeywords (String name, int page, String keyword){
 
-		
-		
-			
+
 		return null;
 	}
 	

@@ -109,7 +109,7 @@ function Main() {
               <ul className='slidebox'>
               <li>
                     <img 
-                      src={item.storeimg} 
+                      src={item.menuUrl} 
                       className="store-image" 
                       alt={item.storeName} 
                       onClick={() => handleImageClick(item.storeId)} // 클릭 이벤트 추가

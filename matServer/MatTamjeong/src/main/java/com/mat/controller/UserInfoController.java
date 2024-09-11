@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mat.domain.Store;
@@ -18,6 +19,7 @@ import com.mat.service.UserService;
 import com.mat.service.locationCategoryService;
 
 @RestController
+@RequestMapping("/user")
 public class UserInfoController 
 {
 	
@@ -25,7 +27,7 @@ public class UserInfoController
 	private UserService userService;
 
 	// 모든 유저의 userInfo 데이터를 반환하는 API
-	@GetMapping("/getuserInfo")
+	@PostMapping("/getuserInfo")
 	public List<userInfo> getAlluserInfos() 
 	{
 		return userService.getAlluserInfos(); // 전체 데이터를 반환
@@ -37,6 +39,8 @@ public class UserInfoController
 	{
 		return userService.getUserInfoById(userId); // 특정 유저의 데이터를 반환
 	}
+	
+
 	
 }
 
