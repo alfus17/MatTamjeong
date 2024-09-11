@@ -40,7 +40,6 @@ function App() {
       <div className='content'>
         <div className='slideshow'>
  
-        <Sidebar />
 
           <Routes>             
             <Route path='/' element={<Main />} />
