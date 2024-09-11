@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity(name="mat_review")
-@Table(name="mat_review")
+@Entity(name="MAT_REVIEW")
+@Table(name="MAT_REVIEW")
 public class matReview {
 	  
 	  /* 	mat Review Table

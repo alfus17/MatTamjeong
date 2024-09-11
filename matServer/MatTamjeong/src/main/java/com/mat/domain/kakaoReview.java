@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity(name="kakao_review")
-@Table(name="kakao_review")
+@Entity(name="KAKAO_REVIEW")
+@Table(name="KAKAO_REVIEW")
 public class kakaoReview {
 	  /* 	kakao Review Table
 	 * 	카카오ID (PK) : kg_review_id		varchar2(10)
