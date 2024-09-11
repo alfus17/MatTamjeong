@@ -1,23 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider } from '@mui/material';
+import axios from 'axios';
 
 function ExDetail() {
 
     // 가게 데이터
-    const store = {
-        name: "코리안 치킨 클럽",
-        imageUrl: "https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg",
-        menu: [
-            { name: "프라이드 치킨", price: 15000 },
-            { name: "양념 치킨", price: 16000 },
-            { name: "스파이시 치킨", price: 17000 }
-        ],
-        reviews: [
-            { user: "김철수", rating: 4, comment: "정말 맛있어요!" },
-            { user: "이영희", rating: 5, comment: "가게 분위기도 좋고, 치킨도 맛있어요." },
-            { user: "박지수", rating: 3.5, comment: "가격 대비 맛은 괜찮아요." }
-        ]
-    };
+    const [store, setStore] = useState([]);
+    const [data, getDate] = useState([]);
+
+    const fetchData = async (id) => {
+        try {
+            const reponse = await axios.post('/')
+        }
+    }
 
     // 별점의 평균 계산
     const averageRating = (store.reviews.reduce((acc, review) => acc + review.rating, 0) / store.reviews.length).toFixed(1);

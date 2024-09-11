@@ -16,7 +16,7 @@ function Ex() {
 
     return (
 <div className='searchForm'>
-        <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper' }}>
+        <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper', marginLeft: 8}}>
         {stores.map((store) => (
         <ListItem
         key={store.id}

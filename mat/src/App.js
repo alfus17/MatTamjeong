@@ -35,7 +35,7 @@ function App() {
             <Route path="/Map" element={<Ex />} />
             <Route path="/Detail" element={<ExDetail/>} />
             <Route path="/Title" element={<Title />} />
-            <Route path='/store/:storeId' element={<StoreDetails />} />
+            <Route path='/store/:storeId' element={<ExDetail />} />
           </Routes>
         </div>
           <Foot />
