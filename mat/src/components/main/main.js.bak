@@ -5,11 +5,13 @@ import "slick-carousel/slick/slick-theme.css";
 import '../css/main.css';
 import Main2 from './main2';
 import Slider from 'react-slick';
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
   const [store, setStore] = useState([]);
   const [filterStore, setFilterStore] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
+  const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
   useEffect(() => {
     // 초기화 시 기본 '강남' 데이터를 불러오는 함수
@@ -29,14 +31,19 @@ function Main() {
     }
   };
 
+  const handleImageClick = (storeId) => {
+    // 클릭 시 해당 가게 ID로 StoreDetails 페이지로 이동
+    navigate(`/store/${storeId}`);
+  };
+
   const settings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 1000,
     slidesToShow: 4,
     slidesToScroll: 4,
-    centerMode: false,
-    centerPadding: "0px",
+    centerMode: true, // 중앙 모드 활성화
+    centerPadding: "0px", // 슬라이드 양쪽 여백 설정
     responsive: [
       {
         breakpoint: 1024,
@@ -84,7 +91,14 @@ function Main() {
           {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
             <div key={index} className="store-item">
               <ul className='slidebox'>
-                <li><img src={item.storeimg} className="store-image" alt={item.storeName}/></li>
+              <li>
+                    <img 
+                      src={item.storeimg} 
+                      className="store-image" 
+                      alt={item.storeName} 
+                      onClick={() => handleImageClick(item.storeId)} // 클릭 이벤트 추가
+                    />
+                  </li>
                 <li>
                   <h4>{item.storeName}</h4>
                   <p>{item.storeAddress}</p>

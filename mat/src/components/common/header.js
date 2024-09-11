@@ -1,40 +1,50 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/header.css';
-import Navba from './nav';
-import { useNavigate } from 'react-router-dom';
-import Topsearch from './topsearch';
-import Sidebar from './sidebar';
-
-
-
+import { Container, Grid, Box, InputBase, IconButton, Paper, Divider } from '@mui/material';
+import { Search as SearchIcon } from '@mui/icons-material';
 
 function Header() { 
-    const navigate = useNavigate(); // useNavigate 훅 사용
-
-    // 클릭 핸들러 함수
-    const handleLogoClick = () => {
-      navigate('/'); // 메인 페이지로 이동
-    };
-
     return (
-      <>
-<div className='top'>
-        <div className='head'>
-            {/* 로고 이미지를 추가하고 클릭 이벤트를 연결 */}
-            <img 
-              src='/img/mat.png' 
-              className='logo'
-              onClick={handleLogoClick} // 클릭 이벤트 추가
-            />
-        </div>  
-        <div className='searchbox'>
-        <Topsearch />
-        <Sidebar/>
-        </div>
-</div>
-        <Navba />
-      </>
+        <Container maxWidth="lg">
+            <Grid container alignItems="center">
+                {/* Left Section: Logo */}
+                <Grid item xs={3} style={{ textAlign: 'left' }}>
+                    <Box>
+                        <Link to="/">
+                            <img 
+                                src={"/img/icon.png"} 
+                                alt="Logo" 
+                                style={{ cursor: 'pointer', width:"150px", height:"150px" }}
+                                 
+                            />
+                        </Link>
+                    </Box>
+                </Grid>
+                
+                {/* Center Section: Search bar */}
+                <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>                   
+                        <InputBase
+                            sx={{ 
+                              ml: 2,
+                              flex: 1 
+
+                              }}
+                            placeholder="맛집 검색"
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                            <SearchIcon />
+                        </IconButton>                  
+                </Grid>
+
+                {/* Right Section: Empty Grid or additional content */}
+                <Grid item xs={3}>
+                    {/* You can add right-side content here if needed */}
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
 
