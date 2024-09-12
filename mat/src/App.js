@@ -1,7 +1,6 @@
 import './components/css/App.css';
 import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Title from './components/title/title';
 import Main from './components/main/main';
 import Ex from './components/detail/searchFoodEx';
 import ExDetail from './components/detail/storeDetailEx';
@@ -33,7 +32,6 @@ function App() {
             <Route path='/' element={<Main />} />
             <Route path="/Map" element={<Ex />} />
             <Route path="/Detail" element={<ExDetail/>} />
-            <Route path="/Title" element={<Title />} />
             <Route path="/Login" element={<Login />} />
             <Route path='/store/:storeId' element={<ExDetail />} />
           </Routes>

@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import '../css/main.css';
-import Slider from 'react-slick';
 import { useNavigate } from 'react-router-dom';
-import {  Box, Button, Container, Grid, Paper } from '@mui/material';
+import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Map from '../map/map';
 
 function Main() {
   const [store, setStore] = useState([]);
   const [filterStore, setFilterStore] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
+  const [currentSlide, setCurrentSlide] = useState(0); // 현재 슬라이드를 관리할 상태
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
   useEffect(() => {
@@ -19,7 +18,6 @@ function Main() {
     fetchStoreByLocation('강남');
   }, []);
   
-
   // 특정 위치로 가게 데이터를 가져오는 함수
   const fetchStoreByLocation = async (location) => {
     try {
@@ -28,6 +26,7 @@ function Main() {
       setStore(response.data);
       setFilterStore(response.data);
       setSelectedLocation(location);
+      setCurrentSlide(0); // 새로 데이터가 로드되면 슬라이드를 처음으로 설정
     } catch (error) {
       console.error('Error fetching store data:', error);
     }
@@ -38,96 +37,102 @@ function Main() {
     navigate(`/store/${storeId}`);
   };
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    centerMode: true, // 중앙 모드 활성화
-    centerPadding: "0px", // 슬라이드 양쪽 여백 설정
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+  const handleNextSlide = () => {
+    if (currentSlide < (filterStore.length > 0 ? filterStore : store).length - 4) {
+      setCurrentSlide(currentSlide + 1); // 슬라이드를 다음으로 이동
+    }
   };
+
+  const handlePrevSlide = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1); // 슬라이드를 이전으로 이동
+    }
+  };
+
+  // 별점 가데이터
+  const averageRating = store.Ratings ? store.Ratings.avgRating.toFixed(1) : '0';
+
   return (
     <>
-     <Container disableGutters maxWidth={false}> {/* Container 여백 제거 및 최대 넓이로 */}
-      <Grid item xs={12} md={6}>
-        <Paper  elevation={3} sx={{ 
-          p: 2, 
-          maxWidth:"70%",
-          margin:"0 auto"
-        }}>
-          <Box>
-     <Map  storeData={store} height="600px" />
-     </Box>
-     </Paper>
-     </Grid>
-      <Grid>
-        <Paper sx={{
-          marginTop:"50px"
-        }}>
-          
-    <div className="gangline">
-      {/* 지역 선택 버튼들 */}
-      <div className='buttons'>
-      <Button onClick={() => fetchStoreByLocation('강남') }># 강남 </Button>
-      <Button onClick={() => fetchStoreByLocation('홍대')}># 홍대 ,</Button>
-      <Button onClick={() => fetchStoreByLocation('명동')}># 명동 ,</Button>
-      <Button onClick={() => fetchStoreByLocation('신촌')}># 신촌 ,</Button>
-      <Button onClick={() => fetchStoreByLocation('종로')}># 종로 ,</Button>
-      <Button onClick={() => fetchStoreByLocation('동대문')}># 동대문</Button>
-      </div>
-      
-      {selectedLocation && (
-        <Slider {...settings}>
-          {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
-            <div key={index} className="store-item">
-              <ul className='slidebox'>
-              <li>
-                    <img 
-                      src={item.storeimg} 
-                      className="store-image" 
-                      alt={item.storeName} 
-                      onClick={() => handleImageClick(item.storeId)} // 클릭 이벤트 추가
-                    />
-                  </li>
-                <li>
-                  <h4>{item.storeName}</h4>
-                  <p>{item.storeAddress}</p>
-                </li>
-              </ul>
-            </div>
-          ))}
-        </Slider>
-      )}
-    </div>
-    </Paper>
-    </Grid>
-    </Container>
+      <Container disableGutters maxWidth={false}> {/* Container 여백 제거 및 최대 넓이로 */}
+        <Grid item xs={12} md={6}>
+          <Card elevation={3} sx={{ p: 2, maxWidth: "50%", margin: "0 auto" }}>
+            <Box>
+              <Map storeData={store} height="450px" />
+            </Box>
+          </Card>
+        </Grid>
+        
+        {/* 맵과 슬라이드 사이에 여백 추가 */}
+        <Box sx={{ marginTop: "13px" }}> {/* 여백을 50px로 설정 */}
+          <Grid>
+            <Paper sx={{ maxWidth: "70%", margin: "0 auto", padding: 2 }}>
+              {/* 지역 선택 버튼들 */}
+              <Box 
+                sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  marginTop: '  0px', // 버튼들 위에 여백 추가
+                  gap:'30px',   
+                 
+                }}
+              >
+                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('강남')}># 강남</Button>
+                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('홍대')}># 홍대</Button>
+                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('명동')}># 명동</Button>
+                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('신촌')}># 신촌</Button>
+                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('종로')}># 종로</Button>
+                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('동대문')}># 동대문</Button>
+              </Box>
+
+              {selectedLocation && (
+                <Box sx={{ width: "100%", overflow: "hidden", position: "relative", marginTop: "20px" }}> {/* 슬라이더 영역 */}
+                  <IconButton
+                    onClick={handlePrevSlide}
+                    sx={{ position: 'absolute', left: 0, top: '50%', zIndex: 1 }}
+                    disabled={currentSlide === 0}
+                  >
+                    <ArrowBackIosIcon />
+                  </IconButton>
+
+                  <Box sx={{
+                    display: 'flex',
+                    transition: 'transform 0.5s ease-in-out',
+                    transform: `translateX(-${currentSlide * 25}%)`, // 슬라이드를 이동시키는 트랜스폼
+                  }}>
+                    {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
+                      <Box key={index} sx={{  padding: 2, display: 'flex', alignItems: 'center' }}> {/* 슬라이드의 너비를 25%로 설정 */}
+                        <img
+                          src={item.storeimg}
+                          alt={item.storeName}
+                          onClick={() => handleImageClick(item.storeId)}
+                          style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }} // 이미지 크기 및 마진
+                        />
+                        <Box>
+                          <Typography variant="h6">{item.storeName}</Typography>
+                          <Typography variant="body2">{item.storeAddress}</Typography>
+                          <Rating name="total-rating" value={parseFloat(averageRating)} readOnly precision={0.5} />
+                          <Typography variant="h6" component="p" sx={{ ml: 2 }}>
+                                {averageRating}/5
+                          </Typography>
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+
+                  <IconButton
+                    onClick={handleNextSlide}
+                    sx={{ position: 'absolute', right: 0, top: '50%', zIndex: 1 }}
+                    disabled={currentSlide >= (filterStore.length > 0 ? filterStore : store).length - 4}
+                  >
+                    <ArrowForwardIosIcon />
+                  </IconButton>
+                </Box>
+              )}
+            </Paper>
+          </Grid>
+        </Box>
+      </Container>
     </>
   );
 }
