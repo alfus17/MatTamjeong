@@ -6,6 +6,7 @@ import Ex from './components/detail/searchFoodEx';
 import ExDetail from './components/detail/storeDetailEx';
 import MypageMain from './components/Mypage/MypageMain';
 import AboutMe from './components/Mypage/aboutMe';
+import PasswordConfirm from './components/Mypage/passwordConfirm'; 
 import EditMe from './components/Mypage/editMe';
 import ManagementHistory from './components/Mypage/managementHistory';
 import Login from './components/login/login';
@@ -39,6 +40,7 @@ function App() {
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
                     <Route path="managementHistory" element={<ManagementHistory />} />
+                    <Route path="passwordConfirm" element={<PasswordConfirm />} />
                   </Route>
                 </Routes>
               </div>

@@ -34,6 +34,7 @@ function EditMe() {
       ...userInfo,
       [name]: value,
     });
+   
   };
 
   const handleSubmit = async (field) => {

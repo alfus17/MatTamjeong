@@ -97,7 +97,4 @@ public class userInfo {
 	@NonNull
 	private String auth;
 
-
-	
-
 }
