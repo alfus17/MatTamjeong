@@ -1,6 +1,5 @@
 import * as React from 'react';
-import '../css/searchFoodEx.css';
-import CssBaseline from '@mui/material/CssBaseline';
+
 import Box from '@mui/material/Box';
 import MapIcon from '@mui/icons-material/Map';
 import { IconButton, List, ListItem, ListItemText, Rating } from '@mui/material';
