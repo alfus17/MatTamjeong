@@ -15,7 +15,7 @@ const Map = (props) => {
     // 기본 맵 옵션 설정 (store[0]이 있을 때만 설정)
     const mapOptions = {
       center: new naver.maps.LatLng(store[0].storeLocationLat, store[0].storeLocationLng), // 초기 좌표 설정
-      zoom: 16,
+      zoom: 14,
     };
 
     // 맵 생성

@@ -23,8 +23,8 @@ import com.mat.service.matReviewService;
 import com.mat.service.menuService;
 
 @RestController
-@RequestMapping("/DetailPage")
-public class DetailPageController {
+@RequestMapping("/Page")
+public class PageController {
 
 	//다이닝 코드
 	@Autowired
@@ -145,7 +145,7 @@ public class DetailPageController {
 		List<matReview> matReviews = matReviewService.getMatReviewsByStoreId(store.getStoreId());
 		response.put("MatReivews", matReviews);
 		
-		// 메뉴테이블 데이터 TODO
+		// 메뉴테이블 데이터 
 		List<menu> menuResult = menuService.getMenu(store.getStoreId());
 		response.put("StoreMenu", menuResult);
 		
@@ -153,6 +153,13 @@ public class DetailPageController {
 		
 		
 	}
+	
+	//TODO url 설정
+//	@GetMapping("/getMainPage")
+//	public  HashMap<String,Object> getStoreAllInformation(@RequestBody Store store){
+//		
+//		
+//	}
 	
 	
 }

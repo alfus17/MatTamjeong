@@ -6,6 +6,7 @@ function Navba() {
         <ul>
             <li><a href="/Map">맛집지도</a></li>
             <li><a href="/Detail">이달의 best</a></li>
+            <li><a href="/Login">이달의 best</a></li>
         </ul>
     </nav>
     )
