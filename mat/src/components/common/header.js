@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar } from '@mui/material';
+import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import Login from '../login/login';
+
+
+
 
 function Header() { 
 
@@ -14,7 +18,9 @@ function Header() {
         bottom: false,
         right: false,
       });
-    
+    const [open, setOpen] = useState(false); // Dialog open state
+
+
       const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -46,7 +52,13 @@ function Header() {
         </Box>
       );
 
+      const handleClickOpen = () => {
+        setOpen(true);
+      };
 
+      const handleClose = () => {
+        setOpen(false);
+      };
 
     return (
         <Container maxWidth="lg" sx={{height:'120px'}}>
@@ -90,10 +102,19 @@ function Header() {
                     alignItems:"center",
                     justifyContent:"flex-end"
                 }}>
+                
+                
                 <Typography component="h2" gutterBottom sx={{
-                    fontSize:'18px'
-                }}>
-                    닉네임
+                    fontSize:'18px',
+                    cursor:'pointer',
+                    '&:hover': {
+                      color : 'red'
+                  },
+                }}
+                onClick={handleClickOpen}
+                >
+                  
+                    로그인
                 </Typography>
 
                     {['right'].map((anchor) => (
@@ -113,6 +134,12 @@ function Header() {
                 </div>
                 </Grid>
             </Grid>
+
+
+         {/* Dialog 컴포넌트 */}
+         <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
+            <Login />
+         </Dialog>
         </Container>
     );
 }

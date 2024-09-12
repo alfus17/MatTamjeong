@@ -5,20 +5,11 @@ function Login() {
     return (
         <Container maxWidth="md" sx={{ mt: 6 }}>
             <Grid container justifyContent="center">
-                <Paper elevation={2} sx={{
+                <Box elevation={2} sx={{
                     p: 4,
-                    borderRadius: 3,
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                     display: 'flex',
                     flexDirection: 'column',
-                    bgcolor: '#f5f5f5', // Light grey background
-                    border: '1px solid #ddd', // Light border
-                    transition: 'all 0.3s ease-in-out', // Smooth transition effect
-                    '&:hover': {
-                        bgcolor: '#e0e0e0', // Darker grey on hover
-                        boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', // Increased shadow on hover
-                        transform: 'scale(1.02)', // Slightly enlarge on hover
-                    },
+
                 }}>
                     <Box>
                         <Typography variant="h4" sx={{ textAlign: "center" }}>
@@ -61,7 +52,7 @@ function Login() {
                             <a>아이디가 없으신가요?</a>
                         </Typography>
                     </Box>
-                </Paper>
+                </Box>
             </Grid>
         </Container>
     );

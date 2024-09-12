@@ -1,4 +1,4 @@
-import './components/css/App.css';
+import './App.css';
 import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Main from './components/main/main';
@@ -6,6 +6,7 @@ import Ex from './components/detail/searchFoodEx';
 import ExDetail from './components/detail/storeDetailEx';
 import Login from './components/login/login';
 import Create from './components/login/createUser';
+import AddReview from './review/review';
 
 
 
@@ -38,6 +39,7 @@ function App() {
             <Route path='/store/:storeId' element={<ExDetail />} />
             <Route path='/Create' element={<Create />} />
             <Route path='/search' element={<Ex/>} />
+            <Route path='/add' element={<AddReview />} />
           </Routes>
         </div>
 
