@@ -5,16 +5,19 @@ import Main from './components/main/main';
 import Ex from './components/detail/searchFoodEx';
 import ExDetail from './components/detail/storeDetailEx';
 import Login from './components/login/login';
+import Create from './components/login/createUser';
 
 
 
 
-// npx create-toolpad-app@latest
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
 // npm i react-router-dom
 // npm install @mui/material @mui/styled-engine-sc styled-components
 // npm install @mui/icons-material
+// npm install @mui/x-date-pickers
+// npm install date-fns@latest
+// npm install date-fns@2.28.0
 
 // npm cache clean --force
 
@@ -31,9 +34,10 @@ function App() {
           <Routes>             
             <Route path='/' element={<Main />} />
             <Route path="/Map" element={<Ex />} />
-            <Route path="/Detail" element={<ExDetail/>} />
             <Route path="/Login" element={<Login />} />
             <Route path='/store/:storeId' element={<ExDetail />} />
+            <Route path='/Create' element={<Create />} />
+            <Route path='/search' element={<Ex/>} />
           </Routes>
         </div>
 

@@ -31,7 +31,7 @@ function Header() {
           onKeyDown={toggleDrawer(anchor, false)}
         >
           <List>
-            {['임시1', '임시1', '임시1','임시1', '임시1'].map((text, index) => (
+            {[ '임시1', '임시1','임시1', '임시1'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
