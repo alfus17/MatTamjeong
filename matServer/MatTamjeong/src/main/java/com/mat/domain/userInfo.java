@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class userInfo {
     /* 	user_info Table
  * 	회원 ID (PK)(FK) 	: user_id			varchar2(20)
- * 
+ * 	비밀번호 			: user_pwd			varchar2(30) 
  * 	이름 				: user_name 		varchar2(60)
  * 	가입일자 			: member_join_date	Date
  *  닉네임  			: nickname			varchar2(20)
@@ -40,6 +40,11 @@ public class userInfo {
 	@NonNull
 	@GeneratedValue
 	private String userId;
+	
+	//  pwd
+	@Column(name="user_pwd" ,length=30)
+	@NonNull
+	private String userPwd;
 	
 	//  이름
 	@Column(name="user_name" ,length=60)

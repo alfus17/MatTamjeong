@@ -8,26 +8,36 @@ import org.springframework.stereotype.Service;
 
 import com.mat.domain.Store;
 import com.mat.domain.userInfo;
-import com.mat.repository.UserRepository;
+import com.mat.repository.UserInfoRepository;
 
 @Service
 public class UserService 
 {
 	@Autowired
-	private UserRepository userRepository;
-	
-//	@Autowi
+	private UserInfoRepository userInfoRepository;
 	
 	// 모든 userInfo 데이터를 가져오는 메소드
 	public List<userInfo> getAlluserInfos() 
 	{
-		return userRepository.findAll();
+		return userInfoRepository.findAll();
 	}
 	
 	// 특정 유저의 userInfo 데이터를 가져오는 메소드
 	public Optional<userInfo> getUserInfoById(String userId) 
 	{
-		return userRepository.findById(userId);
+		return userInfoRepository.findById(userId);
+	}
+
+	public boolean checkUser(String userId, String userPwd) {
+		
+		boolean result= false;
+		
+		Optional<userInfo>user = userInfoRepository.findByUserIdAndUserPwd(userId, userPwd);
+		
+		if(user.isPresent()) {
+			result = !result;
+		}
+		return result;
 	}
 	
 }

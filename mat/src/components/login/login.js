@@ -63,13 +63,7 @@ function Login() {
                                 }}
                                 onClick={ async() => {
                                     try {
-                                        const response = await axios.get(`/user/post/${id}/${password}`)
-                                        .then(
-                                            alert('로그인 성공!')
-                                        )
-                                        .catch(
-                                            alert('로그인 실패!')
-                                        )
+                                        const response = await axios.get(`/user/checkUser/${id}/${password}`);
                                         console.log(response.data); // 서버로부터 받은 응답 처리
                                         
                                     } catch (error) {

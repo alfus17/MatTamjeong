@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mat.domain.Store;
 import com.mat.domain.locationCategory;
 import com.mat.domain.userInfo;
-import com.mat.domain.users;
 import com.mat.service.UserService;
 import com.mat.service.locationCategoryService;
 
@@ -39,6 +38,14 @@ public class UserInfoController
 	{
 		return userService.getUserInfoById(userId); // 특정 유저의 데이터를 반환
 	}
+	
+	// check 로그인 API
+	@GetMapping("/checkUser/{userId}/{password}")
+	public boolean  checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
+		
+		return userService.checkUser(userId,password);
+	}
+	
 	
 
 	
