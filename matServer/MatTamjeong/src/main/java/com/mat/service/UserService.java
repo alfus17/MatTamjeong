@@ -32,6 +32,7 @@ public class UserService
 		
 		boolean result= false;
 		
+		// TODO 변경
 		Optional<userInfo>user = userInfoRepository.findByUserIdAndUserPwd(userId, userPwd);
 		
 		if(user.isPresent()) {
