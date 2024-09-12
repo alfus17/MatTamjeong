@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 
-function Login() {
+function Login({onClose}) {
     const [id, setId] = useState('');  // ID 상태 관리
     const [password, setPassword] = useState('');  // Password 상태 관리
 
@@ -56,6 +56,8 @@ function Login() {
                                     try {
                                         const response = await axios.get(`/user/checkUser/${id}/${password}`);
                                         console.log(response.data); // 서버로부터 받은 응답 처리
+                                        // 로그인로직 구현
+                                        onClose();
                                         
                                     } catch (error) {
                                         console.error('Error during login:', error);

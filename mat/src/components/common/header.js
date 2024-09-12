@@ -52,6 +52,7 @@ function Header() {
         </Box>
       );
 
+      //  Dialog open state
       const handleClickOpen = () => {
         setOpen(true);
       };
@@ -138,7 +139,7 @@ function Header() {
 
          {/* Dialog 컴포넌트 */}
          <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
-            <Login />
+            <Login onClose={handleClose} />
          </Dialog>
         </Container>
     );
