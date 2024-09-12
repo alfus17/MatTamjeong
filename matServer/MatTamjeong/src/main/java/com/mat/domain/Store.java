@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
  * 	상세정보		: details				varchar2(1000)
  * 	음식카테고리 		: food_category			number
  * 	지역카테고리 		: location_category		number
+ * 	메뉴사진 		: menul_url				varchar2(60)
  * 	생성일			: created_at			date
  * 	수정일 		: update_at				date
  * 	리뷰ID(네이버)	: nv_review_id(FK)		varchar2(10)
@@ -78,6 +79,10 @@ public class Store {
 	// 가게 상세정보
 	@Column(name="details" ,length=1000)
 	private String details;
+	
+	// 메뉴사진 url
+	@Column(name="menu_url" ,length=150)
+	private String menuUrl;
 	
 	// 가게 음식 카테고리 id(FK)
 	@Column(name="food_category")

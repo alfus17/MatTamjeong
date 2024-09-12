@@ -20,6 +20,7 @@ public class kgReviewService {
 		return kakaoReviewRepository.findByStoreId(kgReviewId);
 	}
 
+	// 평균 별점 쿼리하기
 	public double getStoreRating(int storeId) {
 	
 		return kakaoReviewRepository.getStoreRating(storeId);
