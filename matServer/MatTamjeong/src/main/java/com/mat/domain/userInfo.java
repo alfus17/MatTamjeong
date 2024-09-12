@@ -21,16 +21,16 @@ public class userInfo {
     /*    user_info Table
  *    회원 ID (PK)(FK)    : user_id         varchar2(20)
  * 
- *    이름             : user_name       varchar2(60)
- *    가입일자          : member_join_date   Date
- *  닉네임           : nickname         varchar2(20)
- *  생년월일          : user_birth      varchar2(6)
- *  이메일          : user_email      varchar2(100)
+ *    이름              : user_name       varchar2(60)
+ *    가입일자           : member_join_date   Date
+ *    닉네임            : nickname         varchar2(20)
+ *    생년월일           : user_birth      varchar2(6)
+ *    이메일            : user_email      varchar2(100)
  *  
- *  주소             : user_address      varchar2(100)
- *    상태            : user_status      varchar2(5)
- *    리뷰ID (FK)      : review_id         varchar2(10)
- *    즐겨찾기(FK)      : bookmark_id      varchar2(10)
+ *    주소              : user_address      varchar2(100)
+ *    상태              : user_status      varchar2(5)
+ *    리뷰ID (FK)       : review_id         varchar2(10)
+ *    즐겨찾기(FK)        : bookmark_id      varchar2(10)
  *    auth(사용여부미정)   : auth            varchar2(1000)
  */
    // 회원 ID (PK)(FK)

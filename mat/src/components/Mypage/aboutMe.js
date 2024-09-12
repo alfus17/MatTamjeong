@@ -26,25 +26,51 @@ function AboutMe() {
     fetchUserInfo();
   }, []);
 
+  // 생년월일 포맷 변경 (11/11/11 형식)
+  const formatBirthDate = (birthDate) => {
+    if (!birthDate) return '정보 없음';
+    const date = new Date(birthDate);
+    return date.toLocaleDateString('ko-KR', {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit',
+    });
+  };
+
+  // 가입일 포맷 변경 (23/02/02 형식)
+  const formatJoinDate = (joinDate) => {
+    if (!joinDate) return '정보 없음';
+    const date = new Date(joinDate);
+    return date.toLocaleDateString('ko-KR', {
+      year: '2-digit',
+      month: '2-digit',
+      day: '2-digit',
+    });
+  };
+
   return (
     <Table striped className='aboutMeeee'>
       <tbody>
         <h2>내 정보</h2>
+        <tr>
+          <td className="head">이름</td>
+          <td className="body">{userInfo.userName || '정보 없음'}</td>
+        </tr>
         <tr>
           <td className="head">아이디</td>
           <td className="body">{userInfo.userId || '정보 없음'}</td>
         </tr>
         <tr>
           <td className="head">생년월일</td>
-          <td className="body">2024-09-10</td>
+          <td className="body">{formatBirthDate(userInfo.userBirth)}</td>
         </tr>
         <tr>
           <td className="head">이메일</td>
-          <td className="body">asd@asd.com</td>
+          <td className="body">{userInfo.email || '정보 없음'}</td>
         </tr>
         <tr>
           <td className="head">가입일</td>
-          <td className="body">2024-09-09</td>
+          <td className="body">{formatJoinDate(userInfo.createAt)}</td>
         </tr>
         <tr>
           <td className="head">주소</td>
