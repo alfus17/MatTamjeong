@@ -1,14 +1,14 @@
 import './components/css/App.css';
 import Header from './components/common/header';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Title from './components/title/title';
 import Main from './components/main/main';
 import Ex from './components/detail/searchFoodEx';
 import ExDetail from './components/detail/storeDetailEx';
+import MypageMain from './components/Mypage/MypageMain';
+import AboutMe from './components/Mypage/aboutMe';
+import EditMe from './components/Mypage/editMe';
+import ManagementHistory from './components/Mypage/managementHistory';
 import Login from './components/login/login';
-
-
-
 
 // npx create-toolpad-app@latest
 // npm install @mui/material @emotion/react @emotion/styled
@@ -23,27 +23,32 @@ function App() {
 
   return (
     <>
-    <Router>
-    <div className='backbg'>
-      <div className='All'>  {/* 전체 영역 설정 */}
-        <Header />
-      <div className='content'>
-        <div className='slideshow'>
-          <Routes>             
-            <Route path='/' element={<Main />} />
-            <Route path="/Map" element={<Ex />} />
-            <Route path="/Detail" element={<ExDetail/>} />
-            <Route path="/Title" element={<Title />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path='/store/:storeId' element={<ExDetail />} />
-          </Routes>
+      <Router>
+        <div className='backbg'>
+          <div className='All'>  {/* 전체 영역 설정 */}
+            <Header />
+            <div className='content'>
+              <div className='slideshow'>
+                <Routes>
+                  <Route path='/' element={<Main />} />
+                  <Route path="/Map" element={<Ex />} />
+                  <Route path="/Detail" element={<ExDetail />} />
+                  <Route path="/Login" element={<Login />} />
+                  <Route path='/store/:storeId' element={<ExDetail />} />
+                  <Route path="/MypageMain" element={<MypageMain />}>
+                    <Route path="aboutMe" element={<AboutMe />} />
+                    <Route path="editMe" element={<EditMe />} />
+                    <Route path="managementHistory" element={<ManagementHistory />} />
+                  </Route>
+                </Routes>
+              </div>
+       
+            </div>
+          </div>
         </div>
 
-        </div>
-      </div>
-    </div>
-    </Router>
-  </>
+      </Router>
+    </>
   );
 }
 
