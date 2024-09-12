@@ -26,7 +26,7 @@ public class userInfo {
  *  닉네임  			: nickname			varchar2(20)
  *  생년월일 			: user_birth		varchar2(6)
  *  이메일 			: user_email		varchar2(100)
- *  
+ *  이미지 경로 		: img_path			varchar2(200)
  *  주소 				: user_address		varchar2(100)
  * 	상태				: user_status		varchar2(5)
  * 	리뷰ID (FK)		: review_id			varchar2(10)
@@ -76,6 +76,11 @@ public class userInfo {
 	@Column(name="user_address" ,length=100)
 	@NonNull
 	private String userAddress;
+	
+	//  이미지 경로
+	@Column(name="img_path" ,length=200)
+	@NonNull
+	private String imgPath;
 
 	// 상태	
 	@Column(name="user_status" ,length=5)
