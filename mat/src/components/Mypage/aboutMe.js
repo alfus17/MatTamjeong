@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import '../css/aboutMe.css';
-import Table from 'react-bootstrap/Table';
+
 
 function AboutMe() {
 
@@ -49,35 +56,36 @@ function AboutMe() {
   };
 
   return (
-    <Table striped className='aboutMeeee'>
-      <tbody>
-        <h2>내 정보</h2>
-        <tr>
-          <td className="head">이름</td>
-          <td className="body">{userInfo.userName || '정보 없음'}</td>
-        </tr>
-        <tr>
-          <td className="head">아이디</td>
-          <td className="body">{userInfo.userId || '정보 없음'}</td>
-        </tr>
-        <tr>
-          <td className="head">생년월일</td>
-          <td className="body">{formatBirthDate(userInfo.userBirth)}</td>
-        </tr>
-        <tr>
-          <td className="head">이메일</td>
-          <td className="body">{userInfo.email || '정보 없음'}</td>
-        </tr>
-        <tr>
-          <td className="head">가입일</td>
-          <td className="body">{formatJoinDate(userInfo.createAt)}</td>
-        </tr>
-        <tr>
-          <td className="head">주소</td>
-          <td className="body">{userInfo.userAddress || '정보 없음'}</td>
-        </tr>
-      </tbody>
-    </Table>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="user info table">
+        <TableBody>
+          <TableRow>
+            <TableCell>이름</TableCell>
+            <TableCell align="left">{userInfo.userName || '정보 없음'}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>아이디</TableCell>
+            <TableCell align="left">{userInfo.userId || '정보 없음'}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>생년월일</TableCell>
+            <TableCell align="left">{formatBirthDate(userInfo.userBirth)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>이메일</TableCell>
+            <TableCell align="left">{userInfo.email || '정보 없음'}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>가입일</TableCell>
+            <TableCell align="left">{formatJoinDate(userInfo.createAt)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>주소</TableCell>
+            <TableCell align="left">{userInfo.userAddress || '정보 없음'}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

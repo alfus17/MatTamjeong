@@ -9,7 +9,7 @@
 .ProfileRectangleee {
   width: 250px;
   height: 430px;
-  background-color: rgb(88, 88, 87);
+  background-color: rgb(218, 218, 218);
   padding: 20px;
   border-radius: 30px;
   margin-right: 20px; /* Adds space between profile and content */
@@ -39,19 +39,19 @@
 
 .ProfileNameee {
   margin-top: 30px;
-  color: white;
+  color: black; /* Changed color to black */
 }
 
 .ProfileEmailll {
   margin-top: 30px;
-  color: white;
+  color: black; /* Changed color to black */
 }
 
 .ProfileEditButtonnn {
-  margin-top: 40px;
-  width: 69px;
-  font-size: 11px;
-  padding: 5px 10px;
+  margin-top: 20px; /* 버튼과 위쪽 요소 간의 간격 조정 */
+  width: 120px; /* 버튼의 너비 설정 */
+  font-size: 14px; /* 버튼 내부 텍스트의 크기 조정 */
+  padding: 8px 15px; /* 버튼 내부 여백 조정 (상하: 8px, 좌우: 15px) */
   border: 1px solid rgb(199, 199, 199);
   border-radius: 5px;
   background-color: rgb(88, 88, 87);
@@ -96,7 +96,6 @@
   color: white;
 }
 
-/* 새로 추가된 CSS */
 .ProfileChangeOverlay {
   position: absolute;
   top: 0;

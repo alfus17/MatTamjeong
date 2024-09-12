@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import '../css/MypageMain.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Button } from '@mui/material'; // Import Material-UI Button
 
 const MypageMain = () => {
 
@@ -13,7 +14,7 @@ const MypageMain = () => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get(`/getuserInfo/${2}`);
+      const response = await axios.get(`/getuserInfo/${2}`); // Fixed template literal
       setUserInfo(response.data);
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -56,11 +57,15 @@ const MypageMain = () => {
           <div className='ProfileNameee'>{userInfo.nickName || '정보 없음'}</div>
           <div className='ProfileEmailll'>{userInfo.email || '정보 없음'}</div>
           
-          <button className='ProfileEditButtonnn'><a href='/mypageMain/aboutMe'>내프로필</a></button>
-          <button className='ProfileEditButtonnn'>
-            <a href='/mypageMain/passwordConfirm'>정보수정</a> {/* Change link to PasswordConfirm */}
-          </button>
-          <button className='ProfileEditButtonnn'><a href='/mypageMain/ManagementHistory'>이력관리</a></button>
+          <Button variant="outlined" component="a" href='/mypageMain/aboutMe'>
+            내프로필
+          </Button>
+          <Button variant="outlined" component="a" href='/mypageMain/passwordConfirm'>
+            정보수정
+          </Button>
+          <Button variant="outlined" component="a" href='/mypageMain/ManagementHistory'>
+            이력관리
+          </Button>
         </div>
       </div>
 

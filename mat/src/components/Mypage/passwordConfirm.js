@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField'; // Import TextField from Material-UI
+import Button from '@mui/material/Button'; // Import Button from Material-UI
 import '../css/passwordConfirm.css';
 
 function PasswordConfirm() {
@@ -31,15 +33,23 @@ function PasswordConfirm() {
       <h2>비밀번호 확인</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>비밀번호</label>
-          <input
+          <TextField
+            id="outlined-basic"
+            label="비밀번호"
+            variant="outlined"
             type="password"
             value={password}
             onChange={handlePasswordChange}
+            fullWidth
             required
           />
         </div>
-        <button type="submit">확인</button>
+
+        &emsp;
+
+        <Button type="submit" variant="contained" color="primary">
+          확인
+        </Button>
       </form>
     </div>
   );
