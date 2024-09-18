@@ -38,8 +38,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Entity(name="Store")
-@Table(name="Store")
+@Entity(name="STORE")
+@Table(name="STORE")
 public class Store {
 	
 	
