@@ -8,12 +8,13 @@ function ExDetail() {
     const { storeId } = useParams();
     const [detail, setDetail] = useState({});
     const [open, setOpen] = useState(false); // Dialog open state
+    console.log("detail : ", detail);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post('/DetailPage/getDetailStore', { storeId });
-                console.log(response.data);
+                const response = await axios.post('/Page/getDetailStore', { storeId });
+                console.log("useEffect :",response.data);
                 setDetail(response.data);
             } catch (error) {
                 console.error('Error fetching store data:', error);
@@ -21,7 +22,7 @@ function ExDetail() {
         };
         
         fetchData();
-    }, [storeId]);
+    }, []);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -42,7 +43,7 @@ function ExDetail() {
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Box
                                 component="img"
-                                src={detail.StoreInfo?.storeimg}
+                                src={detail.StoreInfo?.menuUrl}
                                 alt={detail.StoreInfo?.storeName}
                                 sx={{
                                     width: '100%',

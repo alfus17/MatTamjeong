@@ -43,6 +43,7 @@ function App() {
                   <Route path="/Detail" element={<ExDetail />} />
                   <Route path="/Login" element={<Login />} />
                   <Route path='/store/:storeId' element={<ExDetail />} />
+                  <Route path='/enroll' element={<Create />} />
                   <Route path="/MypageMain" element={<MypageMain />}>
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
