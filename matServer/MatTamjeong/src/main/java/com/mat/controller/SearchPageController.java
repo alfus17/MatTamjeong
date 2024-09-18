@@ -25,8 +25,21 @@ public class SearchPageController {
 	
 	
 	// 가게이름 , 주소, 메뉴이름 검색 이후 set 에 모두 모아서 리턴 최대 10개
-	@GetMapping("/query={keword}/{page}")
-	public List<Store> findStoresWithKeywords (String name, int page, String keyword){
+	@GetMapping("location/{page}")
+	public List<Store> findStoresByLocation (String name, String keyword){
+
+
+		return null;
+	}
+	
+	@GetMapping("storeName/{page}")
+	public List<Store> findStoresByStoreName (String name,String keyword){
+
+
+		return null;
+	}
+	@GetMapping("menu/{page}")
+	public List<Store> findStoresByMenu (String name, String keyword){
 
 
 		return null;

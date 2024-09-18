@@ -2,9 +2,10 @@ import { Box, Container, Grid, Paper, TextField, Typography, Button } from "@mui
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Create } from "@mui/icons-material";
 
 
-function Login({onClose}) {
+function Login({onClose,setSession}) {
     const [id, setId] = useState('');  // ID 상태 관리
     const [password, setPassword] = useState('');  // Password 상태 관리
 
@@ -54,15 +55,26 @@ function Login({onClose}) {
                                 }}
                                 onClick={ async() => {
                                     try {
-                                        const response = await axios.get(`/user/checkUser/${id}/${password}`);
-                                        console.log(response.data); // 서버로부터 받은 응답 처리
-                                        // 로그인로직 구현
-                                        onClose();
-                                        
+                                        const response = await axios.get(`/user/checkUser/${id}/${password}`).then(result =>{
+                                            console.log(result)
+                                            // 로컬스토리지에 저장
+                                            localStorage.setItem('token', result.data.token)
+                                            setSession(localStorage.getItem("token"))
+                                            } 
+                                        );
+                                        console.log("로그인 성공")
+                                       // 서버로부터 받은 응답 처리
+                                        // 로그인로직 구현 
+
                                     } catch (error) {
                                         console.error('Error during login:', error);
                                         alert('로그인 실패!');
-                                    }}
+                                    }
+                                    
+                                    // 로그인 확인 이후 창 닫기 부분
+                                    onClose();
+                                }
+                                    
                                 }
                             >
                                 Login
@@ -72,7 +84,8 @@ function Login({onClose}) {
 
                     <Box sx={{ mt: 2, textAlign: 'center' }}>
                         <Typography variant="body2">
-                            <a>아이디가 없으신가요?</a>
+                            {/* 요기에는 로그아웃 구문 추가 하기   */}
+                            <a >아이디가 없으신가요?</a> 
                         </Typography>
                     </Box>
                 </Box>

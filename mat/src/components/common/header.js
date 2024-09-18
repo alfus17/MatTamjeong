@@ -11,6 +11,9 @@ import Login from '../login/login';
 
 
 function Header() { 
+    const [session, setSession] = useState();
+    // session 확인
+    console.log("session",session);
 
     const [state, setState] = React.useState({
         top: false,
@@ -104,7 +107,7 @@ function Header() {
                     justifyContent:"flex-end"
                 }}>
                 
-                
+                {/* 여기 부분에 만약 session에 token 이 존재할 경우 로그아웃으로 처리하도록 처리구분 */}
                 <Typography component="h2" gutterBottom sx={{
                     fontSize:'18px',
                     cursor:'pointer',
@@ -117,7 +120,6 @@ function Header() {
                   
                     로그인
                 </Typography>
-
                     {['right'].map((anchor) => (
                     <React.Fragment key={anchor}>
                          <Button onClick={toggleDrawer(anchor, true)}><Avatar alt="Remy Sharp" src="/img/gg.jpg" sx={{
@@ -139,7 +141,7 @@ function Header() {
 
          {/* Dialog 컴포넌트 */}
          <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
-            <Login onClose={handleClose} />
+             { <Login onClose={handleClose} setSession={setSession} />}
          </Dialog>
         </Container>
     );
