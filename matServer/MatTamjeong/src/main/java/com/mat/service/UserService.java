@@ -27,7 +27,8 @@ public class UserService
 	{
 		return userInfoRepository.findById(userId);
 	}
-
+	
+	// 유저아이디와 비밀번호로 체크
 	public boolean checkUser(String userId, String userPwd) {
 		
 		boolean result= false;
