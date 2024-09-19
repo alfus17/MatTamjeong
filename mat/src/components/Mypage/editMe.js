@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TextField, Button, Box } from '@mui/material';
-import '../css/editMe.css';
+import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
 function EditMe() {
   const [userInfo, setUserInfo] = useState({
@@ -80,11 +79,12 @@ function EditMe() {
   };
 
   return (
-    <div className='EditMeee'>
-      <h3>내 정보 수정하기</h3>
-      <br />
+    <Container sx={{width:'70%'}}>
+      <Typography variant="h4" component="h2" gutterBottom  color="primary" sx={{mt :8 , textAlign:'center'}}>
+            내 정보 수정하기
+       </Typography>
 
-      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 , mt:8}}>
         <TextField
           name="nickName"
           label="닉네임"
@@ -98,7 +98,7 @@ function EditMe() {
         </Button>
       </Box>
 
-      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 ,mt:6}}>
         <TextField
           name="email"
           label="이메일"
@@ -113,7 +113,7 @@ function EditMe() {
         </Button>
       </Box>
 
-      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 ,mt:6}}>
         <TextField
           name="password"
           label="비밀번호"
@@ -127,7 +127,8 @@ function EditMe() {
           수정
         </Button>
       </Box>
-    </div>
+    </Container>
+
   );
 }
 

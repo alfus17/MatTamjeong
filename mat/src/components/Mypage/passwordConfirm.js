@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField'; // Import TextField from Material-UI
 import Button from '@mui/material/Button'; // Import Button from Material-UI
-import '../css/passwordConfirm.css';
+import { Box, Container, Typography } from '@mui/material';
 
 function PasswordConfirm() {
   const [password, setPassword] = useState('');
@@ -29,29 +29,35 @@ function PasswordConfirm() {
   };
 
   return (
-    <div className="password-confirm-container">
-      <h2>비밀번호 확인</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <TextField
-            id="outlined-basic"
-            label="비밀번호"
-            variant="outlined"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            fullWidth
-            required
-          />
-        </div>
+    <form onSubmit={handleSubmit}>
+      <Container sx={{ width: '500px' }}>
+        <Box sx={{ mt: 6 }}>
+          <Typography variant="h5" component="h1" color="primary" sx={{ mt: 1, textAlign: 'center' }}>
+            비밀번호 확인
+          </Typography>
 
-        &emsp;
-
-        <Button type="submit" variant="contained" color="primary">
-          확인
-        </Button>
-      </form>
-    </div>
+          {/* TextField와 Button을 같은 행에 배치 */}
+          <Box sx={{ display: 'flex', alignItems: 'center', mt: 8, justifyContent: 'center' }}>
+            <TextField
+              id="outlined-basic"
+              label="비밀번호"
+              variant="outlined"
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+              sx={{
+                width: '70%',
+                mr: 2, // 오른쪽에 여백 추가
+              }}
+            />
+            <Button type="submit" variant="contained" sx={{ height: '56px' }}>
+              확인
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </form>
   );
 }
 

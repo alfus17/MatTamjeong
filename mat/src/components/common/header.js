@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog, Select, MenuItem, FormControl, InputLabel, ButtonBase, NativeSelect } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -71,17 +71,24 @@ function Header() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {['임시1', '임시2', '임시3', '임시4'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+      <List sx={{mt:12}}>
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px'}} >
+              <Link to="/mypageMain/aboutMe" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
+              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
+              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
+              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}}>로그아웃</Button>
       </List>
       <Divider />
     </Box>
@@ -105,20 +112,20 @@ function Header() {
 
         {/* Center Section: Search bar with category */}
         <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
-          <FormControl sx={{ minWidth: 120 }}>
-            <InputLabel id="category-select-label">카테고리</InputLabel>
-            <Select
-              labelId="category-select-label"
-              id="category-select"
-              value={category}
-              onChange={handleCategoryChange}
-              label="카테고리"
-            >
-              <MenuItem value="store">가게</MenuItem>
-              <MenuItem value="menu">메뉴</MenuItem>
-              <MenuItem value="location">지역</MenuItem>
-            </Select>
-          </FormControl>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-standard-label">카테고리</InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={category}
+                onChange={handleCategoryChange}
+                label="카테고리"
+              >
+          <MenuItem value="store">가게</MenuItem>
+          <MenuItem value="menu">메뉴</MenuItem>
+          <MenuItem value="location">지역</MenuItem>
+        </Select>
+      </FormControl>
           <InputBase
             sx={{
               ml: 2,
