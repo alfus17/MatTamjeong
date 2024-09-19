@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import axios from 'axios';
+import { TextField, Button, Box } from '@mui/material';
 import '../css/editMe.css';
 
 function EditMe() {
@@ -86,47 +84,49 @@ function EditMe() {
       <h3>내 정보 수정하기</h3>
       <br />
 
-      <InputGroup className='EditMeeeA'>
-        <Form.Control
+      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <TextField
           name="nickName"
-          placeholder="닉네임"
+          label="닉네임"
+          variant="outlined"
           value={userInfo.nickName}
           onChange={handleInputChange}
+          fullWidth
         />
-        <Button onClick={() => handleSubmit('nickName')} variant="outline-secondary" id="button-addon2">
+        <Button onClick={() => handleSubmit('nickName')} variant="contained">
           수정
         </Button>
-      </InputGroup>
+      </Box>
 
-      <br />
-
-      <InputGroup className='EditMeeeA'>
-        <Form.Control
+      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <TextField
           name="email"
+          label="이메일"
           type='email'
-          placeholder="이메일"
+          variant="outlined"
           value={userInfo.email}
           onChange={handleInputChange}
+          fullWidth
         />
-        <Button onClick={() => handleSubmit('email')} variant="outline-secondary" id="button-addon2">
+        <Button onClick={() => handleSubmit('email')} variant="contained">
           수정
         </Button>
-      </InputGroup>
+      </Box>
 
-      <br />
-
-      <InputGroup className='EditMeeeA'>
-        <Form.Control
+      <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <TextField
           name="password"
+          label="비밀번호"
           type='password'
-          placeholder="비밀번호"
+          variant="outlined"
           value={userInfo.password}
           onChange={handleInputChange}
+          fullWidth
         />
-        <Button onClick={() => handleSubmit('password')} variant="outline-secondary" id="button-addon2">
+        <Button onClick={() => handleSubmit('password')} variant="contained">
           수정
         </Button>
-      </InputGroup>
+      </Box>
     </div>
   );
 }

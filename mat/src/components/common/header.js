@@ -139,6 +139,8 @@ function Header() {
             </Grid>
 
 
+  
+
          {/* Dialog 컴포넌트 */}
          <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
              { <Login onClose={handleClose} setSession={setSession} />}
