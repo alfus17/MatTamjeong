@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
@@ -6,6 +6,7 @@ import { Search as SearchIcon } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Login from '../login/login';
+import { AuthContext } from '../login/authContext';
 
 function Header() {
   const [state, setState] = useState({
@@ -14,14 +15,18 @@ function Header() {
     bottom: false,
     right: false,
   });
-  const [open, setOpen] = useState(false); // 다이얼로그 열기/닫기 상태
-  const [category, setCategory] = useState('store'); // 카테고리 상태 관리
-  const [searchText, setSearchText] = useState(''); // 검색 텍스트 상태 관리
+  const [open, setOpen] = useState(false); // Dialog open/close state
+  const [category, setCategory] = useState('store'); // Category state
+  const [searchText, setSearchText] = useState(''); // Search text state
+  const { user, logout } = useContext(AuthContext);
   const startpage = 1;
- 
-  const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate
+  
+  // 로그아웃 버튼 비활성화 상태
+  const [logoutDisabled, setLogoutDisabled] = useState(true); 
 
-  // Drawer 열기/닫기 핸들러
+  const navigate = useNavigate(); // useNavigate for page navigation
+
+  // Drawer open/close handler
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -29,36 +34,36 @@ function Header() {
     setState({ ...state, [anchor]: open });
   };
 
-  // 로그인 다이얼로그 열기 핸들러
+  // Open login dialog handler
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  // 로그인 다이얼로그 닫기 핸들러
+  // Close login dialog handler
   const handleClose = () => {
     setOpen(false);
   };
 
-  // 카테고리 선택 핸들러
+  // Handle category change
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
   };
 
-  // 검색 버튼 클릭 시 처리할 함수
+  // Search button click handler
   const handleSearch = () => {
     if (searchText) {
-      navigate(`/search/${category}/${searchText}/${startpage}`); // 검색어와 카테고리로 이동
+      navigate(`/search/${category}/${searchText}/${startpage}`); // Navigate with search parameters
     }
   };
 
-  // 엔터 키 입력 시 검색 실행
+  // Enter key press handler for search
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      handleSearch(); // 엔터 키로 검색
+      handleSearch(); // Search on Enter key press
     }
   };
 
-  // Drawer 내 리스트 항목 렌더링
+  // Render drawer list
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -123,7 +128,7 @@ function Header() {
             inputProps={{ 'aria-label': 'search' }}
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            onKeyPress={handleKeyPress} // 엔터 키 입력 시 검색
+            onKeyPress={handleKeyPress} // Search on Enter key press
           />
           <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={handleSearch}>
             <SearchIcon />
@@ -132,8 +137,25 @@ function Header() {
 
         {/* Right Section */}
         <Grid item xs={3}>
-          <div>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+            
+                <Typography
+                  component="h2"
+                  gutterBottom
+                  sx={{
+                    fontSize: '18px',
+                    cursor: logoutDisabled ? 'default' : 'pointer',
+                    color: logoutDisabled ? 'gray' : 'black',
+                    '&:hover': {
+                      color: logoutDisabled ? 'gray' : 'red',
+                    },
+                  }}
+                  onClick={!logoutDisabled ? logout : null} // Disable click if logoutDisabled is true
+                >
+                  로그아웃
+                </Typography>
+ 
+            
               <Typography
                 component="h2"
                 gutterBottom
@@ -144,29 +166,23 @@ function Header() {
                     color: 'red',
                   },
                 }}
-                onClick={handleClickOpen}
+                onClick={handleClickOpen} // Open login dialog
               >
                 로그인
               </Typography>
-
-              {['right'].map((anchor) => (
-                <React.Fragment key={anchor}>
-                  <Button onClick={toggleDrawer(anchor, true)}>
-                    <Avatar alt="Remy Sharp" src="/img/gg.jpg" sx={{ width: '60px', height: '60px' }} />
-                  </Button>
-                  <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-                    {list(anchor)}
-                  </Drawer>
-                </React.Fragment>
-              ))}
-            </Box>
-          </div>
+                <Button onClick={toggleDrawer('right', true)}>
+                  <Avatar alt="Remy Sharp" src="/img/gg.jpg" sx={{ width: '60px', height: '60px' }} />
+                </Button>
+                <Drawer anchor="right" open={state['right']} onClose={toggleDrawer('right', false)}>
+                  {list('right')}
+                </Drawer>
+          </Box>
         </Grid>
       </Grid>
 
-      {/* 로그인 Dialog 컴포넌트 */}
+      {/* Login Dialog Component */}
       <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{ height: '800px' }}>
-        <Login />
+        <Login onClose={handleClose} />
       </Dialog>
     </Container>
   );

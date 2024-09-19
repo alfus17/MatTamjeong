@@ -9,6 +9,7 @@ import Create from './components/login/createUser';
 import AddReview from './components/review/review';
 import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 import Find from './components/login/findUser';
+import { AuthProvider } from './components/login/authContext';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -44,7 +45,9 @@ const theme = createTheme({
 
 function App() {
 
+
   return (
+    <AuthProvider>
     <ThemeProvider theme={theme}>
     <Router>
         <Header />
@@ -60,7 +63,7 @@ function App() {
           </Routes>
     </Router>
     </ThemeProvider>
-
+    </AuthProvider>
   );
 }
 
