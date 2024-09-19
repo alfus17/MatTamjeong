@@ -6,9 +6,24 @@ import { Search as SearchIcon } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Login from '../login/login';
-import { AuthContext } from '../login/authContext';
+import { AuthContext, IsLoginContext, useIsLoginState } from '../login/authContext';
 
 function Header() {
+
+  // 로그인 상태 체크
+  const isLogin = useIsLoginState();
+  console.log("로그인 상태 : ", isLogin);
+
+  // 로그인 업데이트 함수 가져오기
+  const { setIsLogin } = useContext(IsLoginContext);
+  // 로그아웃 처리 코드 
+  const logoutHandler = async() =>{
+    // 로컬 스토리지 클린
+    sessionStorage.removeItem('id')
+    sessionStorage.removeItem('token')
+    setIsLogin(false);
+  }
+ 
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -88,7 +103,7 @@ function Header() {
               <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
           </Typography>
 
-          <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}}>로그아웃</Button>
+          {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}}>로그아웃</Button> : null}
       </List>
       <Divider />
     </Box>
@@ -146,24 +161,24 @@ function Header() {
         <Grid item xs={3}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             
-                <Typography
+                {isLogin ?<Typography
                   component="h2"
                   gutterBottom
                   sx={{
                     fontSize: '18px',
-                    cursor: logoutDisabled ? 'default' : 'pointer',
-                    color: logoutDisabled ? 'gray' : 'black',
+                    cursor: !logoutDisabled ? 'default' : 'pointer',
+                    color: !logoutDisabled ? 'gray' : 'black',
                     '&:hover': {
-                      color: logoutDisabled ? 'gray' : 'red',
+                      color: !logoutDisabled ? 'gray' : 'red',
                     },
                   }}
-                  // onClick={!logoutDisabled ? logout : null} // Disable click if logoutDisabled is true
+                  onClick={logoutHandler} // Disable click if logoutDisabled is true
                 >
                   로그아웃
-                </Typography>
+                </Typography>:null}
  
             
-              <Typography
+              { !isLogin ? <Typography
                 component="h2"
                 gutterBottom
                 sx={{
@@ -176,7 +191,7 @@ function Header() {
                 onClick={handleClickOpen} // Open login dialog
               >
                 로그인
-              </Typography>
+              </Typography>:null}
                 <Button onClick={toggleDrawer('right', true)}>
                   <Avatar alt="Remy Sharp" src="/img/gg.jpg" sx={{ width: '60px', height: '60px' }} />
                 </Button>
