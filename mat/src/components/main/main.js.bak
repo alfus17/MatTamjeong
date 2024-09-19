@@ -54,10 +54,10 @@ function Main() {
 
   return (
     <>
-      <Container disableGutters maxWidth={false}> {/* Container 여백 제거 및 최대 넓이로 */}
+      <Container disableGutters maxWidth={false } sx={{backgroundColor:'#FAF3E0', height:'900px' , mt:4}}> {/* Container 여백 제거 및 최대 넓이로 */}
         <Grid item xs={12} md={6}>
-          <Card elevation={3} sx={{ p: 2, maxWidth: "50%", margin: "0 auto" }}>
-            <Box>
+          <Card elevation={3} sx={{ p: 2, maxWidth: "55%", margin: "0 auto" , mt:4}}>
+            <Box sx={{borderRadius:10}}>
               <Map storeData={store} height="450px" />
             </Box>
           </Card>
@@ -66,7 +66,7 @@ function Main() {
         {/* 맵과 슬라이드 사이에 여백 추가 */}
         <Box sx={{ marginTop: "13px" }}> {/* 여백을 50px로 설정 */}
           <Grid>
-            <Paper sx={{ maxWidth: "70%", margin: "0 auto", padding: 2 }}>
+            <Paper sx={{ maxWidth: "60%", margin: "0 auto", padding: 2 , borderRadius:10}}>
               {/* 지역 선택 버튼들 */}
               <Box 
                 sx={{ 

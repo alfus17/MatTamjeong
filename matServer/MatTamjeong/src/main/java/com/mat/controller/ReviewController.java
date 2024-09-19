@@ -69,24 +69,27 @@ public class ReviewController {
     // 카카오 리뷰 가져오기
 	// 음식 카테고리로 쿼리하기
     @GetMapping("/getKgReview/{StoreId}/{page}")
-    public List<kakaoReview> getKgReview(@PathVariable("StoreId") Integer StoreId , @PathVariable("page") int page ) {
-    	Pageable pageable = PageRequest.of(page-1, 10, sort);
+    public List<kakaoReview> getKgReview(@PathVariable("StoreId") Integer StoreId , @PathVariable("page") String page ) {
+    	int intPage = Integer.parseInt(page);
+    	Pageable pageable = PageRequest.of(intPage-1, 10, sort);
     	// hashMap으로 반환
     	return kgReviewService.getKgReviewsByStoreId(StoreId,pageable).getContent();
     }
     
     // 다이닝코드 리뷰 가져오기
     @GetMapping("/getDCReview/{StoreId}/{page}")
-    public List<diningReview> getMatReview(@PathVariable("StoreId") Integer StoreId, @PathVariable("page") int page ) {
-    	Pageable pageable = PageRequest.of(page-1, 10, sort);
+    public List<diningReview> getMatReview(@PathVariable("StoreId") Integer StoreId, @PathVariable("page") String page ) {
+    	int intPage = Integer.parseInt(page);
+    	Pageable pageable = PageRequest.of(intPage-1, 10, sort);
     	// hashMap으로 반환
     	return dcReviewService.getDCReviewsByStoreId(StoreId,pageable).getContent();
     }
     
     // 맛탐정 리뷰 가져오기
     @GetMapping("/getMatReview/{StoreId}/{page}")
-    public List<matReview> getNaverReview(@PathVariable("StoreId") Integer StoreId, @PathVariable("page") int page ) {
-    	Pageable pageable = PageRequest.of(page-1, 10, sort);
+    public List<matReview> getNaverReview(@PathVariable("StoreId") Integer StoreId, @PathVariable("page") String page ) {
+    	int intPage = Integer.parseInt(page);
+    	Pageable pageable = PageRequest.of(intPage-1, 10, sort);
     	// hashMap으로 반환
     	return matReviewService.getMatReviewsByStoreId(StoreId,pageable).getContent();
     }
@@ -94,10 +97,11 @@ public class ReviewController {
     
     // 모든 리뷰들 가져오기
     @GetMapping("/getAllReview/{StoreId}/{page}")
-    public HashMap<String,Object> getAllReviews(@PathVariable("StoreId") Integer StoreId, @PathVariable("page") int page  ) {
+    public HashMap<String,Object> getAllReviews(@PathVariable("StoreId") Integer StoreId, @PathVariable("page") String page  ) {
+    	int intPage = Integer.parseInt(page);
     	// 모든 리뷰들 한하여 페이지네이션 처리
     	// 페이지네이션
-    	Pageable pageable = PageRequest.of(page-1, 10, sort);
+    	Pageable pageable = PageRequest.of(intPage-1, 10, sort);
     	
     	HashMap<String,Object> reviewsMap = new HashMap<>();
     	

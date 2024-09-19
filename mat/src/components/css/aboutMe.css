@@ -1,0 +1,21 @@
+.aboutMeeee {
+    display: flex;
+    justify-content: center;
+    width: 1000px;  /* 좌우 위치 조절 */
+    margin-top: 60px;
+}
+
+.aboutMeeee h2 {
+    text-align: center;
+    color: black;
+}
+
+.head {
+    text-align: center;
+    width: 120px;
+}
+
+.body {
+    text-align: center;
+    width: 240px;
+}
