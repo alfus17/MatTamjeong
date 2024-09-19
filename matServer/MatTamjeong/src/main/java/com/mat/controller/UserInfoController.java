@@ -21,7 +21,7 @@ import com.mat.service.UserService;
 import com.mat.service.locationCategoryService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UserInfoController 
 {
 	private HashMap<String, String> AccessKey =new HashMap<>();
@@ -49,6 +49,7 @@ public class UserInfoController
 	public ResponseEntity<HashMap<String, String>> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
 		boolean usercheck = userService.checkUser(userId,password);
 		if(usercheck) {
+			
 			// ToDO 추후에 여기 jwt 변경 작업
 			AccessKey.put("token","JonMat");
 			return ResponseEntity.ok().body( AccessKey);
@@ -59,6 +60,24 @@ public class UserInfoController
 		
 		
 	}
+	
+	// 사용자 정보를 업데이트하는 API
+    @PostMapping("/updateUserInfo")
+    public Map<String, Object> updateUserInfo(@RequestBody Map<String, String> payload) {
+        String userId = payload.get("userId");
+        String field = payload.get("field");
+        String newValue = payload.get("value");
+        
+        boolean success = userService.updateUserInfo(userId, field, newValue);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", success);
+
+        return response;
+    }
+	
+	
+
 	
 }
 

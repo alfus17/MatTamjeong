@@ -30,9 +30,9 @@ public class dcReviewService {
 	
 	// 가게 평정 평균으로 구하기 
 	public double getStoreRating(int storeId) {
-		System.out.println((diningReviewRepository.getStoreRating(storeId)));
-		System.out.println("dcReviewService : ");
-		return 0.0;
+//		System.out.println(());
+//		System.out.println("dcReviewService : ");
+		return diningReviewRepository.getStoreRating(storeId);
 	}
 	
 	

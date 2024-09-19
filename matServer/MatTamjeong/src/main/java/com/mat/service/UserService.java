@@ -42,4 +42,30 @@ public class UserService
 		return result;
 	}
 	
+	// 유저 정보를 업데이트하는 메소드
+    public boolean updateUserInfo(String userId, String field, String newValue) {
+        Optional<userInfo> userOptional = userInfoRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            userInfo user = userOptional.get();
+
+            switch (field) {
+                case "nickName":
+                    user.setNickName(newValue);
+                    break;
+                case "email":
+                    user.setEmail(newValue);
+                    break;
+                case "password":
+                    // 비밀번호 업데이트 로직 (암호화 등 필요)
+                    break;
+                default:
+                    return false;
+            }
+
+            userInfoRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+	
 }

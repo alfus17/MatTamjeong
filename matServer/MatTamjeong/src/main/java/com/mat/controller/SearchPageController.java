@@ -26,50 +26,48 @@ import com.mat.service.menuService;
 @RestController
 @RequestMapping("/Search")
 public class SearchPageController {
-	
-	// 가게 
+
+	// 가게
 	@Autowired
 	private StoreService StoreService;
-	
+
 	@Autowired
 	private menuService MenuService;
-	
 
-	
 	// 가게이름 , 주소, 메뉴이름 검색 이후 set 에 모두 모아서 리턴 최대 10개
-	
+
 	// 가게 주소중에 해당 키워드가 있을 경우 해당 가게들 리턴 페이지네이션 사용 ( 가나다순으로 정렬)
 	@GetMapping("location/{Address}/{page}")
-	public List<Store> findStoresByAddress ( @PathVariable("Address") String Address ,@PathVariable("page") int page ){
+	public List<Store> findStoresByAddress(@PathVariable("Address") String Address, @PathVariable("page") String page) {
+		int intPage = Integer.parseInt(page);
 		// 정렬 기준
 		Sort sort = Sort.by(Sort.Order.asc("storeName"));
-		Pageable pageable = PageRequest.of(page-1, 10, sort);
-		
+		Pageable pageable = PageRequest.of(intPage - 1, 10, sort);
+
 		return StoreService.getAllStoreByAddress(Address, pageable).getContent();
 	}
-	
+
 	// 가게 이름중 해당 키워드가 있을 경우 해당 가게들 리턴 페이지네이션 적용 ( 가나다순으로 정렬)
 	@GetMapping("store/{storeName}/{page}")
-	public List<Store> findStoresByStoreName (@PathVariable("storeName") String storeName ,@PathVariable("page") int page){
+	public List<Store> findStoresByStoreName(@PathVariable("storeName") String storeName,
+			@PathVariable("page") String page) {
+		int intPage = Integer.parseInt(page);
 		// 정렬 기준
 		Sort sort = Sort.by(Sort.Order.asc("storeName"));
-		Pageable pageable = PageRequest.of(page-1, 10, sort);
+		Pageable pageable = PageRequest.of(intPage - 1, 10, sort);
 		return StoreService.getAllStoreByStoreName(storeName, pageable).getContent();
 	}
-	
+
 	// 메뉴중에 해당 키워드가 있을경우 가게들 리턴 페이지네이션 적용 ( 가나다순으로 정렬)
 	@GetMapping("menu/{menuName}/{page}")
-	public List<Store> findStoresByMenu (@PathVariable("menuName") String menuName ,@PathVariable("page") int page){
+	public List<Store> findStoresByMenu(@PathVariable("menuName") String menuName, @PathVariable("page") String page) {
+		int intPage = Integer.parseInt(page);
 		// 정렬 기준
 		Sort sort = Sort.by(Sort.Order.asc("store_Name"));
-		Pageable pageable = PageRequest.of(page-1, 10, sort);
+		Pageable pageable = PageRequest.of(intPage - 1, 10, sort);
 		List<Store> response = StoreService.getStoreByMenuName(menuName, pageable);
-		
+
 		return response;
 	}
-	
-	
-	
-	
 
 }

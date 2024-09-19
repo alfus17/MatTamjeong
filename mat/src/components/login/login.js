@@ -59,6 +59,8 @@ function Login({onClose,setSession}) {
                                             console.log(result)
                                             // 로컬스토리지에 저장
                                             localStorage.setItem('token', result.data.token)
+                                            // 로컬스토리지 토큰 아이템 삭제 방법
+                                            // localStorage.removeItem('token')
                                             setSession(localStorage.getItem("token"))
                                             } 
                                         );
@@ -84,7 +86,7 @@ function Login({onClose,setSession}) {
 
                     <Box sx={{ mt: 2, textAlign: 'center' }}>
                         <Typography variant="body2">
-                            {/* 요기에는 로그아웃 구문 추가 하기   */}
+                            {/* 요기에는 회원가입 구문 추가 하기   */}
                             <a >아이디가 없으신가요?</a> 
                         </Typography>
                     </Box>
