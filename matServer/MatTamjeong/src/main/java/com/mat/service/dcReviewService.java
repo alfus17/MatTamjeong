@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mat.domain.kakaoReview;
@@ -16,10 +18,15 @@ public class dcReviewService {
 	@Autowired
 	private diningReviewRepository diningReviewRepository;
 
-	// 카카오 리뷰 가져오기
+	// 다이닝코드리뷰 가져오기
 	public List<diningReview> getDCReviewsByStoreId(Integer StoreId ) {
 		return diningReviewRepository.findByStoreId(StoreId);
 	}
+	
+	// 다이닝코드 리뷰 가져오기
+		public Page<diningReview> getDCReviewsByStoreId(Integer StoreId ,Pageable pageable ) {
+			return diningReviewRepository.findByStoreId(StoreId , pageable);
+		}
 	
 	// 가게 평정 평균으로 구하기 
 	public double getStoreRating(int storeId) {

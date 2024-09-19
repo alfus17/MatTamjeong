@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions, Avatar, TextField } from '@mui/material';
 import axios from 'axios';
-import AddReview from '../../review/review';
+import AddReview from '../review/review';
 
 function ExDetail() {
     const { storeId } = useParams();

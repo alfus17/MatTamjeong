@@ -6,8 +6,9 @@ import Ex from './components/detail/searchFoodEx';
 import ExDetail from './components/detail/storeDetailEx';
 import Login from './components/login/login';
 import Create from './components/login/createUser';
-import AddReview from './review/review';
+import AddReview from './components/review/review';
 import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
+import Find from './components/login/findUser';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -53,7 +54,8 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path='/store/:storeId' element={<ExDetail />} />
             <Route path='/Create' element={<Create />} />
-            <Route path='/search' element={<Ex/>} />
+            <Route path='/find' element={<Find />} />
+            <Route path='/search/:category/:keyword/:startpage' element={<Ex/>} />
             <Route path='/add' element={<AddReview />} />
           </Routes>
     </Router>

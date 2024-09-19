@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -49,18 +48,6 @@ public class StoreController {
 		} else {
 			return null; // 카테고리가 없을 경우 null 값을 반환
 		}
-	}
-	
-	public List<Store> getAllStoreByLocationId(@RequestBody Map<String, Integer> request) {
-	    // 요청에서 locationCategoryId 추출
-	    int locationCategoryId = request.get("locationCategoryId");
-	    
-	    // locationCategoryId에 따라 Store 데이터를 가져옴
-	    if (locationCategoryId != -1) {
-	        return storeService.getAllStoreByLc(locationCategoryId);
-	    } else {
-	        return null;  // 유효하지 않은 ID일 경우 null 반환
-	    }
 	}
 
 	// 음식 카테고리로 쿼리하기

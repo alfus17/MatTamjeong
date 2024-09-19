@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity(name="menu")
-@Table(name="menu")
+@Entity(name="MENU")
+@Table(name="MENU")
 public class menu {
 	   /* 	menu Table
 	 * 	메뉴ID (PK) 	: menu_id			number

@@ -3,6 +3,8 @@ package com.mat.service;
 import com.mat.domain.Store;
 import com.mat.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +44,21 @@ public class StoreService {
 	// 음식 태그명으로 쿼리하기
 	public List<Store> getAllStoreByFc(int foodCategoryId) {
 		return storeRepository.findByFoodCategoryId(foodCategoryId);		
+	}
+	
+	// 주소로 모든 가게 검색 (페이지 네이션 사용)
+	public Page<Store> getAllStoreByAddress(String Address , Pageable pageable ){
+		return storeRepository.findByStoreAddressContaining(Address,pageable);
+	}
+
+	// 가게이름으로 모든 가게 검색 (페이지네이션 사용)
+	public Page<Store> getAllStoreByStoreName(String storeName, Pageable pageable) {
+		return storeRepository.findByStoreNameContaining(storeName, pageable);
+	}
+
+	public List<Store> getStoreByMenuName(String menuName, Pageable pageable) {
+		
+		return storeRepository.findStoresByMenuName(menuName,pageable).getContent();
 	}
 
     

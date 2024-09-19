@@ -102,6 +102,15 @@ function Create() {
                             sx={{ width: '100%', maxWidth: '400px', mb: 4 }}  // Adjust width and spacing
                         />
 
+                        <TextField
+                            id="outlined-email-input"
+                            label="이메일"
+                            type="text"
+                            autoComplete="current-password"
+                            sx={{ width: '100%', maxWidth: '400px', mb: 4 }}  // Adjust width and spacing
+                        />
+
+
                         {/* 생년월일 입력 */}
                         <Box sx={{ mb: 4, width: '100%', maxWidth: '400px' }}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>

@@ -60,7 +60,7 @@ function Login() {
                              },
                         }}
                         onClick={()=>{
-                            navigate("/Create"); // useNavigate로 경로 이동
+                            navigate("/Create") // useNavigate로 경로 이동
                         }}
                         >
                             아이디가 없으신가요?
