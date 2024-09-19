@@ -45,6 +45,9 @@ public class UserService
 	// 유저 정보를 업데이트하는 메소드
     public boolean updateUserInfo(String userId, String field, String newValue) {
         Optional<userInfo> userOptional = userInfoRepository.findById(userId);
+        
+        boolean UserInfoUpdate = false;
+        
         if (userOptional.isPresent()) {
             userInfo user = userOptional.get();
 
@@ -61,11 +64,18 @@ public class UserService
                 default:
                     return false;
             }
-
-            userInfoRepository.save(user);
-            return true;
+            
+            try {
+                // 저장 시 예외가 발생하지 않으면 성공으로 간주
+                userInfoRepository.save(user);
+                UserInfoUpdate = true;  // 성공 시 true로 설정
+            } catch (Exception e) {
+                // 예외 발생 시 false 반환
+                System.err.println("유저 정보 업데이트 중 오류 발생 : " + e.getMessage());
+            }
+       
         }
-        return false;
+        return UserInfoUpdate;
     }
 	
 }

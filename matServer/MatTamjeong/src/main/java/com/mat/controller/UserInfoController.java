@@ -26,7 +26,6 @@ public class UserInfoController
 {
 	private HashMap<String, String> AccessKey =new HashMap<>();
 	
-
 	@Autowired
 	private UserService userService;
 
@@ -58,26 +57,37 @@ public class UserInfoController
 			return ResponseEntity.ok().body(AccessKey);
 		}
 		
-		
 	}
 	
 	// 사용자 정보를 업데이트하는 API
     @PostMapping("/updateUserInfo")
-    public Map<String, Object> updateUserInfo(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<Map<String, Object>> updateUserInfo(@RequestBody Map<String, String> payload) {
         String userId = payload.get("userId");
         String field = payload.get("field");
         String newValue = payload.get("value");
-        
-        boolean success = userService.updateUserInfo(userId, field, newValue);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("success", success);
 
-        return response;
+        try {
+            // 업데이트 시도
+            boolean success = userService.updateUserInfo(userId, field, newValue);
+
+            if (success) {
+                response.put("success", true);
+                response.put("message", "유저 정보 업데이트 성공");
+                return ResponseEntity.ok().body(response); // 성공 시 OK 응답 반환
+            } else {
+                response.put("success", false);
+                response.put("message", "유저 정보 업데이트 실패");
+                return ResponseEntity.badRequest().body(response); // 실패 시 Bad Request 응답 반환
+            }
+        } catch (Exception e) {
+            // 예외가 발생하면 실패로 처리하고 에러 메시지를 반환
+            response.put("success", false);
+            response.put("message", "유저 정보 업데이트 중 오류 발생 : " + e.getMessage());
+            return ResponseEntity.status(500).body(response); // 서버 오류 시 500 응답 반환
+        }
     }
-	
-	
-
 	
 }
 
