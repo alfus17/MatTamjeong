@@ -78,28 +78,24 @@ public class userInfo {
 	private String userAddress;
 	
 	//  이미지 경로
-	@Column(name="img_path" ,length=200)
+	@Column(name="img_path" ,length=2000)
 	@NonNull
 	private String imgPath;
 
 	// 상태	
 	@Column(name="user_status" ,length=5)
-	@NonNull
 	private String userStatus;
 	
 	// 리뷰ID (FK)
 	@Column(name="review_id" ,length=10)
-	@NonNull
 	private String reviewId;
 	
 	// 즐겨찾기(FK)
-	@Column(name="bookmark_id" ,length=10)
-	@NonNull
+	@Column(name="bookmark_id" ,length=10) 
 	private String bookmarkId;
 	
 	// auth( 사용여부 미정
 	@Column(name="auth" ,length=1000)
-	@NonNull
 	private String auth;
 
 
