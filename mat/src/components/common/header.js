@@ -107,6 +107,7 @@ function Header() {
                 <Typography component="h2" gutterBottom sx={{
                     fontSize:'18px',
                     cursor:'pointer',
+                    fontFamily:'bord',
                     '&:hover': {
                       color : 'red'
                   },

@@ -7,9 +7,7 @@ import ExDetail from './components/detail/storeDetailEx';
 import Login from './components/login/login';
 import Create from './components/login/createUser';
 import AddReview from './review/review';
-
-
-
+import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -22,16 +20,33 @@ import AddReview from './review/review';
 
 // npm cache clean --force
 
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Poppins, sans-serif',  // 전역 폰트 패밀리 설정
+    h1: {
+      fontSize: '2.5rem',               // h1 태그의 폰트 크기 설정
+      fontWeight: 600,                  // 폰트 두께 설정
+    },
+    h2: {
+      fontSize: '2rem',
+      fontWeight: 500,
+    },
+    body1: {
+      fontSize: '1rem',                 // 본문 텍스트의 기본 크기 설정
+      fontWeight: 400,
+    },
+    button: {
+      textTransform: 'none',            // 버튼 텍스트의 대문자 변환을 비활성화
+    },
+  },
+});
+
 function App() {
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
     <Router>
-    <div className='backbg'>
-      <div className='All'>  {/* 전체 영역 설정 */}
         <Header />
-      <div className='content'>
-        <div className='slideshow'>
           <Routes>             
             <Route path='/' element={<Main />} />
             <Route path="/Map" element={<Ex />} />
@@ -41,13 +56,9 @@ function App() {
             <Route path='/search' element={<Ex/>} />
             <Route path='/add' element={<AddReview />} />
           </Routes>
-        </div>
-
-        </div>
-      </div>
-    </div>
     </Router>
-  </>
+    </ThemeProvider>
+
   );
 }
 
