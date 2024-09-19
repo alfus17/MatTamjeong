@@ -1,6 +1,8 @@
 package com.mat.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,9 @@ import com.mat.service.locationCategoryService;
 @RequestMapping("/")
 public class UserInfoController 
 {
+	private HashMap<String, String> AccessKey =new HashMap<>();
 	
+
 	@Autowired
 	private UserService userService;
 
@@ -42,9 +46,18 @@ public class UserInfoController
 	
 	// check 로그인 API
 	@GetMapping("/checkUser/{userId}/{password}")
-	public boolean  checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
+	public ResponseEntity<HashMap<String, String>> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
+		boolean usercheck = userService.checkUser(userId,password);
+		if(usercheck) {
+			// ToDO 추후에 여기 jwt 변경 작업
+			AccessKey.put("token","JonMat");
+			return ResponseEntity.ok().body( AccessKey);
+		}else {
+			
+			return ResponseEntity.ok().body(AccessKey);
+		}
 		
-		return userService.checkUser(userId,password);
+		
 	}
 	
 }

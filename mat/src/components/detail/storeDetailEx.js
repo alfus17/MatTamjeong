@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider } from '@mui/material';
+import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions, Avatar, TextField } from '@mui/material';
 import axios from 'axios';
+// import AddReview from '../../review/review';
 
 function ExDetail() {
     const { storeId } = useParams();
     const [detail, setDetail] = useState({});
+    const [open, setOpen] = useState(false); // Dialog open state
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,17 +23,26 @@ function ExDetail() {
         fetchData();
     }, [storeId]);
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const averageRating = detail.Ratings ? detail.Ratings.avgRating.toFixed(1) : '0';
     console.log(detail.data);
     return (
         <Container maxWidth="md" sx={{ mt: 6 }}>
             <Grid container spacing={4}>
+                {/* 가게 정보 */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={3} sx={{ p: 2 }}>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Box
                                 component="img"
-                                src={detail.StoreInfo?.storeimg} // `storeimg`는 예시, 실제 데이터에 맞게 수정
+                                src={detail.StoreInfo?.storeimg}
                                 alt={detail.StoreInfo?.storeName}
                                 sx={{
                                     width: '100%',
@@ -49,6 +60,7 @@ function ExDetail() {
                     </Paper>
                 </Grid>
 
+                {/* 메뉴 및 별점 */}
                 <Grid item xs={12} md={6}>
                     <Paper elevation={2} sx={{ p: 3 }}>
                         <Typography variant="h5" component="h2" gutterBottom>
@@ -86,10 +98,26 @@ function ExDetail() {
                 </Grid>
             </Grid>
 
+            {/* 리뷰 섹션 */}
             <Box sx={{ mt: 4 }}>
-                <Typography variant="h5" component="h2" gutterBottom>
-                    리뷰
-                </Typography>
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                }}>
+                    <Typography variant="h5" component="h2" gutterBottom>
+                        리뷰
+                    </Typography>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ ml: 3, mt: 3, mb: 2, width: '100px', height: '40px' }}
+                        onClick={handleClickOpen}
+                    >
+                        등록하기
+                    </Button>
+                </Box>
+
                 <Paper elevation={1} sx={{ p: 8 }}>
                     <List>
                         {detail.MatReviews && detail.MatReviews.map((review, index) => (
@@ -113,6 +141,95 @@ function ExDetail() {
                     </List>
                 </Paper>
             </Box>
+
+            {/* Dialog 컴포넌트 */}
+            <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
+            <Container maxWidth="md" sx={{ mt: 4 , height:'800px'}}>
+            <Grid >
+               
+                     <Box>
+                        <Typography  color="primary" sx={{ textAlign: "center" , mb:2, fontSize:'20px'}}>
+                            리뷰를 써보세요 
+                        </Typography>
+                    </Box>
+                    <Box sx={{
+                        display:'flex',
+                        mt : 4
+                    }}>
+                    <Avatar src="https://bff-images.bemypet.kr/media/medias/all/993-image_picker152967371293908462.jpg" />
+                    <Typography  color="primary" sx={{ textAlign: "center" ,  fontSize:'20px', ml :2 , mt:1}}>
+                        내 닉네임
+                    </Typography>
+                    </Box>
+
+                    <Box sx={{
+                        mt :4
+                    }}>
+                    <Typography  color="primary" sx={{   fontSize:'20px', ml :2 , mt:1}}>
+                        가게 이름 
+                    </Typography>
+                    </Box>
+                    <Box sx={{
+                        display : 'flex',
+                        justifyContent :' right'
+                        
+                    }}>
+                        <Rating />
+                    </Box>
+
+                    <Box sx={{
+                        mt : 1,
+                        maxHeight :'1000px',
+                        justifyContent : 'center'
+                    }}>           
+
+                    {/* text Field 데이터        */}
+                    
+                     <TextField
+                         id="reviewContnet"
+                         label="review"
+                         multiline
+                         rows={13}
+                         placeholder="리뷰를 작성하세요."
+                         sx={{
+                            width :'700px',
+                         }}                       
+                    />  
+                    </Box>
+
+                    <Box sx={{display:'flex', justifyContent:'center'}}>
+                    <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{
+                                mt : 3,
+                                mb: 2,
+                                width: '100px',
+                                height:'40px'
+                            }}
+                            onClick={handleClose}
+                            >
+                    취소
+                    </Button>
+
+                    <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{
+                                ml: 3,
+                                mt: 3,
+                                mb: 2,
+                                width: '100px',
+                                height:'40px'
+                            }}
+                            >
+                    등록하기
+                    </Button>
+                    
+                    </Box>
+            </Grid>
+        </Container>
+            </Dialog>
         </Container>
         
     );
