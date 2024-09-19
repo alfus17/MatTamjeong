@@ -63,7 +63,7 @@ function ExDetail() {
 
                 {/* 메뉴 및 별점 */}
                 <Grid item xs={12} md={6}>
-                    <Paper elevation={2} sx={{ p: 3 }}>
+                    <Paper elevation={2} sx={{ p: 3 , height:'400px'}}>
                         <Typography variant="h5" component="h2" gutterBottom>
                             메뉴
                         </Typography>
@@ -89,7 +89,7 @@ function ExDetail() {
                         </Box>
                     </Paper>
 
-                    <Box sx={{ mt: 4 }}>
+                    <Box sx={{ mt: 2 }}>
                         <Paper elevation={1} sx={{ p: 2 }}>
                             <Typography variant="body1">
                                 {detail.StoreInfo?.storeAddress}

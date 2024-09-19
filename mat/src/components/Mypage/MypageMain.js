@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import '../css/MypageMain.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button } from '@mui/material'; // Import Material-UI Button
+import { Avatar, Box, Button, Container, Grid, Paper, Typography } from '@mui/material'; // Import Material-UI Button
 
 const MypageMain = () => {
 
@@ -25,55 +24,51 @@ const MypageMain = () => {
     fetchUserInfo();
   }, []);
 
-  const handleProfileImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
-    }
-  };
-
   return (
-    <div className="mypage-container">
-      <div className='ProfileRectangleee'>
-        <div className='ProfileCircleee'>
-          <img 
-            src={profileImage || ''} 
-            alt="Profile" 
-            className='ProfilePictureee' 
-          />
-          <label className="ProfileChangeOverlay">
-            사진변경
-            <input 
-              type="file" 
-              className="ProfileImageInput" 
-              accept="image/*"
-              onChange={handleProfileImageChange} 
-            />
-          </label>
-        </div>
+    <>
+      <Container maxWidth="lg" sx={{ mt: 10 }}>
+        <Grid container spacing={2}>
+          {/* Left section: Profile */}
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 2 }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Avatar sx={{ width: '230px', height: '230px', mt: 4 }} />
+                
+                <Typography variant="h5" component="h1" sx={{ mt: 5 }}>
+                    {userInfo.nickName || '정보없음'}
+                </Typography>
 
-        <div className='ProfileInfooo'>
-          <div className='ProfileNameee'>{userInfo.nickName || '정보 없음'}</div>
-          <div className='ProfileEmailll'>{userInfo.email || '정보 없음'}</div>
-          
-          <Button variant="outlined" component="a" href='/mypageMain/aboutMe'>
-            내프로필
-          </Button>
-          <Button variant="outlined" component="a" href='/mypageMain/passwordConfirm'>
-            정보수정
-          </Button>
-          <Button variant="outlined" component="a" href='/mypageMain/ManagementHistory'>
-            이력관리
-          </Button>
-        </div>
-      </div>
+                <Typography variant="h5" component="h1" sx={{ mt: 3}}>
+                    {userInfo.email || '정보없음'}
+                </Typography>
 
-      <div className="mypage-content">
-        <Outlet />
-      </div>
-    </div>
+                <Box sx={{ display: 'flex', mt: 13 }}>
+                  <Button variant="outlined" component="a" href='/mypageMain/aboutMe' sx={{ mr: 2 }}>
+                    내프로필
+                  </Button>
+                  <Button variant="outlined" component="a" href='/mypageMain/passwordConfirm' sx={{ mr: 1 }}>
+                    정보수정
+                  </Button>
+                  <Button variant="outlined" component="a" href='/mypageMain/ManagementHistory' sx={{}}>
+                    이력관리
+                  </Button>
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
+
+          {/* Right section: Outlet */}
+          <Grid item xs={12} md={8}>
+            <Paper elevation={3} sx={{ p: 2, height: '100%' }}>
+              <Box>
+                <Outlet />  
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
-};
+}
 
 export default MypageMain;
