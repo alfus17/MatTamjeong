@@ -7,8 +7,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import '../css/aboutMe.css';
-
 
 function AboutMe() {
 
@@ -57,7 +55,7 @@ function AboutMe() {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="user info table">
+      <Table sx={{ minWidth: 650}} aria-label="user info table">   
         <TableBody>
           <TableRow>
             <TableCell>이름</TableCell>
