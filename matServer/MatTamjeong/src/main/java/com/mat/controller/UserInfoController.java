@@ -26,6 +26,7 @@ public class UserInfoController
 {
 	private HashMap<String, String> AccessKey =new HashMap<>();
 	
+
 	@Autowired
 	private UserService userService;
 
@@ -35,6 +36,13 @@ public class UserInfoController
 	{
 		return userService.getAlluserInfos(); // 전체 데이터를 반환
 	}
+	
+	// 회원가입 
+	@PostMapping("/enrollUser")
+	public boolean enrollUser(@RequestBody userInfo user) {
+		return userService.saveUser(user);
+	}
+
 	
 	// 특정 유저의 userInfo 데이터를 반환하는 API
 	@GetMapping("/getuserInfo/{userId}")
@@ -58,6 +66,16 @@ public class UserInfoController
 		}
 		
 	}
+	
+	// id 존재여부 체크
+	// true 면 존재함 false 면 존재하지 않음
+	@GetMapping("/checkUser/{userId}")
+	public boolean  checkUserId(@PathVariable("userId") String userId  ) {
+		return userService.checkUser(userId);
+			
+		
+	}
+	
 	
 	// 사용자 정보를 업데이트하는 API
     @PostMapping("/updateUserInfo")
@@ -88,6 +106,9 @@ public class UserInfoController
             return ResponseEntity.status(500).body(response); // 서버 오류 시 500 응답 반환
         }
     }
+	
+	
+
 	
 }
 

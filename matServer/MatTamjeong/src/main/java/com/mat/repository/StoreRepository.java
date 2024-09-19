@@ -22,6 +22,6 @@ public interface StoreRepository extends JpaRepository<Store, Integer> {
 	Page<Store> findByStoreNameContaining(String storeName, Pageable pageable);
 
     @Query(value = "SELECT * FROM STORE WHERE store_id IN (SELECT DISTINCT store_id FROM MENU WHERE menu_name LIKE %:menuName%)",nativeQuery = true)
-	Slice<Store> findStoresByMenuName(@Param("menuName")String menuName, Pageable pageable);
+	Page<Store> findStoresByMenuName(@Param("menuName")String menuName, Pageable pageable);
 
 }

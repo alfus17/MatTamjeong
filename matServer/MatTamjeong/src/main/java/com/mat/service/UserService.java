@@ -42,6 +42,31 @@ public class UserService
 		return result;
 	}
 	
+	// 유저아이디로 유저가 있는지 체크
+	public boolean checkUser(String userId) {
+		boolean result= false;
+		List<userInfo>user = userInfoRepository.findByUserId(userId);
+		
+		if(!user.isEmpty()) {
+			result = !result;
+		}
+		return result;
+	}
+	
+	
+	// 회원가입 메소드
+	public boolean saveUser(userInfo user) {
+		userInfo userResult = userInfoRepository.save(user);
+		boolean result = false;
+		
+		// 잘 저장되었는지 확인
+		if(userResult.getUserId() != null) {
+			result = !result;
+		}
+		return result;
+	}
+	
+	
 	// 유저 정보를 업데이트하는 메소드
     public boolean updateUserInfo(String userId, String field, String newValue) {
         Optional<userInfo> userOptional = userInfoRepository.findById(userId);
