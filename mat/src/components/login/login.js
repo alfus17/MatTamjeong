@@ -3,14 +3,27 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Create } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Login({onClose,setSession}) {
     const [id, setId] = useState('');  // ID 상태 관리
     const [password, setPassword] = useState('');  // Password 상태 관리
+    const navigate = useNavigate(); // 페이지 이동을 위한 훅
+
 
     console.log("id : ",id);
     console.log("password : ",password);
+
+    const handleFindIdPassword = () => {
+        navigate('/find'); // "아이디/비밀번호 찾기" 페이지로 이동
+        onClose(); // 다이얼로그 닫기
+    };
+
+    const handleSignUp = () => {
+        navigate('/create'); // "아이디가 없으신가요?" 페이지로 이동
+        onClose(); // 다이얼로그 닫기
+    };
 
     return (
         <Container maxWidth="md" sx={{ mt: 6 }}>
@@ -59,9 +72,7 @@ function Login({onClose,setSession}) {
                                             console.log(result)
                                             // 로컬스토리지에 저장
                                             localStorage.setItem('token', result.data.token)
-                                            // 로컬스토리지 토큰 아이템 삭제 방법
-                                            // localStorage.removeItem('token')
-                                            setSession(localStorage.getItem("token"))
+                                            // setSession(localStorage.getItem("token"))
                                             } 
                                         );
                                         console.log("로그인 성공")
@@ -84,11 +95,15 @@ function Login({onClose,setSession}) {
                         </Box>
                     </Box>
 
-                    <Box sx={{ mt: 2, textAlign: 'center' }}>
-                        <Typography variant="body2">
-                            {/* 요기에는 회원가입 구문 추가 하기   */}
-                            <a >아이디가 없으신가요?</a> 
-                        </Typography>
+                    <Box sx={{ mt: 2, textAlign: 'center', display:'flex'}}>
+
+                    <Typography variant="body2" sx={{ cursor: 'pointer','&:hover': {color:'red'} }} onClick={handleFindIdPassword}>
+                        아이디/비밀번호 찾기
+                    </Typography>
+                    <Typography variant="body2" sx={{ cursor: 'pointer', ml:2 ,'&:hover': {color:'red'} }} onClick={handleSignUp}>
+                        아이디가 없으신가요?
+                    </Typography>
+
                     </Box>
                 </Box>
             </Grid>

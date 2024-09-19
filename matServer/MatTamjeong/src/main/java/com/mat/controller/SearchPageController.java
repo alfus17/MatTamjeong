@@ -24,7 +24,7 @@ import com.mat.service.StoreService;
 import com.mat.service.menuService;
 
 @RestController
-@RequestMapping("/Search")
+@RequestMapping("/search")
 public class SearchPageController {
 
 	// 가게
