@@ -1,21 +1,7 @@
-.aboutMeeee {
-    display: flex;
-    justify-content: center;
-    width: 1000px;  /* 좌우 위치 조절 */
-    margin-top: 60px;
-}
+/* aboutMe.css */
 
-.aboutMeeee h2 {
-    text-align: center;
-    color: black;
-}
-
-.head {
-    text-align: center;
-    width: 120px;
-}
-
-.body {
-    text-align: center;
-    width: 240px;
-}
+.MuiTable-root {
+    width: 60%; /* 전체 테이블 너비를 80%로 설정 */
+    margin: auto; /* 테이블을 가운데 정렬 */
+  }
+  

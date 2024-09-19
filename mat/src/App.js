@@ -11,12 +11,11 @@ import EditMe from './components/Mypage/editMe';
 import ManagementHistory from './components/Mypage/managementHistory';
 import Login from './components/login/login';
 import Create from './components/login/createUser';
-// import AddReview from './review/review';
+import AddReview from './components/review/review';
+import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
+import Find from './components/login/findUser';
+import { AuthProvider } from './components/login/authContext';
 
-
-
-
-// npx create-toolpad-app@latest
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
 // npm i react-router-dom
@@ -45,6 +44,10 @@ function App() {
                   <Route path="/Login" element={<Login />} />
                   <Route path='/store/:storeId' element={<ExDetail />} />
                   <Route path='/enroll' element={<Create />} />
+                  <Route path='/find' element={<Find />} />
+                  <Route path='/search/:category/:keyword/:startpage' element={<Ex/>} />
+                  <Route path='/add' element={<AddReview />} />
+                      
                   <Route path="/MypageMain" element={<MypageMain />}>
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
