@@ -14,7 +14,7 @@ import Create from './components/login/createUser';
 import AddReview from './components/review/review';
 import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 import Find from './components/login/findUser';
-import { AuthProvider } from './components/login/authContext';
+import { AuthProvider, IsLoginProvider } from './components/login/authContext';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -31,6 +31,8 @@ function App() {
 
   return (
     <>
+    {/* 로그인 상태 유지를 위해  씌워준 컴포넌트 */}
+    <IsLoginProvider>
       <Router>
         <div className='backbg'>
           <div className='All'>  {/* 전체 영역 설정 */}
@@ -62,6 +64,7 @@ function App() {
         </div>
 
       </Router>
+      </IsLoginProvider>
     </>
   );
 }

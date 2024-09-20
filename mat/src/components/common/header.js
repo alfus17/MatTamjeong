@@ -1,14 +1,29 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog, Select, MenuItem, FormControl, InputLabel, ButtonBase, NativeSelect } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Login from '../login/login';
-import { AuthContext } from '../login/authContext';
+import { AuthContext, IsLoginContext, useIsLoginState } from '../login/authContext';
 
 function Header() {
+
+  // 로그인 상태 체크
+  const isLogin = useIsLoginState();
+  console.log("로그인 상태 : ", isLogin);
+
+  // 로그인 업데이트 함수 가져오기
+  const { setIsLogin } = useContext(IsLoginContext);
+  // 로그아웃 처리 코드 
+  const logoutHandler = async() =>{
+    // 로컬 스토리지 클린
+    sessionStorage.removeItem('id')
+    sessionStorage.removeItem('token')
+    setIsLogin(false);
+  }
+ 
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -71,17 +86,24 @@ function Header() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {['임시1', '임시2', '임시3', '임시4'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+      <List sx={{mt:12}}>
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px'}} >
+              <Link to="/mypageMain/aboutMe" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
+              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
+              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
+              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+          </Typography>
+
+          {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}}>로그아웃</Button> : null}
       </List>
       <Divider />
     </Box>
@@ -105,20 +127,20 @@ function Header() {
 
         {/* Center Section: Search bar with category */}
         <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
-          <FormControl sx={{ minWidth: 120 }}>
-            <InputLabel id="category-select-label">카테고리</InputLabel>
-            <Select
-              labelId="category-select-label"
-              id="category-select"
-              value={category}
-              onChange={handleCategoryChange}
-              label="카테고리"
-            >
-              <MenuItem value="store">가게</MenuItem>
-              <MenuItem value="menu">메뉴</MenuItem>
-              <MenuItem value="location">지역</MenuItem>
-            </Select>
-          </FormControl>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-standard-label">카테고리</InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={category}
+                onChange={handleCategoryChange}
+                label="카테고리"
+              >
+          <MenuItem value="store">가게</MenuItem>
+          <MenuItem value="menu">메뉴</MenuItem>
+          <MenuItem value="location">지역</MenuItem>
+        </Select>
+      </FormControl>
           <InputBase
             sx={{
               ml: 2,
@@ -139,24 +161,24 @@ function Header() {
         <Grid item xs={3}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             
-                <Typography
+                {isLogin ?<Typography
                   component="h2"
                   gutterBottom
                   sx={{
                     fontSize: '18px',
-                    cursor: logoutDisabled ? 'default' : 'pointer',
-                    color: logoutDisabled ? 'gray' : 'black',
+                    cursor: !logoutDisabled ? 'default' : 'pointer',
+                    color: !logoutDisabled ? 'gray' : 'black',
                     '&:hover': {
-                      color: logoutDisabled ? 'gray' : 'red',
+                      color: !logoutDisabled ? 'gray' : 'red',
                     },
                   }}
-                  // onClick={!logoutDisabled ? logout : null} // Disable click if logoutDisabled is true
+                  onClick={logoutHandler} // Disable click if logoutDisabled is true
                 >
                   로그아웃
-                </Typography>
+                </Typography>:null}
  
             
-              <Typography
+              { !isLogin ? <Typography
                 component="h2"
                 gutterBottom
                 sx={{
@@ -169,7 +191,7 @@ function Header() {
                 onClick={handleClickOpen} // Open login dialog
               >
                 로그인
-              </Typography>
+              </Typography>:null}
                 <Button onClick={toggleDrawer('right', true)}>
                   <Avatar alt="Remy Sharp" src="/img/gg.jpg" sx={{ width: '60px', height: '60px' }} />
                 </Button>
