@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating } from '@mui/material';
+import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating, styled } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Map from '../map/map';
+import { brown } from '@mui/material/colors';
 
 function Main() {
   const [store, setStore] = useState([]);
@@ -49,25 +50,28 @@ function Main() {
     }
   };
 
+  // ColorButton
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(brown[500]),
+    backgroundColor: brown[500],
+    '&:hover': {
+      backgroundColor: brown[700],
+    },
+  }));
+  
   // 별점 가데이터
   const averageRating = store.Ratings ? store.Ratings.avgRating.toFixed(1) : '0';
 
   return (
     <>
-      <Container disableGutters maxWidth={false}> {/* Container 여백 제거 및 최대 넓이로 */}
-        <Grid item xs={12} md={6}>
-          <Card elevation={3} sx={{ p: 2, maxWidth: "50%", margin: "0 auto" }}>
-            <Box>
+      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#F7EED3'}}>
+          <Card elevation={3} sx={{ p: 2, maxWidth: "60%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
+            <Box sx={{maxWidth:'100%', margin:'0 auto'}}>
               <Map storeData={store} height="450px" />
-            </Box>
-          </Card>
-        </Grid>
-        
+            </Box>                     
         {/* 맵과 슬라이드 사이에 여백 추가 */}
-        <Box sx={{ marginTop: "13px" }}> {/* 여백을 50px로 설정 */}
-          <Grid>
-            <Paper sx={{ maxWidth: "70%", margin: "0 auto", padding: 2 }}>
-              {/* 지역 선택 버튼들 */}
+        <Box sx={{ mt:1}}> {/* 여백을 50px로 설정 */}
+          <Grid>                     
               <Box 
                 sx={{ 
                   display: 'flex', 
@@ -77,16 +81,16 @@ function Main() {
                  
                 }}
               >
-                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('강남')}># 강남</Button>
-                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('홍대')}># 홍대</Button>
-                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('명동')}># 명동</Button>
-                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('신촌')}># 신촌</Button>
-                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('종로')}># 종로</Button>
-                <Button  sx={{width:'80px', height:'40px', fontSize:'16px'}} onClick={() => fetchStoreByLocation('동대문')}># 동대문</Button>
+                <ColorButton variant="contained" sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('강남')}># 강남</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('홍대')}># 홍대</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('명동')}># 명동</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('신촌')}># 신촌</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('종로')}># 종로</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('동대문')}># 동대문</ColorButton>
               </Box>
 
               {selectedLocation && (
-                <Box sx={{ width: "100%", overflow: "hidden", position: "relative", marginTop: "20px" }}> {/* 슬라이더 영역 */}
+                <Box sx={{ width: "100%", overflow: "hidden", position: "relative", mt:2}}> {/* 슬라이더 영역 */}
                   <IconButton
                     onClick={handlePrevSlide}
                     sx={{ position: 'absolute', left: 0, top: '50%', zIndex: 1 }}
@@ -129,9 +133,9 @@ function Main() {
                   </IconButton>
                 </Box>
               )}
-            </Paper>
           </Grid>
         </Box>
+      </Card>
       </Container>
     </>
   );

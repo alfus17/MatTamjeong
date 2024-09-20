@@ -32,6 +32,7 @@ function Create() {
     const [fullName, setFullName] = useState("");
     const [userEmail, setEmail] = useState("");
     const [passFlag , setFlag ] = useState(false);
+    const a = false;
 
     console.log("date : ",  Date.UTC(date, 'yyyy-MM-dd') )
     console.log("selectedAvatar",selectedAvatar )
@@ -48,6 +49,9 @@ function Create() {
         userId: "",
         password: "",
         confirmPassword: "",
+        fullName:"",
+        email:""
+
     });
 
     // 텍스트입력 값이 변할때 마다  해당 함수로 체크
@@ -63,7 +67,8 @@ function Create() {
                 setUserId(value);
                 if (!userIdRegex.test(value)) {
                     setErrors((prev) => ({ ...prev, userId: "아이디는 6자에서 20자 사이여야 합니다." }));
-                } else {
+                }
+                else {
                     setErrors((prev) => ({ ...prev, userId: "" }));
                 }
                 break;
@@ -104,6 +109,10 @@ function Create() {
                 break;
             default:
                 break;
+        }
+        
+        if(date !=null && selectedAvatar != null && userId != "" && password != "" && confirmPassword != "" && nickname !="" && fullName != "" && userEmail != ""){
+            setFlag(true)
         }
     };
 
@@ -249,6 +258,7 @@ function Create() {
 
                             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
                                 <Button
+                                    
                                     variant="contained"
                                     color="primary"
                                     sx={{
@@ -256,9 +266,9 @@ function Create() {
                                         mb: 2,
                                         width: '150px',
                                     }}
-                                    onClick={
-                                        ()=>{
-                                            axios.post('/user/enrollUser',{
+                                    onClick={()=>{
+                                            passFlag ?
+                                            (axios.post('/user/enrollUser',{
                                                 userId:userId,
                                                 userPwd:password,
                                                 userName:fullName,
@@ -272,11 +282,21 @@ function Create() {
                                                     alert("회원가입이 정상적으로 완료 되었습니다.")
                                                     navigate('/')
                                                 }else{
-                                                    alert("회원가입 실패")
+                                                    alert("아이디가 이미 존재합니다.")
                                                     navigate('/enroll')
                                                 }
-                                            })
-                                           
+                                            }).catch(result =>{
+                                                console.log("here : ",result)
+                                                if(result.response.data.status === 500){
+                                                    console.log("서버오류")
+                                                }
+
+                                            })):
+                                            
+
+                                            // alert(errors)
+                                            console.log(errors)
+                                            
                                         }
 
                                     }

@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions, Avatar, TextField } from '@mui/material';
+import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, Avatar, TextField, styled } from '@mui/material';
 import axios from 'axios';
-// import AddReview from '../../review/review';
+import AddReview from '../review/review';
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    ...theme.applyStyles('dark', {
+      backgroundColor: '#1A2027',
+    }),
+}));
 
 function ExDetail() {
     const { storeId } = useParams();
     const [detail, setDetail] = useState({});
-    const [open, setOpen] = useState(false); // Dialog open state
-    console.log("detail : ", detail);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.post('/Page/getDetailStore', { storeId });
-                console.log("useEffect :",response.data);
+                console.log(response.data);
                 setDetail(response.data);
             } catch (error) {
                 console.error('Error fetching store data:', error);
@@ -22,7 +32,7 @@ function ExDetail() {
         };
         
         fetchData();
-    }, []);
+    }, [storeId]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -33,119 +43,104 @@ function ExDetail() {
     };
 
     const averageRating = detail.Ratings ? detail.Ratings.avgRating.toFixed(1) : '0';
-    console.log(detail.data);
+
     return (
-        <Container maxWidth="md" sx={{ mt: 6 }}>
-            <Grid container spacing={4}>
-                {/* 가게 정보 */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={3} sx={{ p: 2 }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <Box
-                                component="img"
-                                src={detail.StoreInfo?.menuUrl}
-                                alt={detail.StoreInfo?.storeName}
-                                sx={{
-                                    width: '100%',
-                                    maxHeight: 500,
-                                    minHeight: 390,
-                                    objectFit: 'cover',
-                                    borderRadius: 2,
-                                    mb: 2
-                                }}
-                            />
-                            <Typography variant="h5" component="h1" sx={{ mt: 1 }}>
-                                {detail.StoreInfo?.storeName}
-                            </Typography>
-                        </Box>
-                    </Paper>
-                </Grid>
-
-                {/* 메뉴 및 별점 */}
-                <Grid item xs={12} md={6}>
-                    <Paper elevation={2} sx={{ p: 3 , height:'400px'}}>
-                        <Typography variant="h5" component="h2" gutterBottom>
-                            메뉴
-                        </Typography>
-                        <List>
-                            {detail.StoreMenu && detail.StoreMenu.map((menuItem, index) => (
-                                <ListItem key={index}>
-                                    <ListItemText primary={menuItem.menuName} />
-                                    <Typography variant="body1">
-                                        {menuItem.price.toLocaleString()}원
-                                    </Typography>
-                                </ListItem>
-                            ))}
-                        </List>
-
-                        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', marginLeft: "30px" }}>
-                            <Typography variant="h6" component="p" sx={{ mr: 2 }}>
-                                총 별점:
-                            </Typography>
-                            <Rating name="total-rating" value={parseFloat(averageRating)} readOnly precision={0.5} />
-                            <Typography variant="h6" component="p" sx={{ ml: 2 }}>
-                                {averageRating}/5
-                            </Typography>
-                        </Box>
-                    </Paper>
-
-                    <Box sx={{ mt: 2 }}>
-                        <Paper elevation={1} sx={{ p: 2 }}>
-                            <Typography variant="body1">
-                                {detail.StoreInfo?.storeAddress}
-                            </Typography>
-                        </Paper>
-                    </Box>
-                </Grid>
-            </Grid>
-
-            {/* 리뷰 섹션 */}
-            <Box sx={{ mt: 4 }}>
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                }}>
-                    <Typography variant="h5" component="h2" gutterBottom>
-                        리뷰
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        sx={{ ml: 3, mt: 3, mb: 2, width: '100px', height: '40px' }}
-                        onClick={handleClickOpen}
-                    >
-                        등록하기
-                    </Button>
-                </Box>
-
-                <Paper elevation={1} sx={{ p: 8 }}>
-                    <List>
-                        {detail.MatReviews && detail.MatReviews.map((review, index) => (
-                            <Box key={index}>
-                                <ListItem alignItems="flex-start">
-                                    <ListItemText
-                                        primary={
-                                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <Typography variant="subtitle1" component="span">
-                                                    {console.log("here",review.matReviewContent)}
-                                      
-                                                </Typography>
-                                                <Rating name={`rating-${index}`} value={review.rating} readOnly precision={0.5} />
-                                            </Box>
-                                        }
-                                        secondary={review.matReviewContent}
-                                    />
-                                </ListItem>
-                                {index < detail.MatReviews.length - 1 && <Divider variant="inset" />}
+        <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#F7EED3' }}>
+            {/* 전체영역 */}
+            <Paper elevation={5} sx={{ display: 'flex', p: 2, margin: '0 auto', backgroundColor: '#A67B5B', maxWidth: '60%', mt: 2, borderRadius: 3 }}>
+                <Grid container spacing={2}>
+                    {/*왼쪽 영역 */}
+                    <Grid item xs={4}>
+                        <Item sx={{ height: '500px' }}>
+                            <Box sx={{ margin: '0 auto', width: '100%' }}>
+                                <Box
+                                    component="img"
+                                    src={detail.StoreInfo?.menuUrl}
+                                    alt={detail.StoreInfo?.storeName}
+                                    sx={{
+                                        width: '100%',
+                                        maxHeight: 500,
+                                        objectFit: 'cover',
+                                        borderRadius: 2,
+                                        mb: 2
+                                    }}
+                                />
+                                <Typography variant="h5" component="h1" sx={{ mt: 1, textAlign: 'center', mb: 2 }}>
+                                    {detail.StoreInfo?.storeName}
+                                </Typography>
                             </Box>
-                        ))}
-                    </List>
-                </Paper>
-            </Box>
+                        </Item>
+                    </Grid>
 
-            {/* Dialog 컴포넌트 */}
-            <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
+                    {/* 오른쪽영역 (2개 Paper) */}
+                    <Grid item xs={8} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                        <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+                            <Grid item xs={6}>
+                                <Item sx={{ height: '300px' }}>
+                                    <Typography variant="h6">총 별점:</Typography>
+                                    <Rating name="total-rating" value={parseFloat(averageRating)} readOnly precision={0.5} />
+                                    <Typography variant="h6">{averageRating}/5</Typography>
+                                    <Typography variant="body1">{detail.StoreInfo?.storeAddress}</Typography>
+                                </Item>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Item sx={{ height: '100%' }}>
+                                <Typography variant="h5" component="h2" sx={{ mb: 2 }}>메뉴</Typography>
+                                <List>
+                                    {detail.StoreMenu && detail.StoreMenu.map((menuItem, index) => (
+                                        <ListItem key={index} sx={{ borderBottom: '1px solid #ccc' }}>
+                                            <ListItemText primary={menuItem.menuName} />
+                                            <Typography variant="body1">{menuItem.price.toLocaleString()}원</Typography>
+                                        </ListItem>
+                                    ))}
+                                </List>
+                                </Item>
+                            </Grid>
+                        </Grid>
+
+                        {/* 오른쪽 아래 */}
+                        <Grid item xs={12} sx={{ flexGrow: 1, overflowY: 'auto', mt: 2 }}>
+                            <Item sx={{ height :'100%' }}>
+                            <Typography variant="h6">가게 상세 정보</Typography>
+                            {/* Add more details about the store here */}
+                            </Item>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Paper>
+
+            {/* 리뷰 */}
+            <Paper elevation={2} sx={{ p: 4, width: '60%', margin: '0 auto', mb: 4, mt: 3, borderRadius: 3 }}>
+                <List>
+                    {detail.MatReviews && detail.MatReviews.map((review, index) => (
+                        <Box key={index}>
+                            <ListItem alignItems="flex-start">
+                                <ListItemText
+                                    primary={
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                            <Typography variant="subtitle1" component="span">{review.matReviewContent}</Typography>
+                                            <Rating name={`rating-${index}`} value={review.rating} readOnly precision={0.5} />
+                                        </Box>
+                                    }
+                                    secondary={review.matReviewContent}
+                                />
+                            </ListItem>
+                            {index < detail.MatReviews.length - 1 && <Divider variant="inset" />}
+                        </Box>
+                    ))}
+                </List>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ ml: 3, mt: 3, mb: 2, width: '100px', height: '40px' }}
+                    onClick={handleClickOpen}
+                >
+                    등록하기
+                </Button>
+            </Paper>
+
+           {/* Dialog 컴포넌트 */}
+           <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
             <Container maxWidth="md" sx={{ mt: 4 , height:'800px'}}>
             <Grid >
                
@@ -233,7 +228,6 @@ function ExDetail() {
         </Container>
             </Dialog>
         </Container>
-        
     );
 }
 

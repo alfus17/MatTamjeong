@@ -67,12 +67,12 @@ function AddReview () {
                     <Box sx={{display:'flex'}}>
                     <Button
                             variant="contained"
-                            color="primary"
                             sx={{
                                 mt : 3,
                                 mb: 2,
                                 width: '100px',
-                                height:'40px'
+                                height:'40px',
+                                color:'#674636'
                             }}
                             >
                     초기화
@@ -80,13 +80,13 @@ function AddReview () {
 
                     <Button
                             variant="contained"
-                            color="primary"
+                            color="#674636"
                             sx={{
                                 ml: 3,
                                 mt: 3,
                                 mb: 2,
                                 width: '100px',
-                                height:'40px'
+                                height:'40px',
                             }}
                             >
                     등록하기
