@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Container } from '@mui/material';
 
 function ManagementHistory() {
   const [userInfo, setUserInfo] = useState({
@@ -31,7 +32,7 @@ function ManagementHistory() {
   }, []);
 
   return (
-    <div className='ManagementHistoryyy' style={{ width: '600px', margin: '0 auto' }}>
+    <Container sx={{ width: '600px', margin: '0 auto' ,mt:6}}>
       <Accordion sx={{ width: '100%' }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -63,7 +64,7 @@ function ManagementHistory() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-    </div>
+    </Container>
   );
 }
 
