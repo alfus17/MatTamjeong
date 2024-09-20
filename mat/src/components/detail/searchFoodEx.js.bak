@@ -1,6 +1,6 @@
 import * as React from 'react';
-
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import MapIcon from '@mui/icons-material/Map';
 import { IconButton, List, ListItem, ListItemText, Rating } from '@mui/material';
 
@@ -14,43 +14,43 @@ function Ex() {
     ];
 
     return (
-<div className='searchForm'>
-        <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper', marginLeft: 8}}>
-        {stores.map((store) => (
-        <ListItem
-        key={store.id}
-        disableGutters
-        secondaryAction={
-            <IconButton aria-label="comment">
-            <MapIcon />
-            </IconButton>
-      }
-    >
-      {/* 네모난 이미지 추가 */}
-      <Box component="img" 
-           src={store.imgUrl} 
-           alt={store.name} 
-           sx={{ 
-             width: 150, 
-             height: 150, 
-             borderRadius: 1, // 네모나게
-             objectFit: 'cover', // 이미지가 잘리지 않도록
-             marginRight: 12 // 텍스트와 이미지 사이 간격
-            }} 
-      />
-      
-      <ListItemText 
-        primary={store.name}
-        secondary={
-          // 별점 추가
-          <Rating name={`rating-${store.id}`} value={store.rating} precision={0.5} readOnly />
-        }
-      />
-    </ListItem>
-  ))}
-</List>     
-</div>  
-    )
+        <Container maxWidth="md" sx={{ mt: 4 }}>
+            <List sx={{ width: '100%', maxWidth: 700, bgcolor: 'background.paper', display:'inline-list-item',justifyContent:'left'}}>
+                {stores.map((store) => (
+                    <ListItem
+                        key={store.id}
+                        disableGutters
+                        secondaryAction={
+                            <IconButton aria-label="comment">
+                                <MapIcon />
+                            </IconButton>
+                        }
+                    >
+                        {/* 네모난 이미지 추가 */}
+                        <Box
+                            component="img"
+                            src={store.imgUrl}
+                            alt={store.name}
+                            sx={{
+                                width: 150,
+                                height: 150,
+                                borderRadius: 1, // 네모나게
+                                objectFit: 'cover', // 이미지가 잘리지 않도록
+                                marginRight: 2 // 텍스트와 이미지 사이 간격
+                            }}
+                        />
+                        <ListItemText
+                            primary={store.name}
+                            secondary={
+                                // 별점 추가
+                                <Rating name={`rating-${store.id}`} value={store.rating} precision={0.5} readOnly />
+                            }
+                        />
+                    </ListItem>
+                ))}
+            </List>
+        </Container>
+    );
 }
 
 export default Ex;
