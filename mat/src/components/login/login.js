@@ -56,7 +56,7 @@ function Login({onClose,setSession}) {
     };
 
     const handleSignUp = () => {
-        navigate('/create'); // "아이디가 없으신가요?" 페이지로 이동
+        navigate('/enroll'); // "아이디가 없으신가요?" 페이지로 이동
         onClose(); // 다이얼로그 닫기
     };
 
@@ -102,30 +102,11 @@ function Login({onClose,setSession}) {
                                     width: '150px',
                                 }}
                                 onClick={ async() => {
-                                    // try {
-                                    //     const response = await axios.get(`/user/checkUser/${id}/${password}`).then(result =>{
-                                    //         console.log(result)
-                                    //         // 로컬스토리지에 저장
-                                    //         // localStorage.setItem('token', result.data.token)
-                                    //         sessionStorage.setItem('id',id)
-                                    //         sessionStorage.setItem('token',result.data.token)
-                                    //         // setSession(localStorage.getItem("token"))
-                                    //         } 
-                                    //     );
-                                    //     console.log("로그인 성공")
-                                    //    // 서버로부터 받은 응답 처리
-                                    //     // 로그인로직 구현 
-
-                                    // } catch (error) {
-                                    //     console.error('Error during login:', error);
-                                    //     alert('로그인 실패!');
-                                    // }
+                                    // 비동기 로그인처리 함수
                                     loginHandler();
-                                    
                                     // 로그인 확인 이후 창 닫기 부분
                                     onClose();
-                                }
-                                    
+                                }                                   
                                 }
                             >
                                 Login
@@ -142,9 +123,9 @@ function Login({onClose,setSession}) {
                         아이디가 없으신가요?
                     </Typography>
                     {/* 임시 로그아웃 테스트  */}
-                    <Typography variant="body2" sx={{ cursor: 'pointer', ml:2 ,'&:hover': {color:'red'} }} onClick={logoutHandler}>
+                    {/* <Typography variant="body2" sx={{ cursor: 'pointer', ml:2 ,'&:hover': {color:'red'} }} onClick={logoutHandler}>
                         로그아웃
-                    </Typography>
+                    </Typography> */}
 
                     </Box>
                 </Box>

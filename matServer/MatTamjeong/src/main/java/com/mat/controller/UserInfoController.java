@@ -40,7 +40,13 @@ public class UserInfoController
 	// 회원가입 
 	@PostMapping("/enrollUser")
 	public boolean enrollUser(@RequestBody userInfo user) {
-		return userService.saveUser(user);
+		boolean response = false;
+		// 만약 db에 존재하지 않을경우 유저 회원가입 진행 
+		if(! userService.checkUser(user.getUserId())) {
+			userService.saveUser(user);
+			response = true;
+		}
+		return response;
 	}
 
 	

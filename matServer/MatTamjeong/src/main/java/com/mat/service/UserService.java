@@ -25,7 +25,7 @@ public class UserService
 	// 특정 유저의 userInfo 데이터를 가져오는 메소드
 	public Optional<userInfo> getUserInfoById(String userId) 
 	{
-		return userInfoRepository.findById(userId);
+		return userInfoRepository.findByUserId(userId);
 	}
 	
 	// 유저아이디와 비밀번호로 체크
@@ -43,11 +43,12 @@ public class UserService
 	}
 	
 	// 유저아이디로 유저가 있는지 체크
+	// 유저아이디가 존재하면 true 아니면 false
 	public boolean checkUser(String userId) {
 		boolean result= false;
-		List<userInfo>user = userInfoRepository.findByUserId(userId);
+		Optional<userInfo>user = userInfoRepository.findByUserId(userId);
 		
-		if(!user.isEmpty()) {
+		if(user.isPresent()) {
 			result = !result;
 		}
 		return result;
@@ -69,7 +70,7 @@ public class UserService
 	
 	// 유저 정보를 업데이트하는 메소드
     public boolean updateUserInfo(String userId, String field, String newValue) {
-        Optional<userInfo> userOptional = userInfoRepository.findById(userId);
+        Optional<userInfo> userOptional = userInfoRepository.findByUserId(userId);
         
         boolean UserInfoUpdate = false;
         

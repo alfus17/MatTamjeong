@@ -3,9 +3,11 @@ import React, { useEffect, useRef } from 'react';
 const Map = (props) => {
   const mapElement = useRef(null);
   const store = props.storeData;
+  console.log(store);
 
   let width = props.width === undefined ? '100%' : props.width;
   let height = props.height === undefined ? '700px' : props.height;
+
 
   useEffect(() => {
     const { naver } = window;
