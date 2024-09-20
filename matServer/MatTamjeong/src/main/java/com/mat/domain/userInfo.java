@@ -9,6 +9,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,8 @@ import lombok.NoArgsConstructor;
 @Table(name="user_Info")
 public class userInfo {
     /* 	user_info Table
- * 	회원 ID (PK)(FK) 	: user_id			varchar2(20)
+ *  회원번호 	(pk)	: user_no 			long(20) 
+ * 	회원 ID  	(fk)	: user_id			varchar2(20)
  * 	비밀번호 			: user_pwd			varchar2(30) 
  * 	이름 				: user_name 		varchar2(60)
  * 	가입일자 			: member_join_date	Date
@@ -35,10 +37,22 @@ public class userInfo {
  */
 	// 회원 ID (PK)(FK)
 	// 백엔드 쪽에서 FK 처리예정
+	
+	// pk키
 	@Id
+	@Column(name="user_No" ,length=20)
+	@NonNull
+	@SequenceGenerator (
+			name = "userseq",
+			sequenceName = "userseq",
+			allocationSize = 1
+			)
+	@GeneratedValue(generator="user_No")
+	private Long userNo;
+	
+	// userId
 	@Column(name="user_id" ,length=20)
 	@NonNull
-	@GeneratedValue
 	private String userId;
 	
 	//  pwd
@@ -63,7 +77,7 @@ public class userInfo {
 	private String nickName;
 	
 	//  생년월일
-	@Column(name="user_birth" ,length=6)
+	@Column(name="user_birth" ,length=100)
 	@NonNull
 	private String userBirth;
 	
@@ -74,7 +88,6 @@ public class userInfo {
 	
 	//  주소
 	@Column(name="user_address" ,length=100)
-	@NonNull
 	private String userAddress;
 	
 	//  이미지 경로

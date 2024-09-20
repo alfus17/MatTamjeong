@@ -128,7 +128,8 @@ function ExDetail() {
                                         primary={
                                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                                 <Typography variant="subtitle1" component="span">
-                                                    {review.user}
+                                                    {console.log("here",review.matReviewContent)}
+                                      
                                                 </Typography>
                                                 <Rating name={`rating-${index}`} value={review.rating} readOnly precision={0.5} />
                                             </Box>
