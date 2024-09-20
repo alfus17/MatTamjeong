@@ -34,11 +34,7 @@ function App() {
     {/* 로그인 상태 유지를 위해  씌워준 컴포넌트 */}
     <IsLoginProvider>
       <Router>
-        <div className='backbg'>
-          <div className='All'>  {/* 전체 영역 설정 */}
             <Header />
-            <div className='content'>
-              <div className='slideshow'>
                 <Routes>
                   <Route path='/' element={<Main />} />
                   <Route path="/Map" element={<Ex />} />
@@ -48,8 +44,7 @@ function App() {
                   <Route path='/enroll' element={<Create />} />
                   <Route path='/find' element={<Find />} />
                   <Route path='/search/:category/:keyword/:startpage' element={<Ex/>} />
-                  <Route path='/add' element={<AddReview />} />
-                      
+                  <Route path='/add' element={<AddReview />} />                  
                   <Route path="/MypageMain" element={<MypageMain />}>
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
@@ -57,12 +52,6 @@ function App() {
                     <Route path="passwordConfirm" element={<PasswordConfirm />} />
                   </Route>
                 </Routes>
-              </div>
-       
-            </div>
-          </div>
-        </div>
-
       </Router>
       </IsLoginProvider>
     </>

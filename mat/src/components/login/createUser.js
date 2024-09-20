@@ -1,9 +1,10 @@
-import { Box, Container, Grid, Paper, TextField, Typography, Button, IconButton, Avatar } from "@mui/material";
+import { Box, Container, Grid, Paper, TextField, Typography, Button, IconButton, Avatar, styled } from "@mui/material";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import { brown } from "@mui/material/colors";
 
 // Sample avatars
 const avatars = [
@@ -75,6 +76,15 @@ function Create() {
         }
     };
 
+     // ColorButton
+    const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(brown[500]),
+    backgroundColor: brown[500],
+    '&:hover': {
+      backgroundColor: brown[700],
+    },
+  }));
+
     return (
         <Container maxWidth="md" sx={{ mt: 6 , height:'1000px'}}>
             <Grid container justifyContent="center">
@@ -118,17 +128,21 @@ function Create() {
                             </Grid>
                             <Typography variant="h6" sx={{ textAlign: 'center' , mt:3}}> 프로필을 선택하세요.</Typography>
                         </Box>
+                        <Box sx={{display:'flex', maxWidth:'400px'}}>
                         <TextField
                             id="username"
                             label="아이디를 입력하세요"
                             type="text"
                             value={username}
                             onChange={EnrollChange}
-                            sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
+                            sx={{ Width: '319px', mb: 4}}
                             error={!!errors.username}
                             helperText={errors.username}
                         />
-
+                        <ColorButton sx={{width:'80px',height:'56px'}}>
+                            <Typography sx={{fontSize:'12px'}}>아이디 중복검사</Typography>
+                        </ColorButton>
+                        </Box>                
                         <TextField
                             id="password"
                             label="비밀번호를 입력하세요"
