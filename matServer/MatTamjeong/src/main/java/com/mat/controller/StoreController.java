@@ -8,10 +8,16 @@ import com.mat.service.foodCategoryService;
 import com.mat.service.locationCategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -47,6 +53,41 @@ public class StoreController {
 			return storeService.getAllStoreByLc(categoryID); // 전체 데이터 반환
 		} else {
 			return null; // 카테고리가 없을 경우 null 값을 반환
+		}
+	}
+	
+	// 페이지 네이션 처리 
+	// 지역카테고리로 쿼리하기
+	@PostMapping("/getLCStore/{page}")
+	public Map<String, Object>getAllStoreByLc(@RequestBody locationCategory categoryName, @PathVariable("page") String page ) {
+		int intPage = Integer.parseInt(page);
+		Map <String, Object> result = new HashMap<>();
+
+		Sort sort = Sort.by(Sort.Order.asc("storeName"));
+		Pageable pageable = PageRequest.of(intPage - 1, 10, sort);
+		// 카테고리 비교에서 아이디 가져오기
+		// 만약 입력한 카테고리의 값으로 db의 카테고리 id 체크 이후 없을경우 -1 리턴
+		int categoryID = locationCategoryService.getCategoryId(categoryName.getCategoryName());
+		
+		if (categoryID != -1) {
+			Page<Store> storeList = storeService.getAllStoreByLc(categoryID , pageable);
+			long totalElements =  storeList.getTotalElements();
+			int totalPages = storeList.getTotalPages();
+
+			// 상점 리스트 넣기 
+			result.put("storeList", storeList.getContent());
+			// 총 쿼리 갯수 
+			result.put("totalElements", totalElements);
+			// 총 페이지 갯수 
+			result.put("totalPages", totalPages);
+			
+			System.out.println("totalElements : " + totalElements   );
+			System.out.println("totalPages : " + totalPages);
+			
+			return result;
+
+		} else {
+			return result; // 카테고리가 없을 경우 null 값을 반환
 		}
 	}
 
