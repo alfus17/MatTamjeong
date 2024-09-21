@@ -64,8 +64,9 @@ function Main() {
 
   return (
     <>
-      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#F7EED3'}}>
-          <Card elevation={3} sx={{ p: 2, maxWidth: "60%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
+      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#F7EED3', height:'900px'}}>
+        <Box sx={{width:'100%', height:'10px'}}/>
+          <Card elevation={3} sx={{  maxWidth: "60%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
             <Box sx={{maxWidth:'100%', margin:'0 auto'}}>
               <Map storeData={store} height="450px" />
             </Box>                     

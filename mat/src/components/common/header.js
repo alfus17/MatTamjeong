@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog, Select, MenuItem, FormControl, InputLabel, ButtonBase, NativeSelect, Card } from '@mui/material';
+import { Container, Grid, Box, InputBase, IconButton, Paper, Divider, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography, Avatar, Dialog, Select, MenuItem, FormControl, InputLabel, ButtonBase, NativeSelect, Card, Tabs, Tab } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -109,6 +109,30 @@ function Header() {
     </Box>
   );
 
+  const [value, setValue] = React.useState('one');
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+    
+    // 
+    switch (newValue) {
+      case 'one':
+        navigate('/map'); // Replace with your actual route
+        break;
+      case 'two':
+        navigate('/'); // Replace with your actual route
+        break;
+      case 'three':
+        navigate('/list'); // Replace with your actual route
+        break;
+      default:
+        break;
+    } 
+  };
+  
+  
+  
+
   return (
     <Container maxWidth="lg" sx={{ mt:6 }}>
       <Grid container alignItems="center">
@@ -208,7 +232,19 @@ function Header() {
           </Box>
         </Grid>
       </Grid>
-
+      <Box sx={{ width: '100%' , display:'flex', justifyContent:'center' , mt:4}}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        textColor="primary"
+        indicatorColor="primary"
+        aria-label="secondary tabs example"
+      >
+        <Tab value="one" label="지도로 보기" sx={{ mr: 20 }} onClick={{}}/>
+        <Tab value="two" label="맛집 추천"  sx={{ mr: 20 }} />
+        <Tab value="three" label="리스트로 보기"  />
+      </Tabs>
+    </Box>
       {/* Login Dialog Component */}
       <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{ height: '800px' }}>
         <Login onClose={handleClose} />
