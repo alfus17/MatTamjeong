@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating, styled } from '@mui/material';
+import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating, styled, Tabs, Tab } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Map from '../map/map';
@@ -10,8 +10,10 @@ import { brown } from '@mui/material/colors';
 function Main() {
   const [store, setStore] = useState([]);
   const [filterStore, setFilterStore] = useState([]);
+  const [visibleStores, setVisibleStores] = useState(4); // 처음에 보여줄 가게 수
   const [selectedLocation, setSelectedLocation] = useState('');
   const [currentSlide, setCurrentSlide] = useState(0); // 현재 슬라이드를 관리할 상태
+  const [tab, setTab] = useState('two'); // 탭 상태 관리
   const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
 
   useEffect(() => {
@@ -26,11 +28,17 @@ function Main() {
       console.log(response.data);
       setStore(response.data);
       setFilterStore(response.data);
+      setVisibleStores(4); // 새 데이터를 가져오면 보여줄 가게 수를 초기화
       setSelectedLocation(location);
       setCurrentSlide(0); // 새로 데이터가 로드되면 슬라이드를 처음으로 설정
     } catch (error) {
       console.error('Error fetching store data:', error);
     }
+  };
+
+  // 더보기 버튼 클릭 시 5개 더 보여주기
+  const handleShowMore = () => {
+    setVisibleStores((prevVisible) => prevVisible + 4);
   };
 
   const handleImageClick = (storeId) => {
@@ -62,9 +70,62 @@ function Main() {
   // 별점 가데이터
   const averageRating = store.Ratings ? store.Ratings.avgRating.toFixed(1) : '0';
 
+  const handleOnChange = (event, newValue) => {
+    setTab(newValue);
+  };
+
+  
+   
+
   return (
     <>
+      <Box sx={{ width: '100%' , display:'flex', justifyContent:'center' , mt:4}}>
+      <Tabs
+        value={tab}
+        textColor="primary"
+        onChange={handleOnChange}
+        indicatorColor="primary"
+        aria-label="secondary tabs example"
+      >
+        <Tab value="one" label="지도로 보기" sx={{ mr: 20 }} />
+        <Tab value="two" label="맛집 추천"  sx={{ mr: 20 }} />
+        <Tab value="three" label="리스트로 보기"  />
+      </Tabs>    
+    </Box>
       <Container disableGutters maxWidth={false} sx={{backgroundColor:'#F7EED3', height:'900px'}}>
+
+      {/* 첫번째 탭 */}
+      {tab === 'one' && (
+
+        <>
+         <Box sx={{width:'100%', height:'10px'}}/>
+         <Box 
+                sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  marginTop: '  0px', // 버튼들 위에 여백 추가
+                  gap:'30px',   
+                 
+                }}
+              >
+                <ColorButton variant="contained" sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('강남')}># 강남</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('홍대')}># 홍대</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('명동')}># 명동</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('신촌')}># 신촌</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('종로')}># 종로</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('동대문')}># 동대문</ColorButton>
+        </Box>
+         <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 2, mb: 4, borderRadius: 3 }}>
+         <Box sx={{ maxWidth: '100%', margin: '0 auto' }}>
+           <Map storeData={store} height="700px" /> {/* 지도를 크게 표시 */}
+         </Box>
+       </Card>
+       </>
+      )}
+
+      {/* 두번쨰탭 */}
+      {tab === 'two' && (
+        <>
         <Box sx={{width:'100%', height:'10px'}}/>
           <Card elevation={3} sx={{  maxWidth: "60%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
             <Box sx={{maxWidth:'100%', margin:'0 auto'}}>
@@ -137,6 +198,52 @@ function Main() {
           </Grid>
         </Box>
       </Card>
+      </>
+      )};
+
+          {/* 리스트로 보기 탭 */}
+        {tab === 'three' && (
+          <Card elevation={3} sx={{ maxWidth: "80%", margin: "0 auto", mt: 2, mb: 4, borderRadius: 3 }}>
+            <Box sx={{ maxWidth: '100%', margin: '0 auto', p: 2 }}>
+              {/* 버튼 추가 */}
+              <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mb: 2 }}>
+                <ColorButton variant="contained" sx={{ width: '80px', height: '40px', fontSize: '16px', borderRadius: 1 }} onClick={() => fetchStoreByLocation('강남')}># 강남</ColorButton>
+                <ColorButton sx={{ width: '80px', height: '40px', fontSize: '16px', borderRadius: 1 }} onClick={() => fetchStoreByLocation('홍대')}># 홍대</ColorButton>
+                <ColorButton sx={{ width: '80px', height: '40px', fontSize: '16px', borderRadius: 1 }} onClick={() => fetchStoreByLocation('명동')}># 명동</ColorButton>
+              </Box>
+              {/* 가게 리스트 한 줄에 하나씩 표시, slice로 5개씩 보여줌 */}
+              <Box>
+                {(filterStore.length > 0 ? filterStore : store)
+                  .slice(0, visibleStores)  // 처음에 5개만 보여주고, 더보기 클릭 시 추가로 보여줌
+                  .map((item, index) => (
+                  <Paper key={index} sx={{ mb: 3, p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%' }}>
+                    <img
+                      src={item.menuUrl}
+                      alt={item.storeName}
+                      onClick={() => handleImageClick(item.storeId)}
+                      style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
+                    />
+                    <Box>
+                      <Typography variant="h6">{item.storeName}</Typography>
+                      <Typography variant="body2">{item.storeAddress}</Typography>
+                      <Rating name="total-rating" value={parseFloat(averageRating)} readOnly precision={0.5} />
+                      <Typography variant="h6" component="p">
+                        {averageRating}/5
+                      </Typography>
+                    </Box>
+                  </Paper>
+                ))}
+              </Box>
+
+              {/* 더보기 버튼 */}
+              {visibleStores < store.length && (
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                  <Button variant="contained" onClick={handleShowMore}>더보기</Button>
+                </Box>
+              )}
+            </Box>
+          </Card>
+        )}
       </Container>
     </>
   );
