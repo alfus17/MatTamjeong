@@ -28,12 +28,13 @@ public class diningReview {
 	// 네이버 리뷰 ID
 	@Id
 	@Column(name="review_id")
+	@NonNull
 	@SequenceGenerator (
 			name = "dcRvseq",
 			sequenceName = "dcRvseq",
 			allocationSize = 1
 			)
-	@GeneratedValue(generator="dcRvseq")
+	@GeneratedValue(generator="review_id")
 	private int nvReviewId;
 	
 	// 네이버 별점

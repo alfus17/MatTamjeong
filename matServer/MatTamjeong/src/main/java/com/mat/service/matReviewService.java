@@ -32,4 +32,22 @@ public class matReviewService {
 	public double getStoreRating(int storeId) {
 		return matReviewRepository.getStoreRating(storeId);
 	}
+	
+	// 리뷰 등록 및 업데이트 
+	public boolean  registReview(matReview reivew) {
+		boolean flag  = false;
+		matReview result = matReviewRepository.save(reivew);
+		// null이면 오류
+		if(result != null) {
+			flag = !flag;
+		}
+		return flag;
+		
+	}
+
+	// 해당유저가 해당가게에 리뷰를 남긴적이 있는지 체크 
+	public Optional<matReview> findReviewByUserId(String userId , int storeId) {	
+		return matReviewRepository.findByUserIdAndStoreId(userId ,storeId);
+		
+	}
 }

@@ -31,7 +31,6 @@ public class userInfo {
  *  이미지 경로 		: img_path			varchar2(200)
  *  주소 				: user_address		varchar2(100)
  * 	상태				: user_status		varchar2(5)
- * 	리뷰ID (FK)		: review_id			varchar2(10)
  * 	즐겨찾기(FK)		: bookmark_id		varchar2(10)
  * 	auth(사용여부미정)	: auth				varchar2(1000)
  */
@@ -98,10 +97,6 @@ public class userInfo {
 	// 상태	
 	@Column(name="user_status" ,length=5)
 	private String userStatus;
-	
-	// 리뷰ID (FK)
-	@Column(name="review_id" ,length=10)
-	private String reviewId;
 	
 	// 즐겨찾기(FK)
 	@Column(name="bookmark_id" ,length=10) 
