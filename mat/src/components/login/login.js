@@ -56,7 +56,7 @@ function Login({onClose,setSession}) {
     };
 
     const handleSignUp = () => {
-        navigate('/create'); // "아이디가 없으신가요?" 페이지로 이동
+        navigate('/enroll'); // "아이디가 없으신가요?" 페이지로 이동
         onClose(); // 다이얼로그 닫기
     };
 

@@ -81,26 +81,26 @@ function Header() {
   // Render drawer list
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 400 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List sx={{mt:12}}>
           <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px'}} >
-              <Link to="/mypageMain/aboutMe" style={{textDecoration:'none'}}>마이페이지</Link>
+              <Link to="/mypageMain/aboutMe" style={{textDecoration:'none'}}>내 프로필</Link>
           </Typography>
 
           <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
-              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+              <Link to="/mypageMain/passwordConfirm" style={{textDecoration:'none'}}>정보수정</Link>
           </Typography>
 
           <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
-              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+              <Link to="/mypageMain/ManagementHistory" style={{textDecoration:'none'}}>이력관리</Link>
           </Typography>
 
           <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
-              <Link to="/mypageMain" style={{textDecoration:'none'}}>마이페이지</Link>
+              <Link to="/mypageMain" style={{textDecoration:'none'}}>북마크</Link>
           </Typography>
 
           {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}}>로그아웃</Button> : null}

@@ -42,12 +42,12 @@ function Ex() {
   };
 
   return (
-    <Container maxWidth="100%" sx={{ mt: 2 , backgroundColor:'#F7EED3', height:'700px'}}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Box sx={{ flex: 1}}>
+    <Container maxWidth="100%" sx={{ mt: 2 , backgroundColor:'#F7EED3', height:'700px' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100%' }}>
+        <Box sx={{ flex: 1, height: '100%', overflowY: 'auto' }}>
           <List sx={{ width: '100%' }}>
             {stores.map((store) => (
-              <Paper sx={{ mt: 2 }} key={store.id}>
+              <Paper sx={{ mt: 2 , mr:2}} key={store.id}>
                 <ListItem
                   disableGutters
                   secondaryAction={
@@ -82,7 +82,7 @@ function Ex() {
           </Button>
         </Box>
 
-        <Box sx={{ flex:2}}>
+        <Box sx={{ flex: 2 }}>
           <Map storeData={stores} height="700px" />
         </Box>
       </Box>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, Avatar, TextField, styled } from '@mui/material';
+import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, Avatar, TextField, styled, Icon, IconButton } from '@mui/material';
 import axios from 'axios';
 import AddReview from '../review/review';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -16,9 +18,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function ExDetail() {
-    const { storeId } = useParams();
-    const [detail, setDetail] = useState({});
-    const [open, setOpen] = useState(false);
+    const { storeId } = useParams(); // 받아온 가게 아이디
+    const [detail, setDetail] = useState({}); // 가게 정보
+    const [open, setOpen] = useState(false); // dialog 창 열고 닫기
+    const [isBookmarked, setIsBookmarked] = useState(false); // 북마크
+
+    console.log("여기에요 ----",detail);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,24 +47,49 @@ function ExDetail() {
         setOpen(false);
     };
 
-    const averageRating = detail.Ratings ? detail.Ratings.avgRating.toFixed(1) : '0';
+    const toggleBookmark = () => {
+        setIsBookmarked(prev => !prev);
+    };
+
+    let avgRating = detail?.Ratings?.avgRating.toFixed(1) || 0.0;
+
+    let dcRating = detail?.Ratings?.dcRating || 0.0;
+
+    let kgRating = detail?.Ratings?.kgRating || 0.0;
+
+    let matRating = detail?.Ratings?.matRating || 0.0;
 
     return (
-        <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#F7EED3' }}>
+        <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#F7EED3' , mt:2}}>
             {/* 전체영역 */}
-            <Paper elevation={5} sx={{ display: 'flex', p: 2, margin: '0 auto', backgroundColor: '#A67B5B', maxWidth: '60%', mt: 2, borderRadius: 3 }}>
+            <Box sx={{width:'100%', height:'10px'}}/>
+            <Paper elevation={5} sx={{ position: 'relative', p: 2, margin: '0 auto', backgroundColor: '#A67B5B', maxWidth: '60%', mt: 2, borderRadius: 3 }}>
+            {/* Bookmark Icon at the top-left corner */}
+            <IconButton 
+                    sx={{
+                        position: 'absolute',
+                        top: 18, 
+                        left: 15,
+                        fontSize: '2rem',
+                    }} 
+                    onClick={toggleBookmark}
+                >
+                    {isBookmarked ? <BookmarkIcon sx={{ fontSize: '3rem', color: '#FFD700' }} /> : <BookmarkBorderOutlinedIcon sx={{ fontSize: '3rem', color: '#96927a' }} />}
+                </IconButton>
+
                 <Grid container spacing={2}>
                     {/*왼쪽 영역 */}
+                    
                     <Grid item xs={4}>
                         <Item sx={{ height: '500px' }}>
-                            <Box sx={{ margin: '0 auto', width: '100%' }}>
+                            <Box sx={{ margin: '0 auto', width: '100%' }}>                         
                                 <Box
                                     component="img"
                                     src={detail.StoreInfo?.menuUrl}
                                     alt={detail.StoreInfo?.storeName}
                                     sx={{
                                         width: '100%',
-                                        maxHeight: 500,
+                                        height: '400px',
                                         objectFit: 'cover',
                                         borderRadius: 2,
                                         mb: 2
@@ -77,9 +107,31 @@ function ExDetail() {
                         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                             <Grid item xs={6}>
                                 <Item sx={{ height: '300px' }}>
-                                    <Typography variant="h6">총 별점:</Typography>
-                                    <Rating name="total-rating" value={parseFloat(averageRating)} readOnly precision={0.5} />
-                                    <Typography variant="h6">{averageRating}/5</Typography>
+                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
+                                    <Typography sx={{fontSize:'20px'}}>평균 별점 :</Typography> 
+                                    <Rating name="total-rating" value={(avgRating)} readOnly precision={0.5} />
+                                    <Typography variant="h6">{avgRating}/5</Typography>
+                                    </Box>
+
+                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
+                                    <Typography variant="h6">다이닝 별점 :</Typography>
+                                    <Rating name="total-rating" value={(dcRating)} readOnly precision={0.5} />
+                                    <Typography variant="h6">{dcRating}/5</Typography>
+                                    </Box>
+                                    
+                                                                                                    
+                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
+                                    <Typography variant="h6">카카오 별점 :</Typography>
+                                    <Rating name="total-rating" value={(kgRating)} readOnly precision={0.5} />
+                                    <Typography variant="h6">{kgRating}/5</Typography>
+                                    </Box>
+
+                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
+                                    <Typography variant="h6">맛탐정 별점 :</Typography>
+                                    <Rating name="total-rating" value={(matRating)} readOnly precision={0.5} />
+                                    <Typography variant="h6">{matRating}/5</Typography>
+                                    </Box>
+
                                     <Typography variant="body1">{detail.StoreInfo?.storeAddress}</Typography>
                                 </Item>
                             </Grid>
@@ -110,7 +162,8 @@ function ExDetail() {
             </Paper>
 
             {/* 리뷰 */}
-            <Paper elevation={2} sx={{ p: 4, width: '60%', margin: '0 auto', mb: 4, mt: 3, borderRadius: 3 }}>
+            <Grid container spacing={2}>
+            <Grid item  xs ={4} sx={{ p: 4, width: '100%', margin: '0 auto', mb: 4, mt: 3, borderRadius: 3 }}>
                 <List>
                     {detail.MatReviews && detail.MatReviews.map((review, index) => (
                         <Box key={index}>
@@ -129,7 +182,12 @@ function ExDetail() {
                         </Box>
                     ))}
                 </List>
-                <Button
+            </Grid>
+                
+            <Grid item  xs ={8} sx={{ p: 4, width: '100%', margin: '0 auto', mb: 4, mt: 3, borderRadius: 3 }}>
+            </Grid>
+            </Grid>
+            <Button
                     variant="contained"
                     color="primary"
                     sx={{ ml: 3, mt: 3, mb: 2, width: '100px', height: '40px' }}
@@ -137,8 +195,6 @@ function ExDetail() {
                 >
                     등록하기
                 </Button>
-            </Paper>
-
            {/* Dialog 컴포넌트 */}
            <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
             <Container maxWidth="md" sx={{ mt: 4 , height:'800px'}}>
