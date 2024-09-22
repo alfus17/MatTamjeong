@@ -2,6 +2,7 @@ package com.mat.domain;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 
 import io.micrometer.common.lang.NonNull;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,17 +30,19 @@ public class matReview {
 	 * 	작성일자			: created_at		date
 	 * 	사진ID			: photo_id(FK)		varchar2(10)
 	 * 	가게 ID (FK)		: store_id			varchar2(10)
+	 *  작성자 ID 			: user_id 			varchar2(20)			
 	 */
 	
 	// 맛탐정 리뷰 ID
 	@Id
 	@Column(name="review_id" ,length=10)
+	@NonNull
 	@SequenceGenerator (
 			name = "matRvseq",
 			sequenceName = "matRvseq",
 			allocationSize = 1
 			)
-	@GeneratedValue(generator="matRvseq")
+	@GeneratedValue(generator="review_id")
 	private int matReviewId;
 	
 	// 맛탐정 별점
@@ -69,6 +73,11 @@ public class matReview {
 	@Column(name="store_id" ,length=10)
 	@NonNull
 	private int storeId;
+	
+	// 유저아이디 
+	@Column(name="user_id" ,length=20)
+	@NonNull
+	private String userId;
 	
 
 	

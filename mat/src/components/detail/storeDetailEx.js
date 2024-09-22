@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, Avatar, TextField, styled } from '@mui/material';
 import axios from 'axios';
 import AddReview from '../review/review';
+import { useIsLoginState } from '../login/authContext';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -20,6 +21,15 @@ function ExDetail() {
     const [detail, setDetail] = useState({});
     const [open, setOpen] = useState(false);
 
+    const [userinfo, setUserinfo] =  useState({});
+
+    // const []
+
+    // 로그인 상태 체크
+    const isLogin = useIsLoginState();
+    console.log("로그인 상태 : ", isLogin);
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,6 +38,17 @@ function ExDetail() {
                 setDetail(response.data);
             } catch (error) {
                 console.error('Error fetching store data:', error);
+            }
+
+            // TODO 여기 유저 아이디 session 스토리지에서 가져와서 체크 이후 유저인포 가져오기 
+            // if()
+            try{
+                // const userRespons = await axios.post('/Page/getDetailStore', { storeId });
+                // console.log(response.data);
+                // setUserinfo(response.data);
+
+            }catch (error){
+                console.error('Error fetching user data:', error);
             }
         };
         
@@ -45,6 +66,8 @@ function ExDetail() {
     const averageRating = detail.Ratings ? detail.Ratings.avgRating.toFixed(1) : '0';
 
     return (
+        
+
         <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#F7EED3' }}>
             {/* 전체영역 */}
             <Paper elevation={5} sx={{ display: 'flex', p: 2, margin: '0 auto', backgroundColor: '#A67B5B', maxWidth: '60%', mt: 2, borderRadius: 3 }}>
@@ -129,6 +152,7 @@ function ExDetail() {
                         </Box>
                     ))}
                 </List>
+                { isLogin?
                 <Button
                     variant="contained"
                     color="primary"
@@ -137,6 +161,7 @@ function ExDetail() {
                 >
                     등록하기
                 </Button>
+                :null}
             </Paper>
 
            {/* Dialog 컴포넌트 */}
@@ -209,19 +234,20 @@ function ExDetail() {
                     취소
                     </Button>
 
-                    <Button
-                            variant="contained"
-                            color="primary"
-                            sx={{
-                                ml: 3,
-                                mt: 3,
-                                mb: 2,
-                                width: '100px',
-                                height:'40px'
-                            }}
-                            >
+                  
+                   <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                            ml: 3,
+                            mt: 3,
+                            mb: 2,
+                            width: '100px',
+                            height:'40px'
+                        }}
+                        >
                     등록하기
-                    </Button>
+                    </Button> 
                     
                     </Box>
             </Grid>

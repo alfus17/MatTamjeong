@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,8 @@ import com.mat.domain.matReview;
 import com.mat.service.dcReviewService;
 import com.mat.service.kgReviewService;
 import com.mat.service.matReviewService;
+
+import oracle.jdbc.proxy.annotation.Post;
 
 @RestController
 @RequestMapping("/review")
@@ -120,7 +124,29 @@ public class ReviewController {
 
     	return reviewsMap;
     }
-    
+    /* storeId
+     * userId
+     * matReviewContent
+     * 
+     * 
+     * 
+     */
+    // 맛탐정 리뷰 등록 
+    @PostMapping("/regMatReview")
+    public boolean registerReview(@RequestBody matReview reivew) {
+    	boolean flag = false;
+    	// 로그 찍기
+    	System.out.println("matReview : " + reivew);
+    	
+    	// userID로 해당 가게의 리뷰가 있는지 확인 
+    	Optional<matReview> checkresult =matReviewService.findReviewByUserId(reivew.getUserId(), reivew.getStoreId());
+    	if(! checkresult.isPresent()) {
+    		flag = matReviewService.registReview(reivew);
+    	}else {
+    		System.out.println("기존의 아이디로 리뷰를 쓴 기록이 존재함 : "+ checkresult.get());
+    	}
 
+    	return flag;
+    }
 
 }

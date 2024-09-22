@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, Box, Grid, Paper, List, ListItem, ListItemText, Rating, Divider, Button, Dialog, DialogTitle, DialogContent, DialogActions, Avatar, TextField } from '@mui/material';
 import axios from 'axios';
+import { useIsLoginState } from '../login/authContext';
 // import AddReview from '../../review/review';
 
 function ExDetail() {
@@ -9,6 +10,10 @@ function ExDetail() {
     const [detail, setDetail] = useState({});
     const [open, setOpen] = useState(false); // Dialog open state
     console.log("detail : ", detail);
+      // 로그인 상태 체크
+  const isLogin = useIsLoginState();
+  console.log("로그인 상태 : ", isLogin);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,7 +68,7 @@ function ExDetail() {
 
                 {/* 메뉴 및 별점 */}
                 <Grid item xs={12} md={6}>
-                    <Paper elevation={2} sx={{ p: 3 , height:'400px'}}>
+                    <Paper elevation={2} sx={{ p: 3 }}>
                         <Typography variant="h5" component="h2" gutterBottom>
                             메뉴
                         </Typography>
@@ -89,7 +94,7 @@ function ExDetail() {
                         </Box>
                     </Paper>
 
-                    <Box sx={{ mt: 2 }}>
+                    <Box sx={{ mt: 4 }}>
                         <Paper elevation={1} sx={{ p: 2 }}>
                             <Typography variant="body1">
                                 {detail.StoreInfo?.storeAddress}
@@ -128,8 +133,7 @@ function ExDetail() {
                                         primary={
                                             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                                 <Typography variant="subtitle1" component="span">
-                                                    {console.log("here",review.matReviewContent)}
-                                      
+                                                    {review.user}
                                                 </Typography>
                                                 <Rating name={`rating-${index}`} value={review.rating} readOnly precision={0.5} />
                                             </Box>
@@ -143,7 +147,7 @@ function ExDetail() {
                     </List>
                 </Paper>
             </Box>
-
+            { console.log("user")}
             {/* Dialog 컴포넌트 */}
             <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
             <Container maxWidth="md" sx={{ mt: 4 , height:'800px'}}>
@@ -214,7 +218,7 @@ function ExDetail() {
                     취소
                     </Button>
 
-                    <Button
+                {isLogin ?<Button
                             variant="contained"
                             color="primary"
                             sx={{
@@ -226,7 +230,7 @@ function ExDetail() {
                             }}
                             >
                     등록하기
-                    </Button>
+                    </Button> : null}
                     
                     </Box>
             </Grid>
