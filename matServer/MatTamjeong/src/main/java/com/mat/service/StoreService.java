@@ -41,6 +41,11 @@ public class StoreService {
 		return storeRepository.findByLocationCategoryId(locationCategoryId);		
 	}
 	
+	// 페이지 지역태그명으로 쿼리하기
+	public Page<Store> getAllStoreByLc(int locationCategoryId ,Pageable pageable) {
+		return storeRepository.findByLocationCategoryId(locationCategoryId ,pageable);		
+	}
+
 	// 음식 태그명으로 쿼리하기
 	public List<Store> getAllStoreByFc(int foodCategoryId) {
 		return storeRepository.findByFoodCategoryId(foodCategoryId);		

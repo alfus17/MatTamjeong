@@ -1,5 +1,6 @@
 package com.mat.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class locationCategoryService {
 		    System.out.println("locationCategory 값이 존재하지 않습니다.");
 		    return -1;
 		}
+	}
+
+	public List<locationCategory> getLCList() {
+		return locationCategoryRepository.findAll();
+		
 	}
 
 }

@@ -15,6 +15,7 @@
 		<item value="org.eclipse.jgit.ssh.apache:6.7.0.202309050840-r"/>
 		<item value="org.eclipse.jgit:6.7.0.202309050840-r"/>
 		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.29.0.v202308161955"/>
+		<item value="org.eclipse.jst.enterprise_ui.feature:3.31.0.v202308110616"/>
 		<item value="org.eclipse.justj.openjdk.hotspot.jre.full:17.0.8.v20230831-1047"/>
 		<item value="org.eclipse.m2e.feature:2.4.100.20230827-1557"/>
 		<item value="org.eclipse.m2e.logback.feature:2.2.0.20230819-1220"/>
@@ -29,6 +30,9 @@
 		<item value="org.eclipse.tm.terminal.view.feature:11.3.0.202308190036"/>
 		<item value="org.eclipse.userstorage:1.2.0.v20210517-0327"/>
 		<item value="org.eclipse.wst.common.fproj:3.7.4.v202308161955"/>
+		<item value="org.eclipse.wst.json_ui.feature:1.1.11.v202308160419"/>
+		<item value="org.eclipse.wst.web_ui.feature:3.31.0.v202308210520"/>
+		<item value="org.eclipse.wst.xml_ui.feature:3.31.0.v202308200343"/>
 		<item value="org.jboss.tools.m2e.wro4j.feature:1.2.1.202301111328"/>
 		<item value="org.sonatype.m2e.egit.feature:0.17.0.202209271423"/>
 	</list>
@@ -42,19 +46,10 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
-			<item value="C:\Users\임현승\Documents\GitHub\MatTamjeong\matServer\MatTamjeong"/>
-			<item value="C:\Users\임현승\Documents\GitHub\MatTamjeong\matServer"/>
-			<item value="C:\Users\rnlck\OneDrive\문서\GitHub\MatTamjeong\matServer\MatTamjeong"/>
+			<item value="C:\gjjang\MatTamjeong\matServer\MatTamjeong"/>
 			<item value="C:\lhs\MatTamjeong\matServer"/>
 			<item value="C:\lhs\MatTamjeong\matServer\MatTamjeong"/>
 		</list>
-		<section name="SmartImportWizard.dialogBounds">
-			<item key="DIALOG_X_ORIGIN" value="590"/>
-			<item key="DIALOG_Y_ORIGIN" value="147"/>
-			<item key="DIALOG_WIDTH" value="982"/>
-			<item key="DIALOG_HEIGHT" value="726"/>
-			<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
-		</section>
 	</section>
 	<section name="WORKBENCH_SETTINGS">
 		<list key="ENABLED_TRANSFERS">

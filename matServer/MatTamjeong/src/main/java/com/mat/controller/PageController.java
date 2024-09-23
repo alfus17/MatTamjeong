@@ -143,7 +143,7 @@ public class PageController {
 		
 		// 맛탐정 리뷰 데이터 
 		List<matReview> matReviews = matReviewService.getMatReviewsByStoreId(store.getStoreId());
-		response.put("MatReivews", matReviews);
+		response.put("MatReviews", matReviews);
 		
 		// 메뉴테이블 데이터 
 		List<menu> menuResult = menuService.getMenu(store.getStoreId());

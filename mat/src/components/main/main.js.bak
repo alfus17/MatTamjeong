@@ -1,0 +1,146 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating, styled } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Map from '../map/map';
+import { brown } from '@mui/material/colors';
+
+function Main() {
+  const [store, setStore] = useState([]);
+  const [filterStore, setFilterStore] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [currentSlide, setCurrentSlide] = useState(0); // 현재 슬라이드를 관리할 상태
+  const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate hook
+
+  useEffect(() => {
+    // 초기화 시 기본 '강남' 데이터를 불러오는 함수
+    fetchStoreByLocation('강남');
+  }, []);
+  
+  // 특정 위치로 가게 데이터를 가져오는 함수
+  const fetchStoreByLocation = async (location) => {
+    try {
+
+      // TODO  페이징 처리 완료 리스트업에 따라 더보기 처리 작업 
+      const response = await axios.post('/store/getLCStore', { categoryName: location });
+      console.log(response.data);
+      setStore(response.data);
+      setFilterStore(response.data);
+      setSelectedLocation(location);
+      setCurrentSlide(0); // 새로 데이터가 로드되면 슬라이드를 처음으로 설정
+    } catch (error) {
+      console.error('Error fetching store data:', error);
+    }
+  };
+
+  const handleImageClick = (storeId) => {
+    // 클릭 시 해당 가게 ID로 StoreDetails 페이지로 이동
+    navigate(`/store/${storeId}`);
+  };
+
+  const handleNextSlide = () => {
+    if (currentSlide < (filterStore.length > 0 ? filterStore : store).length - 4) {
+      setCurrentSlide(currentSlide + 1); // 슬라이드를 다음으로 이동
+    }
+  };
+
+  const handlePrevSlide = () => {
+    if (currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1); // 슬라이드를 이전으로 이동
+    }
+  };
+
+  // ColorButton
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(brown[500]),
+    backgroundColor: brown[500],
+    '&:hover': {
+      backgroundColor: brown[700],
+    },
+  }));
+  
+  // 별점 가데이터
+  const averageRating = store.Ratings ? store.Ratings.avgRating.toFixed(1) : '0';
+
+  return (
+    <>
+      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#F7EED3'}}>
+          <Card elevation={3} sx={{ p: 2, maxWidth: "60%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
+            <Box sx={{maxWidth:'100%', margin:'0 auto'}}>
+              <Map storeData={store} height="450px" />
+            </Box>                     
+        {/* 맵과 슬라이드 사이에 여백 추가 */}
+        <Box sx={{ mt:1}}> {/* 여백을 50px로 설정 */}
+          <Grid>                     
+              <Box 
+                sx={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  marginTop: '  0px', // 버튼들 위에 여백 추가
+                  gap:'30px',   
+                 
+                }}
+              >
+                <ColorButton variant="contained" sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('강남')}># 강남</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('홍대')}># 홍대</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('명동')}># 명동</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('신촌')}># 신촌</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('종로')}># 종로</ColorButton>
+                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('동대문')}># 동대문</ColorButton>
+              </Box>
+
+              {selectedLocation && (
+                <Box sx={{ width: "100%", overflow: "hidden", position: "relative", mt:2}}> {/* 슬라이더 영역 */}
+                  <IconButton
+                    onClick={handlePrevSlide}
+                    sx={{ position: 'absolute', left: 0, top: '50%', zIndex: 1 }}
+                    disabled={currentSlide === 0}
+                  >
+                    <ArrowBackIosIcon />
+                  </IconButton>
+
+                  <Box sx={{
+                    display: 'flex',
+                    transition: 'transform 0.5s ease-in-out',
+                    transform: `translateX(-${currentSlide * 25}%)`, // 슬라이드를 이동시키는 트랜스폼
+                  }}>
+                    {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
+                      <Box key={index} sx={{  padding: 2, display: 'flex', alignItems: 'center' }}> {/* 슬라이드의 너비를 25%로 설정 */}
+                        <img
+                          src={item.menuUrl}
+                          alt={item.storeName}
+                          onClick={() => handleImageClick(item.storeId)}
+                          style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }} // 이미지 크기 및 마진
+                        />
+                        <Box>
+                          <Typography variant="h6">{item.storeName}</Typography>
+                          <Typography variant="body2">{item.storeAddress}</Typography>
+                          <Rating name="total-rating" value={parseFloat(averageRating)} readOnly precision={0.5} />
+                          <Typography variant="h6" component="p" sx={{ ml: 2 }}>
+                                {averageRating}/5
+                          </Typography>
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+
+                  <IconButton
+                    onClick={handleNextSlide}
+                    sx={{ position: 'absolute', right: 0, top: '50%', zIndex: 1 }}
+                    disabled={currentSlide >= (filterStore.length > 0 ? filterStore : store).length - 4}
+                  >
+                    <ArrowForwardIosIcon />
+                  </IconButton>
+                </Box>
+              )}
+          </Grid>
+        </Box>
+      </Card>
+      </Container>
+    </>
+  );
+}
+
+export default Main;

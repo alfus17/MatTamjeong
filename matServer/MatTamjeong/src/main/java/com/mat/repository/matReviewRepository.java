@@ -20,4 +20,6 @@ public interface matReviewRepository extends JpaRepository<matReview, Integer>{
 	@Query("SELECT COALESCE( AVG(m.rating) ,0) FROM MAT_REVIEW m WHERE m.storeId = :storeid")
 	double getStoreRating(@Param("storeid") int storeId);
 
+	Optional<matReview> findByUserIdAndStoreId(String userId, int storeId);
+
 }
