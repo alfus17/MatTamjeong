@@ -1,7 +1,6 @@
 package com.mat.controller;
 
 import com.mat.common.ObjectToMapConverter;
-import com.mat.common.ratings;
 import com.mat.domain.Store;
 import com.mat.domain.diningReview;
 import com.mat.domain.locationCategory;

@@ -61,9 +61,9 @@ public class StoreService {
 		return storeRepository.findByStoreNameContaining(storeName, pageable);
 	}
 
-	public List<Store> getStoreByMenuName(String menuName, Pageable pageable) {
+	public Page<Store> getStoreByMenuName(String menuName, Pageable pageable) {
 		
-		return storeRepository.findStoresByMenuName(menuName,pageable).getContent();
+		return storeRepository.findStoresByMenuName(menuName,pageable);
 	}
 
     
