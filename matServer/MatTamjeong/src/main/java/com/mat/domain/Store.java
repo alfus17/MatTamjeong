@@ -52,7 +52,7 @@ public class Store {
 			sequenceName = "storeseq",
 			allocationSize = 1
 			)
-	@GeneratedValue(generator="store_id")
+	@GeneratedValue(generator="storeseq")
 	private int storeId;
 	
 	// 가게 이름
