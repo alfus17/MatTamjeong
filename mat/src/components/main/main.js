@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating, styled, Tabs, Tab } from '@mui/material';
+import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Rating, styled, Tabs, Tab, ButtonGroup } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Map from '../map/map';
@@ -58,14 +58,7 @@ function Main() {
     }
   };
 
-  // ColorButton
-  const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(brown[500]),
-    backgroundColor: brown[500],
-    '&:hover': {
-      backgroundColor: brown[700],
-    },
-  }));
+  
   
   // 별점 가데이터
   const averageRating = store.Ratings ? store.Ratings.avgRating.toFixed(1) : '0';
@@ -74,7 +67,7 @@ function Main() {
     setTab(newValue);
   };
 
-  
+
    
 
   return (
@@ -87,38 +80,51 @@ function Main() {
         indicatorColor="primary"
         aria-label="secondary tabs example"
       >
-        <Tab value="one" label="지도로 보기" sx={{ mr: 20 }} />
-        <Tab value="two" label="맛집 추천"  sx={{ mr: 20 }} />
-        <Tab value="three" label="리스트로 보기"  />
+        <Tab value="one" label="지도로 보기" sx={{ mr: 20 , fontWeight:'bold' ,fontSize:'18px'}} />
+        <Tab value="two" label="맛집 추천"  sx={{ mr: 20 ,fontWeight:'bold',fontSize:'18px'}} />
+        <Tab value="three" label="리스트로 보기"   sx={{fontWeight:'bold',fontSize:'18px'}}/>
       </Tabs>    
     </Box>
-      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#F7EED3', height:'900px'}}>
+      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#FFEEA9'}}>
 
       {/* 첫번째 탭 */}
       {tab === 'one' && (
-
         <>
          <Box sx={{width:'100%', height:'10px'}}/>
+         <Card elevation={3} sx={{  maxWidth: "100%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
          <Box 
                 sx={{ 
                   display: 'flex', 
                   justifyContent: 'center', 
                   marginTop: '  0px', // 버튼들 위에 여백 추가
-                  gap:'30px',   
+                  gap:'30px',  
+                  mt:2 
                  
                 }}
               >
-                <ColorButton variant="contained" sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('강남')}># 강남</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('홍대')}># 홍대</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('명동')}># 명동</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('신촌')}># 신촌</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('종로')}># 종로</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('동대문')}># 동대문</ColorButton>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('강남')}>
+                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('홍대')}>
+                <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('명동')}>
+                <Typography sx={{fontWeight:'bold'}}>명동</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('신촌')}>
+                <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('종로')}>
+                <Typography sx={{fontWeight:'bold'}}>종로</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('동대문')}>
+                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
         </Box>
-         <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 2, mb: 4, borderRadius: 3 }}>
+         <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 1, mb: 4, borderRadius: 3 }}>
          <Box sx={{ maxWidth: '100%', margin: '0 auto' }}>
            <Map storeData={store} height="700px" /> {/* 지도를 크게 표시 */}
          </Box>
+       </Card>
        </Card>
        </>
       )}
@@ -143,12 +149,25 @@ function Main() {
                  
                 }}
               >
-                <ColorButton variant="contained" sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('강남')}># 강남</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('홍대')}># 홍대</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('명동')}># 명동</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('신촌')}># 신촌</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('종로')}># 종로</ColorButton>
-                <ColorButton  sx={{width:'80px', height:'40px', fontSize:'16px',borderRadius:1}} onClick={() => fetchStoreByLocation('동대문')}># 동대문</ColorButton>
+   
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('강남')}>
+                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('홍대')}>
+                <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('명동')}>
+                <Typography sx={{fontWeight:'bold'}}>명동</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('신촌')}>
+                <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('종로')}>
+                <Typography sx={{fontWeight:'bold'}}>종로</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('동대문')}>
+                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
+     
               </Box>
 
               {selectedLocation && (
@@ -167,11 +186,12 @@ function Main() {
                     transform: `translateX(-${currentSlide * 25}%)`, // 슬라이드를 이동시키는 트랜스폼
                   }}>
                     {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
-                      <Box key={index} sx={{  padding: 2, display: 'flex', alignItems: 'center' }}> {/* 슬라이드의 너비를 25%로 설정 */}
+                      <Box key={index} sx={{  padding: 2, display: 'flex', alignItems: 'center' }}
+                          onClick={() => handleImageClick(item.storeId)}
+                      > {/* 슬라이드의 너비를 25%로 설정 */}
                         <img
                           src={item.menuUrl}
-                          alt={item.storeName}
-                          onClick={() => handleImageClick(item.storeId)}
+                          alt={item.storeName}                         
                           style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }} // 이미지 크기 및 마진
                         />
                         <Box>
@@ -201,35 +221,51 @@ function Main() {
       </>
       )};
 
-          {/* 리스트로 보기 탭 */}
+          {/* 세번째 탭 */}
         {tab === 'three' && (
           <Card elevation={3} sx={{ maxWidth: "80%", margin: "0 auto", mt: 2, mb: 4, borderRadius: 3 }}>
             <Box sx={{ maxWidth: '100%', margin: '0 auto', p: 2 }}>
               {/* 버튼 추가 */}
               <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mb: 2 }}>
-                <ColorButton variant="contained" sx={{ width: '80px', height: '40px', fontSize: '16px', borderRadius: 1 }} onClick={() => fetchStoreByLocation('강남')}># 강남</ColorButton>
-                <ColorButton sx={{ width: '80px', height: '40px', fontSize: '16px', borderRadius: 1 }} onClick={() => fetchStoreByLocation('홍대')}># 홍대</ColorButton>
-                <ColorButton sx={{ width: '80px', height: '40px', fontSize: '16px', borderRadius: 1 }} onClick={() => fetchStoreByLocation('명동')}># 명동</ColorButton>
+              <Button  sx={{}} onClick={() => fetchStoreByLocation('강남')}>
+                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('홍대')}>
+                <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('명동')}>
+                <Typography sx={{fontWeight:'bold'}}>명동</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('신촌')}>
+                <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('종로')}>
+                <Typography sx={{fontWeight:'bold'}}>종로</Typography>
+                </Button>
+                <Button  sx={{}} onClick={() => fetchStoreByLocation('동대문')}>
+                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
               </Box>
               {/* 가게 리스트 한 줄에 하나씩 표시, slice로 5개씩 보여줌 */}
               <Box>
                 {(filterStore.length > 0 ? filterStore : store)
                   .slice(0, visibleStores)  // 처음에 5개만 보여주고, 더보기 클릭 시 추가로 보여줌
                   .map((item, index) => (
-                  <Paper key={index} sx={{ mb: 3, p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%' }}>
+                  <Paper key={index} sx={{ mb: 3, p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor:'#FEFFD2'}}>
                     <img
                       src={item.menuUrl}
                       alt={item.storeName}
                       onClick={() => handleImageClick(item.storeId)}
-                      style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
+                      style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' , cursor:'pointer'}}
                     />
                     <Box>
-                      <Typography variant="h6">{item.storeName}</Typography>
-                      <Typography variant="body2">{item.storeAddress}</Typography>
+                      <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
+                      <Typography >{item.storeAddress}</Typography>
+                      <Box sx={{display:'flex' , mt:2}}>
                       <Rating name="total-rating" value={parseFloat(averageRating)} readOnly precision={0.5} />
-                      <Typography variant="h6" component="p">
+                      <Typography sx={{ml:1 , fontSize:'24px'}}>
                         {averageRating}/5
                       </Typography>
+                      </Box>
                     </Box>
                   </Paper>
                 ))}
