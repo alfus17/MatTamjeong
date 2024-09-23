@@ -29,13 +29,13 @@ function Find() {
         >
           <Box sx={{ display: "flex", justifyContent: "center", gap: 2, alignItems: "center", height: "100%" }}> {/* 세로 중앙 정렬 */}
             {/* 아이디 찾기 및 비밀번호 찾기 버튼 */}
-            <Button variant="contained" onClick={() => handleModeChange("findId")} sx={{
+            <Button  variant="outlined"  onClick={() => handleModeChange("findId")} sx={{
                 width: "120px",
                 height: "50px"
             }}>
               아이디 찾기   
             </Button>
-            <Button variant="contained" onClick={() => handleModeChange("findPassword")} sx={{
+            <Button variant="outlined" onClick={() => handleModeChange("findPassword")} sx={{
                 width: "120px",
                 height: "50px"
             }}>
@@ -66,7 +66,7 @@ function Find() {
                     mt : 2,
                     margin: "0 auto"
                 }}>
-                <Button variant="contained" onClick={() => handleModeChange("findId")} sx={{
+                <Button variant="outlined" onClick={() => handleModeChange("findId")} sx={{
                 width: "120px",
                 height: "50px",
                 display:"flex",
@@ -105,7 +105,7 @@ function Find() {
                     mt : 2,
                     margin: "0 auto"
                 }}>
-                <Button variant="contained" onClick={() => handleModeChange("findPassword")} sx={{
+                <Button variant="outlined" onClick={() => handleModeChange("findPassword")} sx={{
                 width: "120px",
                 height: "50px",
                 display:"flex",

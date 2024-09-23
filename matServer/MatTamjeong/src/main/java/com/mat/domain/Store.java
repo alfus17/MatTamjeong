@@ -81,7 +81,7 @@ public class Store {
 	private String details;
 	
 	// 메뉴사진 url
-	@Column(name="menu_url" ,length=150)
+	@Column(name="menu_url" ,length=300)
 	private String menuUrl;
 	
 	// 가게 음식 카테고리 id(FK)
