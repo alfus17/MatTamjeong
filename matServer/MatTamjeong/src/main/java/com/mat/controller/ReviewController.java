@@ -42,10 +42,8 @@ public class ReviewController {
     @Autowired
     private matReviewService matReviewService;
     
-    
     // 정렬 설정
 	Sort sort = Sort.by(Sort.Order.desc("rating"));
-
     
     // 카카오 리뷰 가져오기
 	// 음식 카테고리로 쿼리하기
@@ -106,7 +104,6 @@ public class ReviewController {
     	// 모든 리뷰들 한하여 페이지네이션 처리
     	// 페이지네이션
     	Pageable pageable = PageRequest.of(intPage-1, 10, sort);
-    	
     	HashMap<String,Object> reviewsMap = new HashMap<>();
     	
     	//Page<Object> 형식이라서 .getContent 해줘야함
@@ -120,7 +117,6 @@ public class ReviewController {
 		reviewsMap.put("matReview", matReviews);
 		reviewsMap.put("dcReview", dcReview);
 		reviewsMap.put("kgReview", kgReview);
-
 
     	return reviewsMap;
     }

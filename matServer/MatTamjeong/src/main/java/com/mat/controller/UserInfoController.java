@@ -18,6 +18,7 @@ import com.mat.domain.Store;
 import com.mat.domain.locationCategory;
 import com.mat.domain.userInfo;
 import com.mat.service.UserService;
+import com.mat.service.bookMarkService;
 import com.mat.service.locationCategoryService;
 
 @RestController
@@ -29,6 +30,9 @@ public class UserInfoController
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private bookMarkService bookMarkService;
 
 	// 모든 유저의 userInfo 데이터를 반환하는 API
 	@PostMapping("/getuserInfo")
@@ -78,9 +82,24 @@ public class UserInfoController
 	@GetMapping("/checkUser/{userId}")
 	public boolean  checkUserId(@PathVariable("userId") String userId  ) {
 		return userService.checkUser(userId);
-			
-		
 	}
+	
+	// 사용자 북마크 정보 입력
+	@GetMapping("/addBookMark/{userId}")
+	public boolean addBookMark(@PathVariable("userId") String userId  ) {
+		
+		// 유저 아이디로 유저가 있는지 확인하기 
+		// true 면 존재함 false 면 존재하지 않음
+		boolean userCheck = userService.checkUser(userId); 
+		
+		if(userCheck) {
+			
+			bookMarkService.addBookMark(userId);
+		}
+		
+		return false;
+	}
+	
 	
 	
 	// 사용자 정보를 업데이트하는 API
