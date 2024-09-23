@@ -20,6 +20,7 @@ function ExDetail() {
     const { storeId } = useParams();
     const [detail, setDetail] = useState({});
     const [open, setOpen] = useState(false);
+    console.log("detail", detail==null)
 
     const [userinfo, setUserinfo] =  useState({});
 

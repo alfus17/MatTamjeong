@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class bookmark {
 	 
     /* 	bookmark Table
- * 	즐겨찾기 ID (PK) 		: bookmark_id 	varchar2(10)
+ * 	즐겨찾기 ID (PK) 회원아이디 : bookmark_id 	varchar2(10)
  *  가게ID 	(PK)(FK)	: store_id 		varchar2(10)
  * 	생성일					: created_at	date
  * 	수정일 				: update_at		date
@@ -32,7 +32,7 @@ public class bookmark {
  */	
  
 	 
-	// 	즐겨찾기 ID (PK) 
+	// 	즐겨찾기 ID =  회원 아이디(PK) 
 	@Id
 	@Column(name="bookmark_id" ,length=10)
 	@NonNull
