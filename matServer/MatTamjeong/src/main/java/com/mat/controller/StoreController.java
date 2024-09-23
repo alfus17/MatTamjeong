@@ -1,7 +1,6 @@
 package com.mat.controller;
 
 import com.mat.common.ObjectToMapConverter;
-import com.mat.common.ratings;
 import com.mat.domain.Store;
 import com.mat.domain.diningReview;
 import com.mat.domain.locationCategory;
@@ -92,6 +91,7 @@ public class StoreController {
 	// 지역카테고리로 쿼리하기
 	@PostMapping("/getLCStore/{page}")
 	public Map<String, Object>getAllStoreByLc(@RequestBody locationCategory categoryName, @PathVariable("page") String page ) {
+		System.out.println("메서드가 호출되었습니다");
 		int intPage = Integer.parseInt(page);
 		// 최종 반환 맵
 		Map <String, Object> result = new HashMap<>();
