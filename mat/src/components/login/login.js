@@ -70,12 +70,12 @@ function Login({onClose,setSession}) {
 
                 }}>
                     <Box>
-                        <Typography variant="h4" sx={{ textAlign: "center" }}>
+                        <Typography variant="h4" sx={{ textAlign: "center" ,color:'#FF7D29'}}>
                             Login <VpnKeyIcon />
                         </Typography>
                     </Box>
 
-                    <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <TextField 
                             id="outlined-id-input"
                             label="ID"
@@ -94,7 +94,7 @@ function Login({onClose,setSession}) {
                         />
                         <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
                             <Button 
-                                variant="contained" 
+                                 variant="outlined" // 테두리만 있는 버튼
                                 color="primary" 
                                 sx={{ 
                                     mt: 2, 

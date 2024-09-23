@@ -9,12 +9,13 @@ import Rating from '@mui/material/Rating';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { Button, Paper } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Map from '../map/map';
 
 function Ex() {
   const { category, keyword, startpage } = useParams();
+  const navigate = useNavigate();  // 수정된 부분
   
   const [stores, setStores] = useState([]);
   const [page, setPage] = useState(parseInt(startpage));
@@ -41,6 +42,11 @@ function Ex() {
     setPage((prevPage) => prevPage + 1);
   };
 
+  const handleSearchClick = (storeId) => {
+    // 클릭 시 해당 가게 ID로 StoreDetails 페이지로 이동
+    navigate(`/store/${storeId}`);
+  };
+
   return (
     <Container maxWidth="100%" sx={{ mt: 2 , backgroundColor:'#F7EED3', height:'700px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100%' }}>
@@ -60,6 +66,7 @@ function Ex() {
                     component="img"
                     src={store.menuUrl}
                     alt={store.storeName}
+                    onClick={() => handleSearchClick(stores.storeId)}
                     sx={{
                       width: 150,
                       height: 150,

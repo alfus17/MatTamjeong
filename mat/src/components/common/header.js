@@ -86,24 +86,24 @@ function Header() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List sx={{mt:12}}>
-          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px'}} >
-              <Link to="/mypageMain/aboutMe" style={{textDecoration:'none'}}>내 프로필</Link>
+      <List>
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px', mt:10,color:'#FF7D29'}} >
+              <Link to="/mypageMain/aboutMe" style={{textDecoration:'none',color: 'inherit' }} >내 프로필</Link>
           </Typography>
 
-          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
-              <Link to="/mypageMain/passwordConfirm" style={{textDecoration:'none'}}>정보수정</Link>
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt:6 ,color:'#FF7D29'}} >
+              <Link to="/mypageMain/passwordConfirm" style={{textDecoration:'none',color: 'inherit'}}>정보수정</Link>
           </Typography>
 
-          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
-              <Link to="/mypageMain/ManagementHistory" style={{textDecoration:'none'}}>이력관리</Link>
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt:6,color:'#FF7D29'}} >
+              <Link to="/mypageMain/ManagementHistory" style={{textDecoration:'none',color: 'inherit'}}>이력관리</Link>
           </Typography>
 
-          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt : 6}} >
-              <Link to="/mypageMain" style={{textDecoration:'none'}}>북마크</Link>
+          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt:6,color:'#FF7D29'}} >
+              <Link to="/mypageMain" style={{textDecoration:'none',color: 'inherit'}} >북마크</Link>
           </Typography>
 
-          {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}}>로그아웃</Button> : null}
+          {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}} onClick={logoutHandler}>로그아웃</Button> : null}
       </List>
       <Divider />
     </Box>
@@ -113,23 +113,32 @@ function Header() {
     <Container maxWidth="lg" sx={{ mt:6 }}>
       <Grid container alignItems="center">
         {/* Left Section: Logo */}
-        <Grid item xs={3} style={{ textAlign: 'left' }}>
-          <Box sx={{display:'flex'}}>
-            <Link to="/">
-              <img
-                src="/img/logo.png"
-                alt="Logo"
-                style={{ cursor: 'pointer' }}
-              />
-            </Link>
-          </Box>
-        </Grid>
+    <Grid item xs={3} style={{ textAlign: 'left' }}>
+      <Box sx={{ display: 'flex' }}>
+        <Link to="/" style={{ textDecoration: 'none' }}> {/* 밑줄 없애기 */}
+          <Typography 
+            sx={{ 
+              fontSize: '25px', 
+              fontWeight: 'bold', // 글씨 두껍게
+              color: '#1E2A5E', // 원하는 색상으로 설정
+              fontFamily: 'Noto Sans KR, sans-serif', // 로고 같은 폰트
+              '&:hover': {
+                color: '#f50057', // 마우스 오버 시 색상 변화
+                transition: 'color 0.3s ease', // 부드러운 전환 효과
+              },
+            }}
+          >
+            맛탐정
+          </Typography>
+        </Link>
+      </Box>
+    </Grid>
 
         {/* Center Section: Search bar with category */}
         <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
-        <Paper sx={{width:'100%' , borderRadius:6 , paddingLeft:3 ,backgroundColor:'#FFF8E8', display:''}}>
-        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 ,color:'#674636'}}>
-          <InputLabel id="demo-simple-select-standard-label" sx={{color:'#674636'}}>카테고리</InputLabel>
+        <Paper sx={{width:'100%' , borderRadius:6 , paddingLeft:3 ,backgroundColor:'#f7f7f7', display:''}}>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 ,color:'#FF7D29'}}>
+          <InputLabel id="demo-simple-select-standard-label" sx={{color:'#FF7D29'}}>카테고리</InputLabel>
               <Select
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
@@ -157,7 +166,7 @@ function Header() {
             onKeyPress={handleKeyPress} // Search on Enter key press
           />
           <IconButton type="button" sx={{  }} aria-label="search" onClick={handleSearch}>
-            <SearchIcon sx={{width:'35px',height:'35px' ,mb:1,color:'#674636'}}/>
+            <SearchIcon sx={{width:'35px',height:'35px' ,mb:1,color:'#FF7D29'}}/>
           </IconButton>
         </Paper>
         </Grid>
@@ -187,9 +196,9 @@ function Header() {
                 component="h2"
                 gutterBottom
                 sx={{
-                  fontSize: '20px',
+                  fontSize: '25px',
                   cursor: 'pointer',
-                  color:'#674636',
+                  color:'#FF7D29',
                   '&:hover': {
                     color: 'red',
                   

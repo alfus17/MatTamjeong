@@ -67,7 +67,7 @@ function Main() {
     setTab(newValue);
   };
 
-  
+
    
 
   return (
@@ -85,7 +85,7 @@ function Main() {
         <Tab value="three" label="리스트로 보기"   sx={{fontWeight:'bold',fontSize:'18px'}}/>
       </Tabs>    
     </Box>
-      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#F7EED3'}}>
+      <Container disableGutters maxWidth={false} sx={{backgroundColor:'#FFEEA9'}}>
 
       {/* 첫번째 탭 */}
       {tab === 'one' && (
@@ -186,11 +186,12 @@ function Main() {
                     transform: `translateX(-${currentSlide * 25}%)`, // 슬라이드를 이동시키는 트랜스폼
                   }}>
                     {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
-                      <Box key={index} sx={{  padding: 2, display: 'flex', alignItems: 'center' }}> {/* 슬라이드의 너비를 25%로 설정 */}
+                      <Box key={index} sx={{  padding: 2, display: 'flex', alignItems: 'center' }}
+                          onClick={() => handleImageClick(item.storeId)}
+                      > {/* 슬라이드의 너비를 25%로 설정 */}
                         <img
                           src={item.menuUrl}
-                          alt={item.storeName}
-                          onClick={() => handleImageClick(item.storeId)}
+                          alt={item.storeName}                         
                           style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }} // 이미지 크기 및 마진
                         />
                         <Box>
@@ -249,12 +250,12 @@ function Main() {
                 {(filterStore.length > 0 ? filterStore : store)
                   .slice(0, visibleStores)  // 처음에 5개만 보여주고, 더보기 클릭 시 추가로 보여줌
                   .map((item, index) => (
-                  <Paper key={index} sx={{ mb: 3, p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor:'#FFF8E8'}}>
+                  <Paper key={index} sx={{ mb: 3, p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor:'#FEFFD2'}}>
                     <img
                       src={item.menuUrl}
                       alt={item.storeName}
                       onClick={() => handleImageClick(item.storeId)}
-                      style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
+                      style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' , cursor:'pointer'}}
                     />
                     <Box>
                       <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
