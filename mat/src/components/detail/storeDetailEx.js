@@ -110,49 +110,52 @@ function ExDetail() {
                     {/* 오른쪽영역 (2개 Paper) */}
                     <Grid item xs={8} elevation={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
-                            <Grid item xs={6} >
-                                <Item sx={{ height: '300px' }} elevation={6}>
-                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
-                                    <Typography sx={{fontSize:'20px'}}>평균 별점 :</Typography> 
-                                    <Rating name="total-rating" value={(avgRating)} readOnly precision={0.5} />
-                                    <Typography variant="h6">{avgRating}/5</Typography>
+                        <Grid item xs={6}>
+                            <Item sx={{ height: '300px' }} elevation={6}>
+                                {/* 1행: 평균 별점 */}
+                                <Box sx={{ textAlign: 'center', mb: 2 }}>
+                                    <Typography sx={{ fontSize: '24px', fontWeight: 'bold' }}>평균 별점</Typography>
+                                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                        <Rating name="total-rating" value={avgRating} readOnly precision={0.5} sx={{ fontSize: '2rem' }} />
+                                        <Typography variant="h6" sx={{ ml: 1 }}>{avgRating}/5</Typography>
+                                    </Box>
+                                </Box>
+
+                                {/* 2행: 다이닝, 카카오, 맛탐정 별점 - 수평 정렬 */}
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, width: '100%' }}>
+                                    {/* 다이닝 별점 */}
+                                    <Box sx={{ flexBasis: '33%', textAlign: 'center' }}> {/* 각 박스의 너비를 33%로 설정 */}
+                                        <Typography variant="h6">다이닝 별점 :</Typography>
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                            <Rating name="dc-rating" value={dcRating} readOnly precision={0.5} sx={{ fontSize: '1.5rem' }} />
+                                            <Typography variant="h6">{dcRating}/5</Typography>
+                                        </Box>
                                     </Box>
 
-                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
-                                    <Typography variant="h6">다이닝 별점 :</Typography>
-                                    <Rating name="total-rating" value={(dcRating)} readOnly precision={0.5} />
-                                    <Typography variant="h6">{dcRating}/5</Typography>
-                                    </Box>
-                                    
-                                                                                                    
-                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
-                                    <Typography variant="h6">카카오 별점 :</Typography>
-                                    <Rating name="total-rating" value={(kgRating)} readOnly precision={0.5} />
-                                    <Typography variant="h6">{kgRating}/5</Typography>
+                                    {/* 카카오 별점 */}
+                                    <Box sx={{ flexBasis: '33%', textAlign: 'center' }}>
+                                        <Typography variant="h6">카카오 별점 :</Typography>
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                            <Rating name="kg-rating" value={kgRating} readOnly precision={0.5} sx={{ fontSize: '1.5rem' }} />
+                                            <Typography variant="h6">{kgRating}/5</Typography>
+                                        </Box>
                                     </Box>
 
-                                    <Box sx={{display:'flex' , margin:'0 auto'}}>                                 
-                                    <Typography variant="h6">맛탐정 별점 :</Typography>
-                                    <Rating name="total-rating" value={(matRating)} readOnly precision={0.5} />
-                                    <Typography variant="h6">{matRating}/5</Typography>
+                                    {/* 맛탐정 별점 */}
+                                    <Box sx={{ flexBasis: '33%', textAlign: 'center' }}>
+                                        <Typography variant="h6">맛탐정 별점 :</Typography>
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                            <Rating name="mat-rating" value={matRating} readOnly precision={0.5} sx={{ fontSize: '1.5rem' }} />
+                                            <Typography variant="h6">{matRating}/5</Typography>
+                                        </Box>
                                     </Box>
+                                </Box>
 
-                                    <Typography variant="body1">{detail.StoreInfo?.storeAddress}</Typography>
-                                </Item>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Item sx={{ height: '100%' }} elevation={6}>
-                                <Typography variant="h5" component="h2" sx={{ mb: 2 }}>메뉴</Typography>
-                                <List>
-                                    {detail.StoreMenu && detail.StoreMenu.map((menuItem, index) => (
-                                        <ListItem key={index} sx={{ borderBottom: '1px solid #ccc' }}>
-                                            <ListItemText primary={menuItem.menuName} />
-                                            <Typography variant="body1">{menuItem.price.toLocaleString()}원</Typography>
-                                        </ListItem>
-                                    ))}
-                                </List>
-                                </Item>
-                            </Grid>
+                                {/* 3행: 주소 */}
+                                <Typography variant="body1" sx={{ textAlign: 'center', mt: 2 }}>{detail.StoreInfo?.storeAddress}</Typography>
+                            </Item>
+                        </Grid>
+
                         </Grid>
 
                        {/* 오른쪽 아래 */}
