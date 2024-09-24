@@ -6,6 +6,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Map from '../map/map';
 import { Rating } from '@mui/material';
+import { set } from 'date-fns';
 
 function Main() {
   const [store, setStore] = useState([]); // 가게 리스트
@@ -13,10 +14,14 @@ function Main() {
   const [selectedLocation, setSelectedLocation] = useState('강남');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [tab, setTab] = useState('two');
-  const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [filterStore, setFilterStore] = useState([]); // 추가: filterStore 초기화
   const navigate = useNavigate();
+  // 페이지
+  const [page, setPage] = useState(1);
+
+
+  console.log(page)
 
   useEffect(() => {
     fetchStoreByLocation(selectedLocation, page);
@@ -24,6 +29,7 @@ function Main() {
 
   const fetchStoreByLocation = async (location, pageNumber) => {
     try {
+      console.log(pageNumber,location);
       const response = await axios.post(`/store/getLCStore/${pageNumber}`, { categoryName: location });
       console.log('Axios Response:', response);
       console.log('Response Data:', response.data);
@@ -40,10 +46,13 @@ function Main() {
     }
   };
 
+
+
   const handleShowMore = () => {
     if (page < totalPages) {
       setPage((prevPage) => prevPage + 1);
     }
+
   };
 
   const handleImageClick = (storeId) => {
@@ -95,22 +104,40 @@ function Main() {
                  
                 }}
               >
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('강남')}>
+                 <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('강남',page);
+                }}>
                   <Typography sx={{fontWeight:'bold'}}>강남</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('홍대')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('홍대',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('명동')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('명동',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>명동</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('신촌')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('신촌',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('종로')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('종로',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>종로</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('동대문')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('동대문',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
         </Box>
          <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 1, mb: 4, borderRadius: 3 }}>
@@ -145,22 +172,40 @@ function Main() {
                 }}
               >
    
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('강남')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('강남',page);
+                }}>
                   <Typography sx={{fontWeight:'bold'}}>강남</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('홍대')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('홍대',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('명동')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('명동',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>명동</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('신촌')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('신촌',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('종로')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('종로',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>종로</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('동대문')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('동대문',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
      
               </Box>
@@ -222,22 +267,40 @@ function Main() {
             <Box sx={{ maxWidth: '100%', margin: '0 auto', p: 2 }}>
               {/* 버튼 추가 */}
               <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mb: 2 }}>
-              <Button  sx={{}} onClick={() => fetchStoreByLocation('강남')}>
+              <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('강남',page);
+                }}>
                   <Typography sx={{fontWeight:'bold'}}>강남</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('홍대')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('홍대',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('명동')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('명동',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>명동</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('신촌')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('신촌',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('종로')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('종로',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>종로</Typography>
                 </Button>
-                <Button  sx={{}} onClick={() => fetchStoreByLocation('동대문')}>
+                <Button  sx={{}} onClick={() =>{ 
+                setPage(1);
+                fetchStoreByLocation('동대문',page);
+                }}>
                 <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
               </Box>
               {/* 가게 리스트 한 줄에 하나씩 표시, slice로 5개씩 보여줌 */}
@@ -256,14 +319,6 @@ function Main() {
                       <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
                       <Typography >{item.storeAddress}</Typography>
                       <Box sx={{display:'flex' , mt:2}}>
-                      <Rating name="total-rating" value={parseFloat(d)} readOnly precision={0.5} />
-                      <Typography sx={{ml:1 , fontSize:'24px'}}>
-                        {avgRating}/5
-                      </Typography>
-                      <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
-                      <Typography sx={{ml:1 , fontSize:'24px'}}>
-                        {avgRating}/5
-                      </Typography>
                       <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
                       <Typography sx={{ml:1 , fontSize:'24px'}}>
                         {avgRating}/5
