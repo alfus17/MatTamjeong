@@ -20,6 +20,8 @@ function Ex() {
   const [stores, setStores] = useState([]);
   const [page, setPage] = useState(parseInt(startpage));
 
+  const [totalPage, setTotalPage ] = useState(1);
+
   useEffect(() => {
     // Reset stores and fetch new data when keyword or category changes
     setStores([]); // Clear existing stores
@@ -35,7 +37,9 @@ function Ex() {
 
   const fetchStores = async (page, keyword) => {
     const response = await axios.get(`/search/${category}/${keyword}/${page}`);
-    setStores((prevStores) => [...prevStores, ...response.data]); // Add new data to existing stores
+    console.log(response.data);
+    setStores((prevStores) => [...prevStores, ...response.data?.storeList]); // Add new data to existing stores
+    setTotalPage(response?.data?.totalPages)
   };
 
   const loadMore = () => {
@@ -53,7 +57,7 @@ function Ex() {
         <Box sx={{ flex: 1, height: '100%', overflowY: 'auto' }}>
           <List sx={{ width: '100%' }}>
             {stores.map((store) => (
-              <Paper sx={{ mt: 2 , mr:2}} key={store.id}>
+              <Paper sx={{ mt: 2 , mr:2}} key={store.id}  onClick={() => handleSearchClick(stores.storeId)}>
                 <ListItem
                   disableGutters
                   secondaryAction={
@@ -66,7 +70,7 @@ function Ex() {
                     component="img"
                     src={store.menuUrl}
                     alt={store.storeName}
-                    onClick={() => handleSearchClick(stores.storeId)}
+                    // onClick={() => handleSearchClick(stores.storeId)}
                     sx={{
                       width: 150,
                       height: 150,
@@ -84,9 +88,9 @@ function Ex() {
               </Paper>
             ))}
           </List>
-          <Button onClick={loadMore} variant="contained" sx={{ mt: 2 }}>
+         {totalPage !== page?  <Button onClick={loadMore} variant="contained" sx={{ mt: 2 }}>
             더보기
-          </Button>
+          </Button> : null}
         </Box>
 
         <Box sx={{ flex: 2 }}>

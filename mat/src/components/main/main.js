@@ -271,7 +271,7 @@ function Main() {
                 setPage(1);
                 fetchStoreByLocation('강남',page);
                 }}>
-                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
+                  <Typography sx={{fontWeight:'bold'}}>강남1</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
