@@ -256,6 +256,14 @@ function Main() {
                       <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
                       <Typography >{item.storeAddress}</Typography>
                       <Box sx={{display:'flex' , mt:2}}>
+                      <Rating name="total-rating" value={parseFloat(d)} readOnly precision={0.5} />
+                      <Typography sx={{ml:1 , fontSize:'24px'}}>
+                        {avgRating}/5
+                      </Typography>
+                      <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
+                      <Typography sx={{ml:1 , fontSize:'24px'}}>
+                        {avgRating}/5
+                      </Typography>
                       <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
                       <Typography sx={{ml:1 , fontSize:'24px'}}>
                         {avgRating}/5
