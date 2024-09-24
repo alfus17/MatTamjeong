@@ -85,21 +85,21 @@ public class UserInfoController
 	}
 	
 	// 사용자 북마크 정보 입력
-	@GetMapping("/addBookMark/{userId}")
-	public boolean addBookMark(@PathVariable("userId") String userId  ) {
-		
-		// 유저 아이디로 유저가 있는지 확인하기 
-		// true 면 존재함 false 면 존재하지 않음
-		boolean userCheck = userService.checkUser(userId); 
-		
-		if(userCheck) {
-			
-			bookMarkService.addBookMark(userId);
-		}
-		
-		return false;
-	}
-	
+//	@GetMapping("/addBookMark/{userId}")
+//	public boolean addBookMark(@PathVariable("userId") String userId  ) {
+//		
+//		// 유저 아이디로 유저가 있는지 확인하기 
+//		// true 면 존재함 false 면 존재하지 않음
+//		boolean userCheck = userService.checkUser(userId); 
+//		
+//		if(userCheck) {
+//			
+//			bookMarkService.addBookMark(userId);
+//		}
+//		
+//		return false;
+//	}
+//	
 	
 	
 	// 사용자 정보를 업데이트하는 API
