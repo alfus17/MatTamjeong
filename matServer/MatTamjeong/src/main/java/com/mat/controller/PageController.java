@@ -6,12 +6,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mat.domain.Store;
+import com.mat.domain.diningReview;
+import com.mat.domain.kakaoReview;
 import com.mat.domain.matReview;
 import com.mat.domain.menu;
 import com.mat.service.StoreService;
@@ -60,56 +66,60 @@ public class PageController {
 	 *  
 	 * ex) 응답값
 	 * {
-    "MatReivews": [
-        {
-            "matReviewId": 1,
-            "rating": 4.8,
-            "matLikeCount": 45,
-            "matReviewContent": "새로운 메뉴가 정말 맛있었어요! 특히 스시의 신선함이 최고였어요.",
-            "matCreatedTime": null,
-            "matPhotoUrl": null,
-            "storeId": 1
-        }...
-    ],
-    "StoreMenu": [
-        {
-            "menuId": 1,
-            "menuName": "자장면",
-            "storeId": 1,
-            "foodCategory": "중식",
-            "price": 30000,
-            "imageUrl": null
-        }...
-    ],
-    "StoreInfo": {
-        "storeId": 1,
-        "storeName": "Sushi Myeongdong",
-        "storeAddress": "서울특별시 중구 명동길 14",
-        "storeLocationLat": 37.5642135,
-        "storeLocationLng": 126.9826842,
-        "businessHours": "09:00 AM - 08:00 PM",
-        "details": null,
-        "foodCategoryId": 1,
-        "locationCategoryId": 1,
-        "createdAt": null,
-        "updateAt": null								
-    },
-    "Ratings": {
-        "kgRating": 4.5,								// 카카오 평점 평균
-        "dcRating": 0.0,								// 다이닝코드 평점 평균
-        "avgRating": 3.1,								// 모든 평점 평균
-        "matRating": 4.8								// 맛탐정 평점 평균
-    }
-}
+		    "MatReivews": [
+		        {
+		            "matReviewId": 1,
+		            "rating": 4.8,
+		            "matLikeCount": 45,
+		            "matReviewContent": "새로운 메뉴가 정말 맛있었어요! 특히 스시의 신선함이 최고였어요.",
+		            "matCreatedTime": null,
+		            "matPhotoUrl": null,
+		            "storeId": 1
+		        }...
+		    ],
+		    "StoreMenu": [
+		        {
+		            "menuId": 1,
+		            "menuName": "자장면",
+		            "storeId": 1,
+		            "foodCategory": "중식",
+		            "price": 30000,
+		            "imageUrl": null
+		        }...
+		    ],
+		    "StoreInfo": {
+		        "storeId": 1,
+		        "storeName": "Sushi Myeongdong",
+		        "storeAddress": "서울특별시 중구 명동길 14",
+		        "storeLocationLat": 37.5642135,
+		        "storeLocationLng": 126.9826842,
+		        "businessHours": "09:00 AM - 08:00 PM",
+		        "details": null,
+		        "foodCategoryId": 1,
+		        "locationCategoryId": 1,
+		        "createdAt": null,
+		        "updateAt": null								
+		    },
+		    "Ratings": {
+		        "kgRating": 4.5,								// 카카오 평점 평균
+		        "dcRating": 0.0,								// 다이닝코드 평점 평균
+		        "avgRating": 3.1,								// 모든 평점 평균
+		        "matRating": 4.8								// 맛탐정 평점 평균
+		    }
+		}
 	 */
 	
 	//TODO url 설정
-	@PostMapping("/getDetailStore")
-	public  HashMap<String,Object> getStoreAllInformation(@RequestBody Store store){
+	@PostMapping("/getDetailStore/{page}")
+	public  HashMap<String,Object> getStoreAllInformation(@RequestBody Store store , @PathVariable("page") String page){
+		
+		// 리뷰 페이징 처리
+		int intPage = Integer.parseInt(page);
+		Sort sort = Sort.by(Sort.Order.desc("rating"));
+    	Pageable pageable = PageRequest.of(intPage-1, 10, sort);
 		
 		// 해쉬맵 
 		HashMap<String,Object> response =  new HashMap<>();
-		
 		
 		// 가게 데이터 ( StoreInfo ) 
 		Optional<Store> idQueryResult =  storeService.getStoreById(store.getStoreId());
@@ -140,11 +150,23 @@ public class PageController {
 		
 		// 되돌려줄 값에다가 넣어줌
 		response.put("Ratings", StoreRatings);
+		int StoreId =store.getStoreId();
+		
+		HashMap<String, Object> allReviews = new HashMap<>();
+		
+		// 카카오 리뷰 데이터
+		List<kakaoReview> kakaoReview = kgReviewService.getKgReviewsByStoreId(StoreId,pageable).getContent();
+		allReviews.put("kakaoReview", kakaoReview);
+		
+		// 다이닝 리뷰 데이터
+		List<diningReview> diningReview =dcReviewService.getDCReviewsByStoreId(StoreId,pageable).getContent();
+		allReviews.put("diningReview", diningReview);
 		
 		// 맛탐정 리뷰 데이터 
-		List<matReview> matReviews = matReviewService.getMatReviewsByStoreId(store.getStoreId());
-		response.put("MatReviews", matReviews);
+		List<matReview> matReviews = matReviewService.getMatReviewsByStoreId(StoreId,pageable).getContent();
+		allReviews.put("MatReviews", matReviews);
 		
+		response.put("Reviews", allReviews);
 		// 메뉴테이블 데이터 
 		List<menu> menuResult = menuService.getMenu(store.getStoreId());
 		response.put("StoreMenu", menuResult);
@@ -153,13 +175,7 @@ public class PageController {
 
 		
 	}
-	
-	//TODO url 설정
-//	@GetMapping("/getMainPage")
-//	public  HashMap<String,Object> getStoreAllInformation(@RequestBody Store store){
-//		
-//		
-//	}
+
 	
 	
 }

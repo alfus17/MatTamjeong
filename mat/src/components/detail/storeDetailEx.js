@@ -27,15 +27,27 @@ function ExDetail() {
     const [detail, setDetail] = useState({}); // 가게 정보
     const [open, setOpen] = useState(false); // dialog 창 열고 닫기
     const [isBookmarked, setIsBookmarked] = useState(false); // 북마크
+    // 리뷰 배열
+    const [kgRevivews , setKgRevivews] = useState([]);
+    const [dcRevivews , setDcRevivews] = useState([]);
+    const [matRevivews , setMatRevivews] = useState([]);
+    // 각각의 리뷰 페이지 번호 
+    const [kgRevivewsPage , setKgRevivewsPage] = useState(1);
+    const [dcRevivewsPage , setDcRevivewsPage] = useState(1);
+    const [matRevivewsPage , setMatRevivewsPage] = useState(1);
 
     console.log("여기에요 ----",detail);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.post('/Page/getDetailStore', { storeId });
+                const response = await axios.post('/Page/getDetailStore/1', { storeId });
                 console.log(response.data);
                 setDetail(response.data);
+                setKgRevivews(response?.data?.Reviews?.kakaoReview)
+                setDcRevivews(response?.data?.Reviews?.diningReview)
+                setMatRevivews(response?.data?.Reviews?.MatReviews)
+
             } catch (error) {
                 console.error('Error fetching store data:', error);
             }
