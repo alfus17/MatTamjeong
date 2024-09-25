@@ -89,8 +89,8 @@ function Main() {
           <Tab value="three" label="리스트로 보기" />
         </Tabs>
       </Box>
-
-      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' }}>
+      
+      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9', width: '100%', margin: '0 auto' }}>
         {/* 첫번째 탭 */}
       {tab === 'one' && (
         <>
@@ -311,10 +311,12 @@ function Main() {
                       style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' , cursor:'pointer'}}
                     />
                     <Box sx={{width:'100%'}}>
-                      <Typography sx={{fontSize:'24px' , fontWeight:'bold',textAlign:'center'}}>{item.storeName}</Typography>
+                      <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
                       <Typography >{item.storeAddress}</Typography>
                       <Box sx={{display:'flex' , mt:2}}>
                       <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
+                          <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
+                          <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5} />   
                       <Typography sx={{ml:1 , fontSize:'24px'}}>
                         {kgRating}/5
                       </Typography>
