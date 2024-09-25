@@ -355,7 +355,7 @@ function Main() {
                       precision={0.5}
                     />
                     <Typography sx={{  fontSize: '24px', ml:2 }}>
-                      {item.matRating}
+                      {item.matRating.toFixed(1) || 0.0}
                     </Typography>
                   </Box>
                   </Box>
@@ -379,7 +379,7 @@ function Main() {
                       precision={0.5}
                     />
                     <Typography sx={{ ml: 2, fontSize: '24px' }}>
-                      {item.kgRating}
+                      {item.kgRating.toFixed(1) || 0.0}
                     </Typography>
                   </Box>
                   </Box>
@@ -403,7 +403,7 @@ function Main() {
                       precision={0.5}
                     />
                     <Typography sx={{ ml: 2, fontSize: '24px' }}>
-                      {item.dcRating}
+                      {item.dcRating.toFixed(1) || 0.0}
                     </Typography>
                   </Box>
                   </Box>
