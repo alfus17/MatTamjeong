@@ -50,4 +50,9 @@ public class matReviewService {
 		return matReviewRepository.findByUserIdAndStoreId(userId ,storeId);
 		
 	}
+
+	public List <matReview> getReviewsByUserId(String userId) {
+		List <matReview> reviews =matReviewRepository.findByUserId(userId);
+		return reviews;
+	}
 }

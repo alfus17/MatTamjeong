@@ -13,7 +13,7 @@ const MypageMain = () => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get(`/getuserInfo/${2}`); // Fixed template literal
+      const response = await axios.get(`/user/getuserInfo/${sessionStorage.getItem("id")}`); // Fixed template literal
       setUserInfo(response.data);
     } catch (error) {
       console.error('Error fetching user info:', error);

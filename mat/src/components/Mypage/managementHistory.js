@@ -19,7 +19,7 @@ function ManagementHistory() {
   const fetchUserInfo = async () => {
     try {
       // 백엔드 API에서 사용자 정보 가져오기
-      const response = await axios.get(`/getuserInfo/${2}`); // ID를 적절히 변경
+      const response = await axios.get(`/user/getuserInfo/${sessionStorage.getItem("id")}`); // ID를 적절히 변경
       setUserInfo(response.data);
     } catch (error) {
       console.error('Error fetching user info:', error);
