@@ -1,5 +1,6 @@
 package com.mat.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mat.common.ObjectToMapConverter;
 import com.mat.domain.Store;
 import com.mat.domain.locationCategory;
 import com.mat.domain.matReview;
 import com.mat.domain.userInfo;
+import com.mat.service.StoreService;
 import com.mat.service.UserService;
 import com.mat.service.bookMarkService;
 import com.mat.service.locationCategoryService;
@@ -37,6 +40,9 @@ public class UserInfoController
 	
 	@Autowired
 	private bookMarkService bookMarkService;
+	
+	@Autowired
+	private StoreService storeService;
 
 	// 모든 유저의 userInfo 데이터를 반환하는 API
 	@PostMapping("/getuserInfo")
@@ -190,7 +196,25 @@ public class UserInfoController
     	Object result = null;
     	
     	if(userService.checkUser(userId)) {
-    		result = matReviewService.getReviewsByUserId(userId);
+    		List<Object> ReviewList = new ArrayList<>();
+    		
+    		for(matReview review : matReviewService.getReviewsByUserId(userId) ) {
+    			// 이걸로 객체를 Map으로 변경 
+    			HashMap<String, Object> reviewMap=new ObjectToMapConverter().convertObjectToMap(review);
+    			
+    			// store id로 storeName 검색
+    			Optional<Store> store = storeService.getStoreById(review.getStoreId());
+    			if(store.isPresent()) {
+    				reviewMap.put("storeName", store.get().getStoreName());  
+    			}
+    			ReviewList.add(reviewMap);
+    			System.out.println("ReviewList : " +ReviewList);
+    		}
+    		result =ReviewList;
+    		
+    		System.out.println("result : " +result.toString());
+    		
+    		
     	}else {
     		result = "";
     	}
