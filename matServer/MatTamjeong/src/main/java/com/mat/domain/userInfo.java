@@ -3,10 +3,12 @@ package com.mat.domain;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Entity(name="user_Info")
 @Table(name="user_Info")
 public class userInfo {
@@ -66,7 +69,7 @@ public class userInfo {
 	
 	//  가입일자
 	@CreatedDate
-	@Column(name="create_at" )
+	@Column(name="create_at", columnDefinition = "DATE DEFAULT SYSDATE" )
 	@NonNull
 	private LocalDateTime createAt;
 	
