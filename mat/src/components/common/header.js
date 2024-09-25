@@ -25,6 +25,7 @@ function Header() {
     // 로컬 스토리지 클린
     sessionStorage.removeItem('id')
     sessionStorage.removeItem('token')
+    sessionStorage.removeItem('profile')
     setIsLogin(false);
   }
  

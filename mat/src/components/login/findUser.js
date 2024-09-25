@@ -1,6 +1,7 @@
 import { Box, Button, Container, Dialog, Grid, Paper, TextField, Typography } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Find() {
@@ -23,6 +24,8 @@ function Find() {
   console.log("IDResult : ", IDResult);
   console.log("PWDResult : ", PWDResult);
 
+  const navigate = useNavigate(); 
+
   //다이얼로그
   const [open, setOpen] = useState(false); // Dialog open/close state
   // Close login dialog handler
@@ -34,6 +37,17 @@ function Find() {
   const handleModeChange = (selectedMode) => {
     setMode(selectedMode);
   };
+
+  useEffect(() => {
+    const userId = sessionStorage.getItem('id');
+    console.log("useEffect : ",userId);
+    if(userId!==null){
+      alert("이미 로그인한 유저입니다.");
+      navigate(`/`);
+    }
+
+  }, []);
+
 
   return (
     <Container maxWidth="md" sx={{ mt: 2, height: "1000px" }}>
