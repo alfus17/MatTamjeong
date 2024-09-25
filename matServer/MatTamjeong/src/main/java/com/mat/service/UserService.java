@@ -52,6 +52,18 @@ public class UserService
 		return result;
 	}
 	
+	// 유저아이디로 유저가 있는지 체크
+	// 유저아이디가 존재하면 true 아니면 false
+	public boolean checkUserByEmail(String email) {
+		boolean result= false;
+		Optional<userInfo>user = userInfoRepository.findByEmail(email);
+		
+		if(user.isPresent()) {
+			result = !result;
+		}
+		return result;
+	}
+	
 	
 	// 회원가입 메소드
 	public boolean saveUser(userInfo user) {
@@ -101,10 +113,16 @@ public class UserService
         }
         return UserInfoUpdate;
     }
+    // 유저 아이디 찾기 
+	public String getUserIdById(String userName , String email) {
+		String result = "";
+		Optional<userInfo> user = userInfoRepository.findByUserNameAndEmail(userName,email );
+		if(user.isPresent()) {
+			result =user.get().getUserId();
+			
+		}		
+		return result;
+	}
 
-//    // 유저 아이디 찾기 
-//	public String getUserIdById() {
-//		return null;
-//	}
-	
+
 }

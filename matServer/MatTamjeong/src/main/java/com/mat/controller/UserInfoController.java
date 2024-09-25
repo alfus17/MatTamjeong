@@ -45,11 +45,13 @@ public class UserInfoController
 	@PostMapping("/enrollUser")
 	public boolean enrollUser(@RequestBody userInfo user) {
 		boolean response = false;
-		// 만약 db에 존재하지 않을경우 유저 회원가입 진행 
-		if(! userService.checkUser(user.getUserId())) {
+		// 만약 db에 존재하지 않을경우 유저 회원가입 진행 이메일도 체크
+		if(! userService.checkUser(user.getUserId())&& !userService.checkUserByEmail(user.getEmail())) {
 			userService.saveUser(user);
 			response = true;
 		}
+		
+		
 		return response;
 	}
 	
@@ -64,25 +66,26 @@ public class UserInfoController
 	
 	
 	// 사용자의 아이디 찾기 
-//	@PostMapping("/findUserId")
-//	public String findUserId(@RequestBody userInfo user) {
-//		String userId = "";
-//		userId = userService.getUserIdById();
-//	
-//		return "";
-//	}
-//
-//	
+	@PostMapping("/findUserId")
+	public String findUserId(@RequestBody userInfo user) {
+		String userId = "";
+		String userName = user.getUserName();
+		String userEmail = user.getEmail();
+		System.out.println("userName : " + userName);
+		System.out.println("userEmail : "+userEmail);
+		if(userName != "" && userEmail != "") {
+			userId = userService.getUserIdById(userName,userEmail);
+		}
+		
+		return userId;
+	}
+
+	
 	
 	
 	// 사용자의 비밀번호 찾기 
 	
-	
-	
-	
-	
 
-	
 	// 특정 유저의 userInfo 데이터를 반환하는 API
 	@GetMapping("/getuserInfo/{userId}")
 	public Optional<userInfo> getUserInfoById(@PathVariable("userId") String userId) 
