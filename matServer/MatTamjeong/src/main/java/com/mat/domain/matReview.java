@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Entity(name="MAT_REVIEW")
 @Table(name="MAT_REVIEW")
 public class matReview {
@@ -61,7 +64,7 @@ public class matReview {
 	private String matReviewContent;
 	
 	// 이리뷰의 db 저장시간
-	@Column(name="created_at")
+	@Column(name="created_at" , columnDefinition = "DATE DEFAULT SYSDATE")
 	@CreatedDate
 	private LocalDateTime matCreatedTime;
 	
