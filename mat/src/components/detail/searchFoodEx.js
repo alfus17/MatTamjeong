@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import Rating from '@mui/material/Rating';
 import NavigationIcon from '@mui/icons-material/Navigation';
-import { Button, Paper } from '@mui/material';
+import { Button, Paper, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -19,9 +19,9 @@ function Ex() {
   
   const [stores, setStores] = useState([]);
   const [page, setPage] = useState(parseInt(startpage));
-
   const [totalPage, setTotalPage ] = useState(1);
 
+  console.log("33333333", stores)
   useEffect(() => {
     // Reset stores and fetch new data when keyword or category changes
     setStores([]); // Clear existing stores
@@ -38,9 +38,22 @@ function Ex() {
   const fetchStores = async (page, keyword) => {
     const response = await axios.get(`/search/${category}/${keyword}/${page}`);
     console.log(response.data);
-    setStores((prevStores) => [...prevStores, ...response.data?.storeList]); // Add new data to existing stores
-    setTotalPage(response?.data?.totalPages)
+  
+    setStores((prevStores) => {
+      const newStores = response.data?.storeList || [];
+      // Filter out duplicates
+      const uniqueStores = [...prevStores, ...newStores].reduce((acc, current) => {
+        if (!acc.find(store => store.id === current.id)) {
+          acc.push(current);
+        }
+        return acc;
+      }, []);
+      return uniqueStores;
+    });
+  
+    setTotalPage(response?.data?.totalPages);
   };
+  
 
   const loadMore = () => {
     setPage((prevPage) => prevPage + 1);
@@ -57,33 +70,60 @@ function Ex() {
         <Box sx={{ flex: 1, height: '100%', overflowY: 'auto' }}>
           <List sx={{ width: '100%' }}>
             {stores.map((store) => (
-              <Paper sx={{ mt: 2 , mr:2}} key={store.id}  onClick={() => handleSearchClick(stores.storeId)}>
-                <ListItem
-                  disableGutters
-                  secondaryAction={
-                    <IconButton sx={{ mr: 2 }}>
-                      <NavigationIcon />
-                    </IconButton>
-                  }
-                >
+              <Paper sx={{ mt: 2 , mr:2 , cursor:'pointer'}} 
+                key={store.storeId}  
+                onClick={() => handleSearchClick(store.storeId)}>
+                <ListItem>
                   <Box
                     component="img"
                     src={store.menuUrl}
                     alt={store.storeName}
-                    // onClick={() => handleSearchClick(stores.storeId)}
                     sx={{
                       width: 150,
                       height: 150,
                       borderRadius: 1,
                       objectFit: 'cover',
                       marginRight: 2,
-                      ml: 2,
+                      
                     }}
                   />
-                  <ListItemText
-                    primary={store.storeName}
-                    secondary={<Rating name={`rating-${store.id}`} value={store.rating} precision={0.5} readOnly />}
-                  />
+
+                  <Box>
+                  <Typography sx={{fontSize:'24px'}}>
+                      {store.storeName}
+                  </Typography>
+                  <Typography sx={{mt:7}}>
+                    {store.businessHours}
+                  </Typography>
+                  </Box>
+                  
+                  <Box sx={{ml:16}}>
+
+                  <Box sx={{display:'flex'}}>
+                  <Box sx={{textAlign:'center'}}>
+                  <Typography>다이닝</Typography>
+                  <Rating name="total-rating" value={parseFloat(store.dcRating)} readOnly precision={0.5} />
+                  </Box>
+                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.dcRating}</Typography>
+                  </Box>
+      
+
+                  <Box sx={{display:'flex'}}>
+                  <Box sx={{textAlign:'center'}}>
+                  <Typography>카카오</Typography>
+                  <Rating name="total-rating" value={parseFloat(store.kgRating)} readOnly precision={0.5} />
+                  </Box>
+                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.kgRating}</Typography>
+                  </Box>
+
+                  <Box sx={{display:'flex'}}>
+                  <Box sx={{textAlign:'center'}}>
+                  <Typography>맛탐정</Typography>
+                  <Rating name="total-rating" value={parseFloat(store.matRating)} readOnly precision={0.5} />
+                  </Box>
+                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.matRating}</Typography>
+                  </Box>
+                  </Box>
                 </ListItem>
               </Paper>
             ))}
@@ -93,7 +133,7 @@ function Ex() {
           </Button> : null}
         </Box>
 
-        <Box sx={{ flex: 2 }}>
+        <Box sx={{ flex: 1.8 }}>
           <Map storeData={stores} height="700px" />
         </Box>
       </Box>

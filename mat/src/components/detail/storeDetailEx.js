@@ -443,14 +443,14 @@ function ExDetail() {
                                     userId:sessionStorage.getItem("id")
                                 }).then(result => {
                                     console.log("axios result : " ,result);
-                                    
-                                }
-                                    
-                                )
-                            
-
+                                    if(result.data){
+                                        alert("리뷰가 정상적으로 등록됐습니다.")
+                                    }else{
+                                        alert("기존에 작성한 리뷰가 존재합니다.")
+                                    }
+                                })
+                                window.location.reload();
                                 handleClose();
-
                             }
                             }
                             >
