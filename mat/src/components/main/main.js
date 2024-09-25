@@ -76,7 +76,9 @@ function Main() {
   };
 
   // 별점 데이터
-  let avgRating = store?.Ratings?.avgRating.toFixed(1) || 0.0;
+  let kgRating = store?.storeList?.kgRating.toFixed(1) || 0.0;
+  let dcRating = store?.Ratings?.dcRating.toFixed(1) || 0.0;
+  let matRating = store?.Ratings?.matRating.toFixed(1) || 0.0;
 
   return (
     <>
@@ -163,15 +165,8 @@ function Main() {
         <Box sx={{ mt:1}}> {/* 여백을 50px로 설정 */}
           <Grid>                     
               <Box 
-                sx={{ 
-                  display: 'flex', 
-                  justifyContent: 'center', 
-                  marginTop: '  0px', // 버튼들 위에 여백 추가
-                  gap:'30px',   
-                 
-                }}
-              >
-   
+               sx={{ display: 'flex', justifyContent: 'center', marginTop: '0px', gap: '30px', mt: 2 }}
+               >
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
                 fetchStoreByLocation('강남',page);
@@ -223,10 +218,11 @@ function Main() {
                   <Box sx={{
                     display: 'flex',
                     transition: 'transform 0.5s ease-in-out',
-                    transform: `translateX(-${currentSlide * 25}%)`, // 슬라이드를 이동시키는 트랜스폼
+                    width:'100%',
+                    transform: `translateX(-${currentSlide * 50}%)`, // 슬라이드를 이동시키는 트랜스폼
                   }}>
                     {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
-                      <Box key={index} sx={{  padding: 2, display: 'flex', alignItems: 'center' }}
+                     <Box key={index} sx={{ padding: 2, width: '50%' }}  // Updated width
                           onClick={() => handleImageClick(item.storeId)}
                       > {/* 슬라이드의 너비를 25%로 설정 */}
                         <img
@@ -234,13 +230,11 @@ function Main() {
                           alt={item.storeName}                         
                           style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }} // 이미지 크기 및 마진
                         />
-                        <Box>
-                          <Typography variant="h6">{item.storeName}</Typography>
-                          <Typography variant="body2">{item.storeAddress}</Typography>
-                          <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
-                          <Typography variant="h6" component="p" sx={{ ml: 2 }}>
-                                {avgRating}/5
-                          </Typography>
+                        <Box sx={{width:'100%'}}>                       
+                          <Typography sx={{fontSize:'17px',fontWeight:'bold'}} >{item.storeName}</Typography>
+                          <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
+                          <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
+                          <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5} />   
                         </Box>
                       </Box>
                     ))}
@@ -303,6 +297,7 @@ function Main() {
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
               </Box>
+              
               {/* 가게 리스트 한 줄에 하나씩 표시, slice로 5개씩 보여줌 */}
               <Box>
                 {(filterStore.length > 0 ? filterStore : store)
@@ -315,13 +310,13 @@ function Main() {
                       onClick={() => handleImageClick(item.storeId)}
                       style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' , cursor:'pointer'}}
                     />
-                    <Box>
-                      <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
+                    <Box sx={{width:'100%'}}>
+                      <Typography sx={{fontSize:'24px' , fontWeight:'bold',textAlign:'center'}}>{item.storeName}</Typography>
                       <Typography >{item.storeAddress}</Typography>
                       <Box sx={{display:'flex' , mt:2}}>
-                      <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
+                      <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
                       <Typography sx={{ml:1 , fontSize:'24px'}}>
-                        {avgRating}/5
+                        {kgRating}/5
                       </Typography>
                       </Box>
                     </Box>
