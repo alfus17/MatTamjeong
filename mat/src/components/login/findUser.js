@@ -14,12 +14,14 @@ function Find() {
   
   // 아이디 비밀번호 찾기 공용 변수 
   const [userId , setUserId] = useState("")
-
   // 비밀번호 찾기
   const [userPwd, setUserPwd] = useState("")
-
+  // 아이디 결과값
   const [IDResult , setIDResult ] = useState("");
+  // 비밀번호 결과값
+  const [PWDResult , setPWDResult ] = useState("");
   console.log("IDResult : ", IDResult);
+  console.log("PWDResult : ", PWDResult);
 
   //다이얼로그
   const [open, setOpen] = useState(false); // Dialog open/close state
@@ -110,16 +112,14 @@ function Find() {
                 }).then(res =>{
                   console.log(res.data)
                   setIDResult(res.data)
+                  setPWDResult("");
                   // 쿼리했을때 아이디가 나오지 않았을 경우 
                   setOpen(true);
                   if(res.data === ""){
                     alert("유효하지 않은 정보입니다.")
                   }
-                  
                 }
- 
-                )}}
-                
+                )}} 
                 >
                  아이디 찾기   
                 </Button>
@@ -170,8 +170,23 @@ function Find() {
                 display:"flex",
                 margin:"0 auto"
                 }}
-              
-                
+                onClick={() => {
+                  console.log("여기안에 들어옴 ")
+                  axios.post('/user/findUserPwd', {  
+                    userId :userId,
+                    userName : userName
+                }).then(res =>{
+                  console.log("finde pwd 결과 :",res.data);
+                  setIDResult("");
+                  setPWDResult(res.data);
+                  // 쿼리했을때 아이디가 나오지 않았을 경우 
+                  setOpen(true);
+                  if(res.data === ""){
+                    alert("유효하지 않은 정보입니다.")
+                  }
+                }
+                )}} 
+
                 >
                  비밀번호 찾기   
                 </Button>
@@ -186,9 +201,9 @@ function Find() {
                {IDResult != "" ?<Typography sx={{fontSize:'32px' ,textAlign:'center',mt:5}}> 
                 당신의 아이디는  {IDResult} 입니다.
                </Typography>:null}
-               
-               {IDResult != "" ?<Typography sx={{fontSize:'32px' ,textAlign:'center',mt:5}}> 
-                당신의 비밀번호는  {IDResult} 입니다.
+
+               {PWDResult != "" ?<Typography sx={{fontSize:'32px' ,textAlign:'center',mt:5}}> 
+                당신의 비밀번호는  {PWDResult} 입니다.
                </Typography>:null}
                <Button variant="outlined" onClick={handleClose} sx={{display:'flex', margin:'0 auto' ,mt :10 ,width:'120px', height:'50px'}}>
                 닫기

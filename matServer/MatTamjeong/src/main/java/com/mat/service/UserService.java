@@ -123,6 +123,17 @@ public class UserService
 		}		
 		return result;
 	}
+	
+	// 유저 비밀번호 찾기
+	public String getPwdById(String userId , String userName) {
+		String result = "";
+		Optional<userInfo> user = userInfoRepository.findByUserIdAndUserName(userId,userName );
+		if(user.isPresent()) {
+			result =user.get().getUserPwd();
+			
+		}		
+		return result;
+	}
 
 
 }

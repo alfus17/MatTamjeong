@@ -80,10 +80,22 @@ public class UserInfoController
 		return userId;
 	}
 
-	
-	
-	
+
 	// 사용자의 비밀번호 찾기 
+	//사용자 이름과 아이디를 받아서 비밀번호를 반환해준다.
+	@PostMapping("/findUserPwd")
+	public String findUserPwd(@RequestBody userInfo user) {
+		String userPwd = "";
+		String userId = user.getUserId();
+		String userName = user.getUserName();
+		System.out.println("userId : " + userId);
+		System.out.println("userName : "+userName);
+		if(userName != "" && userId != "") {
+			userId = userService.getPwdById(userId,userName);
+		}
+		
+		return userId;
+	}
 	
 
 	// 특정 유저의 userInfo 데이터를 반환하는 API
