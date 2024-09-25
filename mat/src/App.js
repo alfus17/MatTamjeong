@@ -15,6 +15,7 @@ import AddReview from './components/review/review';
 import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 import Find from './components/login/findUser';
 import { AuthProvider, IsLoginProvider } from './components/login/authContext';
+import { Foot } from './components/common/foot';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -27,9 +28,22 @@ import { AuthProvider, IsLoginProvider } from './components/login/authContext';
 
 // npm cache clean --force
 
+
+const theme = createTheme({
+  palette: {
+      primary: {
+          main: '#FF7D29',
+      },
+  },
+  typography: {
+      fontFamily: 'Orbit', // Global font family
+  },
+});
+
 function App() {
 
   return (
+    <ThemeProvider theme={theme}>
     <>
     {/* 로그인 상태 유지를 위해  씌워준 컴포넌트 */}
     <IsLoginProvider>
@@ -53,8 +67,10 @@ function App() {
                   </Route>
                 </Routes>
       </Router>
+      <Foot />
       </IsLoginProvider>
     </>
+    </ThemeProvider>
   );
 }
 

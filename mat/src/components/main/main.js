@@ -76,21 +76,25 @@ function Main() {
   };
 
   // 별점 데이터
-  let kgRating = store?.storeList?.kgRating.toFixed(1) || 0.0;
+  let avgRating = store?.Ratings?.avgRating.toFixed(1) || 0.0;
+
   let dcRating = store?.Ratings?.dcRating.toFixed(1) || 0.0;
+
+  let kgRating = store?.Ratings?.kgRating.toFixed(1) || 0.0;
+
   let matRating = store?.Ratings?.matRating.toFixed(1) || 0.0;
 
   return (
     <>
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
         <Tabs value={tab} onChange={handleOnChange}>
-          <Tab value="one" label="지도로 보기" />
-          <Tab value="two" label="맛집 추천" />
-          <Tab value="three" label="리스트로 보기" />
+          <Tab value="one" label="지도로 보기" sx={{fontWeight:'bold', mr:20 , fontSize:'20px'}}/>
+          <Tab value="two" label="맛집 추천" sx={{fontWeight:'bold', mr:20,fontSize:'20px'}}/>
+          <Tab value="three" label="리스트로 보기" sx={{fontWeight:'bold',fontSize:'20px'}} />
         </Tabs>
       </Box>
-      
-      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9', width: '100%', margin: '0 auto' }}>
+
+      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' ,height:'100%'}}>
         {/* 첫번째 탭 */}
       {tab === 'one' && (
         <>
@@ -106,7 +110,7 @@ function Main() {
                  
                 }}
               >
-                 <Button  sx={{}} onClick={() =>{ 
+                       <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
                 fetchStoreByLocation('강남',page);
                 }}>
@@ -140,9 +144,9 @@ function Main() {
                 setPage(1);
                 fetchStoreByLocation('동대문',page);
                 }}>
-                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
+                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>  
         </Box>
-         <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 1, mb: 4, borderRadius: 3 }}>
+         <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 1,borderRadius: 3 }}>
          <Box sx={{ maxWidth: '100%', margin: '0 auto' }}>
            <Map storeData={store} height="700px" /> {/* 지도를 크게 표시 */}
          </Box>
@@ -154,20 +158,17 @@ function Main() {
 
 
        {/* 두번쨰탭 */}
-      {tab === 'two' && (
-        <>
-        <Box sx={{width:'100%', height:'10px'}}/>
-          <Card elevation={3} sx={{  maxWidth: "60%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
-            <Box sx={{maxWidth:'100%', margin:'0 auto'}}>
-              <Map storeData={store} height="450px" />
-            </Box>                     
-        {/* 맵과 슬라이드 사이에 여백 추가 */}
-        <Box sx={{ mt:1}}> {/* 여백을 50px로 설정 */}
-          <Grid>                     
-              <Box 
-               sx={{ display: 'flex', justifyContent: 'center', marginTop: '0px', gap: '30px', mt: 2 }}
-               >
-                <Button  sx={{}} onClick={() =>{ 
+       {tab === 'two' && (
+          <>
+            <Box sx={{ width: '100%', height: '10px' }} />
+            <Card elevation={3} sx={{ maxWidth: '60%', margin: '0 auto', mt: 2, mb: 4, borderRadius: 3 }}>
+              <Box sx={{ maxWidth: '100%', margin: '0 auto' }}>
+                <Map storeData={store} height="450px" />
+              </Box>
+              <Box sx={{ mt: 1 }}>
+                <Grid>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mt: 2 }}>
+                  <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
                 fetchStoreByLocation('강남',page);
                 }}>
@@ -201,59 +202,75 @@ function Main() {
                 setPage(1);
                 fetchStoreByLocation('동대문',page);
                 }}>
-                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
-     
-              </Box>
-
-              {selectedLocation && (
-                <Box sx={{ width: "100%", overflow: "hidden", position: "relative", mt:2}}> {/* 슬라이더 영역 */}
-                  <IconButton
-                    onClick={handlePrevSlide}
-                    sx={{ position: 'absolute', left: 0, top: '50%', zIndex: 1 }}
-                    disabled={currentSlide === 0}
-                  >
-                    <ArrowBackIosIcon />
-                  </IconButton>
-
-                  <Box sx={{
-                    display: 'flex',
-                    transition: 'transform 0.5s ease-in-out',
-                    width:'100%',
-                    transform: `translateX(-${currentSlide * 50}%)`, // 슬라이드를 이동시키는 트랜스폼
-                  }}>
-                    {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
-                     <Box key={index} sx={{ padding: 2, width: '50%' }}  // Updated width
-                          onClick={() => handleImageClick(item.storeId)}
-                      > {/* 슬라이드의 너비를 25%로 설정 */}
-                        <img
-                          src={item.menuUrl}
-                          alt={item.storeName}                         
-                          style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }} // 이미지 크기 및 마진
-                        />
-                        <Box sx={{width:'100%'}}>                       
-                          <Typography sx={{fontSize:'17px',fontWeight:'bold'}} >{item.storeName}</Typography>
-                          <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
-                          <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
-                          <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5} />   
-                        </Box>
-                      </Box>
-                    ))}
+                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>
                   </Box>
 
-                  <IconButton
-                    onClick={handleNextSlide}
-                    sx={{ position: 'absolute', right: 0, top: '50%', zIndex: 1 }}
-                    disabled={currentSlide >= (filterStore.length > 0 ? filterStore : store).length - 4}
-                  >
-                    <ArrowForwardIosIcon />
-                  </IconButton>
-                </Box>
-              )}
-          </Grid>
-        </Box>
-      </Card>
-      </>
-      )};
+                  {selectedLocation && (
+                    <Box sx={{ width: '100%', overflow: 'hidden', position: 'relative', mt: 2 }}>
+                      <IconButton
+                        onClick={handlePrevSlide}
+                        sx={{ position: 'absolute', left: 0, top: '50%', zIndex: 1 }}
+                        disabled={currentSlide === 0}
+                      >
+                        <ArrowBackIosIcon />
+                      </IconButton>
+
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          transition: 'transform 0.5s ease-in-out',
+                          width: `${store.length * 33.33}%`,
+                          transform: `translateX(-${currentSlide * 29.9}%)`, // 슬라이드 이동
+                        }}
+                      >
+                        {store.map((item, index) => (
+                          <Box
+                            key={index}
+                            sx={{ padding: 2, width: '33.33%',display:'flex'}} // Each slide takes up 33.33% of the width
+                            onClick={() => handleImageClick(item.storeId)}
+                          >
+                            <img
+                              src={item.menuUrl}
+                              alt={item.storeName}
+                              style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
+                            />
+                            <Box sx={{ width: '100%' ,ml:1}}>
+                              <Typography sx={{ fontSize: '18px', fontFamily:'Do+Hyeon&display=swap'}}>
+                                {item.storeName}
+                              </Typography>
+                            <Box sx={{mt:2, display:'flex' ,flexDirection:'column'}}>
+                              <Box sx={{display:'flex'}}>
+                              <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
+                              <Typography sx={{ml:1.5 , fontSize:'19px' ,fontFamily:'Jua',color:'#fa7e0a'}}>{kgRating}</Typography>
+                              </Box>
+                              <Box sx={{display:'flex', mt:1}}>
+                              <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
+                              <Typography sx={{ml:1.5, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{dcRating}</Typography>
+                              </Box>
+                              <Box sx={{display:'flex', mt:1}}>
+                              <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5}/>
+                              <Typography sx={{ml:1.5, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{matRating}</Typography>
+                              </Box>
+                            </Box>
+                            </Box>
+                          </Box>
+                        ))}
+                      </Box>
+
+                      <IconButton
+                        onClick={handleNextSlide}
+                        sx={{ position: 'absolute', right: 0, top: '50%', zIndex: 1 }}
+                        disabled={currentSlide >= Math.ceil(store.length / 3) - 1}
+                      >
+                        <ArrowForwardIosIcon />
+                      </IconButton>
+                    </Box>
+                  )}
+                </Grid>
+              </Box>
+            </Card>
+          </>
+        )}
 
        {/* 세번째 탭 */}
        {tab === 'three' && (
@@ -265,7 +282,7 @@ function Main() {
                 setPage(1);
                 fetchStoreByLocation('강남',page);
                 }}>
-                  <Typography sx={{fontWeight:'bold'}}>강남1</Typography>
+                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
@@ -295,9 +312,8 @@ function Main() {
                 setPage(1);
                 fetchStoreByLocation('동대문',page);
                 }}>
-                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>     
+                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>   
               </Box>
-              
               {/* 가게 리스트 한 줄에 하나씩 표시, slice로 5개씩 보여줌 */}
               <Box>
                 {(filterStore.length > 0 ? filterStore : store)
@@ -310,15 +326,13 @@ function Main() {
                       onClick={() => handleImageClick(item.storeId)}
                       style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' , cursor:'pointer'}}
                     />
-                    <Box sx={{width:'100%'}}>
+                    <Box>
                       <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
                       <Typography >{item.storeAddress}</Typography>
                       <Box sx={{display:'flex' , mt:2}}>
-                      <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
-                          <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
-                          <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5} />   
+                      <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
                       <Typography sx={{ml:1 , fontSize:'24px'}}>
-                        {kgRating}/5
+                        {avgRating}/5
                       </Typography>
                       </Box>
                     </Box>

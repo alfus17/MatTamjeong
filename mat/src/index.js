@@ -4,16 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { NavermapsProvider } from 'react-naver-maps';
-import { ThemeProvider } from '@mui/material';
-import { theme } from './components/common/pallet';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <NavermapsProvider>
   <React.StrictMode>
-  <ThemeProvider theme={theme}>
     <App />
-  </ThemeProvider>
   </React.StrictMode>
   </NavermapsProvider>
 );
