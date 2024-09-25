@@ -29,17 +29,15 @@ public class UserService
 	}
 	
 	// 유저아이디와 비밀번호로 체크
-	public boolean checkUser(String userId, String userPwd) {
+	public userInfo checkUser(String userId, String userPwd) {
 		
-		boolean result= false;
+		
 		
 		// TODO 변경
 		Optional<userInfo>user = userInfoRepository.findByUserIdAndUserPwd(userId, userPwd);
 		
-		if(user.isPresent()) {
-			result = !result;
-		}
-		return result;
+		
+		return user.get();
 	}
 	
 	// 유저아이디로 유저가 있는지 체크
@@ -103,5 +101,10 @@ public class UserService
         }
         return UserInfoUpdate;
     }
+
+//    // 유저 아이디 찾기 
+//	public String getUserIdById() {
+//		return null;
+//	}
 	
 }

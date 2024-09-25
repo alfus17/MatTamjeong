@@ -3,6 +3,17 @@ import { useState } from "react";
 
 function Find() {
   const [mode, setMode] = useState("none"); // 현재 선택된 모드를 상태로 관리
+  
+  // 아이디 찾기 
+  const [userName ,setUserName ] = useState("")
+  const [userEmail, setUserEmail] = useState("")
+  
+  // 아이디 비밀번호 찾기 공용 변수 
+  const [userId , setUserId] = useState("")
+
+  // 비밀번호 찾기
+  const [userPwd, setUserPwd] = useState("")
+
 
   // 모드 변경 함수
   const handleModeChange = (selectedMode) => {
@@ -53,6 +64,7 @@ function Find() {
                   label="회원님의 이름을 입력하세요"
                   type="text"
                   fullWidth
+                  onChange={(result) =>{ setUserName(result.target.value)}}
                   sx={{ width: "100%", maxWidth: "600px", mb: 4 }} // Adjust width and spacing
                 />
                 <TextField
@@ -60,13 +72,15 @@ function Find() {
                   label="회원님의 이메일을 입력하세요"
                   type="email"
                   fullWidth
+                  onChange={(result) =>{ setUserEmail(result.target.value)}}
                   sx={{ width: "100%", maxWidth: "600px", mb: 4 }} // Adjust width and spacing
                 />
                 <Box sx={{
                     mt : 2,
                     margin: "0 auto"
                 }}>
-                <Button variant="outlined" onClick={() => handleModeChange("findId")} sx={{
+                  {/* 아이디 찾기 제출 버튼  */}
+                <Button variant="outlined" onClick={() =>{}} sx={{
                 width: "120px",
                 height: "50px",
                 display:"flex",
@@ -90,6 +104,7 @@ function Find() {
                   label="회원님의 이름을 입력하세요"
                   type="text"
                   fullWidth
+                  onChange={(result) =>{ setUserName(result.target.value)}}
                   sx={{ width: "100%", maxWidth: "600px", mb: 4 }} // Adjust width and spacing
                 />
                 <TextField
@@ -97,6 +112,7 @@ function Find() {
                   label="회원님의 아이디를 입력하세요"
                   type="text"
                   fullWidth
+                  onChange={(result) =>{ setUserId(result.target.value)}}
                   sx={{ width: "100%", maxWidth: "600px", mb: 4 }} // Adjust width and spacing
                 />
               </Box>
@@ -105,7 +121,8 @@ function Find() {
                     mt : 2,
                     margin: "0 auto"
                 }}>
-                <Button variant="outlined" onClick={() => handleModeChange("findPassword")} sx={{
+                   {/* 아이디 찾기 제출 버튼  */}
+                <Button variant="outlined" onClick={() => {console.log(1)}} sx={{
                 width: "120px",
                 height: "50px",
                 display:"flex",

@@ -41,12 +41,11 @@ function Main() {
         setStore((prevStore) => [...prevStore, ...response.data.storeList]);
       }
       setTotalPages(response.data.totalPages);
+      console.log("totalpage : ",response.data.totalPages )
     } catch (error) {
       console.error('Error fetching store data:', error);
     }
   };
-
-
 
   const handleShowMore = () => {
     if (page < totalPages) {
@@ -88,7 +87,7 @@ function Main() {
         </Tabs>
       </Box>
 
-      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' }}>
+      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' } }>
         {/* 첫번째 탭 */}
       {tab === 'one' && (
         <>
@@ -271,7 +270,7 @@ function Main() {
                 setPage(1);
                 fetchStoreByLocation('강남',page);
                 }}>
-                  <Typography sx={{fontWeight:'bold'}}>강남1</Typography>
+                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);

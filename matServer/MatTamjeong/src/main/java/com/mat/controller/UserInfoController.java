@@ -52,6 +52,35 @@ public class UserInfoController
 		}
 		return response;
 	}
+	
+	// 유저 아이디 중복 체크  
+	@PostMapping("/userIdCheck")
+	public boolean userIdCheck(@RequestBody userInfo user) {
+		// true면 존재함 false 면 존재하지않음 
+		return userService.checkUser(user.getUserId());
+	}
+	
+	
+	
+	
+	// 사용자의 아이디 찾기 
+//	@PostMapping("/findUserId")
+//	public String findUserId(@RequestBody userInfo user) {
+//		String userId = "";
+//		userId = userService.getUserIdById();
+//	
+//		return "";
+//	}
+//
+//	
+	
+	
+	// 사용자의 비밀번호 찾기 
+	
+	
+	
+	
+	
 
 	
 	// 특정 유저의 userInfo 데이터를 반환하는 API
@@ -63,18 +92,15 @@ public class UserInfoController
 	
 	// check 로그인 API
 	@GetMapping("/checkUser/{userId}/{password}")
-	public ResponseEntity<HashMap<String, String>> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
-		boolean usercheck = userService.checkUser(userId,password);
-		if(usercheck) {
-			
+	public ResponseEntity<userInfo> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
+		userInfo usercheck = userService.checkUser(userId,password);
+		if(usercheck.getUserId() != "" ) {
+			usercheck.setAuth("JonMat");
 			// ToDO 추후에 여기 jwt 변경 작업
-			AccessKey.put("token","JonMat");
-			return ResponseEntity.ok().body( AccessKey);
-		}else {
-			
-			return ResponseEntity.ok().body(AccessKey);
+//			AccessKey.put("token","JonMat");
 		}
-		
+			
+		return ResponseEntity.ok().body(usercheck);
 	}
 	
 	// id 존재여부 체크
