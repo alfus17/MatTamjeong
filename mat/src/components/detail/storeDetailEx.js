@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import AddReview from '../review/review';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { useIsLoginState } from '../login/authContext';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -32,6 +33,16 @@ function ExDetail() {
     const [dcRevivewsPage , setDcRevivewsPage] = useState(1);
     const [matRevivewsPage , setMatRevivewsPage] = useState(1);
 
+    // 리뷰
+    const [rating ,setRating] = useState(0.0);
+    const [matReviewContent, setMatReviewContent] = useState("");
+    console.log("matReviewContent : ", matReviewContent)
+    console.log("rating : ", rating)
+
+    // 로그인 상태 체크
+    const isLogin = useIsLoginState();
+    console.log("로그인 상태 : ", isLogin);
+
     console.log("여기에요 ----",detail);
 
     useEffect(() => {
@@ -43,7 +54,7 @@ function ExDetail() {
                 setKgRevivews(response?.data?.Reviews?.kakaoReview)
                 setDcRevivews(response?.data?.Reviews?.diningReview)
                 setMatRevivews(response?.data?.Reviews?.MatReviews)
-
+            
             } catch (error) {
                 console.error('Error fetching store data:', error);
             }
@@ -66,14 +77,15 @@ function ExDetail() {
 
     let avgRating = detail?.Ratings?.avgRating.toFixed(1) || 0.0;
 
-    let dcRating = detail?.Ratings?.dcRating || 0.0;
+    let dcRating = detail?.Ratings?.dcRating.toFixed(1) || 0.0;
 
-    let kgRating = detail?.Ratings?.kgRating || 0.0;
+    let kgRating = detail?.Ratings?.kgRating.toFixed(1) || 0.0;
 
-    let matRating = detail?.Ratings?.matRating || 0.0;
+    let matRating = detail?.Ratings?.matRating.toFixed(1) || 0.0;
+
 
     return (
-        <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' , mt:4}}>
+        <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' , mt:4, height:'1200px'}}>
             {/* 전체영역 */}
             <Box sx={{width:'100%', height:'10px'}}/>
             <Paper elevation={5} sx={{ position: 'relative', p: 2, margin: '0 auto', maxWidth: '60%', mt: 1, borderRadius: 3 }}>
@@ -119,7 +131,7 @@ function ExDetail() {
                     <Grid item xs={8} elevation={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                         <Grid item xs={6}>
-                            <Item sx={{ height: '300px' }} elevation={6}>
+                            <Item sx={{ height: '330px' }} elevation={6}>
                                 {/* 1행: 평균 별점 */}
                                 <Box sx={{ textAlign: 'center', mb: 2 }}>
                                     <Typography sx={{ fontSize: '24px', fontWeight: 'bold' }}>총 별점</Typography>
@@ -131,10 +143,10 @@ function ExDetail() {
 
                                 {/* 2행: 다이닝, 카카오, 맛탐정 별점 - 수평 정렬 */}    
                                     {/* 다이닝 별점 */}
-                                    <Box sx={{}}> {/* 각 박스의 너비를 33%로 설정 */}
+                                    <Box sx={{mt:3}}> {/* 각 박스의 너비를 33%로 설정 */}
                                         <Typography variant="h6" sx={{ fontWeight: 'bold'}}>다이닝</Typography>
                                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                            <Rating name="dc-rating" value={dcRating} readOnly precision={0.5} sx={{ fontSize: '1.5rem' }} />
+                                            <Rating name="dc-rating" value={dcRating} readOnly precision={0.5} sx={{ fontSize: '1.4rem' }} />
                                             <Typography variant="h6" sx={{ml:1}}>{dcRating}/5</Typography>
                                         </Box>
                                     </Box>
@@ -143,7 +155,7 @@ function ExDetail() {
                                     <Box sx={{ flexBasis: '33%', textAlign: 'center' }}>
                                         <Typography variant="h6" sx={{ fontWeight: 'bold'}}>카카오</Typography>
                                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                            <Rating name="kg-rating" value={kgRating} readOnly precision={0.5} sx={{ fontSize: '1.5rem' }} />
+                                            <Rating name="kg-rating" value={kgRating} readOnly precision={0.5} sx={{ fontSize: '1.4em' }} />
                                             <Typography variant="h6" sx={{ml:1}}>{kgRating}/5</Typography>
                                         </Box>
                                     </Box>
@@ -152,7 +164,7 @@ function ExDetail() {
                                     <Box sx={{ flexBasis: '33%', textAlign: 'center' }}>
                                         <Typography variant="h6" sx={{ fontWeight: 'bold'}}>맛탐정</Typography>
                                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                            <Rating name="mat-rating" value={matRating} readOnly precision={0.5} sx={{ fontSize: '1.5rem' }} />
+                                            <Rating name="mat-rating" value={matRating} readOnly precision={0.5} sx={{ fontSize: '1.4rem' }} />
                                             <Typography variant="h6" sx={{ml:1}}>{matRating}/5</Typography>
                                         </Box>
                                     </Box>                        
@@ -161,7 +173,7 @@ function ExDetail() {
 
                         {/* 메뉴 정보 */}
                         <Grid item xs={6}>
-                                <Item sx={{ height: '100%' }} elevation={6}>
+                                <Item sx={{ height: '330px' }} elevation={6}>
                                 <Typography variant="h5" component="h2" sx={{ mb: 2 }}>메뉴</Typography>
                                 <List>
                                     {detail.StoreMenu && detail.StoreMenu.map((menuItem, index) => (
@@ -178,83 +190,165 @@ function ExDetail() {
                        {/* 오른쪽 아래 */}
                         <Grid item xs={12} sx={{ flexGrow: 1, mt: 2 }}>
                             <Item sx={{ height: '100%' }} elevation={6}>
-                                <Typography>가게 상세 정보</Typography>
-                                 {/* 3행: 주소 */}
-                                 <Typography variant="body1" sx={{ textAlign: 'center', mt: 2 }}>{detail.StoreInfo?.storeAddress}</Typography>
-                                {/* Add more details about the store here */}
+                                <Typography variant="h5" component="h2">가게 상세 정보</Typography>
+                                <Typography variant="body1" sx={{ textAlign: 'center', mt: 3 }}>주소 : {detail.StoreInfo?.storeAddress}</Typography>
+                                <Typography variant="body1" sx={{ textAlign: 'center', mt: 3 }}>영업 시간 : {detail.StoreInfo?.businessHours}</Typography>
                             </Item>
                         </Grid>
                     </Grid>
                 </Grid>
+
+
             {/* 리뷰 */}
             <Grid container spacing={2} sx={{ mt: 1, width: '100%' }}>
-                {/* 첫 번째 리뷰 */}
+                {/* 카카오 리뷰 */}
                 <Grid item xs={4}>
-                    <Item sx={{ height: '300px' }} elevation={6}>
-                    <List>
-                        {detail.MatReviews &&
-                        detail.MatReviews.map((review, index) => (
-                            <Box key={index}>
-                            <ListItem alignItems="flex-start">
-                                <ListItemText
-                                primary={
-                                    <Box
-                                    sx={{ display: 'flex', justifyContent: 'space-between' }}
-                                    >
-                                    <Typography variant="subtitle1" component="span">
-                                        {review.matReviewContent}
-                                    </Typography>
-                                    <Rating
-                                        name={`rating-${index}`}
-                                        value={review.rating}
-                                        readOnly
-                                        precision={0.5}
-                                    />
+                    <Item sx={{ height: '400px' }} elevation={6}>
+                    <Box sx={{ maxHeight: '400px', overflowY: 'auto' }}>
+                    <Typography sx={{fontSize:'20px'}}>
+                        카카오 리뷰
+                    </Typography>
+                        <List>
+                            {detail.Reviews?.kakaoReview &&
+                                detail.Reviews?.kakaoReview.map((review, index) => (
+                                    <Box key={index}>
+                                        <ListItem alignItems="flex-start">
+                                            <ListItemText
+                                                primary={
+                                                    <Box
+                                                        sx={{ justifyContent: 'space-between', flex: 1, height: '100%', overflowY: 'auto',borderBottom:'1px solid' }}
+                                                    >                                                   
+                                                        <Box sx={{display:'flex' ,justifyContent: 'space-between'}}>    
+                                                        <Typography variant="subtitle1" component="span">
+                                                            {review?.userId}
+                                                        </Typography>
+                                                        <Rating
+                                                            name={`rating-${index}`}
+                                                            value={review.rating}
+                                                            readOnly
+                                                            precision={0.5}
+                                                        
+                                                        />
+                                                        </Box>
+                                                        <Typography sx={{mt:2}}>{review.kgReviewContent}</Typography>                                                      
+                                                        
+                                                    </Box>
+                                                }
+                                            />
+                                        </ListItem>
+                                        {index < detail.Reviews?.kakaoReview.length - 1 && (
+                                            <Divider variant="inset" />
+                                        )}
                                     </Box>
-                                }
-                                secondary={review.matReviewContent}
-                                />
-                            </ListItem>
-                            {index < detail.MatReviews.length - 1 && (
-                                <Divider variant="inset" />
-                            )}
-                            </Box>
-                        ))}
-                    </List>
+                                ))}
+                        </List>
+                    </Box>
                     </Item>
                 </Grid>
 
                 {/* 두 번째 리뷰 */}
                 <Grid item xs={4}>
-                    <Item sx={{ height: '300px' }} elevation={6}>
-                    <ListItem alignItems="flex-start">
-                        <ListItemText
-                        primary={<Typography variant="subtitle1">리뷰 2 내용</Typography>}
-                        secondary="리뷰 2 설명"
-                        />
-                    </ListItem>
+                <Item sx={{ height: '400px' }} elevation={6}>
+                <Box sx={{ maxHeight: '400px', overflowY: 'auto' }}>
+                    <Typography sx={{fontSize:'20px'}}>
+                        다이닝 리뷰
+                    </Typography>
+                        <List>
+                            {detail.Reviews?.diningReview &&
+                                detail.Reviews?.diningReview.map((review, index) => (
+                                    <Box key={index}>
+                                        <ListItem alignItems="flex-start">
+                                            <ListItemText
+                                                primary={
+                                                    <Box
+                                                        sx={{ justifyContent: 'space-between', flex: 1, height: '100%', overflowY: 'auto',borderBottom:'1px solid' }}
+                                                    >                                                   
+                                                        <Box sx={{display:'flex' ,justifyContent: 'space-between'}}>    
+                                                        <Typography variant="subtitle1" component="span">
+                                                            {review?.userId}
+                                                        </Typography>
+                                                        <Rating
+                                                            name={`rating-${index}`}
+                                                            value={review.rating}
+                                                            readOnly
+                                                            precision={0.5}
+                                                        
+                                                        />
+                                                        </Box>
+                                                        <Typography sx={{mt:2}}>{review.nvReviewContent}</Typography>                                                      
+                                                        
+                                                    </Box>
+                                                }
+                                            />
+                                        </ListItem>
+                                        {index < detail.Reviews?.diningReview.length - 1 && (
+                                            <Divider variant="inset" />
+                                        )}
+                                    </Box>
+                                ))}
+                        </List>
+                    </Box>
                     </Item>
                 </Grid>
 
                 {/* 세 번째 리뷰 */}
                 <Grid item xs={4}>
-                    <Item sx={{ height: '300px' }} elevation={6}>
-                    <ListItem alignItems="flex-start">
-                        <ListItemText
-                        primary={<Typography variant="subtitle1">리뷰 3 내용</Typography>}
-                        secondary="리뷰 3 설명"
-                        />
-                    </ListItem>
+                <Item sx={{ height: '400px' }} elevation={6}>
+                    <Box sx={{ maxHeight: '400px', overflowY: 'auto' }}>
+                    <Typography sx={{fontSize:'20px'}}>
+                        맛탐정 리뷰
+                    </Typography>
+                        <List>
+                            {detail.Reviews?.MatReviews &&
+                                detail.Reviews?.MatReviews.map((review, index) => (
+                                    <Box key={index}>
+                                        <ListItem alignItems="flex-start">
+                                            <ListItemText
+                                                primary={
+                                                    <Box
+                                                        sx={{ justifyContent: 'space-between', flex: 1, height: '100%', overflowY: 'auto',borderBottom:'1px solid' }}
+                                                    >                                                   
+                                                        <Box sx={{display:'flex' ,justifyContent: 'space-between'}}>    
+                                                        <Typography variant="subtitle1" component="span">
+                                                            {review?.userId}
+                                                        </Typography>
+                                                        <Rating
+                                                            name={`rating-${index}`}
+                                                            value={review.rating}
+                                                            readOnly
+                                                            precision={0.5}
+                                                        
+                                                        />
+                                                        </Box>
+                                                        <Typography sx={{mt:2}}>{review.matReviewContent}</Typography>                                                      
+                                                        
+                                                    </Box>
+                                                }
+                                            />
+                                        </ListItem>
+                                        {index < detail.Reviews?.MatReviews.length - 1 && (
+                                            <Divider variant="inset" />
+                                        )}
+                                    </Box>
+                                ))}
+                        </List>
+                    </Box>
                     </Item>
                 </Grid>
                 </Grid>
             </Paper>
-            <Fab color="primary" aria-label="add" onClick={handleClickOpen}    
-            sx={{ position: 'absolute',
-                top: 940,
-                right: 250,}}>
-                <AddIcon />
-            </Fab>
+            {isLogin ?<Fab 
+                    color="primary" 
+                    aria-label="add" 
+                    onClick={handleClickOpen}
+                    sx={{ 
+                        position: 'fixed', // or 'sticky' if preferred
+                        bottom: 20, // distance from the bottom of the viewport
+                        right: 330,  // distance from the right side of the viewport
+                        zIndex: 1000 // ensure it appears above other content
+                    }}>
+                    <AddIcon />
+            </Fab> : null}
            {/* Dialog 컴포넌트 */}
            <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
             <Container maxWidth="md" sx={{ mt: 4 , height:'800px'}}>
@@ -269,9 +363,9 @@ function ExDetail() {
                         display:'flex',
                         mt : 4
                     }}>
-                    <Avatar src="https://bff-images.bemypet.kr/media/medias/all/993-image_picker152967371293908462.jpg" />
+                    <Avatar src={sessionStorage.getItem("profile")} />
                     <Typography  color="primary" sx={{ textAlign: "center" ,  fontSize:'20px', ml :2 , mt:1}}>
-                        내 닉네임
+                        {sessionStorage.getItem("id")}
                     </Typography>
                     </Box>
 
@@ -279,7 +373,7 @@ function ExDetail() {
                         mt :4
                     }}>
                     <Typography  color="primary" sx={{   fontSize:'20px', ml :2 , mt:1}}>
-                        가게 이름 
+                        {detail?.StoreInfo?.storeName} 
                     </Typography>
                     </Box>
                     <Box sx={{
@@ -287,7 +381,10 @@ function ExDetail() {
                         justifyContent :' right'
                         
                     }}>
-                        <Rating />
+                        <Rating          
+                        onChange={(result)=>{
+                            setRating(result.target.value)
+                         }}   />
                     </Box>
 
                     <Box sx={{
@@ -306,6 +403,9 @@ function ExDetail() {
                          placeholder="리뷰를 작성하세요."
                          sx={{
                             width :'700px',
+                         }}
+                         onChange={(result)=>{
+                            setMatReviewContent(result.target.value)
                          }}                       
                     />  
                     </Box>
@@ -335,6 +435,24 @@ function ExDetail() {
                                 width: '100px',
                                 height:'40px'
                             }}
+                            onClick={()=>{
+                                axios.post('/review/regMatReview', {
+                                    rating:rating,
+                                    matReviewContent:matReviewContent,
+                                    storeId:detail.StoreInfo.storeId,
+                                    userId:sessionStorage.getItem("id")
+                                }).then(result => {
+                                    console.log("axios result : " ,result);
+                                    
+                                }
+                                    
+                                )
+                            
+
+                                handleClose();
+
+                            }
+                            }
                             >
                     등록하기
                     </Button>

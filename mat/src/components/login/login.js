@@ -19,13 +19,14 @@ function Login({onClose,setSession}) {
     const loginHandler = async () => {
         try {
           const response = await axios.get(`/user/checkUser/${id}/${password}`);
-          
-          if (response.data.token) {
-            console.log('로그인 성공:', response);
+            // console.log("로그인 응답값 : ", response);
+          if (response.data.auth) {
+            console.log('로그인 성공:', response.data);
             
             // 세션 스토리지에 id와 토큰 저장
-            sessionStorage.setItem('id', id);
-            sessionStorage.setItem('token', response.data.token);
+            sessionStorage.setItem('id', response.data?.userId);
+            sessionStorage.setItem('profile', response.data?.imgPath);
+            sessionStorage.setItem('token', response.data.auth);
     
             // 로그인 상태 업데이트
             setIsLogin(true);

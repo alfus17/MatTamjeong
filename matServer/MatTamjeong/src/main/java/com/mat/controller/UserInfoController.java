@@ -45,15 +45,59 @@ public class UserInfoController
 	@PostMapping("/enrollUser")
 	public boolean enrollUser(@RequestBody userInfo user) {
 		boolean response = false;
-		// 만약 db에 존재하지 않을경우 유저 회원가입 진행 
-		if(! userService.checkUser(user.getUserId())) {
+		// 만약 db에 존재하지 않을경우 유저 회원가입 진행 이메일도 체크
+		if(! userService.checkUser(user.getUserId())&& !userService.checkUserByEmail(user.getEmail())) {
 			userService.saveUser(user);
 			response = true;
 		}
+		
+		
 		return response;
 	}
-
 	
+	// 유저 아이디 중복 체크  
+	@PostMapping("/userIdCheck")
+	public boolean userIdCheck(@RequestBody userInfo user) {
+		// true면 존재함 false 면 존재하지않음 
+		return userService.checkUser(user.getUserId());
+	}
+	
+	
+	
+	
+	// 사용자의 아이디 찾기 
+	@PostMapping("/findUserId")
+	public String findUserId(@RequestBody userInfo user) {
+		String userId = "";
+		String userName = user.getUserName();
+		String userEmail = user.getEmail();
+		System.out.println("userName : " + userName);
+		System.out.println("userEmail : "+userEmail);
+		if(userName != "" && userEmail != "") {
+			userId = userService.getUserIdById(userName,userEmail);
+		}
+		
+		return userId;
+	}
+
+
+	// 사용자의 비밀번호 찾기 
+	//사용자 이름과 아이디를 받아서 비밀번호를 반환해준다.
+	@PostMapping("/findUserPwd")
+	public String findUserPwd(@RequestBody userInfo user) {
+		String userPwd = "";
+		String userId = user.getUserId();
+		String userName = user.getUserName();
+		System.out.println("userId : " + userId);
+		System.out.println("userName : "+userName);
+		if(userName != "" && userId != "") {
+			userId = userService.getPwdById(userId,userName);
+		}
+		
+		return userId;
+	}
+	
+
 	// 특정 유저의 userInfo 데이터를 반환하는 API
 	@GetMapping("/getuserInfo/{userId}")
 	public Optional<userInfo> getUserInfoById(@PathVariable("userId") String userId) 
@@ -63,18 +107,15 @@ public class UserInfoController
 	
 	// check 로그인 API
 	@GetMapping("/checkUser/{userId}/{password}")
-	public ResponseEntity<HashMap<String, String>> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
-		boolean usercheck = userService.checkUser(userId,password);
-		if(usercheck) {
-			
+	public ResponseEntity<userInfo> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
+		userInfo usercheck = userService.checkUser(userId,password);
+		if(usercheck.getUserId() != "" ) {
+			usercheck.setAuth("JonMat");
 			// ToDO 추후에 여기 jwt 변경 작업
-			AccessKey.put("token","JonMat");
-			return ResponseEntity.ok().body( AccessKey);
-		}else {
-			
-			return ResponseEntity.ok().body(AccessKey);
+//			AccessKey.put("token","JonMat");
 		}
-		
+			
+		return ResponseEntity.ok().body(usercheck);
 	}
 	
 	// id 존재여부 체크

@@ -29,12 +29,22 @@ public class UserService
 	}
 	
 	// 유저아이디와 비밀번호로 체크
-	public boolean checkUser(String userId, String userPwd) {
+	public userInfo checkUser(String userId, String userPwd) {
 		
-		boolean result= false;
+		
 		
 		// TODO 변경
 		Optional<userInfo>user = userInfoRepository.findByUserIdAndUserPwd(userId, userPwd);
+		
+		
+		return user.get();
+	}
+	
+	// 유저아이디로 유저가 있는지 체크
+	// 유저아이디가 존재하면 true 아니면 false
+	public boolean checkUser(String userId) {
+		boolean result= false;
+		Optional<userInfo>user = userInfoRepository.findByUserId(userId);
 		
 		if(user.isPresent()) {
 			result = !result;
@@ -44,9 +54,9 @@ public class UserService
 	
 	// 유저아이디로 유저가 있는지 체크
 	// 유저아이디가 존재하면 true 아니면 false
-	public boolean checkUser(String userId) {
+	public boolean checkUserByEmail(String email) {
 		boolean result= false;
-		Optional<userInfo>user = userInfoRepository.findByUserId(userId);
+		Optional<userInfo>user = userInfoRepository.findByEmail(email);
 		
 		if(user.isPresent()) {
 			result = !result;
@@ -103,5 +113,27 @@ public class UserService
         }
         return UserInfoUpdate;
     }
+    // 유저 아이디 찾기 
+	public String getUserIdById(String userName , String email) {
+		String result = "";
+		Optional<userInfo> user = userInfoRepository.findByUserNameAndEmail(userName,email );
+		if(user.isPresent()) {
+			result =user.get().getUserId();
+			
+		}		
+		return result;
+	}
 	
+	// 유저 비밀번호 찾기
+	public String getPwdById(String userId , String userName) {
+		String result = "";
+		Optional<userInfo> user = userInfoRepository.findByUserIdAndUserName(userId,userName );
+		if(user.isPresent()) {
+			result =user.get().getUserPwd();
+			
+		}		
+		return result;
+	}
+
+
 }

@@ -10,6 +10,10 @@ import { AuthContext, IsLoginContext, useIsLoginState } from '../login/authConte
 
 function Header() {
 
+  //세션스토리지에 저장된 데이터 가져오기
+  const profileImg = sessionStorage.getItem("profile");
+  const id = sessionStorage.getItem("id");
+  
   // 로그인 상태 체크
   const isLogin = useIsLoginState();
   console.log("로그인 상태 : ", isLogin);
@@ -21,6 +25,7 @@ function Header() {
     // 로컬 스토리지 클린
     sessionStorage.removeItem('id')
     sessionStorage.removeItem('token')
+    sessionStorage.removeItem('profile')
     setIsLogin(false);
   }
  
@@ -103,6 +108,22 @@ function Header() {
               <Link to="/mypageMain" style={{textDecoration:'none',color: 'inherit'}} >북마크</Link>
           </Typography>
 
+          <Typography
+                  component="h2"
+                  gutterBottom
+                  sx={{
+                    fontSize: '18px',
+                    cursor: !logoutDisabled ? 'default' : 'pointer',
+                    color: !logoutDisabled ? 'gray' : 'black',
+                    '&:hover': {
+                      color: !logoutDisabled ? 'gray' : 'red',
+                    },
+                  }}
+                  onClick={logoutHandler} // Disable click if logoutDisabled is true
+                >
+                  로그아웃
+                </Typography>
+
           {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}} onClick={logoutHandler}>로그아웃</Button> : null}
       </List>
       <Divider />
@@ -175,21 +196,18 @@ function Header() {
         <Grid item xs={3}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             
-                {isLogin ?<Typography
-                  component="h2"
-                  gutterBottom
-                  sx={{
-                    fontSize: '18px',
-                    cursor: !logoutDisabled ? 'default' : 'pointer',
-                    color: !logoutDisabled ? 'gray' : 'black',
-                    '&:hover': {
-                      color: !logoutDisabled ? 'gray' : 'red',
-                    },
-                  }}
-                  onClick={logoutHandler} // Disable click if logoutDisabled is true
-                >
-                  로그아웃
-                </Typography>:null}
+                {isLogin? 
+                <>
+                <Typography>
+                  {sessionStorage.getItem("id")}
+                </Typography>
+                <Button onClick={toggleDrawer('right', true)}>
+                <Avatar alt="Remy Sharp" src={sessionStorage.getItem("profile") !== undefined? sessionStorage.getItem("profile") :"/img/gg.jpg"} sx={{ width: '60px', height: '60px' }} />
+                </Button>
+                <Drawer anchor="right" open={state['right']} onClose={toggleDrawer('right', false)}>
+                  {list('right')}
+                </Drawer>
+                </>:null}
  
             
               { !isLogin ? <Typography
@@ -208,12 +226,7 @@ function Header() {
               >
                 Login
               </Typography>:null}
-                <Button onClick={toggleDrawer('right', true)}>
-                  <Avatar alt="Remy Sharp" src="/img/gg.jpg" sx={{ width: '60px', height: '60px' }} />
-                </Button>
-                <Drawer anchor="right" open={state['right']} onClose={toggleDrawer('right', false)}>
-                  {list('right')}
-                </Drawer>
+               
           </Box>
         </Grid>
       </Grid>
