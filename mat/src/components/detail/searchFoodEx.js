@@ -105,7 +105,7 @@ function Ex() {
                   <Typography>다이닝</Typography>
                   <Rating name="total-rating" value={parseFloat(store.dcRating)} readOnly precision={0.5} />
                   </Box>
-                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.dcRating}</Typography>
+                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.dcRating.toFixed(1)}</Typography>
                   </Box>
       
 
@@ -114,7 +114,7 @@ function Ex() {
                   <Typography>카카오</Typography>
                   <Rating name="total-rating" value={parseFloat(store.kgRating)} readOnly precision={0.5} />
                   </Box>
-                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.kgRating}</Typography>
+                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.kgRating.toFixed(1)}</Typography>
                   </Box>
 
                   <Box sx={{display:'flex'}}>
@@ -122,7 +122,7 @@ function Ex() {
                   <Typography>맛탐정</Typography>
                   <Rating name="total-rating" value={parseFloat(store.matRating)} readOnly precision={0.5} />
                   </Box>
-                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.matRating}</Typography>
+                  <Typography variant="h6" sx={{ml:3,mt:2}}>{store.matRating.toFixed(1)}</Typography>
                   </Box>
                   </Box>
                 </ListItem>
