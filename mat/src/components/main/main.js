@@ -93,13 +93,12 @@ function Main() {
         </Tabs>
       </Box>
 
-      <Container disableGutters maxWidth={false} >
-        <Box sx={{ backgroundColor: '#FFEEA9' ,height:'100%'}}>
+      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' ,height:'100%'}}>
         {/* 첫번째 탭 */}
       {tab === 'one' && (
         <>
          <Box sx={{width:'100%', height:'10px'}}/>
-         <Card elevation={3} sx={{  maxWidth: "100%", margin: "0 auto" , mt:2  ,borderRadius: 3}}>
+         <Card elevation={3} sx={{  maxWidth: "100%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
          <Box 
                 sx={{ 
                   display: 'flex', 
@@ -170,36 +169,42 @@ function Main() {
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mt: 2 }}>
                   <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
+                setCurrentSlide(0)
                 fetchStoreByLocation('강남',page);
                 }}>
                   <Typography sx={{fontWeight:'bold'}}>강남</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
+                setCurrentSlide(0)
                 fetchStoreByLocation('홍대',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
+                setCurrentSlide(0)
                 fetchStoreByLocation('명동',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>명동</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
+                setCurrentSlide(0)
                 fetchStoreByLocation('신촌',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
+                setCurrentSlide(0)
                 fetchStoreByLocation('종로',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>종로</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
+                setCurrentSlide(0)
                 fetchStoreByLocation('동대문',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>
@@ -418,12 +423,9 @@ function Main() {
                 <Button variant="contained" onClick={handleShowMore}>더보기</Button>
               </Box>
             )}
-
           </Box>
         </Card>
         )}
-        <Box sx={{width:'100%', height:'20px'}}></Box>
-        </Box>
       </Container>
     </>
   );

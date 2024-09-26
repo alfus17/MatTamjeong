@@ -13,7 +13,7 @@ const MypageMain = () => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get(`/getuserInfo/${2}`); // Fixed template literal
+      const response = await axios.get(`/user/getuserInfo/${sessionStorage.getItem("id")}`); // Fixed template literal
       setUserInfo(response.data);
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -22,6 +22,7 @@ const MypageMain = () => {
 
   useEffect(() => {
     fetchUserInfo();
+    setProfileImage(sessionStorage.getItem("profile"))
   }, []);
 
   return (
@@ -32,7 +33,7 @@ const MypageMain = () => {
           <Grid item xs={12} md={4}>
             <Paper elevation={3} sx={{ p: 2 }}>
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Avatar sx={{ width: '230px', height: '230px', mt: 4 }} />
+                <Avatar sx={{ width: '230px', height: '230px', mt: 4 }}  src={profileImage}/>
                 
                 <Typography variant="h5" component="h1" sx={{ mt: 5 }}>
                     {userInfo.nickName || '정보없음'}

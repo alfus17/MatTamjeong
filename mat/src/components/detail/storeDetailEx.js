@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import AddReview from '../review/review';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { useIsLoginState } from '../login/authContext';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -32,7 +33,17 @@ function ExDetail() {
     const [dcRevivewsPage , setDcRevivewsPage] = useState(1);
     const [matRevivewsPage , setMatRevivewsPage] = useState(1);
 
-    console.log("여기에요 ----",detail.Reviews?.MatReviews);
+    // 리뷰
+    const [rating ,setRating] = useState(0.0);
+    const [matReviewContent, setMatReviewContent] = useState("");
+    console.log("matReviewContent : ", matReviewContent)
+    console.log("rating : ", rating)
+
+    // 로그인 상태 체크
+    const isLogin = useIsLoginState();
+    console.log("로그인 상태 : ", isLogin);
+
+    console.log("여기에요 ----",detail);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,7 +54,7 @@ function ExDetail() {
                 setKgRevivews(response?.data?.Reviews?.kakaoReview)
                 setDcRevivews(response?.data?.Reviews?.diningReview)
                 setMatRevivews(response?.data?.Reviews?.MatReviews)
-
+            
             } catch (error) {
                 console.error('Error fetching store data:', error);
             }
@@ -326,18 +337,18 @@ function ExDetail() {
                 </Grid>
                 </Grid>
             </Paper>
-            <Fab 
-    color="primary" 
-    aria-label="add" 
-    onClick={handleClickOpen}
-    sx={{ 
-        position: 'fixed', // or 'sticky' if preferred
-        bottom: 20, // distance from the bottom of the viewport
-        right: 330,  // distance from the right side of the viewport
-        zIndex: 1000 // ensure it appears above other content
-    }}>
-    <AddIcon />
-</Fab>
+            {isLogin ?<Fab 
+                    color="primary" 
+                    aria-label="add" 
+                    onClick={handleClickOpen}
+                    sx={{ 
+                        position: 'fixed', // or 'sticky' if preferred
+                        bottom: 20, // distance from the bottom of the viewport
+                        right: 330,  // distance from the right side of the viewport
+                        zIndex: 1000 // ensure it appears above other content
+                    }}>
+                    <AddIcon />
+            </Fab> : null}
            {/* Dialog 컴포넌트 */}
            <Dialog open={open} onClose={handleClose} maxWidth="md" sx={{height:'800px'}} >
             <Container maxWidth="md" sx={{ mt: 4 , height:'800px'}}>
@@ -352,9 +363,9 @@ function ExDetail() {
                         display:'flex',
                         mt : 4
                     }}>
-                    <Avatar src="https://bff-images.bemypet.kr/media/medias/all/993-image_picker152967371293908462.jpg" />
+                    <Avatar src={sessionStorage.getItem("profile")} />
                     <Typography  color="primary" sx={{ textAlign: "center" ,  fontSize:'20px', ml :2 , mt:1}}>
-                        내 닉네임
+                        {sessionStorage.getItem("id")}
                     </Typography>
                     </Box>
 
@@ -362,7 +373,7 @@ function ExDetail() {
                         mt :4
                     }}>
                     <Typography  color="primary" sx={{   fontSize:'20px', ml :2 , mt:1}}>
-                        가게 이름 
+                        {detail?.StoreInfo?.storeName} 
                     </Typography>
                     </Box>
                     <Box sx={{
@@ -370,7 +381,10 @@ function ExDetail() {
                         justifyContent :' right'
                         
                     }}>
-                        <Rating />
+                        <Rating          
+                        onChange={(result)=>{
+                            setRating(result.target.value)
+                         }}   />
                     </Box>
 
                     <Box sx={{
@@ -389,6 +403,9 @@ function ExDetail() {
                          placeholder="리뷰를 작성하세요."
                          sx={{
                             width :'700px',
+                         }}
+                         onChange={(result)=>{
+                            setMatReviewContent(result.target.value)
                          }}                       
                     />  
                     </Box>
@@ -418,6 +435,24 @@ function ExDetail() {
                                 width: '100px',
                                 height:'40px'
                             }}
+                            onClick={()=>{
+                                axios.post('/review/regMatReview', {
+                                    rating:rating,
+                                    matReviewContent:matReviewContent,
+                                    storeId:detail.StoreInfo.storeId,
+                                    userId:sessionStorage.getItem("id")
+                                }).then(result => {
+                                    console.log("axios result : " ,result);
+                                    if(result.data){
+                                        alert("리뷰가 정상적으로 등록됐습니다.")
+                                    }else{
+                                        alert("기존에 작성한 리뷰가 존재합니다.")
+                                    }
+                                })
+                                window.location.reload();
+                                handleClose();
+                            }
+                            }
                             >
                     등록하기
                     </Button>

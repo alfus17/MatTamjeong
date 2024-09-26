@@ -10,6 +10,10 @@ import { AuthContext, IsLoginContext, useIsLoginState } from '../login/authConte
 
 function Header() {
 
+  //세션스토리지에 저장된 데이터 가져오기
+  const profileImg = sessionStorage.getItem("profile");
+  const id = sessionStorage.getItem("id");
+  
   // 로그인 상태 체크
   const isLogin = useIsLoginState();
   console.log("로그인 상태 : ", isLogin);
@@ -21,6 +25,7 @@ function Header() {
     // 로컬 스토리지 클린
     sessionStorage.removeItem('id')
     sessionStorage.removeItem('token')
+    sessionStorage.removeItem('profile')
     setIsLogin(false);
   }
  
@@ -193,8 +198,11 @@ function Header() {
             
                 {isLogin? 
                 <>
+                <Typography>
+                  {sessionStorage.getItem("id")}
+                </Typography>
                 <Button onClick={toggleDrawer('right', true)}>
-                <Avatar alt="Remy Sharp" src="/img/gg.jpg" sx={{ width: '60px', height: '60px' }} />
+                <Avatar alt="Remy Sharp" src={sessionStorage.getItem("profile") !== undefined? sessionStorage.getItem("profile") :"/img/gg.jpg"} sx={{ width: '60px', height: '60px' }} />
                 </Button>
                 <Drawer anchor="right" open={state['right']} onClose={toggleDrawer('right', false)}>
                   {list('right')}
