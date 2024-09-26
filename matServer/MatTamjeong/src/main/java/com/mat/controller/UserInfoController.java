@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mat.common.ObjectToMapConverter;
 import com.mat.domain.Store;
+import com.mat.domain.bookmark;
 import com.mat.domain.locationCategory;
 import com.mat.domain.matReview;
 import com.mat.domain.userInfo;
@@ -142,22 +143,57 @@ public class UserInfoController
 		return userService.checkUser(userId);
 	}
 	
-	// 사용자 북마크 정보 입력
-//	@GetMapping("/addBookMark/{userId}")
-//	public boolean addBookMark(@PathVariable("userId") String userId  ) {
-//		
-//		// 유저 아이디로 유저가 있는지 확인하기 
-//		// true 면 존재함 false 면 존재하지 않음
-//		boolean userCheck = userService.checkUser(userId); 
-//		
-//		if(userCheck) {
-//			
-//			bookMarkService.addBookMark(userId);
-//		}
-//		
-//		return false;
-//	}
-//	
+//	 사용자 북마크 추가
+	@PostMapping("/addBookMark")
+	public boolean addBookMark(@RequestBody bookmark bookmark) {
+		
+		// 유저 아이디로 유저가 있는지 확인하기 
+		// true 면 존재함 false 면 존재하지 않음
+		boolean userCheck = userService.checkUser(bookmark.getUserId()); 
+		boolean addResult= false;
+		
+		if(userCheck) {
+			
+			addResult= bookMarkService.addBookMark(bookmark);
+		}
+		
+		return addResult;
+	}
+	
+//	 사용자 북마크 삭제
+	@PostMapping("/deleteBookMark")
+	public boolean deleteBookMark(@RequestBody bookmark bookmark) {
+		
+		// 유저 아이디로 유저가 있는지 확인하기 
+		// true 면 존재함 false 면 존재하지 않음
+		boolean userCheck = userService.checkUser(bookmark.getUserId()); 
+		boolean addResult= false;
+		
+		if(userCheck) {
+			
+			addResult= bookMarkService.deleteBookMark(bookmark);
+		}
+		
+		return addResult;
+	}
+	
+	@PostMapping("/checkBookMark")
+	public boolean checkBookMark(@RequestBody bookmark bookmark) {
+		
+		// 유저 아이디로 유저가 있는지 확인하기 
+		// true 면 존재함 false 면 존재하지 않음
+		boolean userCheck = userService.checkUser(bookmark.getUserId()); 
+		boolean addResult= false;
+		
+		if(userCheck) {
+			
+			addResult= bookMarkService.checkBookMark(bookmark.getUserId(), bookmark.getStoreId());
+			System.out.println("checkBookMark : "+addResult);
+		}
+		
+		return addResult;
+	}
+	
 	
 	
 	// 사용자 정보를 업데이트하는 API

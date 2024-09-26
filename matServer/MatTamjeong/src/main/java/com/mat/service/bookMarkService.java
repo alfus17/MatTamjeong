@@ -42,10 +42,17 @@ public class bookMarkService {
 		return res;
 	}
 //	
-//	// 북마크 삭제하기 
-//	public boolean deleteBookMark(String userId, String storeId) {
-//		
-//	}
+	// 북마크 삭제하기 
+	public boolean deleteBookMark(bookmark bookmark) {
+		boolean deleteResult = false;
+		int result= bookMarkRepository.deleteStoreByUserIdAndStoreId(bookmark.getUserId(), bookmark.getStoreId());
+		System.out.println("deleteBookMark count : " + result);
+		// 
+		if(result >0) {
+			deleteResult = true;
+		}
+		return deleteResult;
+	}
 	
 	
 }

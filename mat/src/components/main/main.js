@@ -241,7 +241,7 @@ function Main() {
                               style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
                             />
                             <Box sx={{ width: '100%' ,ml:1}}>
-                              <Typography sx={{ fontSize: '18px', fontFamily:'Do+Hyeon&display=swap'}}>
+                              <Typography sx={{ fontSize: '18px'}}>
                                 {item.storeName}
                               </Typography>
                             <Box sx={{mt:2, display:'flex' ,flexDirection:'column'}}>
