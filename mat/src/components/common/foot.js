@@ -4,7 +4,7 @@ import { Container, Box, Typography, Link } from "@mui/material";
 
 export function Foot() {
     return (
-        <Container maxWidth="false" sx={{ backgroundColor: '#F5F5F5', padding: '20px', position: 'relative', bottom: 0, width: '100%' ,mt:10 }}>
+        <Container maxWidth="false" sx={{ backgroundColor: '#F5F5F5', padding: '20px', position: 'relative', bottom: 0, width: '100%' ,mt:2 }}>
             <Box sx={{ textAlign: 'left', mt:6  }}>
                 <Typography variant="body1" color="text.secondary">
                     © 2024 맛탐정. Find Korea MatZip
