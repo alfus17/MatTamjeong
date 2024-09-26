@@ -14,6 +14,7 @@ function ManagementHistory() {
     bookmarkId: '', // 추가된 필드
     reviewId: '', // 추가된 필드
   });
+  //리뷰 리스트 
   const [myReivews , setMyReviews] = useState(null)
   console.log("내 리뷰 목록",myReivews);
 
