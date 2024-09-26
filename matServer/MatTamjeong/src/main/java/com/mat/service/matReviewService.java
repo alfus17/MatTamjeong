@@ -50,4 +50,10 @@ public class matReviewService {
 		return matReviewRepository.findByUserIdAndStoreId(userId ,storeId);
 		
 	}
+	
+	// 유저아이디로 리뷰 객체 가져오기
+	public List <matReview> getReviewsByUserId(String userId) {
+		List <matReview> reviews =matReviewRepository.findByUserId(userId);
+		return reviews;
+	}
 }

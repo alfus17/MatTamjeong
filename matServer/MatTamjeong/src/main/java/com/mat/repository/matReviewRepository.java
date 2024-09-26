@@ -22,4 +22,6 @@ public interface matReviewRepository extends JpaRepository<matReview, Integer>{
 
 	Optional<matReview> findByUserIdAndStoreId(String userId, int storeId);
 
+	List<matReview> findByUserId(String userId);
+
 }

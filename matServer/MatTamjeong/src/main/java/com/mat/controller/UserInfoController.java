@@ -1,5 +1,6 @@
 package com.mat.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mat.common.ObjectToMapConverter;
 import com.mat.domain.Store;
 import com.mat.domain.locationCategory;
+import com.mat.domain.matReview;
 import com.mat.domain.userInfo;
+import com.mat.service.StoreService;
 import com.mat.service.UserService;
 import com.mat.service.bookMarkService;
 import com.mat.service.locationCategoryService;
+import com.mat.service.matReviewService;
 
 @RestController
 @RequestMapping("/user")
@@ -27,12 +32,17 @@ public class UserInfoController
 {
 	private HashMap<String, String> AccessKey =new HashMap<>();
 	
+	@Autowired
+	private matReviewService matReviewService;
 
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private bookMarkService bookMarkService;
+	
+	@Autowired
+	private StoreService storeService;
 
 	// 모든 유저의 userInfo 데이터를 반환하는 API
 	@PostMapping("/getuserInfo")
@@ -100,22 +110,29 @@ public class UserInfoController
 
 	// 특정 유저의 userInfo 데이터를 반환하는 API
 	@GetMapping("/getuserInfo/{userId}")
-	public Optional<userInfo> getUserInfoById(@PathVariable("userId") String userId) 
+	public userInfo getUserInfoById(@PathVariable("userId") String userId) 
 	{
-		return userService.getUserInfoById(userId); // 특정 유저의 데이터를 반환
+		return userService.getUserInfoById(userId).get(); // 특정 유저의 데이터를 반환
 	}
 	
 	// check 로그인 API
 	@GetMapping("/checkUser/{userId}/{password}")
-	public ResponseEntity<userInfo> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
-		userInfo usercheck = userService.checkUser(userId,password);
-		if(usercheck.getUserId() != "" ) {
-			usercheck.setAuth("JonMat");
+	public ResponseEntity<Object> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
+		System.out.println("here userId : " + userId);
+		System.out.println("here  password : " + password);
+		Optional <userInfo>usercheck = userService.checkUser(userId,password);
+		
+//		System.out.println("here usercheck : "+ usercheck.get());
+		if(usercheck.isPresent()) {
+			usercheck.get().setAuth("JonMat");
 			// ToDO 추후에 여기 jwt 변경 작업
 //			AccessKey.put("token","JonMat");
+			return ResponseEntity.ok().body(usercheck.get());
+		}else {
+			return ResponseEntity.ok().body("noUser");
 		}
 			
-		return ResponseEntity.ok().body(usercheck);
+		
 	}
 	
 	// id 존재여부 체크
@@ -172,7 +189,37 @@ public class UserInfoController
             return ResponseEntity.status(500).body(response); // 서버 오류 시 500 응답 반환
         }
     }
-	
+    
+	// 내가 작성한 리뷰 리스트 가져오기 
+    @GetMapping("/getMyReviews/{userId}")
+    public Object  getMyReviews(@PathVariable("userId") String userId  ) {
+    	Object result = null;
+    	
+    	if(userService.checkUser(userId)) {
+    		List<Object> ReviewList = new ArrayList<>();
+    		
+    		for(matReview review : matReviewService.getReviewsByUserId(userId) ) {
+    			// 이걸로 객체를 Map으로 변경 
+    			HashMap<String, Object> reviewMap=new ObjectToMapConverter().convertObjectToMap(review);
+    			
+    			// store id로 storeName 검색
+    			Optional<Store> store = storeService.getStoreById(review.getStoreId());
+    			if(store.isPresent()) {
+    				reviewMap.put("storeName", store.get().getStoreName());  
+    			}
+    			ReviewList.add(reviewMap);
+    			System.out.println("ReviewList : " +ReviewList);
+    		}
+    		result =ReviewList;
+    		
+    		System.out.println("result : " +result.toString());
+    		
+    		
+    	}else {
+    		result = "";
+    	}
+		return result;
+	}
 	
 
 	

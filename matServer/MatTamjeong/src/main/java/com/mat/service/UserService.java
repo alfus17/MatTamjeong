@@ -29,15 +29,12 @@ public class UserService
 	}
 	
 	// 유저아이디와 비밀번호로 체크
-	public userInfo checkUser(String userId, String userPwd) {
+	public Optional<userInfo> checkUser(String userId, String userPwd) {
 		
-		
-		
-		// TODO 변경
 		Optional<userInfo>user = userInfoRepository.findByUserIdAndUserPwd(userId, userPwd);
 		
 		
-		return user.get();
+		return user;
 	}
 	
 	// 유저아이디로 유저가 있는지 체크

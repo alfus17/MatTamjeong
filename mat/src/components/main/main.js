@@ -10,7 +10,6 @@ import { set } from 'date-fns';
 
 function Main() {
   const [store, setStore] = useState([]); // 가게 리스트
-  const [visibleStores, setVisibleStores] = useState(4); // 보여줄 가게 수
   const [selectedLocation, setSelectedLocation] = useState('강남');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [tab, setTab] = useState('two');
@@ -84,7 +83,6 @@ function Main() {
 
   let matRating = store?.Ratings?.matRating.toFixed(1) || 0.0;
 
-
   return (
     <>
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 4 }}>
@@ -95,7 +93,7 @@ function Main() {
         </Tabs>
       </Box>
 
-      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' ,height:'780px'}}>
+      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' ,height:'100%'}}>
         {/* 첫번째 탭 */}
       {tab === 'one' && (
         <>
@@ -147,7 +145,7 @@ function Main() {
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>  
         </Box>
-         <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto",borderRadius: 3 }}>
+         <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 1,borderRadius: 3 }}>
          <Box sx={{ maxWidth: '100%', margin: '0 auto' }}>
            <Map storeData={store} height="700px" /> {/* 지도를 크게 표시 */}
          </Box>
@@ -161,8 +159,8 @@ function Main() {
        {/* 두번쨰탭 */}
        {tab === 'two' && (
           <>
-            <Box sx={{ width: '100%', height: '10px', mb:2, }} />
-            <Card elevation={3} sx={{ maxWidth: '60%', margin: '0 auto', mt: 2,  borderRadius: 3 }}>
+            <Box sx={{ width: '100%', height: '10px' }} />
+            <Card elevation={3} sx={{ maxWidth: '60%', margin: '0 auto', mt: 2, mb: 4, borderRadius: 3 }}>
               <Box sx={{ maxWidth: '100%', margin: '0 auto' }}>
                 <Map storeData={store} height="450px" />
               </Box>
@@ -170,43 +168,43 @@ function Main() {
                 <Grid>
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mt: 2 }}>
                   <Button  sx={{}} onClick={() =>{ 
-                setCurrentSlide(0);
                 setPage(1);
+                setCurrentSlide(0)
                 fetchStoreByLocation('강남',page);
                 }}>
                   <Typography sx={{fontWeight:'bold'}}>강남</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
-                setCurrentSlide(0);
+                setCurrentSlide(0)
                 fetchStoreByLocation('홍대',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
-                setCurrentSlide(0);
+                setCurrentSlide(0)
                 fetchStoreByLocation('명동',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>명동</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
-                setCurrentSlide(0);
+                setCurrentSlide(0)
                 fetchStoreByLocation('신촌',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
-                setCurrentSlide(0);
+                setCurrentSlide(0)
                 fetchStoreByLocation('종로',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>종로</Typography>
                 </Button>
                 <Button  sx={{}} onClick={() =>{ 
                 setPage(1);
-                setCurrentSlide(0);
+                setCurrentSlide(0)
                 fetchStoreByLocation('동대문',page);
                 }}>
                 <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>
@@ -248,15 +246,15 @@ function Main() {
                             <Box sx={{mt:2, display:'flex' ,flexDirection:'column'}}>
                               <Box sx={{display:'flex'}}>
                               <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
-                              <Typography sx={{ml:1.5 , fontSize:'19px' ,fontFamily:'Jua',color:'#fa7e0a'}}>{item.kgRating.toFixed(1)}</Typography>
+                              <Typography sx={{ml:1 , fontSize:'19px' ,fontFamily:'Jua',color:'#fa7e0a'}}>{item.kgRating.toFixed(1) || 0.0}</Typography>
                               </Box>
                               <Box sx={{display:'flex', mt:1}}>
                               <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
-                              <Typography sx={{ml:1.5, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.dcRating.toFixed(1)}</Typography>
+                              <Typography sx={{ml:1, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.dcRating.toFixed(1) || 0.0}</Typography>
                               </Box>
                               <Box sx={{display:'flex', mt:1}}>
                               <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5}/>
-                              <Typography sx={{ml:1.5, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.matRating.toFixed(1)}</Typography>
+                              <Typography sx={{ml:1, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.matRating.toFixed(1) || 0.0}</Typography>
                               </Box>
                             </Box>
                             </Box>
@@ -279,82 +277,154 @@ function Main() {
           </>
         )}
 
-       {/* 세번째 탭 */}
-       {tab === 'three' && (
+        {/* 세번째 탭 */}
+        {tab === 'three' && (
           <Card elevation={3} sx={{ maxWidth: "80%", margin: "0 auto", mt: 2, mb: 4, borderRadius: 3 }}>
-            <Box sx={{ maxWidth: '100%', margin: '0 auto', p: 2 }}>
-              {/* 버튼 추가 */}
-              <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mb: 2 }}>
-              <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('강남',page);
-                }}>
-                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('홍대',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('명동',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>명동</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('신촌',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('종로',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>종로</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('동대문',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>   
-              </Box>
-              {/* 가게 리스트 한 줄에 하나씩 표시, slice로 5개씩 보여줌 */}
-              <Box>
-                {(filterStore.length > 0 ? filterStore : store)
-                  .slice(0, visibleStores)  // 처음에 5개만 보여주고, 더보기 클릭 시 추가로 보여줌
-                  .map((item, index) => (
-                  <Paper key={index} sx={{ mb: 3, p: 3, display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', backgroundColor:'#FEFFD2'}}>
+          <Box sx={{ maxWidth: '100%', margin: '0 auto', p: 2 }}>
+            {/* 지역 버튼 */}
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mb: 2 }}>
+              <Button onClick={() => { setPage(1); fetchStoreByLocation('강남', 1); }}>
+                <Typography sx={{ fontWeight: 'bold' }}>강남</Typography>
+              </Button>
+              <Button onClick={() => { setPage(1); fetchStoreByLocation('홍대', 1); }}>
+                <Typography sx={{ fontWeight: 'bold' }}>홍대</Typography>
+              </Button>
+              <Button onClick={() => { setPage(1); fetchStoreByLocation('명동', 1); }}>
+                <Typography sx={{ fontWeight: 'bold' }}>명동</Typography>
+              </Button>
+              <Button onClick={() => { setPage(1); fetchStoreByLocation('신촌', 1); }}>
+                <Typography sx={{ fontWeight: 'bold' }}>신촌</Typography>
+              </Button>
+              <Button onClick={() => { setPage(1); fetchStoreByLocation('종로', 1); }}>
+                <Typography sx={{ fontWeight: 'bold' }}>종로</Typography>
+              </Button>
+              <Button onClick={() => { setPage(1); fetchStoreByLocation('동대문', 1); }}>
+                <Typography sx={{ fontWeight: 'bold' }}>동대문</Typography>
+              </Button>
+            </Box>
+            
+            {/* 가게 리스트 표시 */}
+            <Box>
+              {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
+                <Paper
+                  key={index}
+                  sx={{
+                    mb: 3,
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '100%',
+                    backgroundColor: '#FEFFD2',
+                  }}
+                >
+                  {/* 가게 이미지 */}
+                  <Box sx={{ width: '16%' }}>
                     <img
                       src={item.menuUrl}
                       alt={item.storeName}
                       onClick={() => handleImageClick(item.storeId)}
-                      style={{ width: '200px', height: '150px', objectFit: 'cover', marginRight: '16px' , cursor:'pointer'}}
+                      style={{
+                        width: '200px',
+                        height: '150px',
+                        objectFit: 'cover',
+                        cursor: 'pointer',
+                      }}
                     />
-                    <Box>
-                      <Typography sx={{fontSize:'24px' , fontWeight:'bold'}}>{item.storeName}</Typography>
-                      <Typography >{item.storeAddress}</Typography>
-                      <Box sx={{display:'flex' , mt:2}}>
-                      <Rating name="total-rating" value={parseFloat(avgRating)} readOnly precision={0.5} />
-                      <Typography sx={{ml:1 , fontSize:'24px'}}>
-                        {avgRating}/5
-                      </Typography>
-                      </Box>
-                    </Box>
-                  </Paper>
-                ))}
-              </Box>
+                  </Box>
 
-              {/* 더보기 버튼 */}
-              {visibleStores < store.length && (
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                  <Button variant="contained" onClick={handleShowMore}>더보기</Button>
-                </Box>
-              )}
+                  {/* 가게 정보 */}
+                  <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, ml: 2 }}>
+                    <Typography sx={{ fontSize: '24px', fontWeight: 'bold' }}>
+                      {item.storeName}
+                    </Typography>
+                    <Typography sx={{mt:6}}>{item.storeAddress}</Typography>
+                  </Box>
+
+                  {/* 맛탐정 별점 */}
+                  <Box sx={{textAlign:'center',mr:4}}>
+                  <Typography variant='h6'>맛탐정</Typography>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: 'auto',
+                      ml: 2,
+                      mt:2
+                    }}
+                  >                 
+                    <Rating
+                      name="total-rating"
+                      value={parseFloat(item.matRating)}
+                      readOnly
+                      precision={0.5}
+                    />
+                    <Typography sx={{  fontSize: '24px', ml:2 }}>
+                      {item.matRating.toFixed(1) || 0.0}
+                    </Typography>
+                  </Box>
+                  </Box>
+
+                  {/* 카카오별점 */}
+                  <Box sx={{textAlign:'center' ,mr:4}}>
+                  <Typography variant='h6'>카카오</Typography>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: 'auto',
+                      ml: 2,
+                      mt:2
+                    }}
+                  >                 
+                    <Rating
+                      name="total-rating"
+                      value={parseFloat(item.kgRating)}
+                      readOnly
+                      precision={0.5}
+                    />
+                    <Typography sx={{ ml: 2, fontSize: '24px' }}>
+                      {item.kgRating.toFixed(1) || 0.0}
+                    </Typography>
+                  </Box>
+                  </Box>
+
+                  {/* 다이닝별점 */}
+                  <Box sx={{textAlign:'center'}}>
+                  <Typography variant='h6'>다이닝</Typography>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: 'auto',
+                      ml: 2,
+                      mt:2
+                    }}
+                  >                 
+                    <Rating
+                      name="total-rating"
+                      value={parseFloat(item.dcRating)}
+                      readOnly
+                      precision={0.5}
+                    />
+                    <Typography sx={{ ml: 2, fontSize: '24px' }}>
+                      {item.dcRating.toFixed(1) || 0.0}
+                    </Typography>
+                  </Box>
+                  </Box>
+                </Paper>
+              ))}
             </Box>
-          </Card>
+
+            {/* 더보기 버튼 */}
+            {page < totalPages && (
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                <Button variant="contained" onClick={handleShowMore}>더보기</Button>
+              </Box>
+            )}
+          </Box>
+        </Card>
         )}
       </Container>
     </>
