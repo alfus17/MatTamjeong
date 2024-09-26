@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, Container, Rating } from '@mui/material';
+import { Box, Button, Container, Paper, Rating } from '@mui/material';
 
-function ManagementHistory() {
+function MyReview() {
   const [userInfo, setUserInfo] = useState({
     userAddress: '', // 기본값으로 빈 문자열
     bookmarkId: '', // 추가된 필드
@@ -16,6 +16,8 @@ function ManagementHistory() {
   });
   //리뷰 리스트 
   const [myReivews , setMyReviews] = useState(null)
+  const [showpage , setShowPage] = useState(3);
+
   console.log("내 리뷰 목록",myReivews);
 
   // 사용자 정보를 가져오는 함수
@@ -41,54 +43,49 @@ function ManagementHistory() {
 
   }, []);
 
+  const handleShowMore = () => {
+    setShowPage()
+  };
+
   return (
     <Container sx={{ width: '600px', margin: '0 auto' ,mt:6}}>
-      <Accordion sx={{ width: '100%' }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <Typography>즐겨찾기</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            {userInfo.bookmarkId || '정보 없음'}
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+    
+        <Typography  variant="h6" sx={{textAlign:'center'}}>
+          내가 쓴 리뷰
+        </Typography>
+        {myReivews?.map((review, showpage) =>         
+          <Paper
+          key={showpage}
+          elevation={4}
+          sx={{
+            p:1,
+            mt:3
 
-      <br />
+          }}
+          > 
+            <Typography sx={{fontSize:'22px'}}>
+              {review.storeName}
+            </Typography>
 
-      <Accordion sx={{ width: '100%' }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-        >
-          <Typography>내가 작성한 리뷰</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {myReivews ===null ? 
-          <Typography>
-            정보없음
-          </Typography>:
-            <Box>
-              {myReivews.map((review) => {
-                console.log("review :", review);
-                <Typography>
-                  가게 아이디 : {review?.storeId}
-                  리뷰내용 : {review?.matReviewContent}
-                  <Rating readOnly>{review?.rating}</Rating>
-                  </Typography>
-
-              })}
+            <Box sx={{display:'flex', justifyContent:'space-between', mt:2}}>
+            <Typography>
+              {review.matReviewContent}
+            </Typography>
+            <Rating name="total-rating" value={parseFloat(review.rating)} readOnly precision={0.5}/>
             </Box>
-          } 
-        </AccordionDetails>
-      </Accordion>
+          </Paper>
+        )}
+         {/* 더보기 버튼 */}   
+              {/* <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                <Button variant="outlined" onClick={handleShowMore}>더보기</Button>
+              </Box> */}
+
+        
+
+        
+ 
     </Container>
   );
 }
 
-export default ManagementHistory;
+export default MyReview;

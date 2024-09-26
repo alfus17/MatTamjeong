@@ -8,7 +8,6 @@ import MypageMain from './components/Mypage/MypageMain';
 import AboutMe from './components/Mypage/aboutMe';
 import PasswordConfirm from './components/Mypage/passwordConfirm'; 
 import EditMe from './components/Mypage/editMe';
-import ManagementHistory from './components/Mypage/managementHistory';
 import Login from './components/login/login';
 import Create from './components/login/createUser';
 import AddReview from './components/review/review';
@@ -16,6 +15,7 @@ import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 import Find from './components/login/findUser';
 import { AuthProvider, IsLoginProvider } from './components/login/authContext';
 import { Foot } from './components/common/foot';
+import MyReview from './components/Mypage/MyReview';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -62,7 +62,7 @@ function App() {
                   <Route path="/MypageMain" element={<MypageMain />}>
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
-                    <Route path="managementHistory" element={<ManagementHistory />} />
+                    <Route path="myreview" element={<MyReview />} />
                     <Route path="passwordConfirm" element={<PasswordConfirm />} />
                   </Route>
                 </Routes>

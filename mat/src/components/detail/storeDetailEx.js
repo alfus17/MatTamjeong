@@ -455,7 +455,7 @@ function ExDetail() {
 
                     <Box sx={{display:'flex', justifyContent:'center'}}>
                     <Button
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
                             sx={{
                                 mt : 3,
@@ -469,7 +469,7 @@ function ExDetail() {
                     </Button>
 
                     <Button
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
                             sx={{
                                 ml: 3,
