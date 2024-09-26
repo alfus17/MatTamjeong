@@ -20,35 +20,36 @@ function Ex() {
   const [stores, setStores] = useState([]);
   const [page, setPage] = useState(parseInt(startpage));
   const [totalPage, setTotalPage ] = useState(1);
-
-  console.log("33333333", stores)
+  console.log("stores : ", stores)
+  
   useEffect(() => {
-    // Reset stores and fetch new data when keyword or category changes
-    setStores([]); // Clear existing stores
-    setPage(1); // Reset page to 1
-    fetchStores(1, keyword); // Fetch stores for the first page
+    // Reset to first page but don't clear stores immediately
+    setPage(1); 
+    fetchStores(1, keyword, true); // Fetch stores for the first page, with an option to reset stores
   }, [category, keyword]);
-
+  
   useEffect(() => {
     if (page > 1) { // Only fetch more stores if page is greater than 1
-      fetchStores(page, keyword);
+      fetchStores(page, keyword, false); // Fetch more stores without resetting
     }
   }, [page, keyword]);
-
-  const fetchStores = async (page, keyword) => {
+  
+  const fetchStores = async (page, keyword, reset = false) => {
     const response = await axios.get(`/search/${category}/${keyword}/${page}`);
-    console.log(response.data);
+    console.log("API Response:", response.data);
   
     setStores((prevStores) => {
+      console.log("setStore resdata :" ,response.data?.storeList )
       const newStores = response.data?.storeList || [];
-      // Filter out duplicates
-      const uniqueStores = [...prevStores, ...newStores].reduce((acc, current) => {
-        if (!acc.find(store => store.id === current.id)) {
-          acc.push(current);
-        }
-        return acc;
-      }, []);
-      return uniqueStores;
+      // Reset stores if required, otherwise append new data
+      console.log("setStore newStores :" ,newStores )
+      console.log("setStore prevStores :" ,prevStores )
+      if (reset) {
+        return newStores;
+      } else {
+        const uniqueStores = [...prevStores, ...newStores];
+        return uniqueStores;
+      }
     });
   
     setTotalPage(response?.data?.totalPages);
@@ -128,11 +129,13 @@ function Ex() {
               </Paper>
             ))}
           </List>
-         {totalPage !== page?  <Button onClick={loadMore} variant="contained" sx={{ mt: 2 }}>
-            더보기
-          </Button> : null}
+          {/* 더보기 버튼 */}
+          {page < totalPage && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+              <Button variant="contained" onClick={loadMore}>더보기</Button>
+            </Box>
+          )}
         </Box>
-
         <Box sx={{ flex: 1.8 }}>
           <Map storeData={stores} height="700px" />
         </Box>

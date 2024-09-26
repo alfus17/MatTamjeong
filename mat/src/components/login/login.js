@@ -137,16 +137,11 @@ function Login({onClose,setSession}) {
                     <Box sx={{ mt: 2, textAlign: 'center', display:'flex'}}>
 
                     <Typography variant="body2" sx={{ cursor: 'pointer','&:hover': {color:'red'} }} onClick={handleFindIdPassword}>
-                        아이디/비밀번호 찾기
+                        아이디/비밀번호 찾기 /
                     </Typography>
                     <Typography variant="body2" sx={{ cursor: 'pointer', ml:2 ,'&:hover': {color:'red'} }} onClick={handleSignUp}>
-                        아이디가 없으신가요?
+                        회원가입
                     </Typography>
-                    {/* 임시 로그아웃 테스트  */}
-                    <Typography variant="body2" sx={{ cursor: 'pointer', ml:2 ,'&:hover': {color:'red'} }} onClick={logoutHandler}>
-                        로그아웃
-                    </Typography>
-
                     </Box>
                 </Box>
             </Grid>

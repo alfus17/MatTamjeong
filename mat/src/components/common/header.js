@@ -108,22 +108,6 @@ function Header() {
               <Link to="/mypageMain" style={{textDecoration:'none',color: 'inherit'}} >북마크</Link>
           </Typography>
 
-          <Typography
-                  component="h2"
-                  gutterBottom
-                  sx={{
-                    fontSize: '18px',
-                    cursor: !logoutDisabled ? 'default' : 'pointer',
-                    color: !logoutDisabled ? 'gray' : 'black',
-                    '&:hover': {
-                      color: !logoutDisabled ? 'gray' : 'red',
-                    },
-                  }}
-                  onClick={logoutHandler} // Disable click if logoutDisabled is true
-                >
-                  로그아웃
-                </Typography>
-
           {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}} onClick={logoutHandler}>로그아웃</Button> : null}
       </List>
       <Divider />

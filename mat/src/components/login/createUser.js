@@ -36,7 +36,7 @@ function Create() {
 
     // console.log("date : ",  Date.UTC(date, 'yyyy-MM-dd') )
     // console.log("selectedAvatar",selectedAvatar )
-    // console.log("userId",userId )
+    console.log("userId",userId )
     // console.log("password",password )
     // console.log("confirmPassword",confirmPassword )
     // console.log("nickname",nickname )
@@ -117,7 +117,7 @@ function Create() {
         <>
       {  !isLogin?
       // 로그인 안했을 경우 보이는 창
-       <Container maxWidth="md" sx={{ mt: 6 , height:'1000px'}}>
+       <Container maxWidth="md" sx={{ mt: 6 , height:'100%'}}>
                 <Grid container justifyContent="center">
                     <Paper elevation={2} sx={{
                         p: 4,
