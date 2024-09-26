@@ -61,8 +61,7 @@ export function AddReview ({onClose}){
 
                 <Box sx={{display:'flex', justifyContent:'center'}}>
                 <Button
-                        variant="contained"
-                        color="primary"
+                        variant="outlined"
                         sx={{
                             mt : 3,
                             mb: 2,
@@ -75,8 +74,7 @@ export function AddReview ({onClose}){
                 </Button>
 
                 <Button
-                        variant="contained"
-                        color="primary"
+                        variant="outlined"
                         sx={{
                             ml: 3,
                             mt: 3,

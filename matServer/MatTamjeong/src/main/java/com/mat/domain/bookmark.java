@@ -20,8 +20,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Entity(name="bookmark")
-@Table(name="bookmark")
+@Entity(name="BOOKMARK")
+@Table(name="BOOKMARK")
 public class bookmark {
 	 
     /* 	bookmark Table
@@ -30,7 +30,6 @@ public class bookmark {
  *  가게ID 	(PK)(FK)	: store_id 		varchar2(10)
  * 	생성일					: created_at	date
  * 	수정일 				: update_at		date
- * 	메뉴ID(FK)			: menu_id		number
  */	
  
 	 
@@ -66,11 +65,6 @@ public class bookmark {
 	@LastModifiedDate
 	private LocalDateTime updateTime;
 	
-	// 메뉴ID(FK)
-	@Column(name="menu_id")
-	@NonNull
-	private int menuId;
-
 	
 
 }

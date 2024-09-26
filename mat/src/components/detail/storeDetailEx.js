@@ -23,7 +23,7 @@ function ExDetail() {
     const { storeId } = useParams(); // 받아온 가게 아이디
     const [detail, setDetail] = useState({}); // 가게 정보
     const [open, setOpen] = useState(false); // dialog 창 열고 닫기
-    const [isBookmarked, setIsBookmarked] = useState(false); // 북마크
+    // const [isBookmarked, setIsBookmarked] = useState(false); // 북마크
     // 리뷰 배열
     const [kgRevivews , setKgRevivews] = useState([]);
     const [dcRevivews , setDcRevivews] = useState([]);
@@ -58,8 +58,22 @@ function ExDetail() {
             } catch (error) {
                 console.error('Error fetching store data:', error);
             }
+            // // 북마크 체크 기능 보류로 인한 주석 
+            // console.log("checkBook storeId :  ", detail?.StoreInfo?.storeId)
+            // console.log("checkBook storeId :  ", detail?.StoreInfo?.storeId)
+            // axios.post('/user/checkBookMark',{
+            //     userId:sessionStorage.getItem("id"),
+            //     storeId:detail?.StoreInfo?.storeId
+            // }).then(
+            //     result =>{
+            //         console.log("북마크 체크 :" , result.data)
+            //         if(result.data){
+            //             setIsBookmarked(true)
+            //         }
+            //     }
+            // )
         };
-        
+
         fetchData();
     }, [storeId]);
 
@@ -71,9 +85,38 @@ function ExDetail() {
         setOpen(false);
     };
 
-    const toggleBookmark = () => {
-        setIsBookmarked(prev => !prev);
-    };
+    // const toggleBookmark = () => {
+    //     if(isBookmarked){
+    //         axios.post(`/user/deleteBookMark`,{
+    //             userId:sessionStorage.getItem("id"),
+    //             storeId:detail?.StoreInfo?.storeId
+    //     }).then(
+    //         result => {
+    //             console.log("북마크 취소 결과  : " , result)
+    //             if(result){
+    //                 setIsBookmarked(prev => !prev);
+    //                 alert("북마크가 취소되었습니다.")
+    //             }
+    //         }
+    //         )
+    //     }else{
+    //         axios.post(`/user/addBookMark`,{
+    //             userId:sessionStorage.getItem("id"),
+    //             storeId:detail?.StoreInfo?.storeId
+    //     }).then(
+    //         result => {
+    //             console.log("북마크 등록 결과  : " , result)
+    //             if(result){
+    //                 setIsBookmarked(prev => !prev);
+    //                 alert("북마크가 등록 되었습니다.")
+    //             }
+    //         }
+    //         )
+
+
+    //     }
+        
+    // };
 
     let avgRating = detail?.Ratings?.avgRating.toFixed(1) || 0.0;
 
@@ -90,7 +133,7 @@ function ExDetail() {
             <Box sx={{width:'100%', height:'10px'}}/>
             <Paper elevation={5} sx={{ position: 'relative', p: 2, margin: '0 auto', maxWidth: '60%', mt: 1, borderRadius: 3 }}>
             {/* Bookmark Icon at the top-left corner */}
-            <IconButton 
+            {/* {isLogin ? <IconButton 
                     sx={{
                         position: 'absolute',
                         top: 18, 
@@ -100,7 +143,7 @@ function ExDetail() {
                     onClick={toggleBookmark}
                 >
                     {isBookmarked ? <BookmarkIcon sx={{ fontSize: '3rem', color: '#FFD700' }} /> : <BookmarkBorderOutlinedIcon sx={{ fontSize: '3rem', color: '#96927a' }} />}
-                </IconButton>
+                </IconButton> : null} */}
 
                 <Grid container spacing={2}>
                     {/*왼쪽 영역 */}
@@ -428,7 +471,7 @@ function ExDetail() {
                     </Button>
 
                     <Button
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
                             sx={{
                                 ml: 3,

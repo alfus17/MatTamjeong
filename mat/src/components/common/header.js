@@ -105,7 +105,7 @@ function Header() {
           </Typography>
 
           <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt:6,color:'#FF7D29'}} >
-              <Link to="/mypageMain" style={{textDecoration:'none',color: 'inherit'}} >북마크</Link>
+              <Link to="/mypageMain/myreview" style={{textDecoration:'none',color: 'inherit'}} >내가 쓴 리뷰</Link>
           </Typography>
 
           {isLogin ? <Button sx={{display:'flex' , margin:'0 auto' , mt : 30 , fontSize:'20px'}} onClick={logoutHandler}>로그아웃</Button> : null}

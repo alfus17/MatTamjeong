@@ -226,7 +226,7 @@ function Main() {
                           display: 'flex',
                           transition: 'transform 0.5s ease-in-out',
                           width: `${store.length * 33.33}%`,
-                          transform: `translateX(-${currentSlide * 29.9}%)`, // 슬라이드 이동
+                          transform: `translateX(-${currentSlide * 30}%)`, // 슬라이드 이동
                         }}
                       >
                         {store.map((item, index) => (
