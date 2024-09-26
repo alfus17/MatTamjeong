@@ -120,7 +120,7 @@ function Create() {
        <Container maxWidth="md" sx={{ mt: 6 , height:'100%'}}>
                 <Grid container justifyContent="center">
                     <Paper elevation={2} sx={{
-                        p: 6,
+                        p: 4,
                         borderRadius: 3,
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                         display: 'flex',

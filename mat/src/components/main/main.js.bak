@@ -93,12 +93,13 @@ function Main() {
         </Tabs>
       </Box>
 
-      <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' ,height:'100%'}}>
+      <Container disableGutters maxWidth={false} >
+        <Box sx={{ backgroundColor: '#FFEEA9' ,height:'100%'}}>
         {/* 첫번째 탭 */}
       {tab === 'one' && (
         <>
          <Box sx={{width:'100%', height:'10px'}}/>
-         <Card elevation={3} sx={{  maxWidth: "100%", margin: "0 auto" , mt:2 , mb:4 ,borderRadius: 3}}>
+         <Card elevation={3} sx={{  maxWidth: "100%", margin: "0 auto" , mt:2  ,borderRadius: 3}}>
          <Box 
                 sx={{ 
                   display: 'flex', 
@@ -426,6 +427,8 @@ function Main() {
           </Box>
         </Card>
         )}
+        <Box sx={{width:'100%', height:'20px'}}></Box>
+        </Box>
       </Container>
     </>
   );
