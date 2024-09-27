@@ -35,15 +35,10 @@ function Ex() {
   }, [page, keyword]);
   
   const fetchStores = async (page, keyword, reset = false) => {
-    const response = await axios.get(`/search/${category}/${keyword}/${page}`);
-    console.log("API Response:", response.data);
-  
+    const response = await axios.get(`/search/${category}/${keyword}/${page}`)
     setStores((prevStores) => {
-      console.log("setStore resdata :" ,response.data?.storeList )
       const newStores = response.data?.storeList || [];
       // Reset stores if required, otherwise append new data
-      console.log("setStore newStores :" ,newStores )
-      console.log("setStore prevStores :" ,prevStores )
       if (reset) {
         return newStores;
       } else {
@@ -51,7 +46,6 @@ function Ex() {
         return uniqueStores;
       }
     });
-  
     setTotalPage(response?.data?.totalPages);
   };
   
