@@ -94,7 +94,7 @@ function Main() {
       </Box>
 
       <Container disableGutters maxWidth={false} >
-        <Box sx={{ backgroundColor: '#FFEEA9' ,height:'100%'}}>
+        <Box sx={{ backgroundColor: '#fb8c00ff' ,height:'100%'}}>
         {/* 첫번째 탭 */}
       {tab === 'one' && (
         <>
@@ -241,22 +241,37 @@ function Main() {
                               style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
                             />
                             <Box sx={{ width: '100%' ,ml:1}}>
-                              <Typography sx={{ fontSize: '18px'}}>
+                            <Typography 
+                                sx={{ 
+                                  fontSize: '18px', 
+                                  lineHeight: '1.2em', 
+                                  height: '2.4em', // 최대 2줄로 제한
+                                  overflow: 'hidden', 
+                                  textOverflow: 'ellipsis', 
+                                  display: '-webkit-box', 
+                                  WebkitLineClamp: 2, 
+                                  WebkitBoxOrient: 'vertical' 
+                                }}
+                              >
                                 {item.storeName}
                               </Typography>
                             <Box sx={{mt:2, display:'flex' ,flexDirection:'column'}}>
+
                               <Box sx={{display:'flex'}}>
                               <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
                               <Typography sx={{ml:1 , fontSize:'19px' ,fontFamily:'Jua',color:'#fa7e0a'}}>{item.kgRating.toFixed(1) || 0.0}</Typography>
                               </Box>
+
                               <Box sx={{display:'flex', mt:1}}>
                               <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
                               <Typography sx={{ml:1, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.dcRating.toFixed(1) || 0.0}</Typography>
                               </Box>
+
                               <Box sx={{display:'flex', mt:1}}>
                               <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5}/>
                               <Typography sx={{ml:1, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.matRating.toFixed(1) || 0.0}</Typography>
                               </Box>
+                              
                             </Box>
                             </Box>
                           </Box>
@@ -280,6 +295,8 @@ function Main() {
 
         {/* 세번째 탭 */}
         {tab === 'three' && (
+          <>
+           <Box sx={{ width: '100%', height: '10px' }} />
           <Card elevation={3} sx={{ maxWidth: "80%", margin: "0 auto", mt: 2, mb: 4, borderRadius: 3 }}>
           <Box sx={{ maxWidth: '100%', margin: '0 auto', p: 2 }}>
             {/* 지역 버튼 */}
@@ -307,21 +324,20 @@ function Main() {
             {/* 가게 리스트 표시 */}
             <Box>
               {(filterStore.length > 0 ? filterStore : store).map((item, index) => (
-                <Paper
+                <Box
                   key={index}
                   sx={{
-                    mb: 3,
+                    borderTop:'1px solid #D3D3D3',
                     p: 3,
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: { xs: 'column', md: 'row' }, // 작은 화면에서는 세로 배치
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     width: '100%',
-                    backgroundColor: '#FEFFD2',
                   }}
                 >
                   {/* 가게 이미지 */}
-                  <Box sx={{ width: '16%' }}>
+                  <Box sx={{ width: { xs: '100%', md: '16%' }, mb: { xs: 2, md: 0 } }}>
                     <img
                       src={item.menuUrl}
                       alt={item.storeName}
@@ -361,7 +377,7 @@ function Main() {
                       readOnly
                       precision={0.5}
                     />
-                    <Typography sx={{  fontSize: '24px', ml:2 }}>
+                    <Typography sx={{  fontSize: '24px', ml:2,fontFamily:'Jua',color:'#fa7e0a' }}>
                       {item.matRating.toFixed(1) || 0.0}
                     </Typography>
                   </Box>
@@ -385,7 +401,7 @@ function Main() {
                       readOnly
                       precision={0.5}
                     />
-                    <Typography sx={{ ml: 2, fontSize: '24px' }}>
+                    <Typography sx={{ ml: 2, fontSize: '24px',fontFamily:'Jua',color:'#fa7e0a' }}>
                       {item.kgRating.toFixed(1) || 0.0}
                     </Typography>
                   </Box>
@@ -409,12 +425,12 @@ function Main() {
                       readOnly
                       precision={0.5}
                     />
-                    <Typography sx={{ ml: 2, fontSize: '24px' }}>
+                    <Typography sx={{ ml: 2, fontSize: '24px',fontFamily:'Jua',color:'#fa7e0a'}}>
                       {item.dcRating.toFixed(1) || 0.0}
                     </Typography>
                   </Box>
                   </Box>
-                </Paper>
+                </Box>
               ))}
             </Box>
 
@@ -426,6 +442,7 @@ function Main() {
             )}
           </Box>
         </Card>
+        </>
         )}
         <Box sx={{width:'100%', height:'20px'}}></Box>
         </Box>
