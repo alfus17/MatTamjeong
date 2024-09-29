@@ -15,8 +15,11 @@ function EditMe() {
     // 처음 마운트 시 사용자 정보 가져오기
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`/getuserInfo/${2}`); // ID는 적절히 변경
-        setOriginalInfo(response.data); // 원본 데이터를 저장
+        await axios.get(`/user/getuserInfo/${sessionStorage.getItem("id")}`).then((result)=>{
+          console.log("axios getuserInfo Result : ",result );
+          setOriginalInfo(result.data); // 원본 데이터를 저장
+        }); // ID는 적절히 변경
+        
       } catch (error) {
         console.error('Error fetching user info:', error);
       }
@@ -49,7 +52,7 @@ function EditMe() {
     }
 
     try {
-      const response = await axios.post(`/updateUserInfo`, { userId: 2, field, value: userInfo[field] });
+      const response = await axios.post(`/user/updateUserInfo`, { userId: sessionStorage.getItem('id'), field, value: userInfo[field] });
       if (response.data.success) {
         alert("수정이 완료되었습니다");
         setOriginalInfo({ ...originalInfo, [field]: userInfo[field] });

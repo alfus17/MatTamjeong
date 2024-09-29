@@ -8,13 +8,14 @@ import MypageMain from './components/Mypage/MypageMain';
 import AboutMe from './components/Mypage/aboutMe';
 import PasswordConfirm from './components/Mypage/passwordConfirm'; 
 import EditMe from './components/Mypage/editMe';
-import ManagementHistory from './components/Mypage/managementHistory';
 import Login from './components/login/login';
 import Create from './components/login/createUser';
 import AddReview from './components/review/review';
 import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 import Find from './components/login/findUser';
 import { AuthProvider, IsLoginProvider } from './components/login/authContext';
+import { Foot } from './components/common/foot';
+import MyReview from './components/Mypage/MyReview';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -27,9 +28,23 @@ import { AuthProvider, IsLoginProvider } from './components/login/authContext';
 
 // npm cache clean --force
 
+
+const theme = createTheme({
+  palette: {
+      primary: {
+          main: '#FF7D29',
+      },
+  },
+  typography: {
+      fontFamily: 'Nanum Gothic', // Global font family
+      fontWeightBold:'500'
+  },
+});
+
 function App() {
 
   return (
+    <ThemeProvider theme={theme}>
     <>
     {/* 로그인 상태 유지를 위해  씌워준 컴포넌트 */}
     <IsLoginProvider>
@@ -48,13 +63,15 @@ function App() {
                   <Route path="/MypageMain" element={<MypageMain />}>
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
-                    <Route path="managementHistory" element={<ManagementHistory />} />
+                    <Route path="myreview" element={<MyReview />} />
                     <Route path="passwordConfirm" element={<PasswordConfirm />} />
                   </Route>
                 </Routes>
       </Router>
+      <Foot />
       </IsLoginProvider>
     </>
+    </ThemeProvider>
   );
 }
 

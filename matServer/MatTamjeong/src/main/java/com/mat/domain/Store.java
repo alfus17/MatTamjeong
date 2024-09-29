@@ -52,7 +52,7 @@ public class Store {
 			sequenceName = "storeseq",
 			allocationSize = 1
 			)
-	@GeneratedValue(generator="store_id")
+	@GeneratedValue(generator="storeseq")
 	private int storeId;
 	
 	// 가게 이름
@@ -94,12 +94,12 @@ public class Store {
 	
 	// 생성날짜
 	@CreatedDate
-	@Column(name="created_at")
+	@Column(name="created_at" , columnDefinition = "DATE DEFAULT SYSDATE")
 	private LocalDateTime createdAt;
 	
 	// 수정날짜
 	@LastModifiedDate
-	@Column(name="update_at")
+	@Column(name="update_at" , columnDefinition = "DATE DEFAULT SYSDATE")
 	private LocalDateTime updateAt;
 
 	

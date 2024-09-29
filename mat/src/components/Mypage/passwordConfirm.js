@@ -8,6 +8,7 @@ import { Box, Container, Typography } from '@mui/material';
 function PasswordConfirm() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [errorMsg , setErrorMsg] = useState("");
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -16,15 +17,21 @@ function PasswordConfirm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get(`/checkUser/${2}/${password}`);
-      if (response.data) {
-        navigate('/MypageMain/editMe'); // 비밀번호가 맞으면 editMe로 이동
-      } else {
-        alert('비밀번호가 틀렸습니다');
-        setPassword(''); // 비밀번호 틀렸을 시 칸 초기화
+      await axios.get(`/user/checkUser/${sessionStorage.getItem("id")}/${password}`).then(result => {
+        console.log("axious result : ",result )
+        if(result.data === 'noUser' ){
+          alert("비밀번호를 잘못 입력하셨습니다.")
+          setPassword('');
+        }else{
+          navigate('/MypageMain/editMe');
+        }
+
       }
+
+      );
     } catch (error) {
       console.error('Error validating password:', error);
+      alert("비밀번호를 잘못 입력하셨습니다.")
     }
   };
 
