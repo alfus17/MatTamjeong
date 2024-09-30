@@ -100,9 +100,9 @@ function Header() {
               <Link to="/mypageMain/passwordConfirm" style={{textDecoration:'none',color: 'inherit'}}>정보수정</Link>
           </Typography>
 
-          <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt:6,color:'#FF7D29'}} >
+          {/* <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt:6,color:'#FF7D29'}} >
               <Link to="/mypageMain/ManagementHistory" style={{textDecoration:'none',color: 'inherit'}}>이력관리</Link>
-          </Typography>
+          </Typography> */}
 
           <Typography sx={{textAlign:'center' , cursor:'pointer' , fontSize:'25px' ,mt:6,color:'#FF7D29'}} >
               <Link to="/mypageMain/myreview" style={{textDecoration:'none',color: 'inherit'}} >내가 쓴 리뷰</Link>

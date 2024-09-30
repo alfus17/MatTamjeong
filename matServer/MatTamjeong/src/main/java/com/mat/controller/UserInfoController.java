@@ -62,7 +62,6 @@ public class UserInfoController
 			response = true;
 		}
 		
-		
 		return response;
 	}
 	
@@ -73,9 +72,7 @@ public class UserInfoController
 		return userService.checkUser(user.getUserId());
 	}
 	
-	
-	
-	
+
 	// 사용자의 아이디 찾기 
 	@PostMapping("/findUserId")
 	public String findUserId(@RequestBody userInfo user) {
@@ -123,11 +120,9 @@ public class UserInfoController
 		System.out.println("here  password : " + password);
 		Optional <userInfo>usercheck = userService.checkUser(userId,password);
 		
-//		System.out.println("here usercheck : "+ usercheck.get());
 		if(usercheck.isPresent()) {
 			usercheck.get().setAuth("JonMat");
 			// ToDO 추후에 여기 jwt 변경 작업
-//			AccessKey.put("token","JonMat");
 			return ResponseEntity.ok().body(usercheck.get());
 		}else {
 			return ResponseEntity.ok().body("noUser");
