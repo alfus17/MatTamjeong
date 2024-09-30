@@ -35,15 +35,10 @@ function Ex() {
   }, [page, keyword]);
   
   const fetchStores = async (page, keyword, reset = false) => {
-    const response = await axios.get(`/search/${category}/${keyword}/${page}`);
-    console.log("API Response:", response.data);
-  
+    const response = await axios.get(`/search/${category}/${keyword}/${page}`)
     setStores((prevStores) => {
-      console.log("setStore resdata :" ,response.data?.storeList )
       const newStores = response.data?.storeList || [];
       // Reset stores if required, otherwise append new data
-      console.log("setStore newStores :" ,newStores )
-      console.log("setStore prevStores :" ,prevStores )
       if (reset) {
         return newStores;
       } else {
@@ -51,7 +46,6 @@ function Ex() {
         return uniqueStores;
       }
     });
-  
     setTotalPage(response?.data?.totalPages);
   };
   
@@ -66,7 +60,7 @@ function Ex() {
   };
 
   return (
-    <Container maxWidth="100%" sx={{ mt: 2 , backgroundColor:'#F7EED3', height:'700px' }}>
+    <Container maxWidth="100%" sx={{ mt: 2 , backgroundColor:'#fb8c00ff', height:'700px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100%' }}>
         <Box sx={{ flex: 1, height: '100%', overflowY: 'auto' }}>
           <List sx={{ width: '100%' }}>
@@ -84,7 +78,7 @@ function Ex() {
                       height: 150,
                       borderRadius: 1,
                       objectFit: 'cover',
-                      marginRight: 2,
+                      
                       
                     }}
                   />
@@ -136,7 +130,7 @@ function Ex() {
             </Box>
           )}
         </Box>
-        <Box sx={{ flex: 1.8 }}>
+        <Box sx={{ flex: 1.6 }}>
           <Map storeData={stores} height="700px" />
         </Box>
       </Box>

@@ -51,7 +51,7 @@ const MypageMain = () => {
                     정보수정
                   </Button>
                   <Button variant="outlined" component="a" href='/mypageMain/ManagementHistory' sx={{}}>
-                    이력관리
+                    내 리뷰 보기
                   </Button>
                 </Box>
               </Box>
