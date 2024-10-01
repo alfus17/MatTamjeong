@@ -60,7 +60,7 @@ function Ex() {
   };
 
   return (
-    <Container maxWidth="100%" sx={{ mt: 2 , backgroundColor:'#F7EED3', height:'700px' }}>
+    <Container maxWidth="100%" sx={{ mt: 2 , backgroundColor:'#fb8c00ff', height:'700px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '100%' }}>
         <Box sx={{ flex: 1, height: '100%', overflowY: 'auto' }}>
           <List sx={{ width: '100%' }}>
@@ -78,7 +78,7 @@ function Ex() {
                       height: 150,
                       borderRadius: 1,
                       objectFit: 'cover',
-                      marginRight: 2,
+                      
                       
                     }}
                   />
@@ -130,7 +130,7 @@ function Ex() {
             </Box>
           )}
         </Box>
-        <Box sx={{ flex: 1.8 }}>
+        <Box sx={{ flex: 1.6 }}>
           <Map storeData={stores} height="700px" />
         </Box>
       </Box>
