@@ -69,6 +69,7 @@ public class UserInfoController
 	@PostMapping("/userIdCheck")
 	public boolean userIdCheck(@RequestBody userInfo user) {
 		// true면 존재함 false 면 존재하지않음 
+		System.out.println("userIdCheck : " + user);
 		return userService.checkUser(user.getUserId());
 	}
 	

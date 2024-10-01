@@ -128,7 +128,7 @@ function ExDetail() {
 
 
     return (
-        <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#FFEEA9' , mt:4, height:'1200px'}}>
+        <Container disableGutters maxWidth={false} sx={{ backgroundColor: '#fb8c00ff' , mt:4, height:'1200px'}}>
             {/* 전체영역 */}
             <Box sx={{width:'100%', height:'10px'}}/>
             <Paper elevation={5} sx={{ position: 'relative', p: 2, margin: '0 auto', maxWidth: '60%', mt: 1, borderRadius: 3 }}>

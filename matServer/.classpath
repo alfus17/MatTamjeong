@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Crawling/src/main/java"/>
+	<classpathentry kind="src" path="Crawling/src/test/java"/>
+	<classpathentry excluding="com/mat/config/|com/mat/repository/" kind="src" path="MatTamjeong/src/main/java"/>
+	<classpathentry kind="src" path="MatTamjeong/src/main/java/com/mat/config"/>
+	<classpathentry kind="src" path="MatTamjeong/src/main/java/com/mat/repository"/>
+	<classpathentry kind="src" path="MatTamjeong/src/test/java"/>
+	<classpathentry kind="lib" path="Crawling/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="MatTamjeong/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

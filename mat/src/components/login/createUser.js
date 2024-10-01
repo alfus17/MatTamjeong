@@ -36,7 +36,7 @@ function Create() {
 
     // console.log("date : ",  Date.UTC(date, 'yyyy-MM-dd') )
     // console.log("selectedAvatar",selectedAvatar )
-    // console.log("userId",userId )
+    console.log("userId",userId )
     // console.log("password",password )
     // console.log("confirmPassword",confirmPassword )
     // console.log("nickname",nickname )

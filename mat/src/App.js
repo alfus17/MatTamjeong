@@ -36,7 +36,8 @@ const theme = createTheme({
       },
   },
   typography: {
-      fontFamily: 'Orbit', // Global font family
+      fontFamily: 'Nanum Gothic', // Global font family
+      fontWeightBold:'500'
   },
 });
 

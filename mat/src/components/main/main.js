@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Tabs, Tab } from '@mui/material';
+import { Box, Button, Card, Container, Grid, Paper, IconButton, Typography, Tabs, Tab, Icon } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Map from '../map/map';
 import { Rating } from '@mui/material';
 import { set } from 'date-fns';
+import { CateButton } from './button';
+import StarIcon from '@mui/icons-material/Star';
 
 function Main() {
   const [store, setStore] = useState([]); // 가게 리스트
@@ -19,13 +21,10 @@ function Main() {
   // 페이지
   const [page, setPage] = useState(1);
 
+  const locations = ['강남', '홍대', '명동', '신촌', '종로', '동대문'];
 
   console.log(page)
-
-  useEffect(() => {
-    fetchStoreByLocation(selectedLocation, page);
-  }, [selectedLocation, page]);
-
+  
   const fetchStoreByLocation = async (location, pageNumber) => {
     try {
       console.log(pageNumber,location);
@@ -44,6 +43,11 @@ function Main() {
       console.error('Error fetching store data:', error);
     }
   };
+
+
+  useEffect(() => {
+    fetchStoreByLocation(selectedLocation, page);
+  }, [selectedLocation, page]);
 
 
 
@@ -110,41 +114,7 @@ function Main() {
                  
                 }}
               >
-                       <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('강남',page);
-                }}>
-                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('홍대',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('명동',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>명동</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('신촌',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('종로',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>종로</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                fetchStoreByLocation('동대문',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>  
+        <CateButton  locations={locations} fetchStoreByLocation={fetchStoreByLocation} setPage={setPage}/> 
         </Box>
          <Card elevation={3} sx={{ maxWidth: "100%", margin: "0 auto", mt: 1,borderRadius: 3 }}>
          <Box sx={{ maxWidth: '100%', margin: '0 auto' }}>
@@ -168,47 +138,7 @@ function Main() {
               <Box sx={{ mt: 1 }}>
                 <Grid>
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mt: 2 }}>
-                  <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                setCurrentSlide(0)
-                fetchStoreByLocation('강남',page);
-                }}>
-                  <Typography sx={{fontWeight:'bold'}}>강남</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                setCurrentSlide(0)
-                fetchStoreByLocation('홍대',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>홍대</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                setCurrentSlide(0)
-                fetchStoreByLocation('명동',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>명동</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                setCurrentSlide(0)
-                fetchStoreByLocation('신촌',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>신촌</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                setCurrentSlide(0)
-                fetchStoreByLocation('종로',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>종로</Typography>
-                </Button>
-                <Button  sx={{}} onClick={() =>{ 
-                setPage(1);
-                setCurrentSlide(0)
-                fetchStoreByLocation('동대문',page);
-                }}>
-                <Typography sx={{fontWeight:'bold'}}>동대문</Typography></Button>
+                  <CateButton  locations={locations} fetchStoreByLocation={fetchStoreByLocation} setPage={setPage}/>
                   </Box>
 
                   {selectedLocation && (
@@ -245,7 +175,7 @@ function Main() {
                                 sx={{ 
                                   fontSize: '18px', 
                                   lineHeight: '1.2em', 
-                                  height: '2.4em', // 최대 2줄로 제한
+                                  height: '1.2em', // 최대 2줄로 제한
                                   overflow: 'hidden', 
                                   textOverflow: 'ellipsis', 
                                   display: '-webkit-box', 
@@ -257,19 +187,22 @@ function Main() {
                               </Typography>
                             <Box sx={{mt:2, display:'flex' ,flexDirection:'column'}}>
 
-                              <Box sx={{display:'flex'}}>
-                              <Rating name="total-rating" value={parseFloat(item.kgRating)} readOnly precision={0.5} />
-                              <Typography sx={{ml:1 , fontSize:'19px' ,fontFamily:'Jua',color:'#fa7e0a'}}>{item.kgRating.toFixed(1) || 0.0}</Typography>
+                              <Box sx={{display:'flex',mt:0.3}}>
+                              <Typography sx={{fontFamily:'Do Hyeon'}}>카카오</Typography>
+                              <StarIcon sx={{color:'#dd3333',ml:2,}} />
+                              <Typography sx={{ml:0.5 , fontSize:'20px' ,fontFamily:'Jua',color:'#fa7e0a',lineHeight:'26px'}}>{item.kgRating.toFixed(1) || 0.0}</Typography>
                               </Box>
 
                               <Box sx={{display:'flex', mt:1}}>
-                              <Rating name="total-rating" value={parseFloat(item.dcRating)} readOnly precision={0.5} />
-                              <Typography sx={{ml:1, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.dcRating.toFixed(1) || 0.0}</Typography>
+                              <Typography sx={{fontFamily:'Do Hyeon'}}>다이닝</Typography>
+                              <StarIcon sx={{color:'#dd3333', ml:2}} />
+                              <Typography sx={{ml:0.5, fontSize:'20px',fontFamily:'Jua',color:'#fa7e0a',lineHeight:'26px'}}>{item.dcRating.toFixed(1) || 0.0}</Typography>
                               </Box>
 
                               <Box sx={{display:'flex', mt:1}}>
-                              <Rating name="total-rating" value={parseFloat(item.matRating)} readOnly precision={0.5}/>
-                              <Typography sx={{ml:1, fontSize:'19px',fontFamily:'Jua',color:'#fa7e0a'}}>{item.matRating.toFixed(1) || 0.0}</Typography>
+                              <Typography sx={{fontFamily:'Do Hyeon'}}>맛탐정</Typography>
+                              <StarIcon sx={{color:'#dd3333', ml:2}} />
+                              <Typography sx={{ml:0.5, fontSize:'20px',fontFamily:'Jua',color:'#fa7e0a',lineHeight:'26px'}}>{item.matRating.toFixed(1) || 0.0}</Typography>
                               </Box>
                               
                             </Box>
@@ -301,24 +234,7 @@ function Main() {
           <Box sx={{ maxWidth: '100%', margin: '0 auto', p: 2 }}>
             {/* 지역 버튼 */}
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mb: 2 }}>
-              <Button onClick={() => { setPage(1); fetchStoreByLocation('강남', 1); }}>
-                <Typography sx={{ fontWeight: 'bold' }}>강남</Typography>
-              </Button>
-              <Button onClick={() => { setPage(1); fetchStoreByLocation('홍대', 1); }}>
-                <Typography sx={{ fontWeight: 'bold' }}>홍대</Typography>
-              </Button>
-              <Button onClick={() => { setPage(1); fetchStoreByLocation('명동', 1); }}>
-                <Typography sx={{ fontWeight: 'bold' }}>명동</Typography>
-              </Button>
-              <Button onClick={() => { setPage(1); fetchStoreByLocation('신촌', 1); }}>
-                <Typography sx={{ fontWeight: 'bold' }}>신촌</Typography>
-              </Button>
-              <Button onClick={() => { setPage(1); fetchStoreByLocation('종로', 1); }}>
-                <Typography sx={{ fontWeight: 'bold' }}>종로</Typography>
-              </Button>
-              <Button onClick={() => { setPage(1); fetchStoreByLocation('동대문', 1); }}>
-                <Typography sx={{ fontWeight: 'bold' }}>동대문</Typography>
-              </Button>
+            <CateButton  locations={locations} fetchStoreByLocation={fetchStoreByLocation} setPage={setPage}/>
             </Box>
             
             {/* 가게 리스트 표시 */}
