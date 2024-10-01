@@ -28,12 +28,13 @@ public class kakaoReview {
 	// 카카오 리뷰 ID
 	@Id
 	@Column(name="review_id" ,length=10 )
+	@NonNull
 	@SequenceGenerator (
 			name = "kgRvseq",
 			sequenceName = "kgRvseq",
 			allocationSize = 1
 			)
-	@GeneratedValue(generator="kgRvseq")
+	@GeneratedValue(generator="review_id")
 	private int kgReviewId;
 	
 	// 카카오 별점(

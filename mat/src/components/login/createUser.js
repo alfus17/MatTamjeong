@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import axios from "axios";
+import { useIsLoginState } from "./authContext";
+import { useNavigate } from "react-router-dom";
 
 // Sample avatars
 const avatars = [
@@ -13,48 +16,66 @@ const avatars = [
 ];
 
 function Create() {
-    // State for form inputs
+    // 네비케이트
+    const navigate = useNavigate();
+
+    // 로그인 상태 체크
+    const isLogin = useIsLoginState();
+
+    // 회원가입 폼데이터  
     const [date, setDate] = useState(null);
     const [selectedAvatar, setSelectedAvatar] = useState(null);
-    const [username, setUsername] = useState("");
+    const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [nickname, setNickname] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [userEmail, setEmail] = useState("");
+    const [passFlag , setFlag ] = useState(false);
 
-    // Validation messages
+
+    // console.log("date : ",  Date.UTC(date, 'yyyy-MM-dd') )
+    // console.log("selectedAvatar",selectedAvatar )
+    // console.log("userId",userId )
+    // console.log("password",password )
+    // console.log("confirmPassword",confirmPassword )
+    // console.log("nickname",nickname )
+    // console.log("fullName",fullName )
+    // console.log("userEmail",userEmail )
+
+
+    // 에러메시지 컴포넌트
     const [errors, setErrors] = useState({
-        username: "",
+        userId: "",
         password: "",
         confirmPassword: "",
+        fullName:"",
+        email:""
+
     });
 
-    // Handle avatar selection
-    const handleAvatarSelect = (avatar) => {
-        setSelectedAvatar(avatar);
-    };
-
-    // Handle input changes and validate
+    // 텍스트입력 값이 변할때 마다  해당 함수로 체크
     const EnrollChange = (e) => {
         const { id, value } = e.target;
 
-        // Regular expressions for validation
-        const usernameRegex = /^[a-z]{6,20}$/; // Lowercase letters only, 6-20 characters
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/; // At least one lowercase, one uppercase, one special character, 8-30 characters
-
-        // Update state and validate
+        // 정규식 표현
+        const userIdRegex =  /^[a-zA-Z0-9]{6,20}$/; // 아이디는 소문자 6자에서 20자 사이여야 합니다.
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,30}$/; //비밀번호는 최소 하나의 소문자, 대문자, 특수기호가 포함되어야 하며, 8자에서 30자 사이여야 합니다.
+ 
         switch (id) {
-            case "username":
-                setUsername(value);
-                if (!usernameRegex.test(value)) {
-                    setErrors((prev) => ({ ...prev, username: "아이디는 소문자 6자에서 20자 사이여야 합니다." }));
-                } else {
-                    setErrors((prev) => ({ ...prev, username: "" }));
+            case "userId":
+                setUserId(value);
+                if (!userIdRegex.test(value)) {
+                    setErrors((prev) => ({ ...prev, userId: "아이디는 6자에서 20자 사이여야 합니다." }));
+                }
+                else {
+                    setErrors((prev) => ({ ...prev, userId: "" }));
                 }
                 break;
             case "password":
                 setPassword(value);
                 if (!passwordRegex.test(value)) {
-                    setErrors((prev) => ({ ...prev, password: "비밀번호는 최소 하나의 소문자, 대문자, 특수기호가 포함되어야 하며, 8자에서 30자 사이여야 합니다." }));
+                    setErrors((prev) => ({ ...prev, password: "비밀번호는 최소 하나의 소문자, 대문자, 특수기호가 포함되어야 하며, 6자에서 30자 사이여야 합니다." }));
                 } else {
                     setErrors((prev) => ({ ...prev, password: "" }));
                 }
@@ -70,149 +91,252 @@ function Create() {
             case "nickname":
                 setNickname(value);
                 break;
+            case "fullName": // 본명 입력 처리
+                setFullName(value);
+                if (value.trim() === "") {
+                    setErrors((prev) => ({ ...prev, fullName: "본명을 입력해주세요." }));
+                } else {
+                    setErrors((prev) => ({ ...prev, fullName: "" }));
+                }
+                break
+            case "outlined-email-input": // 이메일 입력 처리
+                setEmail(value);
+                if (value.trim() === "") {
+                    setErrors((prev) => ({ ...prev, email: "이메일을 입력해주세요." }));
+                } else {
+                    setErrors((prev) => ({ ...prev, email: "" }));
+                }
+                break;
             default:
                 break;
         }
+        
     };
 
     return (
-        <Container maxWidth="md" sx={{ mt: 6 , height:'1000px'}}>
-            <Grid container justifyContent="center">
-                <Paper elevation={2} sx={{
-                    p: 4,
-                    borderRadius: 3,
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    bgcolor: '#f5f5f5',
-                    border: '1px solid #ddd',
-                    width: '800px',
-                }}>
-                    <Box>
-                        <Typography variant="h4" color="primary" sx={{ textAlign: "center" , mb:2}}>
-                            회원 가입
-                        </Typography>
-                    </Box>
-
-                    <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        {/* Avatar selection */}
-                        <Box sx={{ mb: 9 }}>
-                            <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
-                                {avatars.map((avatar, index) => (
-                                    <Grid item key={index}>
-                                        <Avatar
-                                            src={avatar}
-                                            sx={{
-                                                width: 100,
-                                                height: 100,
-                                                border: selectedAvatar === avatar ? '3px groove #FE2E2E' : 'none',
-                                                cursor: 'pointer',
-                                                '&:hover': {
-                                                    boxShadow: '0px 8px 12px rgba(0, 0, 0, 0.7)'
-                                                }
-                                            }}
-                                            onClick={() => setSelectedAvatar(avatar)}
-                                        />
-                                    </Grid>
-                                ))}
-                            </Grid>
-                            <Typography variant="h6" sx={{ textAlign: 'center' , mt:3}}> 프로필을 선택하세요.</Typography>
-                        </Box>
-                        <TextField
-                            id="username"
-                            label="아이디를 입력하세요"
-                            type="text"
-                            value={username}
-                            onChange={EnrollChange}
-                            sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
-                            error={!!errors.username}
-                            helperText={errors.username}
-                        />
-
-                        <TextField
-                            id="password"
-                            label="비밀번호를 입력하세요"
-                            type="password"
-                            value={password}
-                            onChange={EnrollChange}
-                            sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
-                            error={!!errors.password}
-                            helperText={errors.password}
-                        />
-
-                        <TextField
-                            id="confirmPassword"
-                            label="비밀번호 재입력"
-                            type="password"
-                            value={confirmPassword}
-                            onChange={EnrollChange}
-                            sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
-                            error={!!errors.confirmPassword}
-                            helperText={errors.confirmPassword}
-                        />
-
-                        <TextField
-                            id="nickname"
-                            label="닉네임 설정"
-                            type="text"
-                            value={nickname}
-                            onChange={EnrollChange}
-                            sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
-                        />
- 						<TextField
-                            id="outlined-email-input"
-                            label="이메일"
-                            type="text"
-                            autoComplete="current-password"
-                            sx={{ width: '100%', maxWidth: '400px', mb: 4 }}  // Adjust width and spacing
-                        />
-
-                        {/* Date of Birth */}
-                        <Box sx={{ mb: 4, width: '100%', maxWidth: '400px' }}>
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DatePicker
-                                    label="생년월일"
-                                    value={date}
-                                    onChange={(newValue) => setDate(newValue)}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            fullWidth
-                                            sx={{ width: '100%' }}
-                                            InputProps={{
-                                                ...params.InputProps,
-                                                endAdornment: (
-                                                    <>
-                                                        {params.InputProps.endAdornment}
-                                                        <IconButton sx={{ ml: 1 }} aria-label="calendar" component="span">
-                                                            <CalendarTodayIcon />
-                                                        </IconButton>
-                                                    </>
-                                                ),
-                                            }}
-                                        />
-                                    )}
-                                />
-                            </LocalizationProvider>
+        <>
+      {  !isLogin?
+      // 로그인 안했을 경우 보이는 창
+       <Container maxWidth="md" sx={{ mt: 6 , height:'100%'}}>
+                <Grid container justifyContent="center">
+                    <Paper elevation={2} sx={{
+                        p: 4,
+                        borderRadius: 3,
+                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        bgcolor: '#f5f5f5',
+                        border: '1px solid #ddd',
+                        width: '800px',
+                    }}>
+                        <Box>
+                            <Typography variant="h4" color="primary" sx={{ textAlign: "center" , mb:2}}>
+                                회원 가입
+                            </Typography>
                         </Box>
 
-                        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                sx={{
-                                    mt: 2,
-                                    mb: 2,
-                                    width: '150px',
+                        <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            {/* Avatar selection */}
+                            <Box sx={{ mb: 9 }}>
+                                <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
+                                    {avatars.map((avatar, index) => (
+                                        <Grid item key={index}>
+                                            <Avatar
+                                                src={avatar}
+                                                sx={{
+                                                    width: 100,
+                                                    height: 100,
+                                                    border: selectedAvatar === avatar ? '3px groove #FE2E2E' : 'none',
+                                                    cursor: 'pointer',
+                                                    '&:hover': {
+                                                        boxShadow: '0px 8px 12px rgba(0, 0, 0, 0.7)'
+                                                    }
+                                                }}
+                                                onClick={() => setSelectedAvatar(avatar)}
+                                            />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                                <Typography variant="h6" sx={{ textAlign: 'center' , mt:3}}> 프로필을 선택하세요.</Typography>
+                            </Box>
+                             {/* 본명 입력 필드 */}
+                            <TextField
+                                id="fullName"
+                                label="본명을 입력하세요"
+                                type="text"
+                                value={fullName}
+                                onChange={EnrollChange}
+                                sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
+                                error={!!errors.fullName}
+                                helperText={errors.fullName}
+                                required
+                            />                         
+                            <Box  sx={{display:'flex', maxWidth:'400px'}}>
+                            <TextField
+                                id="userId"
+                                label="아이디를 입력하세요"
+                                type="text"
+                                value={userId}
+                                onChange={EnrollChange}
+                                sx={{ width: '400px', maxWidth: '400px', mb: 4 }}
+                                error={!!errors.userId}
+                                helperText={errors.userId}
+                            />
+
+                            <Button variant="outlined" sx={{width:'105px',height:'56px',ml:5}}
+                                onClick={()=>{
+                                    axios.post('/user/userIdCheck',{userId:userId}).then(result => {
+                                        console.log("아이디 중복체크 결과값 : ", result.data);
+                                        if(!result.data){
+                                            setFlag(true);
+                                            alert("사용가능한 아이디입니다.")
+                                        }else{
+                                            setErrors((prev) => ({ ...prev, userId: "아이디가 중복입니다 수정해주세요" }));
+                                        }
+                                    }
+                                    )   
                                 }}
                             >
-                                회원가입
+                            <Typography sx={{fontSize:'12px'}}>아이디 중복검사</Typography>
                             </Button>
+                            </Box>
+
+                            <TextField
+                                id="password"
+                                label="비밀번호를 입력하세요"
+                                type="password"
+                                value={password}
+                                onChange={EnrollChange}
+                                sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
+                                error={!!errors.password}
+                                helperText={errors.password}
+                            />
+
+                            <TextField
+                                id="confirmPassword"
+                                label="비밀번호 재입력"
+                                type="password"
+                                value={confirmPassword}
+                                onChange={EnrollChange}
+                                sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
+                                error={!!errors.confirmPassword}
+                                helperText={errors.confirmPassword}
+                            />
+
+                            <TextField
+                                id="nickname"
+                                label="닉네임 설정"
+                                type="text"
+                                value={nickname}
+                                onChange={EnrollChange}
+                                sx={{ width: '100%', maxWidth: '400px', mb: 4 }}
+                            />
+                            <TextField
+                                id="outlined-email-input"
+                                label="이메일"
+                                type="text"
+                                value={userEmail}
+                                onChange={EnrollChange}
+                    
+                                sx={{ width: '100%', maxWidth: '400px', mb: 4 }}  // Adjust width and spacing
+                            />
+
+                            {/* Date of Birth */}
+                            <Box sx={{ mb: 4, width: '100%', maxWidth: '400px' }}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                       
+                                        label="생년월일"
+                                        value={date}
+                                        onChange={(newValue) => setDate(newValue)}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                fullWidth
+                                                sx={{ width: '100%' }}
+                                                InputProps={{
+                                                    ...params.InputProps,
+                                                    endAdornment: (
+                                                        <>
+                                                            {params.InputProps.endAdornment}
+                                                            <IconButton sx={{ ml: 1 }} aria-label="calendar" component="span">
+                                                                <CalendarTodayIcon />
+                                                            </IconButton>
+                                                        </>
+                                                    ),
+                                                }}
+                                            />
+                                        )}
+                                    />
+                                </LocalizationProvider>
+                            </Box>
+
+                            <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                                <Button                                    
+                                    variant="outlined"
+                                    color="primary"
+                                    sx={{
+                                        mt: 2,
+                                        mb: 2,
+                                        width: '150px',
+                                    }}
+                                    onClick={()=>{
+                                        if(passFlag){
+                                            if(date !=null && selectedAvatar != null && userId != "" && password != "" && confirmPassword != "" && nickname !="" && fullName != "" && userEmail != ""){
+                                            console.log("다채워짐");
+                                            (axios.post('/user/enrollUser',{
+                                                userId:userId,
+                                                userPwd:password,
+                                                userName:fullName,
+                                                nickName:nickname,
+                                                userBirth:date,
+                                                email:userEmail,
+                                                imgPath:selectedAvatar
+                                            }).then(result =>{
+                                                console.log(result)
+                                                if(result.data){
+                                                    alert("회원가입이 정상적으로 완료 되었습니다.")
+                                                    navigate('/')
+                                                }else{
+                                                    alert("아이디가 이미 존재합니다.")
+                                                    navigate('/enroll')
+                                                }
+                                            }).catch(result =>{
+                                                console.log("here : ",result)
+                                                if(result.response.data.status === 500){
+                                                    console.log("서버오류")
+                                                }
+
+                                            }))
+                                            
+                                        }else{
+                                              // alert(errors)
+                                              alert("필드가 다 채워지지 않았음 ");
+                                        } 
+                                        }else{
+                                           alert("아이디 중복체크를 진행해 주세요!");
+                                         }
+                                    }
+                                    }
+                                >
+                                    회원가입
+                                </Button>
+                            </Box>
                         </Box>
+                    </Paper>
+                </Grid>
+            </Container> :
+            
+            // 로그인시 보이는 창
+            <Container>
+                    <Box  sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center'  }}>
+                        이미 회원가입 한 사람입니다.
                     </Box>
-                </Paper>
-            </Grid>
-        </Container>
+            </Container>
+            
+            
+            }
+        </>
     );
 }
 

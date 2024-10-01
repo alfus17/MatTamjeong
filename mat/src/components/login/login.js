@@ -19,13 +19,14 @@ function Login({onClose,setSession}) {
     const loginHandler = async () => {
         try {
           const response = await axios.get(`/user/checkUser/${id}/${password}`);
-          
-          if (response.data.token) {
-            console.log('로그인 성공:', response);
+            // console.log("로그인 응답값 : ", response);
+          if (response.data.auth) {
+            console.log('로그인 성공:', response.data);
             
             // 세션 스토리지에 id와 토큰 저장
-            sessionStorage.setItem('id', id);
-            sessionStorage.setItem('token', response.data.token);
+            sessionStorage.setItem('id', response.data?.userId);
+            sessionStorage.setItem('profile', response.data?.imgPath);
+            sessionStorage.setItem('token', response.data.auth);
     
             // 로그인 상태 업데이트
             setIsLogin(true);
@@ -56,7 +57,7 @@ function Login({onClose,setSession}) {
     };
 
     const handleSignUp = () => {
-        navigate('/create'); // "아이디가 없으신가요?" 페이지로 이동
+        navigate('/enroll'); // "아이디가 없으신가요?" 페이지로 이동
         onClose(); // 다이얼로그 닫기
     };
 
@@ -70,12 +71,12 @@ function Login({onClose,setSession}) {
 
                 }}>
                     <Box>
-                        <Typography variant="h4" sx={{ textAlign: "center" }}>
+                        <Typography variant="h4" sx={{ textAlign: "center" ,color:'#FF7D29'}}>
                             Login <VpnKeyIcon />
                         </Typography>
                     </Box>
 
-                    <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Box sx={{ mt: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <TextField 
                             id="outlined-id-input"
                             label="ID"
@@ -94,7 +95,7 @@ function Login({onClose,setSession}) {
                         />
                         <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
                             <Button 
-                                variant="contained" 
+                                 variant="outlined" // 테두리만 있는 버튼
                                 color="primary" 
                                 sx={{ 
                                     mt: 2, 
@@ -136,16 +137,11 @@ function Login({onClose,setSession}) {
                     <Box sx={{ mt: 2, textAlign: 'center', display:'flex'}}>
 
                     <Typography variant="body2" sx={{ cursor: 'pointer','&:hover': {color:'red'} }} onClick={handleFindIdPassword}>
-                        아이디/비밀번호 찾기
+                        아이디/비밀번호 찾기 /
                     </Typography>
                     <Typography variant="body2" sx={{ cursor: 'pointer', ml:2 ,'&:hover': {color:'red'} }} onClick={handleSignUp}>
-                        아이디가 없으신가요?
+                        회원가입
                     </Typography>
-                    {/* 임시 로그아웃 테스트  */}
-                    <Typography variant="body2" sx={{ cursor: 'pointer', ml:2 ,'&:hover': {color:'red'} }} onClick={logoutHandler}>
-                        로그아웃
-                    </Typography>
-
                     </Box>
                 </Box>
             </Grid>

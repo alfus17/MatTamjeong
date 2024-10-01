@@ -14,6 +14,8 @@ import com.mat.domain.Store;
 public interface StoreRepository extends JpaRepository<Store, Integer> {
 
 	List<Store> findByLocationCategoryId(int locationCategoryId);
+	
+	Page<Store> findByLocationCategoryId(int locationCategoryId, Pageable pageable);
 
 	List<Store> findByFoodCategoryId(int foodCategoryId);
 
