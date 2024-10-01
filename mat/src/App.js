@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 import Find from './components/login/findUser';
 import { AuthProvider, IsLoginProvider } from './components/login/authContext';
 import { Foot } from './components/common/foot';
-import MyReview from './components/Mypage/MyReview';
+import { Error } from './components/common/errorPage';
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -37,7 +37,7 @@ const theme = createTheme({
   },
   typography: {
       fontFamily: 'Nanum Gothic', // Global font family
-      fontWeightBold:'500'
+      fontWeightBold:''
   },
 });
 
@@ -59,11 +59,11 @@ function App() {
                   <Route path='/enroll' element={<Create />} />
                   <Route path='/find' element={<Find />} />
                   <Route path='/search/:category/:keyword/:startpage' element={<Ex/>} />
-                  <Route path='/add' element={<AddReview />} />                  
+                  <Route path='/add' element={<AddReview />} />      
+                  <Route path='/error' element={<Error />} />            
                   <Route path="/MypageMain" element={<MypageMain />}>
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
-                    <Route path="myreview" element={<MyReview />} />
                     <Route path="passwordConfirm" element={<PasswordConfirm />} />
                   </Route>
                 </Routes>

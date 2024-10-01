@@ -3,7 +3,7 @@ import { Button, Typography } from "@mui/material";
 
 export function CateButton({locations, fetchStoreByLocation, setPage}) {
 
-
+    
     return (
         <>
             {locations.map((locations) => (
