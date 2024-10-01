@@ -9,23 +9,20 @@ import { Rating } from '@mui/material';
 import { set } from 'date-fns';
 
 function Main() {
-  const [store, setStore] = useState([]); // 가게 리스트
   const [selectedLocation, setSelectedLocation] = useState('강남');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [tab, setTab] = useState('two');
   const [totalPages, setTotalPages] = useState(1);
   const [filterStore, setFilterStore] = useState([]); // 추가: filterStore 초기화
   const navigate = useNavigate();
-  // 페이지
-  const [page, setPage] = useState(1);
-
-
-  console.log(page)
-
+  
+  const [page, setPage] = useState(1);    // 페이지
+  const [store, setStore] = useState([]); // 가게 리스트
+  
   useEffect(() => {
     fetchStoreByLocation(selectedLocation, page);
   }, [selectedLocation, page]);
-
+  
   const fetchStoreByLocation = async (location, pageNumber) => {
     try {
       console.log(pageNumber,location);
@@ -99,7 +96,7 @@ function Main() {
       {tab === 'one' && (
         <>
          <Box sx={{width:'100%', height:'10px'}}/>
-         <Card elevation={3} sx={{  maxWidth: "100%", margin: "0 auto" , mt:2  ,borderRadius: 3}}>
+         <Card elevation={3} sx={{  maxWidth: "100%", margin: "0 auto" , mt:2  ,borderRadius: 3, height:'750px'}}>
          <Box 
                 sx={{ 
                   display: 'flex', 
@@ -238,7 +235,7 @@ function Main() {
                             <img
                               src={item.menuUrl}
                               alt={item.storeName}
-                              style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
+                              style={{ width: '60%', height: '40%', objectFit: 'cover', marginRight: '16px' }}
                             />
                             <Box sx={{ width: '100%' ,ml:1}}>
                               <Typography sx={{ fontSize: '18px'}}>
