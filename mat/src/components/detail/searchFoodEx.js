@@ -83,7 +83,7 @@ function Ex() {
                     }}
                   />
 
-                  <Box>
+                  <Box sx={{width:'40%',ml:4}}>
                   <Typography sx={{fontSize:'24px'}}>
                       {store.storeName}
                   </Typography>
