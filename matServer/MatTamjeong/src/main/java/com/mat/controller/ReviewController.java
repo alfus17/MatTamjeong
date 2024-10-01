@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -143,6 +144,12 @@ public class ReviewController {
     	}
 
     	return flag;
+    }
+    
+    // 맛탐정 리뷰 삭제
+    @DeleteMapping("/delete/{reviewId}")
+    public boolean deleteReview(@PathVariable("reviewId") int reviewId) {
+        return matReviewService.deleteReviewById(reviewId);
     }
 
 }

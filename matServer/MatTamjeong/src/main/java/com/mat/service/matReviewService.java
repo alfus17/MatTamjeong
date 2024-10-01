@@ -56,4 +56,15 @@ public class matReviewService {
 		List <matReview> reviews =matReviewRepository.findByUserId(userId);
 		return reviews;
 	}
+	
+	// 리뷰 삭제
+	public boolean deleteReviewById(int reviewId) {
+        try {
+            matReviewRepository.deleteById(reviewId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+	
 }
