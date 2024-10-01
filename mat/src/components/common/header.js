@@ -83,6 +83,12 @@ function Header() {
     }
   };
 
+  const handleClick = (e) => {
+    e.preventDefault(); // 기본 Link 동작을 막음
+    window.location.reload(); // 새로고침
+    window.location.href = "/"; // 페이지 이동
+  };
+  
   // Render drawer list
   const list = (anchor) => (
     <Box
@@ -113,14 +119,17 @@ function Header() {
       <Divider />
     </Box>
   );
-
+  
   return (
+
+   
+
     <Container maxWidth="lg" sx={{ mt:6 }}>
       <Grid container alignItems="center">
         {/* Left Section: Logo */}
     <Grid item xs={3} style={{ textAlign: 'left' }}>
       <Box sx={{ display: 'flex' }}>
-        <Link to="/" style={{ textDecoration: 'none' }}> {/* 밑줄 없애기 */}
+        <Link to="/" onClick={handleClick} style={{ textDecoration: 'none' }}> {/* 밑줄 없애기 */}
           <Typography 
             sx={{ 
               fontSize: '25px', 
