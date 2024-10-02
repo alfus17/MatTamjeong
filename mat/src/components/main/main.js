@@ -138,14 +138,19 @@ function Main() {
               <Box sx={{ mt: 1 }}>
                 <Grid>
                   <Box sx={{ display: 'flex', justifyContent: 'center', gap: '30px', mt: 2 }}>
-                  <CateButton  locations={locations} fetchStoreByLocation={fetchStoreByLocation} setPage={setPage}/>
+                  <CateButton 
+                  locations={locations} 
+                  fetchStoreByLocation={fetchStoreByLocation} 
+                  setPage={setPage}
+                  sx={{color:'blue'}}
+                  />
                   </Box>
 
                   {selectedLocation && (
-                    <Box sx={{ width: '100%', overflow: 'hidden', position: 'relative', mt: 2 }}>
+                    <Box sx={{ width: '100%', overflow: 'hidden', position: 'relative', mt: 1 }}>
                       <IconButton
                         onClick={handlePrevSlide}
-                        sx={{ position: 'absolute', left: 0, top: '50%', zIndex: 1 }}
+                        sx={{ position: 'absolute', left: 0, top: '40%', zIndex: 1 ,color:'#fa7e0a' }}
                         disabled={currentSlide === 0}
                       >
                         <ArrowBackIosIcon />
@@ -160,27 +165,31 @@ function Main() {
                         }}
                       >
                         {store.map((item, index) => (
-                          <Box
+                     
+                          <Card elevation={3}
                             key={index}
-                            sx={{ padding: 2, width: '33.33%',display:'flex'}} // Each slide takes up 33.33% of the width
+                            sx={{ mt:1,mb:1, width: '33.33%',display:'flex',backgroundColor:'#F5F5F5',ml:1,mr:1}} // Each slide takes up 33.33% of the width
                             onClick={() => handleImageClick(item.storeId)}
                           >
                             <img
                               src={item.menuUrl}
                               alt={item.storeName}
-                              style={{ width: '180px', height: '150px', objectFit: 'cover', marginRight: '16px' }}
+                              style={{ width: '155px', height: '155px', objectFit: 'cover', marginRight: '16px' }}
                             />
                             <Box sx={{ width: '100%' ,ml:1}}>
                             <Typography 
                                 sx={{ 
-                                  fontSize: '18px', 
+                                  fontSize: '20px', 
                                   lineHeight: '1.2em', 
                                   height: '1.2em', // 최대 2줄로 제한
                                   overflow: 'hidden', 
                                   textOverflow: 'ellipsis', 
                                   display: '-webkit-box', 
                                   WebkitLineClamp: 2, 
-                                  WebkitBoxOrient: 'vertical' 
+                                  WebkitBoxOrient: 'vertical', 
+                                  fontFamily:'Noto Sans Korean',
+                                  color:'#fa7e0a',
+                                  mt:1
                                 }}
                               >
                                 {item.storeName}
@@ -188,32 +197,32 @@ function Main() {
                             <Box sx={{mt:2, display:'flex' ,flexDirection:'column'}}>
 
                               <Box sx={{display:'flex',mt:0.3}}>
-                              <Typography sx={{fontFamily:'Do Hyeon'}}>카카오</Typography>
+                              <Typography sx={{fontFamily:'Noto Sans Korean'}}>카카오</Typography>
                               <StarIcon sx={{color:'#dd3333',ml:2,}} />
                               <Typography sx={{ml:0.5 , fontSize:'20px' ,fontFamily:'Jua',color:'#fa7e0a',lineHeight:'26px'}}>{item.kgRating.toFixed(1) || 0.0}</Typography>
                               </Box>
 
                               <Box sx={{display:'flex', mt:1}}>
-                              <Typography sx={{fontFamily:'Do Hyeon'}}>다이닝</Typography>
+                              <Typography sx={{fontFamily:'Noto Sans Korean'}}>다이닝</Typography>
                               <StarIcon sx={{color:'#dd3333', ml:2}} />
                               <Typography sx={{ml:0.5, fontSize:'20px',fontFamily:'Jua',color:'#fa7e0a',lineHeight:'26px'}}>{item.dcRating.toFixed(1) || 0.0}</Typography>
                               </Box>
 
-                              <Box sx={{display:'flex', mt:1}}>
-                              <Typography sx={{fontFamily:'Do Hyeon'}}>맛탐정</Typography>
+                              <Box sx={{display:'flex', mt:1,mb:1}}>
+                              <Typography sx={{fontFamily:'Noto Sans Korean'}}>맛탐정</Typography>
                               <StarIcon sx={{color:'#dd3333', ml:2}} />
                               <Typography sx={{ml:0.5, fontSize:'20px',fontFamily:'Jua',color:'#fa7e0a',lineHeight:'26px'}}>{item.matRating.toFixed(1) || 0.0}</Typography>
                               </Box>
                               
                             </Box>
                             </Box>
-                          </Box>
+                          </Card>
                         ))}
                       </Box>
 
                       <IconButton
                         onClick={handleNextSlide}
-                        sx={{ position: 'absolute', right: 0, top: '50%', zIndex: 1 }}
+                        sx={{ position: 'absolute', right: 0, top: '40%', zIndex: 1,color:'#fa7e0a'  }}
                         disabled={currentSlide >= Math.ceil(store.length / 3) - 1}
                       >
                         <ArrowForwardIosIcon />
