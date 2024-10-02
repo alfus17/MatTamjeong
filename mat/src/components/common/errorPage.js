@@ -1,6 +1,7 @@
+import React from 'react';
 import { Container, Box, Typography } from '@mui/material';
 
-export function Error() {
+export function ErrorPage() {
     return (
         <Container disableGutters maxWidth={false} sx={{ width: '100%' }}>
             <Box sx={{
