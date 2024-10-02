@@ -15,7 +15,9 @@ import { createTheme, ThemeProvider, Typography } from '@mui/material/styles';
 import Find from './components/login/findUser';
 import { AuthProvider, IsLoginProvider } from './components/login/authContext';
 import { Foot } from './components/common/foot';
+import MyReview from './components/Mypage/MyReview';
 import { ErrorPage } from './components/common/errorPage';
+
 
 // npm install @mui/material @emotion/react @emotion/styled
 // npm i axios
@@ -64,6 +66,7 @@ function App() {
                   <Route path="/MypageMain" element={<MypageMain />}>
                     <Route path="aboutMe" element={<AboutMe />} />
                     <Route path="editMe" element={<EditMe />} />
+                    <Route path="myreview" element={<MyReview />} />
                     <Route path="passwordConfirm" element={<PasswordConfirm />} />
                   </Route>
 
