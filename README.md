@@ -34,30 +34,27 @@
 
 
 - **유즈 케이스 다이어그램**: 사용자 및 시스템 상호작용 정의.
-  ![image](https://github.com/user-attachments/assets/4080c5e2-bf5c-47a7-97fa-ed5997cbc1e2)
+![image](https://github.com/user-attachments/assets/4080c5e2-bf5c-47a7-97fa-ed5997cbc1e2)
 
 - **ERD**: 데이터베이스 설계.
 ![image](https://github.com/user-attachments/assets/3e9e2d21-3cd1-4748-a51c-4043c9cea585)
 
   
 - **개발 환경**:
-  - **Backend**: Spring Boot
-  - **Frontend**: React (MUI)
-  - **Database**: MySQL
-
+  - ![Backend](https://img.shields.io/badge/Backend-Spring%20Boot-brightgreen)     ![Frontend](https://img.shields.io/badge/Frontend-React%20(MUI)-blue)    ![Database](https://img.shields.io/badge/Database-OracleDB-orange)
 
 ---
 
 ## 3. 기능 소개 및 시연
 ### 3.1 회원 기능
 - **회원가입**
+ ![image](https://github.com/user-attachments/assets/6de33c1b-e24b-4519-9bd9-729262a6aaca)
+  
 - **로그인 및 사이드바**
 - **아이디 및 비밀번호 찾기**
 
 ### 3.2 메인 페이지
-
-![image](https://github.com/user-attachments/assets/10c829a3-7876-40c4-9479-52e7193981b1)
-
+![image](https://github.com/user-attachments/assets/ddb7f66d-a2c7-4eb6-8801-cbf1fb6480dd)
 - **지역 데이터 연동 및 가게 데이터 출력**
 - **맵 연동**: Hover 기능 및 클릭 시 가게 상세 페이지 이동.
 - **코드 구현 설명**:
@@ -66,13 +63,24 @@
   - 별점 반환 기능.
 
 ### 3.3 검색 기능
+![image](https://github.com/user-attachments/assets/a8ba9197-bc66-4219-862e-c6c24cc66460)
+
 - **카테고리 및 키워드 검색**
   - 관련 가게 데이터 호출.
   - 위치 데이터 맵과 연동.
 
-### 3.4 마이페이지
+### 3.4 상세페이지
+![image](https://github.com/user-attachments/assets/09f3abce-e4c2-4b70-89d6-fbcf819f1e1d)
+
+- **각 플랫폼 별 리뷰**
+- **각 플랫폼 별 별점**
+- **가게의 상세 정보 및 메뉴**
+
+### 3.5 마이페이지
 - **정보 수정**
 - **나의 리뷰 보기**
+
+
 
 ---
 
@@ -88,6 +96,7 @@
   - 컴포넌트 분리로 유지보수 용이.
 
 ---
+
 
 ## 5. 보완점 및 업데이트 방안
 - **기능 개선**:
