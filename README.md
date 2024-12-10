@@ -30,8 +30,15 @@
 
 ### 2.2 주요 설계 요소
 - **간트 차트**: 프로젝트 일정 관리.
+![image](https://github.com/user-attachments/assets/9e12b325-d992-4205-85ba-5cd59a949fed)
+
 - **유즈 케이스 다이어그램**: 사용자 및 시스템 상호작용 정의.
+  ![image](https://github.com/user-attachments/assets/4080c5e2-bf5c-47a7-97fa-ed5997cbc1e2)
+
 - **ERD**: 데이터베이스 설계.
+![image](https://github.com/user-attachments/assets/3e9e2d21-3cd1-4748-a51c-4043c9cea585)
+
+  
 - **개발 환경**:
   - **Backend**: Spring Boot
   - **Frontend**: React (MUI)
