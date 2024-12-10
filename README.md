@@ -77,6 +77,7 @@
 - **가게의 상세 정보 및 메뉴**
 
 ### 3.5 마이페이지
+![image](https://github.com/user-attachments/assets/38fa7e2f-4876-4f63-9480-76a6cb64e8f2)
 - **정보 수정**
 - **나의 리뷰 보기**
 
@@ -99,11 +100,17 @@
 
 
 ## 5. 보완점 및 업데이트 방안
+
+
 - **기능 개선**:
+  ![image](https://github.com/user-attachments/assets/a8c0942a-802a-468f-9b5a-4525d6e2dfba)
   - 좋아요 및 즐겨찾기 기능 추가 예정.
   - 관리자 기능 강화.
   - 인증 로직 개선.
+    
 - **배포 및 자동화**:
+  ![image](https://github.com/user-attachments/assets/2211c8d0-eec1-4052-a2d3-5c74a9760783)
+
   - Webhook 및 배포 스크립트 활용.
   - Jenkins 기반 자동화.
 
