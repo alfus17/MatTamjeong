@@ -1,4 +1,4 @@
-# 맛탐정 (Hot Place Review Service)
+![image](https://github.com/user-attachments/assets/7d6125d9-c210-4e0a-81d1-32a6ce577d71)# 맛탐정 (Hot Place Review Service)
 
 ### 팀 소개
 - **팀명**: 3조
@@ -11,7 +11,6 @@
 2. 프로젝트 설계
 3. 기능 소개 및 시연
 4. 보완점 및 업데이트 방안
-5. Q&A
 
 ---
 
@@ -30,13 +29,16 @@
 
 ### 2.2 주요 설계 요소
 - **간트 차트**: 프로젝트 일정 관리.
+
+
+
 - **유즈 케이스 다이어그램**: 사용자 및 시스템 상호작용 정의.
 - **ERD**: 데이터베이스 설계.
 - **개발 환경**:
   - **Backend**: Spring Boot
   - **Frontend**: React (MUI)
   - **Database**: MySQL
-  - **Others**: AWS, Jenkins 등.
+
 
 ---
 
@@ -47,6 +49,9 @@
 - **아이디 및 비밀번호 찾기**
 
 ### 3.2 메인 페이지
+
+![image](https://github.com/user-attachments/assets/10c829a3-7876-40c4-9479-52e7193981b1)
+
 - **지역 데이터 연동 및 가게 데이터 출력**
 - **맵 연동**: Hover 기능 및 클릭 시 가게 상세 페이지 이동.
 - **코드 구현 설명**:
