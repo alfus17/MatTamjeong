@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/7d6125d9-c210-4e0a-81d1-32a6ce577d71)# 맛탐정 (Hot Place Review Service)
+# 맛탐정 (Hot Place Review Service)
 
 ### 팀 소개
 - **팀명**: 3조
