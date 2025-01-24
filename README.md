@@ -1,69 +1,72 @@
 # 맛탐정 (Hot Place Review Service)
 
-### 팀 소개
-- **팀명**: 3조
-- **팀원**: 장광진, 임현승, 양승혁
+## 팀 소개
+
+#### 팀명: 맛탐정 <br>
+#### 팀장 : 장광진 | 팀원 : 양승혁 , 임현승 |
+
+### 프로젝트 소개
+- 여러 플랫폼의 리뷰들을 한눈에 비교할수 있도록 통합리뷰시스템 구축
+- 오픈소스 및 오픈API를 활용하여 플랫폼 구성
+- 메뉴, 가게명, 지역의 검색을 통한 빠른 맛집 비교
+
+### 🚀 Stacks
+<div> 
+  <img src="https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white" alt="Oracle DB">
+</div>
+<div> 
+  <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white" alt="Java">   <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot">
+  <img src="https://img.shields.io/badge/JPA-59666C?style=for-the-badge&logo=jpa&logoColor=white" alt="JPA"> </div>
+<div> 
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap"> 
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"> 
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML"> 
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS"> </div>
+<div> 
+  <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="VS Code">
+  <img src="https://img.shields.io/badge/SQL%20Developer-4479A1?style=for-the-badge&logo=oracle&logoColor=white" alt="SQL Developer">
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git"> 
+</div>
+<div> 
+  <img src="https://img.shields.io/badge/Naver%20Maps%20API-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Maps API"> 
+  <img src="https://img.shields.io/badge/Naver%20Geocoding%20API-03C75A?style=for-the-badge&logo=naver&logoColor=white" alt="Naver Geocoding API"> 
+
+</div>
 
 ---
 
-## 목차
-1. 프로젝트 개요
-2. 프로젝트 설계
-3. 기능 소개 및 시연
-4. 보완점 및 업데이트 방안
-
----
-
-## 1. 프로젝트 소
-- **목적**: 여러 플랫폼의 리뷰를 한눈에 비교할 수 있는 핫플레이스 리뷰 서비스 제공.
-- 
-- **특징**:
-  - 3개 플랫폼 리뷰를 통합하여 비교 제공.
-  - 지역 기반 데이터 및 가게 상세 정보 제공.
-
----
-
-## 2. 프로젝트 설계
-### 2.1 시스템 구성
-- **크롤링 서버**: 리뷰 데이터를 수집 및 관리.
-- **구상도**: 다양한 플랫폼에서 데이터를 크롤링하고 이를 통합하여 제공.
-
-### 2.2 주요 설계 요소
-- **간트 차트**: 프로젝트 일정 관리.
-
+##  프로젝트 설계
+### 간트차트
 ![image](https://github.com/user-attachments/assets/9e12b325-d992-4205-85ba-5cd59a949fed)
 
-
-- **유즈 케이스 다이어그램**: 사용자 및 시스템 상호작용 정의.
+### 유즈 케이스 다이어그램
 ![image](https://github.com/user-attachments/assets/4080c5e2-bf5c-47a7-97fa-ed5997cbc1e2)
 
-- **ERD**: 데이터베이스 설계.
+### ERD 
 ![image](https://github.com/user-attachments/assets/3e9e2d21-3cd1-4748-a51c-4043c9cea585)
-
-  
-- **개발 환경**:
-  - ![Backend](https://img.shields.io/badge/Backend-Spring%20Boot-brightgreen)     ![Frontend](https://img.shields.io/badge/Frontend-React%20(MUI)-blue)    ![Database](https://img.shields.io/badge/Database-OracleDB-orange)
 
 ---
 
-## 3. 기능 소개 및 시연
-### 3.1 회원 기능
-- **회원가입**
- ![image]![회원가입](https://github.com/user-attachments/assets/68cb0cae-782e-416d-bfb5-38ec32b86227)
+## 기능 소개 및 시연
+### 로그인/회원가입
 
-  
-- **로그인 및 사이드바**
-- **아이디 및 비밀번호 찾기**
+ ![image](https://github.com/user-attachments/assets/68cb0cae-782e-416d-bfb5-38ec32b86227)
+
+#### ⭐ 로그인 기능구현
+- 모든 페이지에서 로그인/회원가입 버튼 클릭 시 모달창이 활성화됨.
+- 모달 내에서 사용자 입력을 처리하고 서버로 로그인/회원가입 요청 전송.
+- 로그인 성공 시 모달창이 자동으로 닫히고, 사용자 상태를 업데이트.
+- 로그인 성공 시 브라우저의 세션 스토리지에 userId 및 token을 저장.
 
 ### 3.2 메인 페이지
-![image](![맛탐정 메인페이지](https://github.com/user-attachments/assets/1132232a-8685-4678-89ee-8f0a0d85c8db)
-)
-- **지역 데이터 연동 및 가게 데이터 출력**
-- **맵 연동**: Hover 기능 및 클릭 시 가게 상세 페이지 이동.
-- **코드 구현 설명**:
-  - JSON 데이터 활용.
-  - 페이징 처리.
-  - 별점 반환 기능.
+![image](https://github.com/user-attachments/assets/1132232a-8685-4678-89ee-8f0a0d85c8db)
+
+#### ⭐기능구현
+- 각각의 지역 태그에 맞는 데이터를 서버 API를 통해 화면에 표시 
+- 초기에 데이터 10 개 이후 더보기를 통하여 10개씩 추가 로드
+- 지도 Component를 만들어 db에 저장된 상호명 및 가게 위치를 전송할 경우 지도에 마킹 및 이미지 로드하도록 구성
+- 
 
 ![맛탐정메인페이지2](https://github.com/user-attachments/assets/60923e4a-e05b-4f9c-816a-4c30d76178df)
 사용자의 맞춤에 맞도록 확인 가능
