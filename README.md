@@ -107,6 +107,7 @@
   - 좋아요 및 즐겨찾기 기능 추가 예정.
   - 관리자 기능 강화.
   - 인증 로직 개선.
+  - 크롤링 서버 보완
     
 - **배포 및 자동화**:
   ![image](https://github.com/user-attachments/assets/2211c8d0-eec1-4052-a2d3-5c74a9760783)
