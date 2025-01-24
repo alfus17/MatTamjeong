@@ -14,8 +14,9 @@
 
 ---
 
-## 1. 프로젝트 개요
+## 1. 프로젝트 소
 - **목적**: 여러 플랫폼의 리뷰를 한눈에 비교할 수 있는 핫플레이스 리뷰 서비스 제공.
+- 
 - **특징**:
   - 3개 플랫폼 리뷰를 통합하여 비교 제공.
   - 지역 기반 데이터 및 가게 상세 정보 제공.
@@ -48,13 +49,15 @@
 ## 3. 기능 소개 및 시연
 ### 3.1 회원 기능
 - **회원가입**
- ![image](https://github.com/user-attachments/assets/6de33c1b-e24b-4519-9bd9-729262a6aaca)
+ ![image]![회원가입](https://github.com/user-attachments/assets/68cb0cae-782e-416d-bfb5-38ec32b86227)
+
   
 - **로그인 및 사이드바**
 - **아이디 및 비밀번호 찾기**
 
 ### 3.2 메인 페이지
-![image](https://github.com/user-attachments/assets/ddb7f66d-a2c7-4eb6-8801-cbf1fb6480dd)
+![image](![맛탐정 메인페이지](https://github.com/user-attachments/assets/1132232a-8685-4678-89ee-8f0a0d85c8db)
+)
 - **지역 데이터 연동 및 가게 데이터 출력**
 - **맵 연동**: Hover 기능 및 클릭 시 가게 상세 페이지 이동.
 - **코드 구현 설명**:
@@ -62,8 +65,11 @@
   - 페이징 처리.
   - 별점 반환 기능.
 
+![맛탐정메인페이지2](https://github.com/user-attachments/assets/60923e4a-e05b-4f9c-816a-4c30d76178df)
+사용자의 맞춤에 맞도록 확인 가능
+
 ### 3.3 검색 기능
-![image](https://github.com/user-attachments/assets/a8ba9197-bc66-4219-862e-c6c24cc66460)
+![image](https://github.com/user-attachments/assets/c7d01f63-9298-4010-892f-b9ab0e3cb505)
 
 - **카테고리 및 키워드 검색**
   - 관련 가게 데이터 호출.
