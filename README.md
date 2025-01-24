@@ -1,14 +1,23 @@
 # 맛탐정 (Hot Place Review Service)
 
-## 팀 소개
 
-#### 팀명: 맛탐정 <br>
-#### 팀장 : 장광진 | 팀원 : 양승혁 , 임현승 |
 
-### 프로젝트 소개
-- 여러 플랫폼의 리뷰들을 한눈에 비교할수 있도록 통합리뷰시스템 구축
-- 오픈소스 및 오픈API를 활용하여 플랫폼 구성
-- 메뉴, 가게명, 지역의 검색을 통한 빠른 맛집 비교
+
+
+
+### 📃 프로젝트 소개
+> 여러 플랫폼의 리뷰들을 한눈에 비교할수 있도록 통합리뷰시스템
+
+### 📅 제작기간
+>  2024.08.24 ~ 2024.09.30
+
+### 🦸‍♂️ 참여 인원
+> |                    Name                    |  Position   |
+> | :----------------------------------------: | :---------: |
+> | [장광진](https://github.com/alfus17) | Back, Front |
+> |   [임현승]()    | Front |
+> |     [양승혁]()     | Back |
+
 
 ### 🚀 Stacks
 <div> 
@@ -35,94 +44,136 @@
 </div>
 
 ---
+# 📊 프로젝트 설계
 
-##  프로젝트 설계
-### 간트차트
-![image](https://github.com/user-attachments/assets/9e12b325-d992-4205-85ba-5cd59a949fed)
+###  간트차트
+
+<details>
+<summary>간트차트</summary>
+<div markdown="1" style="padding-left: 15px;">
+<img src="https://github.com/user-attachments/assets/9e12b325-d992-4205-85ba-5cd59a949fed" width="800px"/>
+</div>
+</details>
+
 
 ### 유즈 케이스 다이어그램
-![image](https://github.com/user-attachments/assets/4080c5e2-bf5c-47a7-97fa-ed5997cbc1e2)
 
-### ERD 
-![image](https://github.com/user-attachments/assets/3e9e2d21-3cd1-4748-a51c-4043c9cea585)
+<details>
+<summary>유즈 케이스 다이어그램</summary>
+<div markdown="1" style="padding-left: 15px;">
+<img src="https://github.com/user-attachments/assets/4080c5e2-bf5c-47a7-97fa-ed5997cbc1e2" width="800px"/>
+</div>
+</details>
+
+
+###  ERD 
+<details>
+<summary>ERD</summary>
+<div markdown="1" style="padding-left: 15px;">
+<img src="https://github.com/user-attachments/assets/3e9e2d21-3cd1-4748-a51c-4043c9cea585" width="800px"/>
+</div>
+</details>
+
 
 ---
 
-## 기능 소개 및 시연
-### 로그인/회원가입
+# 🖥️ 기능 소개 및 시연
+### 1. 로그인/회원가입
 
  ![image](https://github.com/user-attachments/assets/68cb0cae-782e-416d-bfb5-38ec32b86227)
 
-#### ⭐ 로그인 기능구현
-- 모든 페이지에서 로그인/회원가입 버튼 클릭 시 모달창이 활성화됨.
-- 모달 내에서 사용자 입력을 처리하고 서버로 로그인/회원가입 요청 전송.
-- 로그인 성공 시 모달창이 자동으로 닫히고, 사용자 상태를 업데이트.
-- 로그인 성공 시 브라우저의 세션 스토리지에 userId 및 token을 저장.
+#### ⭐ 로그인 기능
+> 모든 페이지에서 로그인/회원가입 버튼 클릭 시 모달창이 활성화됨. <br>
+> 모달 내에서 사용자 입력을 처리하고 서버로 로그인/회원가입 요청 전송.<br>
+> 로그인 성공 시 모달창이 자동으로 닫히고, 사용자 상태를 업데이트.<br>
+> 로그인 성공 시 브라우저의 세션 스토리지에 userId 및 token을 저장.<br>
 
-### 3.2 메인 페이지
+### 2. 메인 페이지
 ![image](https://github.com/user-attachments/assets/1132232a-8685-4678-89ee-8f0a0d85c8db)
-
-#### ⭐기능구현
-- 각각의 지역 태그에 맞는 데이터를 서버 API를 통해 화면에 표시 
-- 초기에 데이터 10 개 이후 더보기를 통하여 10개씩 추가 로드
-- 지도 Component를 만들어 db에 저장된 상호명 및 가게 위치를 전송할 경우 지도에 마킹 및 이미지 로드하도록 구성
-- 
-
+ 
 ![맛탐정메인페이지2](https://github.com/user-attachments/assets/60923e4a-e05b-4f9c-816a-4c30d76178df)
-사용자의 맞춤에 맞도록 확인 가능
 
-### 3.3 검색 기능
+#### ⭐ 메인페이지 기능
+> 각각의 지역 태그에 맞는 데이터를 서버 API를 통해 화면에 표시 <br>
+> 초기에 데이터 10 개 이후 더보기를 통하여 10개씩 추가 로드<br>
+> 지도 Component를 만들어 db에 저장된 상호명 및 가게 위치를 전송할 경우 지도에 마킹 및 이미지 로드하도록 구성<br>
+
+### 3. 검색 기능
 ![image](https://github.com/user-attachments/assets/c7d01f63-9298-4010-892f-b9ab0e3cb505)
 
-- **카테고리 및 키워드 검색**
-  - 관련 가게 데이터 호출.
-  - 위치 데이터 맵과 연동.
 
-### 3.4 상세페이지
+#### ⭐ 검색기능
+> 카테고리 및 메뉴, 상호명을 통한 검색 기능<br>
+> 초기 10개의 리뷰들과 위치를 지도에 표시 후 더보기 이후에 추가적으로 표시<br>
+> DB에 저장된 위치데이터를 통한 지도 표시 <br>
+
+### 4. 상세페이지
 ![image](https://github.com/user-attachments/assets/09f3abce-e4c2-4b70-89d6-fbcf819f1e1d)
+#### ⭐ 검색기능
+> 한눈에 각 플랫폼의 별점 및 리뷰 확인 가능<br>
+> 해당 상호명의 상세정보 및 메뉴 확인 가능<br>
+> 로그인시 맛탐정을 통해 리뷰 등록 가능<br>
 
-- **각 플랫폼 별 리뷰**
-- **각 플랫폼 별 별점**
-- **가게의 상세 정보 및 메뉴**
-
-### 3.5 마이페이지
-![image](https://github.com/user-attachments/assets/38fa7e2f-4876-4f63-9480-76a6cb64e8f2)
-- **정보 수정**
-- **나의 리뷰 보기**
-
+### 5 마이페이지
+![image](https://github.com/user-attachments/assets/b2765aee-10ab-4d14-9764-f03d96e6cac3)
+#### ⭐ 마이페이지 기능
+> 자신이 쓴 가게의 리뷰들 한눈에 확인 및 삭제 가능<br>
+> 자신의 정보 확인 및 수정 가능 <br>
 
 
 ---
 
-## 4. 장점
-- **편리성**:
-  - 가게 위치와 별점 정보를 한눈에 확인 가능.
-  - 핫플레이스 추천으로 유동인구가 많은 지역 맛집을 빠르게 추천.
-- **효율성**:
-  - 3개 플랫폼의 리뷰를 한 번에 비교.
-  - 대표 메뉴와 상세 정보들을 직관적으로 제공.
-- **최적화**:
-  - 랜더링 최소화.
-  - 컴포넌트 분리로 유지보수 용이.
+
+# 장점
+### 1. 편리성
+> 가게 위치와 별점 정보를 한눈에 확인 가능<br>
+>  핫플레이스 추천으로 유동인구가 많은 지역 맛집을 빠르게 추천.<br>
+### 2. 효율성
+> 3개 플랫폼의 리뷰를 한 번에 비교
+> 대표 메뉴와 상세 정보들을 직관적으로 제공.
+### 3. 최적화
+> 랜더링 최소화.
+> 컴포넌트 분리로 유지보수 용이.
+
 
 ---
 
 
-## 5. 보완점 및 업데이트 방안
+# 보완점 및 업데이트 방안
 
 
-- **기능 개선**:
-  ![image](https://github.com/user-attachments/assets/a8c0942a-802a-468f-9b5a-4525d6e2dfba)
-  - 좋아요 및 즐겨찾기 기능 추가 예정.
-  - 관리자 기능 강화.
-  - 인증 로직 개선.
-  - 크롤링 서버 보완
-    
-- **배포 및 자동화**:
+### 기능 개선
+
+  <details>
+  <summary>🟦 좋아요 및 즐겨찾기 기능</summary>
+  <div markdown="1" style="padding-left: 15px;">
+  </div>
+  </details>
+
+  <details>
+  <summary>🟦 관리자 기능 강화</summary>
+  <div markdown="1" style="padding-left: 15px;">
+  </div>
+  </details>
+  
+  <details>
+  <summary>🟦 인증 로직 개선</summary>
+  <div markdown="1" style="padding-left: 15px;">
+  <img src="https://github.com/user-attachments/assets/a8c0942a-802a-468f-9b5a-4525d6e2dfba" width="800px"/>
+  </div>
+  </details>
+
+  <details>
+  <summary>🟦 크롤링 서버 보완</summary>
+  <div markdown="1" style="padding-left: 15px;">
+  </div>
+  </details>
+
+### 배포 및 자동화
   ![image](https://github.com/user-attachments/assets/2211c8d0-eec1-4052-a2d3-5c74a9760783)
 
-  - Webhook 및 배포 스크립트 활용.
-  - Jenkins 기반 자동화.
+  🟦 Webhook 및 배포 스크립트 활용.<br>
+  🟦 Jenkins 기반 자동화.<br>
 
 ---
 
