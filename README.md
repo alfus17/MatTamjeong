@@ -8,9 +8,6 @@
 ### 📃 프로젝트 소개
 > 여러 플랫폼의 리뷰들을 한눈에 비교할수 있도록 통합리뷰시스템
 
-### 📒 PPT 자료 
-<a herf="https://docs.google.com/presentation/d/1-s8vOfzKKHzodYbKO7sFSzIn3RLcHxFrcbpgBrRlwzk/edit?usp=sharing">자료보기</a>
-
 ### 📅 제작기간
 >  2024.08.24 ~ 2024.09.30
 
@@ -180,5 +177,7 @@
 
 ---
 
-## Q&A
-- 감사합니다!
+### 📒 PPT 자료 
+> https://docs.google.com/presentation/d/1-s8vOfzKKHzodYbKO7sFSzIn3RLcHxFrcbpgBrRlwzk/edit?usp=sharing
+
+
