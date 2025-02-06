@@ -44,9 +44,8 @@
 </div>
 
 ---
-# 📊 프로젝트 설계
+### 📊 프로젝트 설계
 
-###  간트차트
 
 <details>
 <summary>간트차트</summary>
@@ -56,8 +55,6 @@
 </details>
 
 
-### 유즈 케이스 다이어그램
-
 <details>
 <summary>유즈 케이스 다이어그램</summary>
 <div markdown="1" style="padding-left: 15px;">
@@ -66,7 +63,6 @@
 </details>
 
 
-###  ERD 
 <details>
 <summary>ERD</summary>
 <div markdown="1" style="padding-left: 15px;">
@@ -77,8 +73,8 @@
 
 ---
 
-# 🖥️ 기능 소개 및 시연
-### 1. 로그인/회원가입
+### 🖥️ 기능 소개 및 시연
+#### 1. 로그인/회원가입
 
  ![image](https://github.com/user-attachments/assets/68cb0cae-782e-416d-bfb5-38ec32b86227)
 
@@ -88,7 +84,7 @@
 > 로그인 성공 시 모달창이 자동으로 닫히고, 사용자 상태를 업데이트.<br>
 > 로그인 성공 시 브라우저의 세션 스토리지에 userId 및 token을 저장.<br>
 
-### 2. 메인 페이지
+#### 2. 메인 페이지
 ![image](https://github.com/user-attachments/assets/1132232a-8685-4678-89ee-8f0a0d85c8db)
  
 ![맛탐정메인페이지2](https://github.com/user-attachments/assets/60923e4a-e05b-4f9c-816a-4c30d76178df)
@@ -98,7 +94,7 @@
 > 초기에 데이터 10 개 이후 더보기를 통하여 10개씩 추가 로드<br>
 > 지도 Component를 만들어 db에 저장된 상호명 및 가게 위치를 전송할 경우 지도에 마킹 및 이미지 로드하도록 구성<br>
 
-### 3. 검색 기능
+#### 3. 검색 기능
 ![image](https://github.com/user-attachments/assets/c7d01f63-9298-4010-892f-b9ab0e3cb505)
 
 
@@ -107,14 +103,14 @@
 > 초기 10개의 리뷰들과 위치를 지도에 표시 후 더보기 이후에 추가적으로 표시<br>
 > DB에 저장된 위치데이터를 통한 지도 표시 <br>
 
-### 4. 상세페이지
+#### 4. 상세페이지
 ![image](https://github.com/user-attachments/assets/09f3abce-e4c2-4b70-89d6-fbcf819f1e1d)
 #### ⭐ 검색기능
 > 한눈에 각 플랫폼의 별점 및 리뷰 확인 가능<br>
 > 해당 상호명의 상세정보 및 메뉴 확인 가능<br>
 > 로그인시 맛탐정을 통해 리뷰 등록 가능<br>
 
-### 5 마이페이지
+#### 5 마이페이지
 ![image](https://github.com/user-attachments/assets/b2765aee-10ab-4d14-9764-f03d96e6cac3)
 #### ⭐ 마이페이지 기능
 > 자신이 쓴 가게의 리뷰들 한눈에 확인 및 삭제 가능<br>
@@ -124,7 +120,7 @@
 ---
 
 
-# 장점
+## 장점
 ### 1. 편리성
 > 가게 위치와 별점 정보를 한눈에 확인 가능<br>
 >  핫플레이스 추천으로 유동인구가 많은 지역 맛집을 빠르게 추천.<br>
@@ -139,7 +135,7 @@
 ---
 
 
-# 보완점 및 업데이트 방안
+## 🛠 보완점 및 업데이트 방안
 
 
 ### 기능 개선
