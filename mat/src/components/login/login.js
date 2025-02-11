@@ -15,30 +15,58 @@ function Login({onClose,setSession}) {
     // 로그인 상태 및 로그인 업데이트 함수 가져오기
     const { setIsLogin } = useContext(IsLoginContext);
 
+    // // 비동기 로그인 처리
+    // const loginHandler = async () => {
+    //     try {
+    //       const response = await axios.get(`/user/checkUser/${id}/${password}`);
+    //         // console.log("로그인 응답값 : ", response);
+    //       if (response.data.auth) {
+    //         console.log('로그인 성공:', response.data);
+            
+    //         // 세션 스토리지에 id와 토큰 저장
+    //         sessionStorage.setItem('id', response.data?.userId);
+    //         sessionStorage.setItem('profile', response.data?.imgPath);
+    //         sessionStorage.setItem('token', response.data.auth);
+    
+    //         // 로그인 상태 업데이트
+    //         setIsLogin(true);
+            
+    //       } else {
+    //         throw new Error('로그인 실패');
+    //       }
+    //     } catch (error) {
+    //       console.error('Error : ', error);
+    //       alert('로그인 실패!');
+    //     }
+    //   };
+
     // 비동기 로그인 처리
     const loginHandler = async () => {
         try {
-          const response = await axios.get(`/user/checkUser/${id}/${password}`);
-            // console.log("로그인 응답값 : ", response);
-          if (response.data.auth) {
-            console.log('로그인 성공:', response.data);
-            
-            // 세션 스토리지에 id와 토큰 저장
-            sessionStorage.setItem('id', response.data?.userId);
-            sessionStorage.setItem('profile', response.data?.imgPath);
-            sessionStorage.setItem('token', response.data.auth);
-    
-            // 로그인 상태 업데이트
-            setIsLogin(true);
-            
-          } else {
-            throw new Error('로그인 실패');
-          }
+            const response = await axios.post('/user/login', {
+                userId: id,
+                password: password
+            });
+
+            // 응답 확인
+            if (response.status === 200 && response.headers.get('Authorization')) {
+                console.log('로그인 성공:', response.data);
+
+                // 세션 스토리지에 id와 토큰 저장
+                sessionStorage.setItem('id', response.data?.userId);
+                sessionStorage.setItem('profile', response.data?.imgPath);
+                sessionStorage.setItem('token', response.headers?.Authorization);
+
+                // 로그인 상태 업데이트
+                setIsLogin(true);
+            } else {
+                throw new Error('로그인 실패');
+            }
         } catch (error) {
-          console.error('Error : ', error);
-          alert('로그인 실패!');
+            console.error('Error:', error);
+            alert('로그인 실패!');
         }
-      };
+    };
 
       // 로그아웃 처리 코드 
     const logoutHandler = async() =>{

@@ -26,6 +26,9 @@ import com.mat.service.UserService;
 import com.mat.service.bookMarkService;
 import com.mat.service.locationCategoryService;
 import com.mat.service.matReviewService;
+import com.mat.common.authority.JwtToken;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/user")
@@ -44,6 +47,9 @@ public class UserInfoController
 	
 	@Autowired
 	private StoreService storeService;
+	
+	@Autowired
+	private JwtToken JwtToken;
 
 	// 모든 유저의 userInfo 데이터를 반환하는 API
 	@PostMapping("/getuserInfo")
@@ -114,23 +120,33 @@ public class UserInfoController
 		return userService.getUserInfoById(userId).get(); // 특정 유저의 데이터를 반환
 	}
 	
-	// check 로그인 API
-	@GetMapping("/checkUser/{userId}/{password}")
-	public ResponseEntity<Object> checkUserById(@PathVariable("userId") String userId ,@PathVariable("password") String password ) {
-		System.out.println("here userId : " + userId);
-		System.out.println("here  password : " + password);
-		Optional <userInfo>usercheck = userService.checkUser(userId,password);
-		
-		if(usercheck.isPresent()) {
-			usercheck.get().setAuth("JonMat");
-			// ToDO 추후에 여기 jwt 변경 작업
-			return ResponseEntity.ok().body(usercheck.get());
-		}else {
-			return ResponseEntity.ok().body("noUser");
-		}
-			
-		
-	}
+	// 로그인 API - JWT 발급
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> credentials) {
+        String userId = credentials.get("userId");
+        String password = credentials.get("password");
+
+        // 사용자 체크 
+        Optional<userInfo> userCheck = userService.checkUser(userId, password);
+        Map<String, Object> response = new HashMap<>();
+
+        // 만약 유저가 존재할 경우 
+        if (userCheck.isPresent()) {
+            String token = JwtToken.generateToken(userId); // JWT 토큰 발급
+            System.out.println("유저 아이디 : " + userId + ", 유저 비밀번호 : " + password + "생성된 토큰 값 : " + token);
+            
+            // 헤더에 토큰 값 저장
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Authorization",token);
+            
+            response.put("user", userCheck.get());
+            return ResponseEntity.status(HttpStatus.OK).headers(headers).body(response);
+            
+        } else {
+            response.put("message", "아이디 또는 비밀번호가 존재하지 않습니다.");
+            return ResponseEntity.status(401).body(response);
+        }
+    }
 	
 	// id 존재여부 체크
 	// true 면 존재함 false 면 존재하지 않음
